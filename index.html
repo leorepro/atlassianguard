@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Atlassian Guard Standard 與 Premium 的完整功能對照、場景對照、定價級距與導入 FAQ。">
 <title>Atlassian Guard 選版指南</title>
-<link rel="canonical" href="https://leorepro.github.io/atlassianguard/">
+<link rel="canonical" href="https://atlassianguard.com/">
 <meta name="theme-color" content="#12463C">
 
 <!-- Open Graph / 社群分享 -->
@@ -14,12 +14,15 @@
 <meta property="og:site_name" content="Atlassian Guard 選版指南">
 <meta property="og:title" content="Atlassian Guard 選版指南">
 <meta property="og:description" content="Atlassian Guard Standard 與 Premium 的完整功能對照、場景對照、定價級距與導入 FAQ。">
-<meta property="og:url" content="https://leorepro.github.io/atlassianguard/">
+<meta property="og:url" content="https://atlassianguard.com/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Atlassian Guard 選版指南">
 <meta name="twitter:description" content="Atlassian Guard Standard 與 Premium 的完整功能對照、場景對照、定價級距與導入 FAQ。">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2312463C'/%3E%3Cpath d='M16 6l8 3.2v6.4c0 5-3.4 8.6-8 10.4-4.6-1.8-8-5.4-8-10.4V9.2L16 6z' fill='none' stroke='%23fff' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="assets/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,14 +144,19 @@ td.v{text-align:center; width:150px; border-left:1px solid var(--line); font-fam
 td.v.prem{background:color-mix(in srgb, var(--accent-soft) 55%, transparent)}
 
 .tick{
-  display:inline-flex; align-items:center; justify-content:center;
+  /* 勾號改用 SVG 繪製而非字型 glyph：字型的 ascent/descent 會讓 ✓ 在圓內偏移，
+     且 web font 載入前後的 fallback 字型偏移量不同，會有視覺跳動 */
+  display:inline-block; vertical-align:middle;
   width:22px; height:22px; border-radius:50%;
-  background:var(--yes); color:#FFFFFF;
-  font-family:var(--sans); font-size:12px; font-weight:700; line-height:1;
+  background-color:var(--yes);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 12.3 10 16.8 18.5 7.4'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:62%;
   box-shadow:0 0 0 3px var(--yes-ring);
-  vertical-align:middle;
+  font-size:0; line-height:0;  /* 隱藏 HTML 內既有的 ✓ 文字節點（aria-label 仍保留） */
 }
-.tick.sm{width:18px; height:18px; font-size:10px; box-shadow:0 0 0 2px var(--yes-ring)}
+.tick.sm{width:18px; height:18px; background-size:64%; box-shadow:0 0 0 2px var(--yes-ring)}
 td.v.yes{color:var(--yes)}
 .dash{display:inline-block; width:14px; height:2px; background:var(--no); border-radius:1px; vertical-align:middle}
 .ea{font-family:var(--mono); font-size:10px; letter-spacing:.1em; border:1px solid var(--line-2); border-radius:2px; padding:1px 5px; color:var(--ink-3); margin-left:6px; vertical-align:1px}
@@ -258,7 +266,7 @@ img{max-width:100%}
 
   <!-- HERO -->
   <section class="hero">
-    <p class="eyebrow">Atlassian Cloud · 組織層級資安附加訂閱</p>
+    <p class="eyebrow">Atlassian Guard · Standard 與 Premium 選版指南</p>
     <div class="hero-grid">
       <div>
         <h1>讓「誰能存取什麼」<br>成為<em>可稽核、可執行</em>的規則</h1>

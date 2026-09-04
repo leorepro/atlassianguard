@@ -3,13 +3,19 @@
 Atlassian Guard **Standard 與 Premium** 的功能對照、場景對照、定價級距與導入 FAQ，
 以單頁靜態網頁形式呈現。
 
-🔗 **線上瀏覽：** https://leorepro.github.io/atlassianguard/
+🔗 **線上瀏覽：** https://atlassianguard.com/
 
 ## 專案結構
 
 ```
 .
 ├── index.html                    # 網站本體（單一自含檔案：內嵌 CSS、無 JS）
+├── favicon.ico                   # 多尺寸 16/32/48
+├── assets/
+│   ├── favicon-32.png
+│   ├── favicon-192.png           # Android
+│   └── apple-touch-icon.png      # iOS 180×180
+├── CNAME                         # 自訂網域 atlassianguard.com
 ├── .nojekyll                     # 告知 GitHub Pages 略過 Jekyll 處理
 ├── .gitignore
 └── .github/
@@ -19,6 +25,9 @@ Atlassian Guard **Standard 與 Premium** 的功能對照、場景對照、定價
 
 外部相依只有 Google Fonts（Noto Sans TC / Noto Serif TC / IBM Plex Mono），
 其餘樣式全部內嵌，無建置步驟、無 npm 相依。
+
+icon 的 `<link>` 一律用**相對路徑**，所以不論站台掛在自訂網域根目錄或
+`leorepro.github.io/atlassianguard/` 子路徑都能正確載入。
 
 ## 本機預覽
 
@@ -33,6 +42,17 @@ python3 -m http.server 8000
 
 採用 **GitHub Actions 自動部署**。任何推到 `main` 的 commit 都會觸發
 `.github/workflows/deploy.yml`，把 repo 根目錄整包發布到 GitHub Pages。
+
+### 自訂網域
+
+`CNAME` 檔指定 `atlassianguard.com`，DNS 需維持以下設定：
+
+| 類型 | 名稱 | 值 |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` / `.109.153` / `.110.153` / `.111.153` |
+| CNAME | `www` | `leorepro.github.io` |
+
+更換網域時要一併改 `CNAME`、`index.html` 的 `canonical` 與 `og:url`，以及本檔開頭的連結。
 
 ### 首次啟用（只需做一次）
 
