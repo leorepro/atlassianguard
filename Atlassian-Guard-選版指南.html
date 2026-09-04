@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Atlassian Guard Standard 與 Premium 的完整功能對照、場景對照、定價級距與導入 FAQ。">
+<title>Atlassian Guard 選版指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap">
+
+<style>
+/* 單一淺色主題：白底，所有顏色明確指定，不隨檢視者主題反轉 */
+:root{
+  color-scheme:light;
+  --ink:#111716; --ink-2:#404E51; --ink-3:#78878B;
+  --paper:#FFFFFF; --surface:#FFFFFF; --surface-2:#F5F7F6;
+  --line:#E3E7E5; --line-2:#C6CDC9;
+  --accent:#12463C; --accent-soft:#E9F1ED; --on-accent:#FFFFFF;
+  --yes:#0E8F5E; --yes-ring:#CFEBDF; --no:#C6CDC9;
+  --c-public:#5E7A73; --c-internal:#2C6288; --c-conf:#A85C22; --c-restricted:#8E2B2B;
+  --shadow:0 1px 2px rgba(17,23,22,.04), 0 14px 34px -24px rgba(17,23,22,.30);
+
+  --serif:"Noto Serif TC", Georgia, "Songti TC", serif;
+  --sans:"Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-weight:400; font-size:16px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+:where(a,button):focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+
+.wrap{max-width:1080px; margin:0 auto; padding:0 28px}
+section{padding:76px 0; border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+
+.eyebrow{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-3); display:flex; align-items:center; gap:10px; margin:0 0 18px;
+}
+.eyebrow::before{content:""; width:22px; height:1px; background:var(--line-2); flex:none}
+
+h1,h2,h3{font-family:var(--serif); font-weight:600; text-wrap:balance; margin:0}
+h1{font-size:clamp(34px,5vw,54px); line-height:1.22; letter-spacing:-.01em}
+h2{font-size:clamp(24px,3vw,32px); line-height:1.35; margin-bottom:14px}
+h3{font-size:18px; line-height:1.5; font-weight:600}
+p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
+.lede{font-size:17.5px; color:var(--ink-2)}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 72px}
+.hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:start}
+.hero h1 em{font-style:normal; color:var(--accent); box-shadow:inset 0 -.38em 0 var(--accent-soft)}
+.hero .lede{margin-top:22px}
+.cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px}
+.btn{
+  display:inline-block; font-family:var(--sans); font-size:14.5px; font-weight:500;
+  padding:11px 22px; border-radius:2px; text-decoration:none; border:1px solid var(--accent);
+  background:var(--accent); color:var(--on-accent); transition:opacity .18s ease;
+}
+.btn:hover{opacity:.86}
+.btn.ghost{background:transparent; color:var(--ink); border-color:var(--line-2)}
+.btn.ghost:hover{border-color:var(--accent); color:var(--accent); opacity:1}
+
+.facts{display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:44px; border-top:1px solid var(--line)}
+.fact{padding:18px 20px 0 0; border-right:1px solid var(--line)}
+.fact:last-child{border-right:0}
+.fact b{display:block; font-family:var(--serif); font-size:26px; font-weight:600; line-height:1.2; font-variant-numeric:tabular-nums}
+.fact span{display:block; font-size:12.5px; color:var(--ink-3); margin-top:4px; line-height:1.6}
+
+/* classification ladder */
+.ladder{background:var(--surface); border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.ladder-head{
+  padding:14px 18px; border-bottom:1px solid var(--line);
+  font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.ladder-head span:last-child{color:var(--accent)}
+.rung{display:grid; grid-template-columns:5px 1fr; border-bottom:1px solid var(--line)}
+.rung:last-child{border-bottom:0}
+.rung i{display:block}
+.rung-body{padding:13px 18px}
+.rung-body strong{font-size:14.5px; font-weight:500; display:flex; justify-content:space-between; gap:12px; align-items:baseline}
+.rung-body strong code{font-family:var(--mono); font-size:11px; color:var(--ink-3); font-weight:400}
+.rung-body small{display:block; color:var(--ink-3); font-size:12.5px; line-height:1.65; margin-top:3px}
+
+/* ---------- pillars ---------- */
+.pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden}
+.pillar{background:var(--surface); padding:28px 26px 30px}
+.pillar .tag{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent)}
+.pillar h3{margin:10px 0 10px}
+.pillar p{font-size:14.5px; margin:0 0 14px; line-height:1.7}
+.pillar ul{margin:0; padding:0; list-style:none; border-top:1px solid var(--line); padding-top:12px}
+.pillar li{font-size:13.5px; color:var(--ink-2); padding:4px 0 4px 16px; position:relative; line-height:1.65}
+.pillar li::before{content:""; position:absolute; left:0; top:12px; width:6px; height:1px; background:var(--line-2)}
+.pillar li b{font-weight:500; color:var(--ink)}
+
+/* ---------- table ---------- */
+.tbl-note{display:flex; flex-wrap:wrap; gap:18px; align-items:center; margin-bottom:20px; font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; color:var(--ink-3)}
+.tbl-scroll{overflow-x:auto; border:1px solid var(--line); border-radius:3px; background:var(--surface); box-shadow:var(--shadow)}
+table{border-collapse:collapse; width:100%; min-width:720px; font-size:14px}
+thead th{
+  position:sticky; top:0; background:var(--surface); z-index:2;
+  text-align:left; padding:16px 18px; border-bottom:1px solid var(--line-2); vertical-align:bottom;
+}
+thead th.plan{text-align:center; width:150px; border-left:1px solid var(--line)}
+thead th .pn{display:block; font-family:var(--serif); font-size:16px; font-weight:600; color:var(--ink)}
+thead th .pp{display:block; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); margin-top:3px; font-variant-numeric:tabular-nums}
+thead th.prem{background:var(--accent-soft)}
+thead th.prem .pn{color:var(--accent)}
+tbody th{
+  text-align:left; font-weight:500; font-family:var(--mono); font-size:11px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--ink-3); padding:22px 18px 8px; background:var(--surface-2);
+}
+tbody tr.grp th{border-top:1px solid var(--line)}
+td{padding:11px 18px; border-top:1px solid var(--line); vertical-align:top; color:var(--ink-2)}
+td.feat{color:var(--ink); font-weight:400}
+td.feat small{display:block; color:var(--ink-3); font-size:12.5px; line-height:1.6; margin-top:2px}
+td.v{text-align:center; width:150px; border-left:1px solid var(--line); font-family:var(--mono); font-size:13px; color:var(--ink-3); font-variant-numeric:tabular-nums; vertical-align:middle; padding-top:13px; padding-bottom:13px}
+td.v.prem{background:color-mix(in srgb, var(--accent-soft) 55%, transparent)}
+
+.tick{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:22px; height:22px; border-radius:50%;
+  background:var(--yes); color:#FFFFFF;
+  font-family:var(--sans); font-size:12px; font-weight:700; line-height:1;
+  box-shadow:0 0 0 3px var(--yes-ring);
+  vertical-align:middle;
+}
+.tick.sm{width:18px; height:18px; font-size:10px; box-shadow:0 0 0 2px var(--yes-ring)}
+td.v.yes{color:var(--yes)}
+.dash{display:inline-block; width:14px; height:2px; background:var(--no); border-radius:1px; vertical-align:middle}
+.ea{font-family:var(--mono); font-size:10px; letter-spacing:.1em; border:1px solid var(--line-2); border-radius:2px; padding:1px 5px; color:var(--ink-3); margin-left:6px; vertical-align:1px}
+
+/* ---------- cases ---------- */
+.cases{display:grid; gap:18px}
+.group-label{
+  display:flex; align-items:center; gap:14px; margin:18px 0 0;
+  font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+}
+.group-label:first-child{margin-top:0}
+.group-label::after{content:""; flex:1; height:1px; background:var(--line)}
+.case{border:1px solid var(--line); border-radius:3px; background:var(--surface); box-shadow:var(--shadow); overflow:hidden}
+.case-hd{padding:24px 28px 20px}
+.case-hd .tag{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent)}
+.case-hd h3{margin:9px 0 10px; font-size:19px}
+.case-hd p{font-size:14.5px; margin:0; max-width:74ch}
+.case-split{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line)}
+.case-col{padding:20px 28px 22px}
+.case-col + .case-col{border-left:1px solid var(--line); background:color-mix(in srgb, var(--accent-soft) 45%, #FFFFFF)}
+.case-col h4{
+  margin:0 0 8px; font-family:var(--mono); font-size:11px; letter-spacing:.13em; text-transform:uppercase;
+  font-weight:400; color:var(--ink-3); display:flex; align-items:center; gap:8px;
+}
+.case-col + .case-col h4{color:var(--yes)}
+.case-col p{font-size:13.5px; margin:0; line-height:1.75; max-width:none}
+.case-col p b{font-weight:500; color:var(--ink)}
+.stop{display:inline-block; width:14px; height:2px; background:var(--no); border-radius:1px}
+@media (max-width:900px){ .case-split{grid-template-columns:1fr} .case-col + .case-col{border-left:0; border-top:1px solid var(--line)} }
+
+/* ---------- paths ---------- */
+.paths{display:grid; grid-template-columns:200px 1fr; gap:32px; align-items:start}
+.path-start{display:grid; gap:10px}
+.chip{
+  border:1px solid var(--line-2); border-radius:2px; background:var(--surface); padding:12px 14px; font-size:13.5px;
+}
+.chip b{display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.13em; color:var(--ink-3); margin-bottom:3px; font-weight:400}
+.stage{background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:22px 24px; box-shadow:var(--shadow)}
+.stage-hd{display:flex; align-items:baseline; gap:12px; margin-bottom:8px}
+.stage-hd h3{font-size:17px}
+.stage-hd em{font-style:normal; font-family:var(--mono); font-size:11px; letter-spacing:.12em; color:var(--accent); text-transform:uppercase}
+.stage p{font-size:14px; margin:0; max-width:none}
+.branches{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px}
+.branch{border:1px solid var(--line); border-left:2px solid var(--accent); border-radius:2px; padding:16px 18px; background:var(--surface)}
+.branch h4{margin:0 0 6px; font-family:var(--serif); font-size:15px; font-weight:600}
+.branch p{font-size:13px; margin:0; line-height:1.7}
+
+/* ---------- pricing ---------- */
+.price-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:26px}
+.price{background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:26px 26px 24px; box-shadow:var(--shadow)}
+.price.hi{border-color:var(--accent)}
+.price .pl{font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3)}
+.price .amt{font-family:var(--serif); font-size:38px; font-weight:600; line-height:1.15; margin-top:8px; font-variant-numeric:tabular-nums}
+.price .amt sup{font-size:16px; font-weight:500; vertical-align:.9em; margin-right:2px}
+.price .per{font-size:13px; color:var(--ink-3); margin-top:2px}
+.price ul{list-style:none; margin:18px 0 0; padding:16px 0 0; border-top:1px solid var(--line)}
+.price li{font-size:13.5px; color:var(--ink-2); padding:3px 0}
+.tiers{width:100%; min-width:0; font-size:13.5px}
+.tiers td, .tiers th{border-left:0}
+.note{
+  border-left:2px solid var(--line-2); padding:2px 0 2px 16px; font-size:13.5px; color:var(--ink-3);
+  max-width:70ch; line-height:1.75; margin-top:22px;
+}
+.note b{color:var(--ink-2); font-weight:500}
+
+/* ---------- faq ---------- */
+.faq{border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{
+  cursor:pointer; list-style:none; padding:18px 0; font-size:15.5px; font-weight:500;
+  display:flex; justify-content:space-between; gap:20px; align-items:center;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; font-family:var(--mono); color:var(--ink-3); flex:none; transition:transform .2s ease}
+details[open] summary::after{transform:rotate(45deg)}
+details p{font-size:14.5px; padding-bottom:6px}
+
+/* ---------- cta ---------- */
+.final{background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:44px 44px 40px; box-shadow:var(--shadow)}
+.final-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center}
+.card-contact{border-left:1px solid var(--line); padding-left:32px}
+.card-contact dl{margin:0; display:grid; grid-template-columns:auto 1fr; gap:6px 16px; font-size:13.5px}
+.card-contact dt{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); padding-top:3px}
+.card-contact dd{margin:0; color:var(--ink-2)}
+footer{padding:32px 0 56px; font-size:12.5px; color:var(--ink-3); border-top:1px solid var(--line)}
+footer a{color:var(--ink-3)}
+
+@media (max-width:900px){
+  .hero-grid,.final-grid,.paths,.price-grid{grid-template-columns:1fr; gap:32px}
+  .pillars,.branches{grid-template-columns:1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .fact:nth-child(2){border-right:0}
+  .card-contact{border-left:0; border-top:1px solid var(--line); padding-left:0; padding-top:28px}
+  .final{padding:32px 26px}
+  section{padding:56px 0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+<style>
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="eyebrow">Atlassian Cloud · 組織層級資安附加訂閱</p>
+    <div class="hero-grid">
+      <div>
+        <h1>讓「誰能存取什麼」<br>成為<em>可稽核、可執行</em>的規則</h1>
+        <p class="lede">Atlassian Guard 是套用於整個 Atlassian Cloud 組織的資安附加訂閱，將身分驗證、資料分級、敏感內容偵測與事件回應整合於單一管理平面。其目的並非新增一套獨立的資安工具，而是讓 Jira 與 Confluence 中實際流動的資料，具備可被治理與稽核的基礎。</p>
+        <div class="cta-row">
+          <a class="btn" href="#compare">查看功能對照表</a>
+          <a class="btn ghost" href="https://www.atlassian.com/software/guard/pricing" target="_blank" rel="noopener">查看官方定價</a>
+        </div>
+      </div>
+
+      <div class="ladder" aria-label="資料分類階梯示意">
+        <div class="ladder-head"><span>Data Classification</span><span>Guard Premium</span></div>
+        <div class="rung"><i style="background:var(--c-public)"></i><div class="rung-body">
+          <strong>Public<code>LEVEL 1</code></strong>
+          <small>可對外公開，允許匿名檢視與公開分享連結。</small>
+        </div></div>
+        <div class="rung"><i style="background:var(--c-internal)"></i><div class="rung-body">
+          <strong>Internal<code>LEVEL 2</code></strong>
+          <small>限組織內部檢視，封鎖對外分享連結。</small>
+        </div></div>
+        <div class="rung"><i style="background:var(--c-conf)"></i><div class="rung-body">
+          <strong>Confidential<code>LEVEL 3</code></strong>
+          <small>偵測到信用卡號等敏感樣式時自動升級標籤，並禁止匯出。</small>
+        </div></div>
+        <div class="rung"><i style="background:var(--c-restricted)"></i><div class="rung-body">
+          <strong>Restricted<code>LEVEL 4</code></strong>
+          <small>禁止外部協作者存取，命中時觸發告警與建議修復動作。</small>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="facts">
+      <div class="fact"><b>2</b><span>方案：Standard 與 Premium，Premium 疊加於 Standard 之上</span></div>
+      <div class="fact"><b>60+</b><span>Premium 內建敏感內容偵測規則，並支援自訂規則</span></div>
+      <div class="fact"><b>30 天</b><span>兩種方案均提供免費試用</span></div>
+      <div class="fact"><b>80%+</b><span>Atlassian 企業雲端客戶已導入 Guard</span></div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section>
+    <p class="eyebrow">導入背景</p>
+    <h2>雲端協作平台，往往是資料治理最容易被略過的一段</h2>
+    <p>多數組織已在端點防護、雲端存取安全代理與資安事件管理平台上投入相當資源，但 Jira 議題附件與 Confluence 頁面中的合約條款、客戶名單與系統憑證，通常未被納入同一套治理框架。實務上的風險缺口多半並非外部入侵，而是三類日常性疏漏：離職人員的存取權未即時解除、內部頁面被設定為公開連結、以及 AI 助理檢索到原本不應納入索引的內容。</p>
+    <p>Atlassian Guard 針對的正是這一段落差。Standard 建立身分與存取的邊界，Premium 則延伸至資料本身：內容於寫入當下即完成掃描與分級，異常行為在數分鐘內轉為告警，並提供可直接執行的修復建議。</p>
+  </section>
+
+  <!-- PILLARS -->
+  <section>
+    <p class="eyebrow">三大價值支柱</p>
+    <h2>Protect · Detect · Respond</h2>
+    <p style="margin-bottom:30px">Guard 依循「保護、偵測、回應」的完整循環設計。Standard 涵蓋前段的存取控制與可視性，Premium 補齊資料層的偵測能力與事件回應機制。</p>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="tag">Protect</span>
+        <h3>主動防範資料外洩</h3>
+        <p>透過彈性的政策設定，界定哪些人員、在何種裝置條件下，可對特定等級的資料執行哪些操作。</p>
+        <ul>
+          <li><b>強制單一登入與兩步驟驗證</b>，最多可建立 20 組驗證政策，分別套用於正職員工、約聘人員、外部協作者與服務帳號</li>
+          <li><b>SCIM 自動化佈建</b>，於身分識別提供者停用帳號的同時解除存取權</li>
+          <li><b>行動應用程式管理</b>，限制截圖、螢幕錄影與檔案下載</li>
+          <li><b>分級式資料政策</b>（Premium），依機密等級限制公開分享與匯出行為</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <span class="tag">Detect</span>
+        <h3>偵測可疑活動與資料誤用</h3>
+        <p>將風險盤查從人工抽查，轉為持續性掃描與規則化偵測。</p>
+        <ul>
+          <li><b>組織稽核記錄</b>，完整保留管理員操作歷程（Standard）</li>
+          <li><b>使用者活動稽核與 API token 使用追蹤</b>（Premium）</li>
+          <li><b>內容掃描</b>（Premium），60 項以上內建偵測涵蓋個人資料、金融資訊、憑證與健康資料，支援全站掃描與寫入當下的即時判定</li>
+          <li><b>產品探索</b>，識別組織內未納管的 Atlassian 站台</li>
+        </ul>
+      </div>
+      <div class="pillar">
+        <span class="tag">Respond</span>
+        <h3>在威脅升級為事件之前處置</h3>
+        <p>告警必須能銜接既有的資安作業流程，而非形成另一個無人處理的通知管道。</p>
+        <ul>
+          <li><b>統一告警檢視與調查儀表板</b>，含行為者脈絡與事件時間軸（Premium）</li>
+          <li><b>資安事件管理平台整合</b>，透過 Webhook 與 API 串流至 Splunk 等平台（Premium）</li>
+          <li><b>Slack 與 Microsoft Teams 通知</b>（Premium）</li>
+          <li><b>建議修復動作</b>：停用帳號、遮蔽敏感內容、重新分類（Premium）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section id="compare">
+    <p class="eyebrow">完整功能對照</p>
+    <h2>Guard Standard 與 Guard Premium 的差異</h2>
+    <p style="margin-bottom:26px">Premium 為疊加於 Standard 之上的方案，並非替代選項。Guard Standard 已內含於 Cloud Enterprise，以及 Teamwork Collection 的 Premium 與 Enterprise 方案；上述訂閱的持有者在升級 Premium 時，僅需補足每位使用者的價差。</p>
+
+    <div class="tbl-note">
+      <span><span class="tick sm" aria-hidden="true">✓</span>&nbsp;&nbsp;內含</span><span><span class="dash" aria-hidden="true"></span>&nbsp;&nbsp;未提供</span><span>EA = Early Access</span>
+    </div>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">功能</th>
+            <th scope="col" class="plan"><span class="pn">Standard</span><span class="pp">US$4.20 / 人 / 月起</span></th>
+            <th scope="col" class="plan prem"><span class="pn">Premium</span><span class="pp">US$8.18 / 人 / 月起</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><th colspan="3" scope="colgroup">身分與存取管理</th></tr>
+          <tr><td class="feat">強制單一登入<small>支援 SAML 與 OIDC，可串接 Okta、Microsoft Entra ID、Google Workspace</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">強制兩步驟驗證</td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">多組驗證政策<small>最多 20 組，可分別套用於不同使用者群體，並支援小範圍先行驗證</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">非計費政策<small>將無須納管的帳號排除於 Standard 計費之外</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">外部使用者政策<small>針對非受管網域的協作者套用獨立安全設定</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">SCIM 自動化使用者佈建與解除佈建</td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">使用者 API token 管控與到期設定</td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">行動應用程式管理<small>限制截圖、螢幕錄影與檔案下載</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">密碼原則、閒置逾時、工作階段與行動應用逾時</td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">OAuth 2.0 服務帳號上限</td><td class="v">250</td><td class="v yes prem">1,000</td></tr>
+
+          <tr class="grp"><th colspan="3" scope="colgroup">資料保護 Protect</th></tr>
+          <tr><td class="feat">資料安全政策<small>限制匯出、公開連結、匿名存取與第三方應用程式存取</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">組織層級資料分類標籤<small>Public、Internal、Confidential、Restricted 四級</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">自動分類<small>偵測到信用卡號等敏感樣式時自動套用對應標籤</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">以分類等級為條件的組織級政策</td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+
+          <tr class="grp"><th colspan="3" scope="colgroup">偵測 Detect</th></tr>
+          <tr><td class="feat">組織洞察<small>活躍使用者統計與驗證方式分布</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">產品探索<small>識別組織內未納管的 Atlassian 站台</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">管理員活動稽核記錄</td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">使用者活動稽核記錄（延伸稽核）</td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">API token 使用行為追蹤</td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">可疑活動偵測與告警<small>涵蓋異常登入、大量匯出與資料外洩徵兆</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">內容掃描<small>60 項以上內建偵測，涵蓋個人資料、金融資訊、憑證與健康資料</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">自訂偵測規則<small>依組織自有的資料樣式建立</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">全站掃描與即時掃描<small>既有內容一次性盤點，新增內容於寫入當下判定</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+
+          <tr class="grp"><th colspan="3" scope="colgroup">回應 Respond</th></tr>
+          <tr><td class="feat">統一告警檢視與調查儀表板<small>包含行為者脈絡與事件時間軸</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">稽核記錄串流至資安事件管理平台<small>透過 Webhook 與 API，可串接 Splunk 等平台</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">Slack 與 Microsoft Teams 告警通知</td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+          <tr><td class="feat">建議修復動作<small>停用帳號、遮蔽敏感內容、重新分類</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
+
+          <tr class="grp"><th colspan="3" scope="colgroup">AI 治理</th></tr>
+          <tr><td class="feat">Rovo Chat 提示與回應內容掃描<small>阻擋或遮蔽出現於 AI 對話中的敏感資料</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span><span class="ea">EA</span></td></tr>
+          <tr><td class="feat">連接器資料安全<small>避免第三方來源的敏感資料被納入 Teamwork Graph</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span><span class="ea">EA</span></td></tr>
+
+          <tr class="grp"><th colspan="3" scope="colgroup">涵蓋範圍與計費</th></tr>
+          <tr><td class="feat">支援的雲端產品</td><td class="v" style="font-size:12px; line-height:1.7">Jira · JSM（Agent）<br>Confluence · Bitbucket<br>Trello · Statuspage</td><td class="v prem" style="font-size:12px; line-height:1.7; color:var(--accent)">Jira · Confluence</td></tr>
+          <tr><td class="feat">是否已內含於其他訂閱<small>已內含 Standard 者，升級 Premium 時僅需補足每位使用者的價差</small></td><td class="v yes" style="font-size:12px; line-height:1.8"><span class="tick" role="img" aria-label="支援">✓</span><br>Cloud Enterprise<br>Teamwork Collection<br>Premium／Enterprise</td><td class="v prem" style="font-size:12px">另行購買，補足價差</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note"><b>選版的判斷基準：</b>若組織目前的核心課題在於「帳號如何取得存取權、如何解除存取權」，Standard 已可滿足需求。若需回應的是「內容中存在哪些不應存在的資料、由何人於何時存取、能否於短時間內完成處置」，則僅有 Premium 具備對應能力。後者通常也是金融、醫療與其他受監管產業在稽核程序中被要求說明的項目。</p>
+  </section>
+
+  <!-- CASES -->
+  <section>
+    <p class="eyebrow">場景對照</p>
+    <h2>同一事件發生時，兩種方案分別能處理到什麼程度</h2>
+    <p style="margin-bottom:30px">功能清單難以呈現的差異，往往在事件發生的當下才會顯現。以下十個場景均為實務上反覆出現的類型，前五個為跨產業通用情境，後五個聚焦於軟體開發與產品公司。差異的關鍵不在於「是否防範得住」，而在於事後能否完整說明事件經過，以及從發現到處置所需的時間。</p>
+
+    <div class="cases">
+
+      <p class="group-label">通用場景</p>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">離職交接</span>
+          <h3>資深工程師於週五提出離職，主管在下週一才開始盤查其存取歷程</h3>
+          <p>該員於最後兩週仍持有 Confluence 技術規格庫的完整存取權。人資已於身分識別提供者停用帳號，但主管需要釐清的是：離職前該段期間內，其實際匯出與下載了哪些內容。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="stop"></span> Guard Standard</h4>
+            <p>SCIM 會在身分識別提供者停用帳號的同時解除 Atlassian 存取權，此環節可完整覆蓋。惟稽核記錄僅涵蓋<b>管理員操作</b>，可查得權限設定的變更歷程，但無法回溯特定使用者的檢視與匯出行為。實務上僅能依靠頁面版本紀錄逐頁比對，而匯出行為本身並未留存記錄。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>使用者活動稽核記錄會保留該員的檢視與匯出行為，可直接匯出完整時間軸供調查使用。若事前已配置大量匯出的偵測規則，此行為在<b>離職前即會觸發告警</b>，而非於事後才展開追查。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">公開連結</span>
+          <h3>行銷同仁將一頁 Confluence 設定為公開連結，該頁包含尚未對外的定價資訊</h3>
+          <p>其原意是分享給外部設計協力廠商，因而選擇了「知道連結的人皆可檢視」。三週後，業務單位在客戶端看到了這份定價資料。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="stop"></span> Guard Standard</h4>
+            <p>資料安全政策可<b>於站台層級全面禁止公開連結</b>，但此設定為全有全無：一旦啟用，行銷本應對外公開的活動說明與產品文件亦同時受限。實務上多半會因業務單位反映而重新開放，導致政策難以長期維持。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>改以<b>分類等級作為管控條件</b>：標示為 Public 的行銷素材維持正常分享，Confidential 以上則一律禁止公開連結與匯出。定價資料因命中偵測規則而自動升級分類，該同仁在執行分享操作的當下即被阻擋，而非於三週後才由業務單位回報。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">稽核盤點</span>
+          <h3>稽核單位要求說明：Confluence 中是否存有客戶的身分證字號</h3>
+          <p>依內部規範不應存在，但組織共有 40 個 Space、累積六年的內容，且客服團隊過去確有將個案截圖與資料貼入頁面的作業習慣。此項目須於兩週內提出書面答覆。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="stop"></span> Guard Standard</h4>
+            <p>不具備內容層的盤查能力，僅能透過 Confluence 搜尋配合人工抽查。此種作法在稽核程序中難以構成充分證據，能夠證明的是「已進行查找」，而非「已完成全面掃描」。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>可運用內建的個人資料偵測，搭配<b>自訂規則</b>（例如台灣身分證字號格式），執行一次全站掃描並產出命中清單與所在頁面，後續可套用遮蔽或重新分類的修復動作。新增內容則於寫入當下即完成判定。<br><b>惟須先確認覆蓋範圍：</b>掃描不含光學文字辨識、不涵蓋附件內容，亦不支援 Confluence Whiteboard。若前述截圖為影像格式，本輪掃描無法涵蓋。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">帳號異常</span>
+          <h3>凌晨時段，某帳號自非慣用地點登入，隨後開始大量下載附件</h3>
+          <p>該員工的密碼曾於其他網站的外洩名單中出現，且在多處重複使用。攻擊者取得的是一組合法憑證，其行為在驗證層面完全合規。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="stop"></span> Guard Standard</h4>
+            <p>強制單一登入（Single Sign-On）與兩步驟驗證（Two-Step Verification）可大幅降低此類攻擊的成功率，為最具效益的第一道防線。惟若攻擊者已突破兩步驟驗證，Standard <b>不會產生任何告警</b>，事件通常需數日後才會被察覺。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>可疑活動偵測可辨識異常登入與大量下載的組合行為，於數分鐘內將告警送至 Microsoft Teams、Slack 或資安事件管理平台。告警本身即附帶行為者脈絡與事件時間軸，並提供<b>停用帳號</b>的建議動作，資安人員可於同一介面完成處置。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">AI 導入</span>
+          <h3>Rovo 上線第二週，有同仁詢問本年度調薪級距，系統提供了完整答覆</h3>
+          <p>資料來源為人資兩年前建立的一頁 Confluence，當初的權限設定開放給全公司，後續無人重新檢視。AI 並未執行任何違規操作，僅是呈現了原本即處於開放狀態的內容。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="stop"></span> Guard Standard</h4>
+            <p>AI 的可見範圍等同於既有的頁面權限，而權限的設定偏差多為長期累積的結果。Standard 不具備盤點「哪些高敏感內容的權限範圍過寬」的能力，此類問題通常須待實際被查詢後才會浮現。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>內容掃描可在 AI 導入前先行盤點出此類頁面並標示為 Restricted，分類標籤本身亦會被 AI 讀取，成為可見範圍的判斷依據。另提供 Rovo Chat 的提示與回應掃描（<b>Early Access</b>），可於對話層阻擋或遮蔽敏感內容。</p>
+          </div>
+        </div>
+      </article>
+
+      <p class="group-label">軟體開發／產品公司場景</p>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">憑證外洩</span>
+          <h3>工程師為協助同事重現問題，將一組 AWS access key 貼入 Jira 留言</h3>
+          <p>該議題共有 12 位關注者，其中兩位為外部協力廠商。問題排除後未有人回頭清除該則留言，內容持續留存於議題中。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="stop"></span> Guard Standard</h4>
+            <p>此情境不在 Standard 的能力範圍內。Standard 管理的是存取層，不檢視議題的內容本身。此類憑證通常須待實際遭到濫用，或於下一次資安健檢的人工抽查中才會被發現。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>內建偵測涵蓋憑證與金鑰類樣式，留言於<b>寫入當下</b>即會命中並觸發告警，可直接套用遮蔽的修復動作。<br><b>惟涵蓋範圍須予釐清：</b>內容掃描僅支援 Jira 與 Confluence，<b>不包含 Bitbucket</b>。程式碼中的硬編碼憑證仍須由專用的 secret scanning 機制處理。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">委外開發</span>
+          <h3>承接大型專案，外包團隊 20 人將於下週進入組織的 Jira 與 Confluence</h3>
+          <p>其存取範圍應僅限於該專案，但 Confluence 中同時存有其他客戶的規格文件、內部架構圖，以及一份載明各環境連線方式的維運手冊。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
+            <p>此層級的需求 Standard 已可有效覆蓋：外部使用者政策允許對這 20 人套用獨立規則，包括強制兩步驟驗證、縮短工作階段逾時、禁止建立 API token，以及在行動裝置上限制下載與截圖。專案結束時可透過 SCIM 一次性完成權限回收。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>Premium 補強的是 Space 權限設定發生疏漏時的第二道防線。將維運手冊與其他客戶的內容標示為 Restricted 後，即<b>從組織層級禁止外部協作者存取</b>，不再仰賴每一個 Space 的權限設定皆正確無誤。搭配使用者活動稽核記錄，交付後若須證明外包團隊未接觸其他內容，亦具備可查證的依據。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">自動化治理</span>
+          <h3>CI 流程中斷後追查發現，該組 API token 由三年前離職的同事以個人帳號建立</h3>
+          <p>組織希望全面清查此類 token，但無法確認哪些 Jenkins 工作、GitHub Actions 流程或內部工具仍依賴其運作，因而遲遲未能執行停用。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
+            <p>可從源頭進行治理：禁止使用者自行建立 API token、對既有 token 設定到期時間以強制輪替，並改以 OAuth 2.0 服務帳號（上限 250 個）承接自動化流程，使機器身分與個人帳號脫鉤。<br>惟此為<b>由上而下的關閉機制</b>，仍無法在停用前評估各組 token 的影響範圍。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>API token 使用行為追蹤可呈現每一組 token 的<b>最近使用時間、呼叫來源與操作內容</b>。有了這份清單，清查工作即可從無從評估的停用風險，轉為依相依性排序的分階段遷移。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">跨客戶隔離</span>
+          <h3>專案經理將客戶 A 的系統規格文件移入共用 Space 作為範本，客戶 B 的窗口亦具該 Space 存取權</h3>
+          <p>組織與雙方均簽有保密協議。此行為本身可能僅是一次文件整理，但若客戶 A 提出查詢，組織必須能明確說明何人於何時檢視過該文件。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="stop"></span> Guard Standard</h4>
+            <p>Space 權限設計再嚴謹，仍無法防範內容被主動移至權限範圍較寬的位置。事後追查時，Standard 的稽核記錄僅涵蓋管理員操作，無法回應「哪些人員檢視過該頁面」。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>分類標籤依附於內容本身而非所在的 Space，標示為 Restricted 的規格文件無論移至何處，均受同一套政策約束。若事件確實發生，使用者活動稽核記錄可列出完整檢視紀錄，此為對客戶說明時能否完成結案的關鍵差異。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-hd">
+          <span class="tag">影子 IT</span>
+          <h3>某開發小組為簡化流程，自行以公司信箱申請了一個免費 Confluence 站台存放設計文件</h3>
+          <p>該站台已使用八個月，未納入單一登入、未納入備份機制，組織層級亦無人知悉其存在，而這些帳號實際上已計入每月的 Guard 帳單。</p>
+        </div>
+        <div class="case-split">
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
+            <p>產品探索（Product Discovery）即針對此情境設計：只要帳號使用已驗證網域，該站台便會被列出，後續可執行納管、合併或關閉。此外，這些帳號<b>本即已計入 Guard 帳單</b>，因此盤點影子 IT 通常同時具備資安與成本管控的效益。</p>
+          </div>
+          <div class="case-col">
+            <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+            <p>識別站台僅為第一步。完成納管後執行一次內容掃描，方能確認這八個月間累積了哪些內容。測試帳號密碼、客戶名單與尚未公開的產品規劃，多半出現在此類未納管的站台之中。</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="note"><b>上述場景的共同結構：</b>Standard 界定「何人可取得存取權」，此層若未落實，後續機制均無從發揮作用；Premium 則回應「取得存取權之後發生了什麼、組織多久後得知、以及能否完成處置」。若組織現階段的課題仍集中於第一層，優先將 Standard 落實至完整狀態較具效益；若已面臨第二層的問責要求，Premium 便不屬於加值選項，而是唯一可行的方案。</p>
+  </section>
+
+  <!-- PATHS -->
+  <section>
+    <p class="eyebrow">典型採用路徑</p>
+    <h2>三種起點，同一項基礎</h2>
+    <p style="margin-bottom:30px">組織的資安成熟度不同，導入 Guard 的時機亦有差異。但無論由何種需求切入，Guard Standard 均為維持安全協作的共同基準，差異在於後續的發展方向。</p>
+
+    <div class="paths">
+      <div class="path-start">
+        <div class="chip"><b>Path 1</b>高度複雜的大型企業</div>
+        <div class="chip"><b>Path 2</b>高度受監管產業</div>
+        <div class="chip"><b>Path 3</b>資安意識驅動的組織</div>
+      </div>
+
+      <div>
+        <div class="stage">
+          <div class="stage-hd"><em>基礎</em><h3>Atlassian Guard Standard</h3></div>
+          <p>所有企業級組織均應將 Standard 視為在 Atlassian Cloud 維持安全協作的必要條件，涵蓋強制單一登入、集中稽核與自動化佈建。此層若未完備，後續的分級與偵測機制皆缺乏可靠的基礎。</p>
+        </div>
+
+        <div class="branches">
+          <div class="branch">
+            <h4>先行導入 Cloud Enterprise</h4>
+            <p>重視擴展性、合規與分析能力，需求已超出單純的資安控制範疇，例如自帶金鑰與多站台治理。此類組織後續多半會再疊加 Guard Premium，以取得偵測與回應能力。</p>
+          </div>
+          <div class="branch">
+            <h4>先行升級 Guard Premium</h4>
+            <p>認同保護、偵測、回應的完整循環，優先需求為資料分級、內容掃描與事件回應。待組織規模成長後，再導入 Cloud Enterprise 以補足分析與擴展性需求。</p>
+          </div>
+          <div class="branch">
+            <h4>僅採用 Guard Premium</h4>
+            <p>對擴展性與分析的需求相對有限，關注重點集中於更深入的資安洞察與控制。常見於資安團隊主導採購、且整體站台規模尚未達到 Enterprise 門檻的組織。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section>
+    <p class="eyebrow">定價與計費</p>
+    <h2>依不重複使用者計價，不因產品或站台數量重複收費</h2>
+    <p style="margin-bottom:26px">同一位使用者無論持有多少站台或產品的存取權，在 Guard 帳單中僅計算一次。使用者人數愈多，單價級距愈低；年繳約可節省 17%，相當於兩個月的費用。</p>
+
+    <div class="price-grid">
+      <div class="price">
+        <div class="pl">Guard Standard</div>
+        <div class="amt"><sup>US$</sup>4.20</div>
+        <div class="per">每位使用者／月 起（月繳，依人數級距遞減）</div>
+        <ul>
+          <li>已內含於 Cloud Enterprise，以及 Teamwork Collection 的 Premium 與 Enterprise 方案</li>
+          <li>1 至 10 人適用月繳定額 US$30</li>
+          <li>免費版 Jira、Confluence、Trello 的帳號亦計入</li>
+          <li>JSM 客戶入口（portal-only）帳號不計費</li>
+        </ul>
+      </div>
+      <div class="price hi">
+        <div class="pl">Guard Premium</div>
+        <div class="amt"><sup>US$</sup>8.18</div>
+        <div class="per">每位使用者／月 起（月繳，依人數級距遞減）</div>
+        <ul>
+          <li>已持有 Cloud Enterprise、Teamwork Collection Premium／Enterprise 或 Guard Standard 者，僅需補足價差</li>
+          <li>依 Jira 與 Confluence 的存取人數計算</li>
+          <li>列入非計費政策的帳號，仍計入 Premium 計費</li>
+          <li>受管帳號與外部使用者均納入計費</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tbl-scroll">
+      <table class="tiers">
+        <thead>
+          <tr>
+            <th scope="col">Guard Standard 月繳級距</th>
+            <th scope="col" class="plan">每位使用者單價</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="feat">1 – 10 人</td><td class="v">US$30 定額</td></tr>
+          <tr><td class="feat">11 – 250 人</td><td class="v">US$4.00</td></tr>
+          <tr><td class="feat">251 – 1,000 人</td><td class="v">US$3.20</td></tr>
+          <tr><td class="feat">1,001 – 5,000 人</td><td class="v">US$1.80</td></tr>
+          <tr><td class="feat">5,001 人以上</td><td class="v">US$1.20</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note"><b>關於價格差異的說明：</b>Atlassian 產品頁目前標示 Standard 為每人每月 US$4.20 起、Premium 為 US$8.18 起，而授權常見問題的月繳級距表中，11 至 250 人區間為 US$4.00。兩處數據並不一致，實際金額請以官方定價計算工具與正式報價為準。年繳採級距總價制，須另行取得報價。</p>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <p class="eyebrow">常見問題</p>
+    <h2>導入前最常被提出的七項問題</h2>
+    <div class="faq" style="margin-top:24px">
+      <details open>
+        <summary>導入 Guard 之前需要完成哪些前置作業？</summary>
+        <p>Guard Standard 有兩項前置作業：網域驗證（domain verification）與使用者認領（user claim）。組織須先證明擁有該電子郵件網域，方能將使用該網域的 Atlassian 帳號納為受管帳號，後續的單一登入、驗證政策與稽核機制才會生效。此步驟通常需與 IT 或 DNS 管理者協調，建議預留充分時程。</p>
+      </details>
+      <details>
+        <summary>哪些訂閱已內含 Guard Standard？</summary>
+        <p>Cloud Enterprise 訂閱內含 Guard Standard。此外，Teamwork Collection 的 Premium 與 Enterprise 方案亦內含 Guard Standard，Standard 方案則不包含。已透過上述任一訂閱取得 Guard Standard 的組織，若後續要升級 Guard Premium，僅需補足每位使用者的價差，無須重複購買 Standard。</p>
+      </details>
+      <details>
+        <summary>免費版的使用者是否也會計入費用？</summary>
+        <p>會。只要帳號位於受 Guard 管理的網域，並持有 Jira、JSM、Confluence、Bitbucket、Trello 或 Statuspage（含免費版）的存取權，即計入 Guard Standard 帳單。若確認部分帳號無須納管，可建立非計費政策將其排除。惟須留意，這些帳號同時也不再受 Standard 的功能保護，且在 Premium 的計費中仍會被計入。</p>
+      </details>
+      <details>
+        <summary>Premium 為何僅支援 Jira 與 Confluence？</summary>
+        <p>Premium 的核心能力為內容掃描與資料分級，目前的偵測引擎涵蓋 Jira 與 Confluence Cloud。Bitbucket、Trello 與 Statuspage 仍在 Standard 的身分與存取控制範圍內，但不受內容掃描涵蓋。若組織的敏感資料主要存放於程式碼儲存庫，須另行評估補強方案。</p>
+      </details>
+      <details>
+        <summary>資料外洩防護的偵測範圍有哪些已知限制？</summary>
+        <p>內容掃描目前針對頁面與議題的文字內容。實務評估時應特別確認幾項常見盲點：不執行光學文字辨識、不涵蓋附件檔案內容，且尚未支援 Confluence Whiteboard。若組織的敏感資料多以掃描檔或附件形式流通，將直接影響覆蓋率評估，建議於概念驗證階段即進行實測。</p>
+      </details>
+      <details>
+        <summary>取消訂閱後會產生哪些影響？</summary>
+        <p>強制單一登入與強制兩步驟驗證將失效，使用者改以 Atlassian 帳號登入，部分人員可能需重設密碼；內容掃描與行為偵測停止運作，告警不再送出。已驗證的網域不受影響，仍可繼續檢視與管理受管帳號，部分關鍵設定會保留一段期間。退款僅限月繳試用後的第一個付費月份內，或年繳付款後 30 日內提出。</p>
+      </details>
+      <details>
+        <summary>是否可以先行試用？</summary>
+        <p>可以。兩種方案均提供 30 天免費試用，由組織管理員於 admin.atlassian.com 啟用。建議於試用期間即選定兩至三個最具代表性的 Space 或專案執行全站掃描，以實際命中結果驗證偵測規則是否符合組織的資料型態，而非僅就功能清單進行評估。</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    功能與定價資訊整理自 Atlassian 官方網站與支援文件（截至 2026 年 9 月）。Atlassian、Jira、Confluence、Atlassian Guard 為 Atlassian Pty Ltd 之商標。定價與功能可能異動，實際條件以
+    <a href="https://www.atlassian.com/software/guard/pricing" target="_blank" rel="noopener">Atlassian 官方頁面</a>及正式報價為準。
+  </footer>
+
+</div>
+</body>
+</html>
