@@ -127,7 +127,7 @@ thead th{
   position:sticky; top:0; background:var(--surface); z-index:2;
   text-align:left; padding:16px 18px; border-bottom:1px solid var(--line-2); vertical-align:bottom;
 }
-thead th.plan{text-align:center; width:150px; border-left:1px solid var(--line)}
+thead th.plan{text-align:center; width:168px; border-left:1px solid var(--line)}
 thead th .pn{display:block; font-family:var(--serif); font-size:16px; font-weight:600; color:var(--ink)}
 thead th .pp{display:block; font-family:var(--mono); font-size:11.5px; color:var(--ink-3); margin-top:3px; font-variant-numeric:tabular-nums}
 thead th.prem{background:var(--accent-soft)}
@@ -140,8 +140,17 @@ tbody tr.grp th{border-top:1px solid var(--line)}
 td{padding:11px 18px; border-top:1px solid var(--line); vertical-align:top; color:var(--ink-2)}
 td.feat{color:var(--ink); font-weight:400}
 td.feat small{display:block; color:var(--ink-3); font-size:12.5px; line-height:1.6; margin-top:2px}
-td.v{text-align:center; width:150px; border-left:1px solid var(--line); font-family:var(--mono); font-size:13px; color:var(--ink-3); font-variant-numeric:tabular-nums; vertical-align:middle; padding-top:13px; padding-bottom:13px}
+td.v{text-align:center; width:168px; border-left:1px solid var(--line); font-family:var(--mono); font-size:13px; color:var(--ink-3); font-variant-numeric:tabular-nums; vertical-align:middle; padding-top:13px; padding-bottom:13px}
 td.v.prem{background:color-mix(in srgb, var(--accent-soft) 55%, transparent)}
+
+/* 文字清單型儲存格（支援產品、內含方案）：td.v 的等寬字體是為勾號與數字設計的，
+   用在產品名稱上會在窄欄內被逐字拆散。改用無襯線字體，並讓每個項目整體不斷行。 */
+td.v.v-list{font-family:var(--sans); font-size:12px; padding-left:12px; padding-right:12px}
+.v-list ul{list-style:none; margin:0; padding:0; line-height:1.5}
+.v-list li{white-space:nowrap}
+.v-list li + li{margin-top:6px}
+.v-list li .cont{display:block}          /* 同一項的續行，不另計間距 */
+.v-list .tick{margin-bottom:9px}
 
 .tick{
   /* 勾號改用 SVG 繪製而非字型 glyph：字型的 ascent/descent 會讓 ✓ 在圓內偏移，
@@ -224,6 +233,11 @@ td.v.yes{color:var(--yes)}
 
 /* ---------- faq ---------- */
 .faq{border-top:1px solid var(--line)}
+.faq-grp{
+  font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--ink-3); padding:30px 0 11px; border-bottom:1px solid var(--line);
+}
+.faq > .faq-grp:first-child{padding-top:14px}
 details{border-bottom:1px solid var(--line)}
 summary{
   cursor:pointer; list-style:none; padding:18px 0; font-size:15.5px; font-weight:500;
@@ -416,8 +430,8 @@ img{max-width:100%}
           <tr><td class="feat">連接器資料安全<small>避免第三方來源的敏感資料被納入 Teamwork Graph</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span><span class="ea">EA</span></td></tr>
 
           <tr class="grp"><th colspan="3" scope="colgroup">涵蓋範圍與計費</th></tr>
-          <tr><td class="feat">支援的雲端產品</td><td class="v" style="font-size:12px; line-height:1.7">Jira · JSM（Agent）<br>Confluence · Bitbucket<br>Trello · Statuspage</td><td class="v prem" style="font-size:12px; line-height:1.7; color:var(--accent)">Jira · Confluence</td></tr>
-          <tr><td class="feat">是否已內含於其他訂閱<small>已內含 Standard 者，升級 Premium 時僅需補足每位使用者的價差</small></td><td class="v yes" style="font-size:12px; line-height:1.8"><span class="tick" role="img" aria-label="支援">✓</span><br>Cloud Enterprise<br>Teamwork Collection<br>Premium／Enterprise</td><td class="v prem" style="font-size:12px">另行購買，補足價差</td></tr>
+          <tr><td class="feat">支援的雲端產品</td><td class="v v-list"><ul><li>Jira</li><li>JSM（Agent）</li><li>Confluence</li><li>Bitbucket</li><li>Trello</li><li>Statuspage</li></ul></td><td class="v v-list prem" style="color:var(--accent)"><ul><li>Jira</li><li>Confluence</li></ul></td></tr>
+          <tr><td class="feat">是否已內含於其他訂閱<small>已內含 Standard 者，升級 Premium 時僅需補足每位使用者的價差</small></td><td class="v yes v-list"><span class="tick" role="img" aria-label="支援">✓</span><ul><li>Cloud Enterprise</li><li>Teamwork Collection<span class="cont">Premium／Enterprise</span></li></ul></td><td class="v prem v-list">另行購買，補足價差</td></tr>
         </tbody>
       </table>
     </div>
@@ -714,8 +728,9 @@ img{max-width:100%}
   <!-- FAQ -->
   <section>
     <p class="eyebrow">常見問題</p>
-    <h2>導入前最常被提出的七項問題</h2>
+    <h2>導入與採購前最常被提出的問題</h2>
     <div class="faq" style="margin-top:24px">
+      <div class="faq-grp">導入與功能範圍</div>
       <details open>
         <summary>導入 Guard 之前需要完成哪些前置作業？</summary>
         <p>Guard Standard 有兩項前置作業：網域驗證（domain verification）與使用者認領（user claim）。組織須先證明擁有該電子郵件網域，方能將使用該網域的 Atlassian 帳號納為受管帳號，後續的單一登入、驗證政策與稽核機制才會生效。此步驟通常需與 IT 或 DNS 管理者協調，建議預留充分時程。</p>
@@ -743,6 +758,36 @@ img{max-width:100%}
       <details>
         <summary>是否可以先行試用？</summary>
         <p>可以。兩種方案均提供 30 天免費試用，由組織管理員於 admin.atlassian.com 啟用。建議於試用期間即選定兩至三個最具代表性的 Space 或專案執行全站掃描，以實際命中結果驗證偵測規則是否符合組織的資料型態，而非僅就功能清單進行評估。</p>
+      </details>
+
+      <div class="faq-grp">使用者計費與採購</div>
+      <details>
+        <summary>受管使用者、計費使用者與外部使用者如何區分？</summary>
+        <p>受管使用者（managed users）指帳號位於已驗證網域、因而受組織控管的帳號；計費使用者（billable users）則是實際計入帳單的人數。兩者不必然相等：受管帳號若未持有任何受支援產品的存取權，就不會計費；反之，非受管網域的外部協作者只要具備受支援產品的存取權，仍會計入 Standard 帳單。實際人數可於 admin.atlassian.com 的帳單預估頁面查看，建議報價前以該數字為準，而非以組織通訊錄的人數推估。</p>
+      </details>
+      <details>
+        <summary>Premium 的計費人數如何認定？與 Standard 有何不同？</summary>
+        <p>兩者的計費基礎並不相同。Standard 計入具備 Jira、JSM（Agent）、Confluence、Bitbucket、Trello 或 Statuspage 存取權的使用者；Premium 則僅計入具備 Jira 或 Confluence 存取權者，且不分方案版本。已停用的帳號、未持有任何產品存取權者，以及僅使用 JSM 或 Jira Product Discovery 的使用者，不計入 Premium。因此在同一組織中，Premium 的計費人數通常低於 Standard，估算升級成本時不應直接以 Standard 的人數乘以價差。</p>
+      </details>
+      <details>
+        <summary>JSM 的報修者會計入費用嗎？</summary>
+        <p>不會。僅透過客戶入口網站（portal-only）提交或追蹤案件的帳號，不計入 Guard Standard 帳單；實際處理案件的 JSM Agent 才會計費，且該 Agent 須使用受管帳號。對於以 JSM 作為全公司 IT 服務台、報修者動輒數百至數千人的組織，此項差異對總成本的影響甚大，評估時應明確區分 Agent 與報修者的人數。</p>
+      </details>
+      <details>
+        <summary>非計費政策可以排除多少人？有哪些限制？</summary>
+        <p>組織僅能建立一組非計費驗證政策，並非可任意增設。該政策的功能受到明確限制：無法啟用強制單一登入、強制兩步驟驗證與 API token 封鎖，亦無法與身分提供者同步。換言之，被排除計費的帳號同時也失去 Standard 的主要防護能力，實質上等同於未納管。此外，此機制僅適用於 Standard；Premium 的計費不受非計費政策影響，若要將使用者排除於 Premium 之外，只能移除其 Jira 或 Confluence 的產品存取權。</p>
+      </details>
+      <details>
+        <summary>年繳與月繳應如何選擇？</summary>
+        <p>年繳目前的級距定價約等同於免費取得兩個月，適合納管範圍與人數已趨穩定的組織。月繳則依當期實際人數計費，彈性較高，適合仍在擴編或尚未確定納管範圍的階段。試用期間可直接洽詢 Atlassian 取得年繳報價；已採月繳者，可於 admin.atlassian.com 的帳單設定中切換。年繳續約會提前寄送報價（依帳務系統版本為 60 或 90 日前），建議將該時點納入年度預算作業的行事曆。</p>
+      </details>
+      <details>
+        <summary>可使用哪些付款方式？</summary>
+        <p>月繳僅接受信用卡（Visa、Mastercard、American Express，不含 Discover）與 PayPal。年繳的選項較多，除信用卡外亦支援銀行電匯、支票與 ACH（限美國銀行帳戶）；訂單金額達 US$10,000 以上者，可申請 Net-30 付款條件。若組織的採購流程無法以信用卡支付、或需要月結與正式請款單據，年繳往往是唯一可行的路徑。此點常在採購階段才被發現，建議於評估初期即與財務單位確認。</p>
+      </details>
+      <details>
+        <summary>人數成長時帳單會如何變動？會事先通知嗎？</summary>
+        <p>Guard 依當期實際計費人數計算，人數增加時帳單隨之提高。若當期金額高於前一期，帳務與技術聯絡人會在扣款前三日收到通知信；但這是扣款前的告知，而非事前核准機制。對人數波動較大的組織，建議定期於 admin.atlassian.com 的訂閱管理頁面檢視使用量，並將「新進人員取得產品存取權」納入既有的帳號開通流程，避免帳單在無人察覺的情況下逐月墊高。</p>
       </details>
     </div>
   </section>
