@@ -170,6 +170,16 @@ td.v.yes{color:var(--yes)}
 .dash{display:inline-block; width:14px; height:2px; background:var(--no); border-radius:1px; vertical-align:middle}
 .ea{font-family:var(--mono); font-size:10px; letter-spacing:.1em; border:1px solid var(--line-2); border-radius:2px; padding:1px 5px; color:var(--ink-3); margin-left:6px; vertical-align:1px}
 
+/* ---------- capabilities ---------- */
+.caps{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden; margin-top:28px}
+.cap{background:var(--surface); padding:26px 28px 28px}
+.cap .tag{font-family:var(--mono); font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--accent)}
+.cap .tag.std{color:var(--ink-3)}
+.cap h3{margin:9px 0 11px; font-size:17px}
+.cap p{font-size:14.5px; line-height:1.75; margin:0 0 11px}
+.cap p:last-child{margin-bottom:0}
+.cap b{font-weight:500; color:var(--ink)}
+
 /* ---------- cases ---------- */
 .cases{display:grid; gap:18px}
 .group-label{
@@ -266,6 +276,7 @@ footer a{color:var(--ink-3)}
   .card-contact{border-left:0; border-top:1px solid var(--line); padding-left:0; padding-top:28px}
   .final{padding:32px 26px}
   section{padding:56px 0}
+  .caps{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
 
@@ -437,6 +448,58 @@ img{max-width:100%}
     </div>
 
     <p class="note"><b>選版的判斷基準：</b>若組織目前的核心課題在於「帳號如何取得存取權、如何解除存取權」，Standard 已可滿足需求。若需回應的是「內容中存在哪些不應存在的資料、由何人於何時存取、能否於短時間內完成處置」，則僅有 Premium 具備對應能力。後者通常也是金融、醫療與其他受監管產業在稽核程序中被要求說明的項目。</p>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section>
+    <p class="eyebrow">重點能力說明</p>
+    <h2>對照表中幾項需要進一步理解的機制</h2>
+    <p>功能對照表以單行呈現各項能力，但其中數項的實際運作方式會直接影響導入工作量與選版判斷。以下就最容易被低估的六項補充說明。</p>
+    <div class="caps">
+
+      <div class="cap">
+        <span class="tag">Premium</span>
+        <h3>資料分級與自動分類</h3>
+        <p>Guard Premium 於組織層級提供 Public、Internal、Confidential、Restricted 四級標籤，套用對象為 Confluence 頁面與 Jira 議題。<b>須留意標籤本身不具強制力</b>：將頁面標為 Restricted 不會自動封鎖任何操作，必須另行建立「以分類等級為條件的組織級政策」，該等級才會實際限制分享與匯出行為。</p>
+        <p>自動分類則於內容寫入時比對敏感樣式，命中信用卡號等格式即自動套用對應等級，用以降低仰賴人工標記所產生的落差。實務上建議先以手動分級為少量高價值內容建立基準，再逐步開啟自動分類；初期若出現大量誤判，使用者會很快對標籤失去信任。</p>
+      </div>
+
+      <div class="cap">
+        <span class="tag std">Standard · Premium</span>
+        <h3>資料安全政策</h3>
+        <p>可限制匯出、公開分享連結、匿名存取與第三方應用程式的資料存取，兩種方案均具備。<b>差別在於套用條件</b>：Standard 以空間或專案為範圍，屬一體適用；Premium 則可將分類等級作為條件，例如「Confidential 以上一律封鎖對外分享連結，Internal 以下不受限」。</p>
+        <p>這往往是評估是否升級的關鍵分野。若安全要求可以用「整個空間全開或全關」表達，Standard 已足夠；若必須依內容本身的敏感程度採取不同管制，才需要 Premium 的分級能力。</p>
+      </div>
+
+      <div class="cap">
+        <span class="tag">Premium</span>
+        <h3>內容掃描與自訂偵測規則</h3>
+        <p>內容掃描提供 60 項以上內建偵測，涵蓋個人資料、金融資訊、憑證與健康資料，並以兩種模式運作：全站掃描對既有內容執行一次性盤點，即時掃描則於內容寫入當下判定。</p>
+        <p><b>內建偵測以國際通用格式為主</b>（信用卡號、雲端服務金鑰、美國社會安全號碼等）。台灣的身分證字號、健保卡號與統一編號不在預設清單內，須以自訂偵測規則建立。評估階段應將此工作量納入導入時程，並以組織既有內容實測命中率——掃描目前不執行光學文字辨識、亦不涵蓋附件內容，對以掃描檔流通文件的組織影響甚大。</p>
+      </div>
+
+      <div class="cap">
+        <span class="tag std">Standard · Premium</span>
+        <h3>稽核記錄的兩個層次</h3>
+        <p>兩者的差別可以一句話概括：<b>Standard 能回答「管理員做了什麼」，Premium 才能回答「使用者對資料做了什麼」。</b></p>
+        <p>Standard 提供管理員活動稽核記錄、組織洞察（活躍使用者統計與驗證方式分布），以及產品探索（識別組織內未納管的 Atlassian 站台）。Premium 另加使用者活動稽核（延伸稽核）與 API token 使用行為追蹤。離職人員的存取歷程盤查，或稽核單位要求說明「何人於何時檢視過哪份文件」這類需求，僅憑 Standard 的管理員記錄無法完成。</p>
+      </div>
+
+      <div class="cap">
+        <span class="tag">Premium</span>
+        <h3>告警、調查與修復動作</h3>
+        <p>可疑活動偵測涵蓋異常登入、大量匯出與資料外洩徵兆，命中後於統一的調查儀表板呈現，包含行為者脈絡與事件時間軸，免去跨多個管理介面拼湊事件經過。告警可送達 Slack 或 Microsoft Teams，稽核記錄亦可經 Webhook 與 API 串流至 Splunk 等資安事件管理平台。儀表板並提供可直接執行的修復動作：停用帳號、遮蔽敏感內容、重新分類。</p>
+        <p><b>導入時的關鍵不在偵測規則的數量，而在於告警的收斂。</b>應於上線前即設定告警等級與接收對象，並確認高風險項目具備明確的處理時限，否則未處理告警會快速累積至無法判讀的程度。</p>
+      </div>
+
+      <div class="cap">
+        <span class="tag">Premium · Early Access</span>
+        <h3>AI 治理</h3>
+        <p>兩項能力目前均屬 Early Access：Rovo Chat 的提示與回應內容掃描，可阻擋或遮蔽出現於 AI 對話中的敏感資料；連接器資料安全則避免第三方來源的敏感資料被納入 Teamwork Graph 的索引範圍。</p>
+        <p><b>Early Access 表示功能尚未正式發布</b>，可用性、涵蓋範圍與服務水準均可能調整。若組織尚未導入 Rovo，這兩項不宜構成升級 Premium 的決定性理由；若已導入或即將導入，則建議於試用期間實際驗證，並將其視為後續強化項目，而非既有保障。</p>
+      </div>
+
+    </div>
   </section>
 
   <!-- CASES -->
