@@ -381,6 +381,50 @@ img{max-width:100%}
     </div>
   </section>
 
+  <!-- 產品方案 vs GUARD -->
+  <section>
+    <p class="eyebrow">產品方案與 Guard 的分工</p>
+    <h2>已經有 Jira，為什麼還需要 Guard？</h2>
+    <p>這是評估階段最常出現的疑問，其根源在於兩者的<b>邊界不同</b>。Jira 與 Confluence 方案中的安全控制，作用範圍是單一站台與單一產品，保護的是<b>應用程式本身</b>；Atlassian Guard 的作用範圍是整個組織的所有帳號與所有 Atlassian 產品，管理的是<b>身分與資料</b>。兩者並非替代關係，而是分工——升級 Jira Premium 不會取得 Guard 的任何能力，反之亦然。</p>
+
+    <div class="tbl-scroll" style="margin-top:26px">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">安全控制項目</th>
+            <th scope="col" class="plan"><span class="pn">產品方案</span><span class="pp">Jira · Confluence</span></th>
+            <th scope="col" class="plan prem"><span class="pn">Atlassian Guard</span><span class="pp">附加訂閱</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><th colspan="3" scope="colgroup">由產品方案提供，Guard 不重複涵蓋</th></tr>
+          <tr><td class="feat">IP 許可清單<small>限制僅特定 IP 範圍或公司 VPN 可存取</small></td><td class="v v-list">Premium 以上</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">沙箱測試環境<small>於隔離環境驗證權限設定與外掛變更</small></td><td class="v v-list">Premium 以上</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">版本發佈軌道<small>控制雲端功能更新的時間與方式</small></td><td class="v v-list">Premium 以上</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">專案封存<small>隱藏過期專案，降低權限管理的複雜度</small></td><td class="v v-list">Premium 以上</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">議題層級安全性<small>自訂單一議題的檢視權限</small></td><td class="v v-list">Standard 以上</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">資料落腳地<small>指定資料存放區域</small></td><td class="v v-list">Standard 以上</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+
+          <tr class="grp"><th colspan="3" scope="colgroup">僅 Guard 提供，產品方案再高階亦不含</th></tr>
+          <tr><td class="feat">強制單一登入<small>強制全組織帳號改由公司身分識別提供者驗證</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
+          <tr><td class="feat">強制兩步驟驗證</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
+          <tr><td class="feat">SCIM 自動佈建與解除佈建<small>於 IdP 停用帳號的同時解除所有存取權</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
+          <tr><td class="feat">API token 管控與到期設定</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
+          <tr><td class="feat">跨產品的組織層級稽核記錄<small>涵蓋所有站台，而非單一產品的操作記錄</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
+          <tr><td class="feat">行動應用程式管理<small>限制截圖、螢幕錄影與檔案下載</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
+          <tr><td class="feat">資料分類與自動分級</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
+          <tr><td class="feat">內容掃描與自訂偵測規則</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
+          <tr><td class="feat">異常行為偵測與告警</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
+          <tr><td class="feat">SIEM 整合與建議修復動作</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note"><b>為何產品方案無法取代 Guard：</b>Jira Premium 的 IP 許可清單於<b>站台層級</b>生效，依 Atlassian 官方文件，其範圍明確不涵蓋 admin.atlassian.com、使用者管理與帳號佈建的 REST API——亦即帳號與存取權的管理面，完全不在其保護範圍內。更根本的原因在於，Atlassian 帳號並不隸屬於任何單一產品：即使於 Jira 中移除某位離職人員的產品存取權，該帳號依然存在、依然可以登入，並可能仍持有其他站台的存取權。未經 Guard 完成網域驗證與帳號納管，組織既無法強制其改用公司的身分識別提供者登入，也無法在 HR 系統或 IdP 停用該人員時連動解除全部存取權。</p>
+
+    <p class="note" style="margin-top:14px"><b>一句話說明：</b>產品方案保護的是 <b>Jira 這個應用程式</b>，Guard 保護的是<b>使用 Jira 的人，以及其中的資料</b>。</p>
+  </section>
+
   <!-- COMPARE -->
   <section id="compare">
     <p class="eyebrow">完整功能對照</p>
