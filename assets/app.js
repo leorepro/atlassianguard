@@ -56,3 +56,49 @@
   });
   openGroup(location.hash);
 })();
+
+/* 導覽列標示目前所在區塊。判定方式為「頂緣已捲過導覽列的最後一個區塊」，
+   而非可見面積最大者——後者在長短懸殊的區塊之間會來回跳動。導覽列未收錄的區塊
+   （受管帳號、重點能力等）沿用其前一個收錄區塊的標示，因其本就隸屬該段落。
+   讀取以 rAF 節流，且只在需要換頁籤時才動 DOM。 */
+(function(){
+  var nav = document.querySelector('.nav-links');
+  if(!nav) return;
+  var items = [];
+  Array.prototype.forEach.call(nav.querySelectorAll('a[href^="#"]'), function(a){
+    var el;
+    try{ el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))); }catch(e){ return; }
+    if(el) items.push({a:a, el:el});
+  });
+  if(!items.length) return;
+
+  var current = null;
+  function mark(a){
+    if(current === a) return;
+    if(current){ current.classList.remove('is-current'); current.removeAttribute('aria-current'); }
+    if(a){ a.classList.add('is-current'); a.setAttribute('aria-current', 'true'); }
+    current = a;
+  }
+  function pick(){
+    var hit = null, i;
+    /* 判定線設在導覽列下緣稍下方，與 section[id] 的 scroll-margin-top 同一量級 */
+    for(i = 0; i < items.length; i++){
+      if(items[i].el.getBoundingClientRect().top <= 96) hit = items[i].a;
+    }
+    /* 最後一個區塊多半太短，頂緣永遠到不了判定線；捲抵頁尾時直接標示它 */
+    if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4){
+      hit = items[items.length - 1].a;
+    }
+    mark(hit);
+  }
+
+  var queued = false;
+  function schedule(){
+    if(queued) return;
+    queued = true;
+    requestAnimationFrame(function(){ queued = false; pick(); });
+  }
+  window.addEventListener('scroll', schedule, {passive:true});
+  window.addEventListener('resize', schedule, {passive:true});
+  pick();
+})();
