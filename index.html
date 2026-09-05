@@ -660,12 +660,6 @@ td.v.yes{color:var(--yes)}
 
 /* ---------- cases ---------- */
 .cases{display:grid; gap:18px}
-.group-label{
-  display:flex; align-items:center; gap:14px; margin:18px 0 0;
-  font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3);
-}
-.group-label:first-child{margin-top:0}
-.group-label::after{content:""; flex:1; height:1px; background:var(--line)}
 /* 場景卡是列表卡：靜止時只有 1px 邊框、不帶陰影，陰影留給主卡與 hover 提升。 */
 .case{border:1px solid var(--line); border-radius:var(--r-card); background:var(--surface); overflow:hidden;
   transition:border-color .18s ease, box-shadow .18s ease}
@@ -711,11 +705,38 @@ td.v.yes{color:var(--yes)}
 .case-nav a b{font-family:var(--mono); font-size:var(--fs-tag); font-weight:400; color:currentColor; opacity:.6}
 .case-nav a:hover b{opacity:.8}
 
-/* 分組色帶：底色僅取代表色最淡的一階，卡片維持白底浮於其上 */
-.case-group{background:var(--gs); border-radius:var(--r-card); padding:20px 20px 24px; display:grid; gap:18px}
+/* 分組色帶：底色僅取代表色最淡的一階，卡片維持白底浮於其上。
+   六組改為 <details>：21 則場景在行動版高達 8,700px，佔全頁四分之一，
+   僅通用場景預設展開，其餘五組收合成六條有色橫條，讀者依產業自行展開。
+   內距移到 summary 上，讓整條橫條（含左右 20px）都是可點擊區；
+   border-bottom:0 是為了蓋掉全站 details 的底線（與 .case-more 同理）。 */
+.case-group{background:var(--gs); border-radius:var(--r-card); padding:0 20px 24px; display:grid; gap:18px; border-bottom:0}
+.case-group:not([open]){padding-bottom:0}
 .case-group[id]{scroll-margin-top:96px}
-.case-group > .group-label{margin:0; color:var(--g)}
-.case-group > .group-label::after{background:var(--g); opacity:.28}
+.case-group > summary{
+  cursor:pointer; list-style:none; display:flex; align-items:center; gap:14px;
+  margin:0 -20px; padding:18px 20px; border-radius:var(--r-card);
+  font-family:var(--mono); font-size:var(--fs-tag); font-weight:400; letter-spacing:.16em; text-transform:uppercase; color:var(--g);
+  transition:color .15s ease;
+}
+/* 展開時縮小與第一張卡的距離，維持原本組名到卡片約 18–22px 的節奏 */
+.case-group[open] > summary{padding-bottom:4px}
+.case-group > summary::-webkit-details-marker{display:none}
+.case-group > summary:focus-visible{outline:2px solid var(--accent); outline-offset:-2px}
+/* 組名後的細線改由 ::before 承擔並以 order 排到文字之後，
+   讓 ::after 空出來放全站一致的「+ 轉 45° 變 ×」指示 */
+.case-group > summary::before{content:""; flex:1; height:1px; background:var(--g); opacity:.28; order:1}
+.case-group > summary .group-count{order:2; letter-spacing:.1em; color:var(--ink-3); white-space:nowrap; transition:color .15s ease}
+.case-group > summary::after{
+  content:"+"; order:3; font-family:var(--mono); font-size:var(--fs-base); line-height:1; letter-spacing:0;
+  color:var(--ink-3); flex:none; transition:transform .2s ease, color .15s ease;
+}
+.case-group > summary:hover .group-count,
+.case-group > summary:hover::after{color:var(--g)}
+.case-group[open] > summary::after{transform:rotate(45deg)}
+/* 全站的 details[open] summary::after 是後代選擇器：組展開時會連帶把組內
+   尚未展開的 .case-more 指示也轉成 ×，此處拉高特異性把它壓回原位 */
+.case-group .case-more:not([open]) > summary::after{transform:none}
 
 /* 比較區收合：標題與情境常駐可見，兩方案的處理程度由讀者自行展開 */
 .case-more{border-bottom:0}
@@ -1558,8 +1579,8 @@ img{max-width:100%}
     </nav>
 
     <div class="cases">
-      <div class="case-group" id="g-common" style="--g:var(--g-common); --gs:var(--g-common-s)">
-        <p class="group-label">通用場景</p>
+      <details class="case-group" id="g-common" style="--g:var(--g-common); --gs:var(--g-common-s)" open>
+        <summary>通用場景<span class="group-count">5 則</span></summary>
 
         <article class="case">
           <div class="case-hd">
@@ -1666,10 +1687,10 @@ img{max-width:100%}
           </details>
         </article>
 
-      </div>
+      </details>
 
-      <div class="case-group" id="g-finance" style="--g:var(--g-finance); --gs:var(--g-finance-s)">
-        <p class="group-label">金融／保險業場景</p>
+      <details class="case-group" id="g-finance" style="--g:var(--g-finance); --gs:var(--g-finance-s)">
+        <summary>金融／保險業場景<span class="group-count">3 則</span></summary>
 
         <article class="case">
           <div class="case-hd">
@@ -1734,10 +1755,10 @@ img{max-width:100%}
           </details>
         </article>
 
-      </div>
+      </details>
 
-      <div class="case-group" id="g-manufacturing" style="--g:var(--g-manu); --gs:var(--g-manu-s)">
-        <p class="group-label">製造／半導體業場景</p>
+      <details class="case-group" id="g-manufacturing" style="--g:var(--g-manu); --gs:var(--g-manu-s)">
+        <summary>製造／半導體業場景<span class="group-count">2 則</span></summary>
 
         <article class="case">
           <div class="case-hd">
@@ -1781,10 +1802,10 @@ img{max-width:100%}
           </details>
         </article>
 
-      </div>
+      </details>
 
-      <div class="case-group" id="g-services" style="--g:var(--g-services); --gs:var(--g-services-s)">
-        <p class="group-label">專業服務／受稽核組織場景</p>
+      <details class="case-group" id="g-services" style="--g:var(--g-services); --gs:var(--g-services-s)">
+        <summary>專業服務／受稽核組織場景<span class="group-count">3 則</span></summary>
 
         <article class="case">
           <div class="case-hd">
@@ -1849,10 +1870,10 @@ img{max-width:100%}
           </details>
         </article>
 
-      </div>
+      </details>
 
-      <div class="case-group" id="g-public" style="--g:var(--g-public); --gs:var(--g-public-s)">
-        <p class="group-label">醫療／公部門場景</p>
+      <details class="case-group" id="g-public" style="--g:var(--g-public); --gs:var(--g-public-s)">
+        <summary>醫療／公部門場景<span class="group-count">2 則</span></summary>
 
         <article class="case">
           <div class="case-hd">
@@ -1896,10 +1917,10 @@ img{max-width:100%}
           </details>
         </article>
 
-      </div>
+      </details>
 
-      <div class="case-group" id="g-software" style="--g:var(--g-software); --gs:var(--g-software-s)">
-        <p class="group-label">軟體開發／產品公司場景</p>
+      <details class="case-group" id="g-software" style="--g:var(--g-software); --gs:var(--g-software-s)">
+        <summary>軟體開發／產品公司場景<span class="group-count">6 則</span></summary>
 
         <article class="case">
           <div class="case-hd">
@@ -2027,7 +2048,7 @@ img{max-width:100%}
           </details>
         </article>
 
-      </div>
+      </details>
     </div>
 
     <p class="note"><b>上述場景的共同結構：</b>Standard 界定「何人可取得存取權」，此層若未落實，後續機制均無從發揮作用；Premium 則回應「取得存取權之後發生了什麼、組織多久後得知、以及能否完成處置」。若組織現階段的課題仍集中於第一層，優先將 Standard 落實至完整狀態；若已面臨第二層的問責要求，則須由 Premium 提供對應能力。</p>
@@ -2274,6 +2295,28 @@ img{max-width:100%}
     });
     v.addEventListener('pause', function(){ card.classList.remove('is-playing'); });
   });
+})();
+
+/* 場景分組收合：五組預設收合成橫條，若網址錨點（導覽晶片或帶 hash 進站）指向
+   收合中的分組，先展開再捲到該組，否則讀者只會看到一條橫條而不知內容在哪。
+   未啟用指令碼時，錨點仍會捲到橫條，讀者可自行點開。 */
+(function(){
+  function openGroup(hash){
+    if(!hash || hash.length < 2) return;
+    var el;
+    try{ el = document.getElementById(decodeURIComponent(hash.slice(1))); }catch(e){ return; }
+    if(!el || !el.classList.contains('case-group') || el.open) return;
+    el.open = true;
+    /* 展開後文件變長，原本可能捲不到位的目標現在捲得到；scroll-margin-top 由 CSS 負責 */
+    el.scrollIntoView({block:'start'});
+  }
+  window.addEventListener('hashchange', function(){ openGroup(location.hash); });
+  /* 重複點同一枚晶片不會觸發 hashchange，另監聽站內錨點的點擊 */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#g-"]');
+    if(a) openGroup(a.getAttribute('href'));
+  });
+  openGroup(location.hash);
 })();
 </script>
 </body>
