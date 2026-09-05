@@ -57,20 +57,24 @@
   openGroup(location.hash);
 })();
 
-/* 導覽列標示目前所在區塊。判定方式為「頂緣已捲過導覽列的最後一個區塊」，
-   而非可見面積最大者——後者在長短懸殊的區塊之間會來回跳動。導覽列未收錄的區塊
-   （受管帳號、重點能力等）沿用其前一個收錄區塊的標示，因其本就隸屬該段落。
-   讀取以 rAF 節流，且只在需要換頁籤時才動 DOM。 */
+/* 捲動時要更新的三件事，共用同一個 rAF 節流的監聽器：導覽列的所在區塊標示、
+   導覽列底緣的閱讀進度條，以及回到頂端按鈕的顯隱。三者的觸發時機相同，分開掛
+   監聽器只是多繞路；各自在目標元素不存在時略過，彼此不相依。
+
+   所在區塊的判定方式為「頂緣已捲過導覽列的最後一個區塊」，而非可見面積最大者
+   ——後者在長短懸殊的區塊之間會來回跳動。導覽列未收錄的區塊（受管帳號、重點
+   能力等）沿用其前一個收錄區塊的標示，因其本就隸屬該段落。 */
 (function(){
   var nav = document.querySelector('.nav-links');
-  if(!nav) return;
+  var bar = document.querySelector('.nav');
+  var toTop = document.querySelector('.to-top');
+  if(!nav && !bar && !toTop) return;
   var items = [];
-  Array.prototype.forEach.call(nav.querySelectorAll('a[href^="#"]'), function(a){
+  if(nav) Array.prototype.forEach.call(nav.querySelectorAll('a[href^="#"]'), function(a){
     var el;
     try{ el = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))); }catch(e){ return; }
     if(el) items.push({a:a, el:el});
   });
-  if(!items.length) return;
 
   var current = null;
   function mark(a){
@@ -79,17 +83,39 @@
     if(a){ a.classList.add('is-current'); a.setAttribute('aria-current', 'true'); }
     current = a;
   }
+  var lastRatio = -1, lastOn = null;
   function pick(){
-    var hit = null, i;
-    /* 判定線設在導覽列下緣稍下方，與 section[id] 的 scroll-margin-top 同一量級 */
-    for(i = 0; i < items.length; i++){
-      if(items[i].el.getBoundingClientRect().top <= 96) hit = items[i].a;
+    var doc = document.documentElement;
+    var y = window.scrollY;
+    var atEnd = window.innerHeight + y >= doc.scrollHeight - 4;
+
+    if(items.length){
+      var hit = null, i;
+      /* 判定線設在導覽列下緣稍下方，與 section[id] 的 scroll-margin-top 同一量級 */
+      for(i = 0; i < items.length; i++){
+        if(items[i].el.getBoundingClientRect().top <= 96) hit = items[i].a;
+      }
+      /* 最後一個區塊多半太短，頂緣永遠到不了判定線；捲抵頁尾時直接標示它 */
+      if(atEnd) hit = items[items.length - 1].a;
+      mark(hit);
     }
-    /* 最後一個區塊多半太短，頂緣永遠到不了判定線；捲抵頁尾時直接標示它 */
-    if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4){
-      hit = items[items.length - 1].a;
+
+    if(bar){
+      /* 可捲動距離為 0 時（內容短於視窗）視為已讀完，避免除以零 */
+      var span = doc.scrollHeight - window.innerHeight;
+      var ratio = span > 0 ? Math.min(1, Math.max(0, y / span)) : 1;
+      /* 只在肉眼可辨的變動量才寫入，省下捲動中大量無意義的樣式異動 */
+      if(Math.abs(ratio - lastRatio) > 0.002 || ratio === 0 || ratio === 1){
+        bar.style.setProperty('--read-progress', ratio.toFixed(4));
+        lastRatio = ratio;
+      }
     }
-    mark(hit);
+
+    if(toTop){
+      /* 捲過一個視窗高度才出現：首屏本來就看得到頁首，不需要這顆按鈕 */
+      var on = y > window.innerHeight;
+      if(on !== lastOn){ toTop.classList.toggle('is-on', on); lastOn = on; }
+    }
   }
 
   var queued = false;
@@ -101,4 +127,43 @@
   window.addEventListener('scroll', schedule, {passive:true});
   window.addEventListener('resize', schedule, {passive:true});
   pick();
+})();
+
+/* 章節錨點：在每個 section[id] 的 h2 後掛一枚 #，點擊複製該節的完整連結。
+   業務同仁常要把單一段落傳給客戶，原本只能自己拼 URL。
+   複製失敗時（clipboard API 需安全環境，或使用者拒絕授權）不吞掉事件，
+   讓瀏覽器照常跳到該錨點，網址列一樣會出現可複製的連結。 */
+(function(){
+  var heads = document.querySelectorAll('section[id] > h2');
+  if(!heads.length) return;
+  var timer = null;
+
+  Array.prototype.forEach.call(heads, function(h2){
+    var id = h2.parentNode.id;
+    var a = document.createElement('a');
+    a.className = 'h-anchor';
+    a.href = '#' + id;
+    a.textContent = '#';
+    a.setAttribute('aria-label', '複製「' + h2.textContent.trim() + '」這一節的連結');
+
+    a.addEventListener('click', function(e){
+      if(!navigator.clipboard || !navigator.clipboard.writeText) return;  /* 照常跳錨點 */
+      var url = location.origin + location.pathname + '#' + id;
+      e.preventDefault();
+      navigator.clipboard.writeText(url).then(function(){
+        /* 同時間只留一個「已複製」，避免連點多節後畫面上散著好幾個 */
+        var prev = document.querySelector('.h-anchor.is-copied');
+        if(prev) prev.classList.remove('is-copied');
+        clearTimeout(timer);
+        a.classList.add('is-copied');
+        timer = setTimeout(function(){ a.classList.remove('is-copied'); }, 1600);
+        /* 網址列同步更新，讀者按上一頁時的行為與直接點錨點一致 */
+        history.replaceState(null, '', '#' + id);
+      }, function(){
+        location.hash = id;   /* 寫入剪貼簿被拒，退回原本的跳轉行為 */
+      });
+    });
+
+    h2.appendChild(a);
+  });
 })();
