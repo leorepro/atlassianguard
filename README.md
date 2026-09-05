@@ -114,6 +114,11 @@ git push
 python3 tools/stamp-assets.py
 ```
 
+⚠️ **本機開發時倉庫內的 `?v=` 固定不變，改了 `style.css` 或 `app.js` 後瀏覽器
+會續用快取。** 請以強制重新整理（macOS `⌘⇧R`）載入，或在開發者工具的
+Network 分頁勾選 Disable cache。這只影響本機；線上因為每次部署都會重新
+計算雜湊，不會有這個問題。
+
 ## 資料來源
 
 功能與定價資訊整理自 Atlassian 官方網站與支援文件（截至 2026 年 9 月）。

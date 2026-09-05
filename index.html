@@ -952,7 +952,7 @@
 
     <h3 class="pol-h3">多組政策疊加：同一站台落在兩組政策內時</h3>
     <p>舉例：Acme 組織有五個 Confluence 站台，資安團隊基於兩種不同的顧慮各建一組政策。<b>Policy 1</b> 針對含個人識別資訊（PII）的站台——hr 與 legal——規則最嚴：不允許下載、應用程式存取與匿名存取。<b>Policy 2</b> 針對含未經核准對外揭露資訊的站台——finance、hr、legal 與 marketing——只禁止下載與匿名存取。兩組政策各自獨立設定；hr 與 legal 因同時符合兩種顧慮而落在兩組範圍內。</p>
-    <p>下表逐站台列出涵蓋情形（✓ 表示受該政策約束），最後一欄是<b>實際生效的限制</b>：所有涵蓋該站台的政策，其規則加總。</p>
+    <p>下表逐站台列出涵蓋情形（<span class="tick sm" role="img" aria-label="打勾">✓</span> 表示受該政策約束），最後一欄是<b>實際生效的限制</b>：所有涵蓋該站台的政策，其規則加總。</p>
     <div class="tbl-scroll">
       <table class="tiers pol-tbl pol-matrix">
         <thead>
@@ -965,10 +965,10 @@
         </thead>
         <tbody>
           <tr><td class="feat">acme.atlassian.net/wiki</td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td>無</td></tr>
-          <tr><td class="feat">acme-finance.atlassian.net/wiki</td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td>下載、匿名存取</td></tr>
-          <tr class="hi"><td class="feat">acme-hr.atlassian.net/wiki</td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td><b>下載、應用程式存取、匿名存取</b></td></tr>
-          <tr class="hi"><td class="feat">acme-legal.atlassian.net/wiki</td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td><b>下載、應用程式存取、匿名存取</b></td></tr>
-          <tr><td class="feat">acme-marketing.atlassian.net/wiki</td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td>下載、匿名存取</td></tr>
+          <tr><td class="feat">acme-finance.atlassian.net/wiki</td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td class="v yes"><span class="tick sm" role="img" aria-label="受此政策約束">✓</span></td><td>下載、匿名存取</td></tr>
+          <tr class="hi"><td class="feat">acme-hr.atlassian.net/wiki</td><td class="v yes"><span class="tick sm" role="img" aria-label="受此政策約束">✓</span></td><td class="v yes"><span class="tick sm" role="img" aria-label="受此政策約束">✓</span></td><td><b>下載、應用程式存取、匿名存取</b></td></tr>
+          <tr class="hi"><td class="feat">acme-legal.atlassian.net/wiki</td><td class="v yes"><span class="tick sm" role="img" aria-label="受此政策約束">✓</span></td><td class="v yes"><span class="tick sm" role="img" aria-label="受此政策約束">✓</span></td><td><b>下載、應用程式存取、匿名存取</b></td></tr>
+          <tr><td class="feat">acme-marketing.atlassian.net/wiki</td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td class="v yes"><span class="tick sm" role="img" aria-label="受此政策約束">✓</span></td><td>下載、匿名存取</td></tr>
         </tbody>
       </table>
     </div>

@@ -594,6 +594,9 @@ td.v.v-list{font-family:var(--sans); font-size:var(--fs-xs); padding-left:12px; 
   font-size:0; line-height:0;  /* 隱藏 HTML 內既有的 ✓ 文字節點（aria-label 仍保留） */
 }
 .tick.sm{width:18px; height:18px; background-size:64%; box-shadow:0 0 0 2px var(--yes-ring)}
+/* 嵌在句子裡的勾號（表格圖例）：ring 畫在版面盒之外、左右各佔 2px，
+   不補外距會貼住相鄰文字 */
+p > .tick{margin:0 4px}
 td.v.yes{color:var(--yes)}
 .dash{display:inline-block; width:14px; height:2px; background:var(--no); border-radius:1px; vertical-align:middle}
 .ea{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.1em; border:1px solid var(--line-2); border-radius:var(--r-chip); padding:2px 7px; color:var(--ink-3); margin-left:6px; vertical-align:1px}
