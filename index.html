@@ -109,7 +109,7 @@ section[id]{scroll-margin-top:72px}
 .eyebrow::before{content:""; width:22px; height:1px; background:var(--line-2); flex:none}
 
 h1,h2,h3{font-family:var(--sans); font-weight:800; text-wrap:balance; margin:0}
-h1{font-size:clamp(36px,5.2vw,56px); line-height:1.18; letter-spacing:-.028em}
+h1{font-size:clamp(31px,4.3vw,45px); line-height:1.24; letter-spacing:-.028em}
 h2{font-size:clamp(26px,3.2vw,34px); line-height:1.3; letter-spacing:-.02em; margin-bottom:14px}
 h3{font-size:18.5px; line-height:1.5; font-weight:700; letter-spacing:-.01em}
 p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
@@ -117,7 +117,7 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 
 /* ---------- hero ---------- */
 .hero{padding:64px 0 72px}
-.hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:start}
+.hero-grid{display:grid; grid-template-columns:1.25fr .75fr; gap:56px; align-items:start}
 .hero h1 em{font-style:normal; color:var(--accent); box-shadow:inset 0 -.38em 0 var(--accent-soft)}
 .hero .lede{margin-top:22px}
 .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px}
@@ -300,6 +300,7 @@ td.v.yes{color:var(--yes)}
 /* ---------- capabilities ---------- */
 .caps{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin-top:28px}
 .cap{background:var(--surface); padding:26px 28px 28px}
+.cap-ico{display:block; width:40px; height:40px; margin-bottom:15px}
 .cap .tag{font-family:var(--mono); font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--accent)}
 .cap .tag.std{color:var(--ink-3)}
 .cap h3{margin:9px 0 11px; font-size:17px}
@@ -447,7 +448,7 @@ img{max-width:100%}
     <p class="eyebrow">Atlassian Guard · Standard 與 Premium 選版指南</p>
     <div class="hero-grid">
       <div>
-        <h1>讓「誰能存取什麼」<br>成為<em>可稽核、可執行</em>的規則</h1>
+        <h1><em>Standard</em> 建立存取的邊界，<br><em>Premium</em> 涵蓋邊界內的資料與行為</h1>
         <p class="lede">Atlassian Guard 是套用於整個 Atlassian Cloud 組織的資安附加訂閱，將身分驗證、資料分級、敏感內容偵測與事件回應整合於單一管理平面。其作用對象為既有的 Jira 與 Confluence 環境，使其中流動的資料具備可治理與可稽核的基礎，而非另行建置獨立的資安系統。</p>
         <div class="cta-row">
           <a class="btn" href="https://tsgojira.atlassian.net/servicedesk/customer/portal/4/group/8/create/43" target="_blank" rel="noopener">預約 Demo</a>
@@ -592,7 +593,7 @@ img{max-width:100%}
           </svg>
           <h3>身分識別提供者</h3>
         <p>透過 SAML 或 OIDC 串接，並以 SCIM 同步帳號的建立與停用。</p>
-        <ul><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.6" fill="none" stroke="#00297A" stroke-width="4.8"/></svg>Okta</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6 21 19l-9 2.4Z" fill="#0F6CBD"/><path d="M12 2.6 3 19l9 2.4Z" fill="#50B0E8"/></svg>Microsoft Entra ID</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke-width="3.6"><path d="M12 4.4a7.6 7.6 0 0 0-6.58 3.8" stroke="#EA4335"/><path d="M5.42 8.2a7.6 7.6 0 0 0 0 7.6" stroke="#FBBC05"/><path d="M5.42 15.8A7.6 7.6 0 0 0 12 19.6" stroke="#34A853"/><path d="M12 19.6a7.6 7.6 0 0 0 7.6-7.6" stroke="#4285F4"/></g><rect x="11.6" y="10.2" width="8" height="3.6" fill="#4285F4"/></svg>Google Workspace</li></ul>
+        <ul><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10Z" fill="#00297A"/></svg>Okta</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2 2.6 21h5.6L12 12.4Z" fill="#50B0E8"/><path d="M12 2.2 21.4 21h-5.6L12 12.4Z" fill="#0F6CBD"/><path d="M12 12.4 15.8 21H8.2Z" fill="#2E8FD8"/></svg>Microsoft Entra ID</li><li><svg class="brand-ico" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5Z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65Z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19Z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48Z"/></svg>Google Workspace</li></ul>
       </div>
       <div class="integ-col">
         <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
@@ -603,7 +604,7 @@ img{max-width:100%}
           </svg>
           <h3>告警通知</h3>
         <p>可疑活動命中偵測規則後，將告警送至團隊既有的通訊管道。</p>
-        <ul><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="10" y="1.6" width="4" height="9" rx="2" fill="#36C5F0"/><rect x="13.4" y="10" width="9" height="4" rx="2" fill="#2EB67D"/><rect x="10" y="13.4" width="4" height="9" rx="2" fill="#ECB22E"/><rect x="1.6" y="10" width="9" height="4" rx="2" fill="#E01E5A"/></svg>Slack</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="13" height="14" rx="2.6" fill="#5059C9"/><rect x="5" y="8" width="8" height="2.3" fill="#FFFFFF"/><rect x="7.85" y="8" width="2.3" height="8.4" fill="#FFFFFF"/><circle cx="18.6" cy="8.4" r="3.4" fill="#7B83EB"/><path d="M15.5 12.4h6v4.2a3 3 0 0 1-3 3h-3Z" fill="#7B83EB"/></svg>Microsoft Teams</li></ul>
+        <ul><li><svg class="brand-ico" viewBox="0 0 122.8 122.8" aria-hidden="true"><path d="M25.8 77.6a12.9 12.9 0 1 1-12.9-12.9h12.9zm6.5 0a12.9 12.9 0 0 1 25.8 0v32.3a12.9 12.9 0 0 1-25.8 0z" fill="#E01E5A"/><path d="M45.2 25.8a12.9 12.9 0 1 1 12.9-12.9v12.9zm0 6.5a12.9 12.9 0 0 1 0 25.8H12.9a12.9 12.9 0 0 1 0-25.8z" fill="#36C5F0"/><path d="M97 45.2a12.9 12.9 0 1 1 12.9 12.9H97zm-6.5 0a12.9 12.9 0 0 1-25.8 0V12.9a12.9 12.9 0 0 1 25.8 0z" fill="#2EB67D"/><path d="M77.6 97a12.9 12.9 0 1 1-12.9 12.9V97zm0-6.5a12.9 12.9 0 0 1 0-25.8h32.3a12.9 12.9 0 0 1 0 25.8z" fill="#ECB22E"/></svg>Slack</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18.2" cy="6.6" r="3" fill="#7B83EB"/><path d="M14.6 10.6h7.6a1.6 1.6 0 0 1 1.6 1.6v3.6a3.9 3.9 0 0 1-3.9 3.9h-1.4a3.9 3.9 0 0 1-3.9-3.9Z" fill="#7B83EB"/><rect x="1" y="5" width="14.4" height="14.4" rx="1.7" fill="#5059C9"/><path d="M4 8.4h8.4v2H9.2v6.8H7.2v-6.8H4Z" fill="#FFFFFF"/></svg>Microsoft Teams</li></ul>
       </div>
       <div class="integ-col">
         <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
@@ -813,42 +814,48 @@ img{max-width:100%}
 
       <div class="cap">
         <span class="tag">Premium</span>
-        <h3>資料分級與自動分類</h3>
+        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#71808F"/><rect x="17" y="6.4" width="25" height="5.2" rx="2.6" fill="#71808F" opacity=".3"/><circle cx="9" cy="20" r="3.4" fill="#2E6FA8"/><rect x="17" y="17.4" width="25" height="5.2" rx="2.6" fill="#2E6FA8" opacity=".3"/><circle cx="9" cy="31" r="3.4" fill="#A85C22"/><rect x="17" y="28.4" width="19" height="5.2" rx="2.6" fill="#A85C22" opacity=".3"/><circle cx="9" cy="42" r="3.4" fill="#8E2B2B"/><rect x="17" y="39.4" width="13" height="5.2" rx="2.6" fill="#8E2B2B" opacity=".3"/></svg>
+          <h3>資料分級與自動分類</h3>
         <p>Guard Premium 於組織層級提供 Public、Internal、Confidential、Restricted 四級標籤，套用對象為 Confluence 頁面與 Jira 議題。<b>標籤本身不具強制力</b>：將頁面標為 Restricted 不會自動封鎖任何操作，必須另行建立「以分類等級為條件的組織級政策」，該等級才會實際限制分享與匯出行為。</p>
         <p>自動分類則於內容寫入時比對敏感樣式，命中信用卡號等格式即自動套用對應等級，用以降低仰賴人工標記所產生的落差。導入順序通常為先以手動分級建立少量高價值內容的基準，再逐步開啟自動分類。初期誤判比例過高時，標籤的可信度會連帶受影響。</p>
       </div>
 
       <div class="cap">
         <span class="tag std">Standard · Premium</span>
-        <h3>資料安全政策</h3>
+        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 10v12c0 10-7 17-16 20-9-3-16-10-16-20V10Z" fill="#1769DC"/><rect x="16" y="17" width="16" height="3.2" rx="1.6" fill="#FFFFFF"/><rect x="16" y="24" width="16" height="3.2" rx="1.6" fill="#FFFFFF"/><rect x="16" y="31" width="10" height="3.2" rx="1.6" fill="#FFFFFF"/></svg>
+          <h3>資料安全政策</h3>
         <p>可限制匯出、公開分享連結、匿名存取與第三方應用程式的資料存取，兩種方案均具備。<b>差別在於套用條件</b>：Standard 以空間或專案為範圍，屬一體適用；Premium 則可將分類等級作為條件，例如「Confidential 以上一律封鎖對外分享連結，Internal 以下不受限」。</p>
         <p>此項為兩方案的主要分野。若安全要求可以「整個空間全開或全關」表達，Standard 即可滿足；若必須依內容本身的敏感程度採取不同管制，才需要 Premium 的分級能力。</p>
       </div>
 
       <div class="cap">
         <span class="tag">Premium</span>
-        <h3>內容掃描與自訂偵測規則</h3>
+        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="5" width="25" height="33" rx="3" fill="#123B5E"/><rect x="10" y="12" width="15" height="2.6" rx="1.3" fill="#FFFFFF" opacity=".75"/><rect x="10" y="18" width="15" height="2.6" rx="1.3" fill="#FFFFFF" opacity=".75"/><rect x="10" y="24" width="9" height="2.6" rx="1.3" fill="#FFFFFF" opacity=".75"/><circle cx="30" cy="29" r="9" fill="none" stroke="#FFA902" stroke-width="4"/><path d="M36.4 35.4 43 42" stroke="#FFA902" stroke-width="4" stroke-linecap="round"/></svg>
+          <h3>內容掃描與自訂偵測規則</h3>
         <p>內容掃描提供 60 項以上內建偵測，涵蓋個人資料、金融資訊、憑證與健康資料，並以兩種模式運作：全站掃描對既有內容執行一次性盤點，即時掃描則於內容寫入當下判定。</p>
         <p><b>內建偵測以國際通用格式為主</b>（信用卡號、雲端服務金鑰、美國社會安全號碼等）。台灣的身分證字號、健保卡號與統一編號不在預設清單內，須以自訂偵測規則建立。此項工作量需納入導入時程評估。另有兩項涵蓋限制：掃描不執行光學文字辨識，亦不涵蓋附件內容；以掃描檔形式流通文件的組織，實際覆蓋率會低於偵測項目數所呈現的水準。</p>
       </div>
 
       <div class="cap">
         <span class="tag std">Standard · Premium</span>
-        <h3>稽核記錄的兩個層次</h3>
+        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="7" width="38" height="15" rx="3" fill="#50B0E8"/><rect x="5" y="26" width="38" height="15" rx="3" fill="#123B5E"/><circle cx="13" cy="14.5" r="2.8" fill="#FFFFFF"/><rect x="20" y="13" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/><circle cx="13" cy="33.5" r="2.8" fill="#FFA902"/><rect x="20" y="32" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/></svg>
+          <h3>稽核記錄的兩個層次</h3>
         <p>兩者的記錄對象不同：<b>Standard 記錄管理員的操作行為，Premium 另涵蓋使用者對內容的檢視與匯出行為。</b></p>
         <p>Standard 提供管理員活動稽核記錄、組織洞察（活躍使用者統計與驗證方式分布），以及產品探索（識別組織內未納管的 Atlassian 站台）。Premium 另加使用者活動稽核（延伸稽核）與 API token 使用行為追蹤。離職人員的存取歷程盤查，或稽核單位要求說明「何人於何時檢視過哪份文件」這類需求，僅憑 Standard 的管理員記錄無法完成。</p>
       </div>
 
       <div class="cap">
         <span class="tag">Premium</span>
-        <h3>告警、調查與修復動作</h3>
+        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M21 6 40 37H2Z" fill="#FFA902"/><rect x="18.6" y="17" width="4.8" height="10" rx="2.4" fill="#123B5E"/><circle cx="21" cy="31.4" r="2.8" fill="#123B5E"/><circle cx="37" cy="34" r="10" fill="#1769DC"/><path d="M32.6 34.2 35.8 37.4 41.4 31.4" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>告警、調查與修復動作</h3>
         <p>可疑活動偵測涵蓋異常登入、大量匯出與資料外洩徵兆，命中後於統一的調查儀表板呈現，包含行為者脈絡與事件時間軸，免去跨多個管理介面拼湊事件經過。告警可送達 Slack 或 Microsoft Teams，稽核記錄亦可經 Webhook 與 API 串流至 Splunk 等資安事件管理平台。儀表板並提供可直接執行的修復動作：停用帳號、遮蔽敏感內容、重新分類。</p>
         <p><b>告警機制的效果取決於收斂程度，而非偵測規則的數量。</b>上線前需設定告警等級與接收對象，並訂定高風險項目的處理時限。未經分級的情況下，未處理告警的累積會使儀表板失去判讀價值。</p>
       </div>
 
       <div class="cap">
         <span class="tag">Premium · Early Access</span>
-        <h3>AI 治理</h3>
+        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 10v12c0 10-7 17-16 20-9-3-16-10-16-20V10Z" fill="#123B5E"/><path d="M24 13.5 26.9 20.6 34 23.5 26.9 26.4 24 33.5 21.1 26.4 14 23.5 21.1 20.6Z" fill="#FFA902"/></svg>
+          <h3>AI 治理</h3>
         <p>兩項能力目前均屬 Early Access：Rovo Chat 的提示與回應內容掃描，可阻擋或遮蔽出現於 AI 對話中的敏感資料；連接器資料安全則避免第三方來源的敏感資料被納入 Teamwork Graph 的索引範圍。</p>
         <p><b>Early Access 表示功能尚未正式發布</b>，可用性、涵蓋範圍與服務水準均可能調整。尚未導入 Rovo 的組織，此兩項與其升級評估無直接關聯；已導入或即將導入者，可於試用期間驗證實際行為。Early Access 階段的功能不宜列為既有保障。</p>
       </div>
