@@ -1139,7 +1139,7 @@ img{max-width:100%}
               <figcaption>
                 <span class="tag">Premium</span>
                 <b>加速事件回應</b>
-                <p>透過 SIEM 整合，於數分鐘內將潛在威脅通知資安團隊。</p>
+                <p>透過 SIEM（Security Information and Event Management）整合，於數分鐘內將潛在威脅通知資安團隊。</p>
                 <p class="scr">「Confluence page crawling」告警詳情，列出遭檢視的頁面及其分類等級、行為者脈絡（IP 位址、地點、帳號建立時間）、事件時間軸與建議調查步驟，並可就地開立 Jira 議題轉入既有的事件處理流程。</p>
               </figcaption>
             </figure>
@@ -1202,7 +1202,7 @@ img{max-width:100%}
             <circle cx="40" cy="24" r="3.2" fill="#FFFFFF"/>
           </svg>
           <h3>資安事件管理平台</h3>
-        <p>稽核記錄可經 Webhook 與 API 串流至 SIEM（Security Information and Event Management），納入既有的監控與留存機制。</p>
+        <p>稽核記錄可經 Webhook 與 API 串流至 SIEM，納入既有的監控與留存機制。</p>
         <ul><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5 17 12 6.5 19.5" fill="none" stroke="#F2951E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>Splunk</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="6.5" r="3.4" fill="var(--ink-3)"/><circle cx="17.5" cy="12" r="3.4" fill="var(--ink-3)"/><circle cx="7" cy="17.5" r="3.4" fill="var(--ink-3)"/><path d="M9.6 8.2 15 10.8M15 13.2 9.6 15.8" stroke="var(--ink-3)" stroke-width="2" stroke-linecap="round"/></svg>Webhook</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.5 3.5 12l5 5.5M15.5 6.5 20.5 12l-5 5.5" fill="none" stroke="var(--ink-3)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.4 5.6 10.6 18.4" stroke="var(--ink-3)" stroke-width="2.4" stroke-linecap="round"/></svg>REST API</li></ul>
       </div>
     </div>
@@ -1247,9 +1247,9 @@ img{max-width:100%}
       </table>
     </div>
 
-    <p class="note"><b>為何產品方案無法取代 Guard：</b>Jira Premium 的 IP 許可清單於<b>站台層級</b>生效，依 Atlassian 官方文件，其範圍明確不涵蓋 admin.atlassian.com、使用者管理與帳號佈建的 REST API。帳號與存取權的管理面不在其涵蓋範圍內。更根本的原因在於，Atlassian 帳號並不隸屬於任何單一產品：即使於 Jira 中移除某位離職人員的產品存取權，該帳號依然存在、依然可以登入，並可能仍持有其他站台的存取權。未經 Guard 完成網域驗證與帳號納管，組織既無法強制其改用公司的身分識別提供者登入，也無法在 HR 系統或 IdP 停用該人員時連動解除全部存取權。</p>
+    <p class="note"><b>為何產品方案無法取代 Guard：</b>Jira Premium 的 IP 許可清單僅於<b>站台層級</b>生效，依官方文件不涵蓋 admin.atlassian.com 與帳號管理的 REST API。更根本的是，<b>Atlassian 帳號不隸屬於任何單一產品</b>——在 Jira 移除離職人員的存取權後，帳號依然存在、依然可登入，且可能仍持有其他站台的權限。未經 Guard 納管，就無法強制其改用公司 IdP 登入，也無法在 IdP 停用時連動解除全部存取權。</p>
 
-    <p class="note" style="margin-top:14px"><b>判斷功能歸屬的依據：</b>於站台管理區進行設定的項目，屬於 Jira 或 Confluence 方案的範圍；須於 admin.atlassian.com 進行設定的項目，則屬於 Guard 的範圍。組織層級的管理面不在單一站台的權責範圍內，升級產品方案不會涵蓋此部分。</p>
+    <p class="note" style="margin-top:14px"><b>判斷功能歸屬的依據：</b>於站台管理區設定的項目屬於 Jira 或 Confluence 方案；須於 admin.atlassian.com 設定的項目屬於 Guard。組織層級的管理面不在單一站台的權責範圍內，升級產品方案不會涵蓋。</p>
   </section>
 
   <!-- LAYERS -->
@@ -1385,14 +1385,14 @@ img{max-width:100%}
       </table>
     </div>
 
-    <p class="note"><b>選版的判斷基準：</b>若組織目前的核心課題在於「帳號如何取得存取權、如何解除存取權」，Standard 已可滿足需求。若需回應的是「內容中存在哪些不應存在的資料、由何人於何時存取、能否於短時間內完成處置」，則僅有 Premium 具備對應能力。後者通常也是金融、醫療與其他受監管產業在稽核程序中被要求說明的項目。</p>
+    <p class="note"><b>選版的判斷基準：</b>核心課題若是「帳號如何取得與解除存取權」，Standard 即可滿足；若是「內容中有哪些不該存在的資料、何人於何時存取過、能否即時處置」，則僅 Premium 具備對應能力——後者正是受監管產業於稽核時被要求說明的項目。</p>
   </section>
 
   <!-- CAPABILITIES -->
   <section id="capabilities">
     <p class="eyebrow">重點能力說明</p>
     <h2>對照表中幾項需要進一步理解的機制</h2>
-    <p>功能對照表以單行呈現各項能力，但其中數項的實際運作方式會直接影響導入工作量與選版判斷。以下就其中六項補充說明。</p>
+    <p>對照表以單行呈現各項能力，但其中六項的實際運作方式會直接影響導入工作量與選版判斷。</p>
     <div class="caps">
 
       <div class="cap">
@@ -1444,7 +1444,7 @@ img{max-width:100%}
   <section id="classification">
     <p class="eyebrow">資料分類四級</p>
     <h2>四個等級分別對應什麼內容，又實際限制了什麼</h2>
-    <p>資料分類是 Guard Premium 與 Standard 之間最具體的分野，但四個等級的名稱本身並未說明其效力。以下逐級列出建議的適用內容、搭配政策後的實際限制，以及設定時容易被忽略的一點。等級數量與名稱由組織自行定義，此處採 Atlassian 預設的四級架構。</p>
+    <p>資料分類是 Premium 與 Standard 之間最具體的分野，但四個等級的名稱本身並未說明其效力。等級數量與名稱由組織自行定義，此處採 Atlassian 預設的四級架構。</p>
     <div class="cls">
 
       <article class="cls-row" style="--k:var(--c-public)">
