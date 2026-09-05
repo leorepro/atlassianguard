@@ -1246,17 +1246,54 @@ img{max-width:100%}
     <p>Atlassian Guard 針對的正是這一段落差。Standard 建立身分與存取的邊界，Premium 則延伸至資料本身：內容於寫入當下即完成掃描與分級，異常行為在數分鐘內轉為告警，並提供可直接執行的修復建議。</p>
   </section>
 
-  <!-- HISTORY -->
-  <section id="history" class="compact">
-    <p class="eyebrow">產品沿革</p>
-    <h2>從 Atlassian Access 到 Atlassian Guard</h2>
-    <p>Atlassian 於 2024 年將 Access（2018 年推出的身分與存取管理）與 Beacon（2023 年進入 Beta 的威脅偵測）合併，並新增資料外洩防護，整合為 Guard。<b>原 Atlassian Access 的訂閱者即為現行的 Guard Standard</b>；Beacon 的能力則併入 Guard Premium。</p>
-    <ol class="tl">
-      <li><span class="tl-y">2011</span><b>Jira 與 Confluence Cloud</b><small>Atlassian 雲端產品線的起點</small></li>
-      <li><span class="tl-y">2018</span><b>Atlassian Access 推出</b><small>首個專為 Atlassian Cloud 設計的身分與存取管理工具</small></li>
-      <li><span class="tl-y">2023</span><b>Beacon 進入 Beta</b><small>威脅偵測與回應能力</small></li>
-      <li><span class="tl-y">2024</span><b>Atlassian Guard 發表</b><small>整合 Access 與 Beacon，並新增資料外洩防護</small></li>
-    </ol>
+  <!-- LAYERS -->
+  <section id="layers">
+    <p class="eyebrow">三個防護層次</p>
+    <h2>隨組織規模擴充的防護能力</h2>
+    <div class="layers-wrap">
+      <p>Atlassian Cloud 的資安能力分為三層，後者疊加於前者之上。釐清目前所處的層次，是選版判斷的起點。</p>
+      <div class="layers">
+        <div class="layer">
+          <svg class="layer-ico" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="5" y="38" width="38" height="5" rx="2.5" fill="#123B5E"/>
+            <rect x="8" y="25" width="32" height="10" rx="5" fill="#1769DC"/>
+            <circle cx="19" cy="19.5" r="9" fill="#1769DC"/>
+            <circle cx="30" cy="22" r="7.5" fill="#1769DC"/>
+            <path d="M21.5 22v-2.8a2.5 2.5 0 0 1 5 0V22" fill="none" stroke="#FFA902" stroke-width="2.2"/>
+            <rect x="19" y="22" width="10" height="7.5" rx="1.5" fill="#FFA902"/>
+          </svg>
+          <span class="lv">Layer 1</span>
+          <h3>Atlassian 平台</h3>
+          <p class="sub">預設即具備</p>
+          <p>每個 Atlassian Cloud 方案均內含的基本身分與資料控制，包含站台層級的權限管理與產品自身的安全設定。無須額外訂閱。</p>
+        </div>
+        <div class="layer">
+          <svg class="layer-ico" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="5" y="38" width="38" height="5" rx="2.5" fill="#123B5E"/>
+            <rect x="13" y="9" width="22" height="26" rx="3" fill="#1769DC"/>
+            <rect x="20" y="5" width="8" height="7" rx="2" fill="#FFA902"/>
+            <circle cx="24" cy="19.5" r="3.8" fill="#FFA902"/>
+            <path d="M17.5 29.5a6.5 6.5 0 0 1 13 0Z" fill="#FFA902"/>
+          </svg>
+          <span class="lv">Layer 2</span>
+          <h3>Guard Standard</h3>
+          <p class="sub">組織層級的可視性與控制</p>
+          <p>將控制範圍由單一站台提升至整個組織的所有帳號：強制單一登入與兩步驟驗證、SCIM 自動佈建、API token 管控，以及跨產品的稽核記錄。</p>
+        </div>
+        <div class="layer">
+          <svg class="layer-ico" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="5" y="38" width="38" height="5" rx="2.5" fill="#123B5E"/>
+            <path d="M24 5 38 10v10c0 7.5-6 12.6-14 15-8-2.4-14-7.5-14-15V10Z" fill="#1769DC"/>
+            <circle cx="22" cy="18.5" r="5" fill="none" stroke="#FFA902" stroke-width="3"/>
+            <path d="M25.6 22.1 30 26.5" stroke="#FFA902" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <span class="lv">Layer 3</span>
+          <h3>Guard Premium</h3>
+          <p class="sub">進階防護與威脅偵測</p>
+          <p>由存取層延伸至資料本身：資料分級與自動分類、內容掃描、異常行為偵測，以及告警調查與修復動作。適用於持有高價值資料的組織。</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- PROTECT / DETECT / RESPOND -->
@@ -1605,56 +1642,6 @@ img{max-width:100%}
     <p class="note" style="margin-top:14px"><b>判斷功能歸屬的依據：</b>於站台管理區設定的項目屬於 Jira 或 Confluence 方案；須於 admin.atlassian.com 設定的項目屬於 Guard。組織層級的管理面不在單一站台的權責範圍內，升級產品方案不會涵蓋。</p>
   </section>
 
-  <!-- LAYERS -->
-  <section id="layers">
-    <p class="eyebrow">三個防護層次</p>
-    <h2>隨組織規模擴充的防護能力</h2>
-    <div class="layers-wrap">
-      <p>Atlassian Cloud 的資安能力分為三層，後者疊加於前者之上。釐清目前所處的層次，是選版判斷的起點。</p>
-      <div class="layers">
-        <div class="layer">
-          <svg class="layer-ico" viewBox="0 0 48 48" aria-hidden="true">
-            <rect x="5" y="38" width="38" height="5" rx="2.5" fill="#123B5E"/>
-            <rect x="8" y="25" width="32" height="10" rx="5" fill="#1769DC"/>
-            <circle cx="19" cy="19.5" r="9" fill="#1769DC"/>
-            <circle cx="30" cy="22" r="7.5" fill="#1769DC"/>
-            <path d="M21.5 22v-2.8a2.5 2.5 0 0 1 5 0V22" fill="none" stroke="#FFA902" stroke-width="2.2"/>
-            <rect x="19" y="22" width="10" height="7.5" rx="1.5" fill="#FFA902"/>
-          </svg>
-          <span class="lv">Layer 1</span>
-          <h3>Atlassian 平台</h3>
-          <p class="sub">預設即具備</p>
-          <p>每個 Atlassian Cloud 方案均內含的基本身分與資料控制，包含站台層級的權限管理與產品自身的安全設定。無須額外訂閱。</p>
-        </div>
-        <div class="layer">
-          <svg class="layer-ico" viewBox="0 0 48 48" aria-hidden="true">
-            <rect x="5" y="38" width="38" height="5" rx="2.5" fill="#123B5E"/>
-            <rect x="13" y="9" width="22" height="26" rx="3" fill="#1769DC"/>
-            <rect x="20" y="5" width="8" height="7" rx="2" fill="#FFA902"/>
-            <circle cx="24" cy="19.5" r="3.8" fill="#FFA902"/>
-            <path d="M17.5 29.5a6.5 6.5 0 0 1 13 0Z" fill="#FFA902"/>
-          </svg>
-          <span class="lv">Layer 2</span>
-          <h3>Guard Standard</h3>
-          <p class="sub">組織層級的可視性與控制</p>
-          <p>將控制範圍由單一站台提升至整個組織的所有帳號：強制單一登入與兩步驟驗證、SCIM 自動佈建、API token 管控，以及跨產品的稽核記錄。</p>
-        </div>
-        <div class="layer">
-          <svg class="layer-ico" viewBox="0 0 48 48" aria-hidden="true">
-            <rect x="5" y="38" width="38" height="5" rx="2.5" fill="#123B5E"/>
-            <path d="M24 5 38 10v10c0 7.5-6 12.6-14 15-8-2.4-14-7.5-14-15V10Z" fill="#1769DC"/>
-            <circle cx="22" cy="18.5" r="5" fill="none" stroke="#FFA902" stroke-width="3"/>
-            <path d="M25.6 22.1 30 26.5" stroke="#FFA902" stroke-width="3" stroke-linecap="round"/>
-          </svg>
-          <span class="lv">Layer 3</span>
-          <h3>Guard Premium</h3>
-          <p class="sub">進階防護與威脅偵測</p>
-          <p>由存取層延伸至資料本身：資料分級與自動分類、內容掃描、異常行為偵測，以及告警調查與修復動作。適用於持有高價值資料的組織。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- COMPARE -->
   <section id="compare" class="band">
     <p class="eyebrow">完整功能對照</p>
@@ -1874,7 +1861,7 @@ img{max-width:100%}
       </article>
 
     </div>
-    <p class="cls-note"><b>適用說明：</b>一、分類標籤本身不具強制效力，上述限制須於組織層級另行建立「以分類等級為條件的資料安全政策」，方能生效。二、此處列舉之限制為常見的政策設定範例，並非產品預設值，實際行為以組織所建立的政策為準。三、分級式資料政策為 Guard Premium 專屬；Guard Standard 的資料安全政策以空間或專案為套用單位，於其範圍內一體適用。相關差異詳見<a href="#compare">功能對照表</a>，以及本節上方的「資料安全政策」說明。</p>
+    <p class="cls-note"><b>適用說明：</b>一、分類標籤本身不具強制效力，上述限制須於組織層級另行建立「以分類等級為條件的資料安全政策」，方能生效。二、此處列舉之限制為常見的政策設定範例，並非產品預設值，實際行為以組織所建立的政策為準。三、分級式資料政策為 Guard Premium 專屬；Guard Standard 的資料安全政策以空間或專案為套用單位，於其範圍內一體適用。相關差異詳見<a href="#compare">功能對照表</a>；政策如何選定範圍與疊加，見下一節<a href="#policy">資料安全政策</a>。</p>
   </section>
 
   <!-- POLICY -->
@@ -2541,6 +2528,19 @@ img{max-width:100%}
     </div>
 
     <p class="note"><b>關於價格差異的說明：</b>Atlassian 產品頁目前標示 Standard 為每人每月 US$4.20 起、Premium 為 US$8.18 起，而授權常見問題的月繳級距表中，11 至 250 人區間為 US$4.00。兩處數據並不一致，實際金額請以官方定價計算工具與正式報價為準。年繳採級距總價制，須另行取得報價。</p>
+  </section>
+
+  <!-- HISTORY -->
+  <section id="history" class="compact">
+    <p class="eyebrow">產品沿革</p>
+    <h2>從 Atlassian Access 到 Atlassian Guard</h2>
+    <p>Atlassian 於 2024 年將 Access（2018 年推出的身分與存取管理）與 Beacon（2023 年進入 Beta 的威脅偵測）合併，並新增資料外洩防護，整合為 Guard。<b>原 Atlassian Access 的訂閱者即為現行的 Guard Standard</b>；Beacon 的能力則併入 Guard Premium。</p>
+    <ol class="tl">
+      <li><span class="tl-y">2011</span><b>Jira 與 Confluence Cloud</b><small>Atlassian 雲端產品線的起點</small></li>
+      <li><span class="tl-y">2018</span><b>Atlassian Access 推出</b><small>首個專為 Atlassian Cloud 設計的身分與存取管理工具</small></li>
+      <li><span class="tl-y">2023</span><b>Beacon 進入 Beta</b><small>威脅偵測與回應能力</small></li>
+      <li><span class="tl-y">2024</span><b>Atlassian Guard 發表</b><small>整合 Access 與 Beacon，並新增資料外洩防護</small></li>
+    </ol>
   </section>
 
   <!-- FAQ -->
