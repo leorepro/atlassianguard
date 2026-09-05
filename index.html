@@ -398,26 +398,23 @@ p{margin:0 0 16px; max-width:60ch; color:var(--ink-2)}
 .fact b{display:block; font-family:var(--sans); font-size:var(--fs-num); font-weight:800; letter-spacing:-.02em; line-height:1.2; font-variant-numeric:tabular-nums}
 .fact span{display:block; font-size:var(--fs-xs); color:var(--ink-3); margin-top:4px; line-height:1.6}
 
-/* 首屏影片：色塊向右下偏移、播放器浮於其上，與 .pdr-media 使用同一套處理 */
+/* 首屏媒體：色塊向右下偏移、播放器浮於其上，與 .pdr-media 使用同一套處理。
+   內容為管理主控台的實際操作錄影（無聲循環），取代原本的 YouTube 人物縮圖——
+   整頁講的是產品，首屏最大的視覺就該是產品本身。 */
 .hero-video{margin:0}
 .hv-media{position:relative}
 .hv-media::before{content:""; position:absolute; inset:18px -18px -18px 18px; background:var(--accent)}
-.hv-btn{
-  position:relative; display:block; aspect-ratio:16/9; overflow:hidden;
+/* 以錄影原始比例保留高度，海報與影片載入前後不產生版面位移 */
+.hv-media video{
+  position:relative; display:block; width:100%; height:auto; aspect-ratio:1100/618;
   background:var(--surface-2); box-shadow:0 1px 3px rgba(17,21,25,.12);
 }
-.hv-btn img{display:block; width:100%; height:100%; object-fit:cover}
-.hv-play{
-  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width:62px; height:62px; border-radius:50%;
-  background:rgba(17,21,25,.60); display:grid; place-items:center;
-  transition:background .18s ease, transform .18s ease;
+/* 圖說需讓過色塊向下溢出的 18px；官方影片連結與圖說分列兩端 */
+.hero-video figcaption{
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px 18px;
+  margin-top:32px; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.6;
 }
-.hv-play svg{width:22px; height:22px; fill:#FFFFFF; margin-left:3px; display:block}
-.hv-btn:hover .hv-play{background:var(--accent); transform:translate(-50%,-50%) scale(1.07)}
-.hv-btn:active .hv-play{transform:translate(-50%,-50%) scale(1)}
-/* 點擊後由指令碼替換為 iframe，尺寸與縮圖一致，避免版面位移 */
-.hv-frame{position:relative; display:block; width:100%; aspect-ratio:16/9; border:0; background:#000}
+.hero-video figcaption a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
 
 /* ---------- 資料分類四級 ---------- */
 .cls{
@@ -1007,15 +1004,16 @@ img{max-width:100%}
 
       <figure class="hero-video">
         <div class="hv-media">
-          <a class="hv-btn" href="https://www.youtube.com/watch?v=4NUYNM5H4RI" target="_blank" rel="noopener"
-             aria-label="播放 Atlassian 官方影片：Safeguard mission-critical work with Atlassian Guard，片長 1 分 19 秒">
-            <picture>
-              <source srcset="assets/video/guard-overview-poster.webp" type="image/webp">
-              <img src="assets/video/guard-overview-poster.jpg" width="1280" height="720" alt="" fetchpriority="high">
-            </picture>
-            <span class="hv-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5 20.5 12 6 20.5Z"/></svg></span>
-          </a>
+          <!-- 不寫 autoplay：瀏覽器遇到 autoplay 會忽略 preload="none" 直接下載；
+               改由頁尾指令碼在桌面寬度且未要求減少動態時才 play()，行動裝置只載海報 -->
+          <video src="assets/video/guard-cap-alert-dashboard.mp4" poster="assets/video/guard-hero-poster.webp"
+                 width="1100" height="618" muted loop playsinline preload="none"
+                 aria-label="Atlassian Guard 告警儀表板操作錄影：告警狀態統計、依人員分布與活動明細，無聲循環播放"></video>
         </div>
+        <figcaption>
+          <span>Guard 告警儀表板實際操作畫面</span>
+          <a href="https://www.youtube.com/watch?v=4NUYNM5H4RI" target="_blank" rel="noopener">觀看官方介紹影片（1:19）</a>
+        </figcaption>
       </figure>
     </div>
 
@@ -2288,21 +2286,24 @@ img{max-width:100%}
 </footer>
 
 <script>
-/* 首屏影片採點擊後載入：初次進站只下載本地縮圖，按下播放才向 YouTube 發出請求。
-   未啟用指令碼時，連結維持原本行為，於新分頁開啟 YouTube。 */
+/* 首屏錄影只在桌面寬度自動播放：行動裝置停在海報、不下載 mp4（356KB），
+   與行動版不載入中文字型同一原則。prefers-reduced-motion 時同樣停在海報，
+   使用中切換偏好即暫停。未啟用指令碼時海報本身就是產品畫面，不影響閱讀。 */
 (function(){
-  var btn = document.querySelector('.hv-btn');
-  if(!btn) return;
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
-    var f = document.createElement('iframe');
-    f.className = 'hv-frame';
-    f.src = 'https://www.youtube-nocookie.com/embed/4NUYNM5H4RI?autoplay=1&rel=0&cc_load_policy=1';
-    f.title = 'Safeguard mission-critical work with Atlassian Guard';
-    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
-    f.allowFullscreen = true;
-    btn.replaceWith(f);
-  });
+  var v = document.querySelector('.hv-media video');
+  if(!v) return;
+  var wide  = window.matchMedia('(min-width:601px)');
+  var still = window.matchMedia('(prefers-reduced-motion:reduce)');
+  function sync(){
+    if(still.matches){ if(!v.paused) v.pause(); return; }
+    if(wide.matches && v.paused){
+      v.preload = 'auto';
+      var p = v.play();
+      if(p && p.catch) p.catch(function(){});
+    }
+  }
+  function watch(m){ m.addEventListener ? m.addEventListener('change', sync) : m.addListener(sync); }
+  sync(); watch(wide); watch(still);
 })();
 
 /* 能力卡的操作錄影：三欄縮圖中的主控台介面過小而不可辨讀，
