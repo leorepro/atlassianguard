@@ -514,8 +514,8 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 .layers-wrap{background:var(--accent-soft); border-radius:var(--r-card); padding:40px 40px 44px; margin-top:30px}
 .layers-wrap > p{max-width:none; color:var(--ink-2)}
 .layers{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin-top:26px}
-.layer{background:var(--surface); padding:24px 26px 28px}
-.layer-art{display:block; width:100%; max-width:168px; height:auto; margin:0 auto 18px}
+.layer{background:var(--surface); padding:26px 26px 28px}
+.layer-ico{display:block; width:48px; height:48px; margin-bottom:14px}
 .layer .lv{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3)}
 .layer h3{font-size:var(--fs-md); margin:10px 0 3px}
 .layer .sub{font-size:var(--fs-sm); font-weight:700; color:var(--accent); margin:0 0 9px}
@@ -1262,14 +1262,13 @@ img{max-width:100%}
       <p>Atlassian Cloud 的資安能力分為三層，後者疊加於前者之上。釐清目前所處的層次，是選版判斷的起點。</p>
       <div class="layers">
         <div class="layer">
-          <svg class="layer-art" viewBox="0 0 200 124" role="img" aria-label="鑰匙與盾形的示意插畫">
-            <path d="M47 108a48 48 0 0 1 96 0Z" fill="#1769DC"/>
-            <path d="M122 108a26 26 0 0 1 52 0Z" fill="#FFA902"/>
-            <path d="M122 108a26 26 0 0 1 26-26v26Z" fill="#123B5E"/>
-            <rect x="63" y="60" width="39" height="11" rx="1.5" fill="#123B5E"/>
-            <circle cx="52" cy="65.5" r="15" fill="none" stroke="#FFA902" stroke-width="9"/>
-            <circle cx="95" cy="74" r="10.5" fill="#FFFFFF"/>
-            <rect x="89.5" y="74" width="11" height="28" fill="#FFFFFF"/>
+          <svg class="layer-ico" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="5" y="38" width="38" height="5" rx="2.5" fill="#123B5E"/>
+            <rect x="8" y="25" width="32" height="10" rx="5" fill="#1769DC"/>
+            <circle cx="19" cy="19.5" r="9" fill="#1769DC"/>
+            <circle cx="30" cy="22" r="7.5" fill="#1769DC"/>
+            <path d="M21.5 22v-2.8a2.5 2.5 0 0 1 5 0V22" fill="none" stroke="#FFA902" stroke-width="2.2"/>
+            <rect x="19" y="22" width="10" height="7.5" rx="1.5" fill="#FFA902"/>
           </svg>
           <span class="lv">Layer 1</span>
           <h3>Atlassian 平台</h3>
@@ -1277,19 +1276,12 @@ img{max-width:100%}
           <p>每個 Atlassian Cloud 方案均內含的基本身分與資料控制，包含站台層級的權限管理與產品自身的安全設定。無須額外訂閱。</p>
         </div>
         <div class="layer">
-          <svg class="layer-art" viewBox="0 0 200 124" role="img" aria-label="員工識別證的示意插畫">
-            <g transform="rotate(-8 100 64)">
-            <rect x="86" y="22" width="27" height="15" fill="#FFA902"/>
-            <rect x="47" y="34" width="49" height="60" fill="#123B5E"/>
-            <rect x="96" y="34" width="58" height="60" fill="#1769DC"/>
-            <circle cx="71.5" cy="61" r="17" fill="#FFFFFF"/>
-            <circle cx="71.5" cy="55" r="7" fill="#FFA902"/>
-            <path d="M62 73a9.5 9.5 0 0 1 19 0Z" fill="#FFA902"/>
-            <rect x="104" y="47" width="42" height="2.8" rx="1.4" fill="#123B5E"/>
-            <rect x="104" y="57" width="46" height="2.8" rx="1.4" fill="#123B5E"/>
-            <rect x="104" y="67" width="40" height="2.8" rx="1.4" fill="#123B5E"/>
-            <rect x="104" y="77" width="44" height="2.8" rx="1.4" fill="#123B5E"/>
-            </g>
+          <svg class="layer-ico" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="5" y="38" width="38" height="5" rx="2.5" fill="#123B5E"/>
+            <rect x="13" y="9" width="22" height="26" rx="3" fill="#1769DC"/>
+            <rect x="20" y="5" width="8" height="7" rx="2" fill="#FFA902"/>
+            <circle cx="24" cy="19.5" r="3.8" fill="#FFA902"/>
+            <path d="M17.5 29.5a6.5 6.5 0 0 1 13 0Z" fill="#FFA902"/>
           </svg>
           <span class="lv">Layer 2</span>
           <h3>Guard Standard</h3>
@@ -1297,20 +1289,11 @@ img{max-width:100%}
           <p>將控制範圍由單一站台提升至整個組織的所有帳號：強制單一登入與兩步驟驗證、SCIM 自動佈建、API token 管控，以及跨產品的稽核記錄。</p>
         </div>
         <div class="layer">
-          <svg class="layer-art" viewBox="0 0 200 124" role="img" aria-label="密碼鎖的示意插畫">
-            <path d="M78 64V46a22 22 0 0 1 44 0v18" fill="none" stroke="#1769DC" stroke-width="13"/>
-            <rect x="71.5" y="52" width="13" height="18" fill="#123B5E"/>
-            <rect x="115.5" y="52" width="13" height="18" fill="#123B5E"/>
-            <rect x="62" y="62" width="76" height="56" rx="5" fill="#FFA902"/>
-            <circle cx="80" cy="76" r="5.4" fill="#1769DC"/>
-            <circle cx="100" cy="76" r="5.4" fill="#FFFFFF"/>
-            <circle cx="120" cy="76" r="5.4" fill="#1769DC"/>
-            <circle cx="80" cy="90" r="5.4" fill="#FFFFFF"/>
-            <circle cx="100" cy="90" r="5.4" fill="#1769DC"/>
-            <circle cx="120" cy="90" r="5.4" fill="#FFFFFF"/>
-            <circle cx="80" cy="104" r="5.4" fill="#1769DC"/>
-            <circle cx="100" cy="104" r="5.4" fill="#FFFFFF"/>
-            <circle cx="120" cy="104" r="5.4" fill="#1769DC"/>
+          <svg class="layer-ico" viewBox="0 0 48 48" aria-hidden="true">
+            <rect x="5" y="38" width="38" height="5" rx="2.5" fill="#123B5E"/>
+            <path d="M24 5 38 10v10c0 7.5-6 12.6-14 15-8-2.4-14-7.5-14-15V10Z" fill="#1769DC"/>
+            <circle cx="22" cy="18.5" r="5" fill="none" stroke="#FFA902" stroke-width="3"/>
+            <path d="M25.6 22.1 30 26.5" stroke="#FFA902" stroke-width="3" stroke-linecap="round"/>
           </svg>
           <span class="lv">Layer 3</span>
           <h3>Guard Premium</h3>
