@@ -1001,14 +1001,14 @@
             <p>該員於最後兩週仍持有 Confluence 技術規格庫的完整存取權。人資已於身分識別提供者停用帳號，但主管需要釐清的是：離職前該段期間內，其實際匯出與下載了哪些內容。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>SCIM 會在身分識別提供者停用帳號的同時解除 Atlassian 存取權，此環節可完整覆蓋。惟稽核記錄僅涵蓋<b>管理員操作</b>，可查得權限設定的變更歷程，但無法回溯特定使用者的檢視與匯出行為。實務上僅能依靠頁面版本紀錄逐頁比對，而匯出行為本身並未留存記錄。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>使用者活動稽核記錄會保留該員的檢視與匯出行為，可直接匯出完整時間軸供調查使用。若事前已配置大量匯出的偵測規則，此行為在<b>離職前即會觸發告警</b>，而非於事後才展開追查。</p>
               </div>
             </div>
@@ -1022,14 +1022,14 @@
             <p>其原意是分享給外部設計協力廠商，因而選擇了「知道連結的人皆可檢視」。三週後，業務單位在客戶端看到了這份定價資料。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>資料安全政策可<b>於站台層級全面禁止公開連結</b>，但此設定為全有全無：一旦啟用，行銷本應對外公開的活動說明與產品文件亦同時受限。此類設定多因業務單位反映而重新開放，難以長期維持。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>改以<b>分類等級作為管控條件</b>：標示為 Public 的行銷素材維持正常分享，Confidential 以上則一律禁止公開連結與匯出。定價資料因命中偵測規則而自動升級分類，該同仁在執行分享操作的當下即被阻擋，而非於三週後才由業務單位回報。</p>
               </div>
             </div>
@@ -1043,14 +1043,14 @@
             <p>依內部規範不應存在，但組織共有 40 個 Space、累積六年的內容，且客服團隊過去確有將個案截圖與資料貼入頁面的作業習慣。此項目須於兩週內提出書面答覆。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>不具備內容層的盤查能力，僅能透過 Confluence 搜尋配合人工抽查。此種作法在稽核程序中難以構成充分證據，能夠證明的是「已進行查找」，而非「已完成全面掃描」。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>可運用內建的個人資料偵測，搭配<b>自訂規則</b>（例如台灣身分證字號格式），執行一次全站掃描並產出命中清單與所在頁面，後續可套用遮蔽或重新分類的修復動作。新增內容則於寫入當下即完成判定。<br><b>惟須先確認覆蓋範圍：</b>掃描不含光學文字辨識、不涵蓋附件內容，亦不支援 Confluence Whiteboard。若前述截圖為影像格式，本輪掃描無法涵蓋。</p>
               </div>
             </div>
@@ -1064,14 +1064,14 @@
             <p>該員工的密碼曾於其他網站的外洩名單中出現，且在多處重複使用。攻擊者取得的是一組合法憑證，其行為在驗證層面完全合規。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>強制單一登入（Single Sign-On）與兩步驟驗證（Two-Step Verification）可大幅降低此類攻擊的成功率，構成第一道防線。惟若攻擊者已突破兩步驟驗證，Standard <b>不會產生任何告警</b>，事件通常需數日後才會被察覺。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>可疑活動偵測可辨識異常登入與大量下載的組合行為，於數分鐘內將告警送至 Microsoft Teams、Slack 或資安事件管理平台。告警本身即附帶行為者脈絡與事件時間軸，並提供<b>停用帳號</b>的建議動作，資安人員可於同一介面完成處置。</p>
               </div>
             </div>
@@ -1085,14 +1085,14 @@
             <p>資料來源為人資兩年前建立的一頁 Confluence，當初的權限設定開放給全公司，後續無人重新檢視。AI 並未執行任何違規操作，僅是呈現了原本即處於開放狀態的內容。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>AI 的可見範圍等同於既有的頁面權限，而權限的設定偏差多為長期累積的結果。Standard 不具備盤點「哪些高敏感內容的權限範圍過寬」的能力，此類問題通常須待實際被查詢後才會浮現。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>內容掃描可在 AI 導入前先行盤點出此類頁面並標示為 Restricted，分類標籤本身亦會被 AI 讀取，成為可見範圍的判斷依據。另提供 Rovo Chat 的提示與回應掃描（<b>Early Access</b>），可於對話層阻擋或遮蔽敏感內容。</p>
               </div>
             </div>
@@ -1111,14 +1111,14 @@
             <p>該報告存放於權限受限的 Confluence Space，權限清單本身可自設定頁調出。惟金檢問項為「實際開啟過該文件的人員與時間」，與權限清單並非同一件事。答覆期限為十個工作日。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>稽核記錄涵蓋的是<b>管理員操作</b>——權限何時被授予、由何人授予——可完整證明存取權的設定歷程，但無法回答「權限清單上的三十人之中，實際開啟過該文件者為何人」。以權限清單代替存取軌跡提交，於金檢程序中通常會被要求補件。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>使用者活動稽核記錄逐筆保留檢視、編輯與匯出事件，可依內容與期間篩選後直接匯出，作為答覆的附件。事件亦可持續外送至資安事件管理平台長期保存，使舉證能力不受平台端保留期限的限制。</p>
               </div>
             </div>
@@ -1132,14 +1132,14 @@
             <p>該工單歷經三個處理階段、七位經手人，並曾以通知信形式寄出。作業本身合乎既有流程，問題在於這些欄位原不應離開核心系統。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>Standard 不檢視工單內容，此類資料進入 Jira 之後即無從辨識。多數組織依靠教育訓練與作業規範加以約束，惟在結案時效的壓力下，此種約束的實際遵循率既難以量測，亦無數據可供佐證。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>內建偵測涵蓋信用卡號與個人識別資訊樣式，並可另行建立台灣身分證字號的<b>自訂規則</b>。工單於儲存當下即命中，可自動遮蔽該段內容並通知法遵窗口。既有工單則以一次性全站掃描盤出，產出可直接交付的命中清單。</p>
               </div>
             </div>
@@ -1153,14 +1153,14 @@
             <p>核心小組共九人，但該 Space 建立時沿用了既有範本的權限設定，公司內另有二十餘人具備繼承而來的存取權。消息若於公開前走漏，組織須說明接觸範圍。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>權限收斂屬 Space 管理層次，Standard 可確保僅經身分驗證的員工得以進入，卻無法辨識「此 Space 的內容敏感度與其權限範圍不相稱」。設定偏差須待人工複查方能發現，而併購案的時程通常不容許此種節奏。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>分類使敏感度附著於文件本身：標示為 Restricted 後，即可自組織層級一併禁止匯出、公開連結與外部協作者存取，不因單一 Space 的權限疏漏而失效。消息若確實外流，使用者活動稽核記錄可列出公開前曾檢視該內容的人員名單，此為向主管機關與律師說明時<b>唯一具備效力的依據</b>。</p>
               </div>
             </div>
@@ -1179,14 +1179,14 @@
             <p>該 Space 內除新機種規格外，另存有既有產品的 BOM 表（Bill of Materials，物料清單）、製程參數，以及一份委外代工的報價比較。三家供應商彼此互為競爭關係。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Standard</h4>
                 <p>此層級 Standard 已可覆蓋：外部使用者政策允許對這批帳號單獨套用規則，包括強制兩步驟驗證、縮短工作階段逾時、禁止建立 API token，並於行動裝置上停用下載與截圖。合作結束時可透過 SCIM 一次性回收。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>Premium 補強的是內容誤置時的第二道防線。BOM 表與報價比較標示為 Restricted 後，即使被移入共用區域，外部協作者仍無法開啟。合作期間的檢視紀錄亦得以保留：供應商若質疑報價條件遭他方取得，組織具備可查證的回應依據，而非僅能表示「應該沒有」。</p>
               </div>
             </div>
@@ -1200,14 +1200,14 @@
             <p>公司懷疑其離職前已取得關鍵製程參數，擬循營業秘密相關法規主張權利。訴訟的第一道門檻並非證明對方使用了資料，而是證明該員曾接觸何種資料、於何時、以何種方式取出。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>SCIM 已於離職當日完成帳號停用，此環節並無缺漏。惟舉證所需的是離職前數月的行為紀錄，而 Standard 的稽核範圍不含使用者的檢視與匯出。此時常見的作法是自備份資料與頁面版本紀錄反推，其完整度與證據強度均相當有限。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>使用者活動稽核記錄本即為此類需求而存在：可依人員與期間篩選，匯出含時間戳記的檢視與匯出事件清單。若事前已設定大量匯出的偵測規則，該行為在離職程序啟動前即已產生告警——<b>組織得以在資料離開之前介入，而非於三個月後蒐集證據</b>。</p>
               </div>
             </div>
@@ -1226,14 +1226,14 @@
             <p>依委任契約，組織須維持資訊隔離。人員調動由專案端自行處理，並無系統機制確保舊案權限同步解除。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>權限的授予與解除均可執行，惟 Standard 無從判斷「同一人同時持有兩個互斥專案的存取權」屬於異常狀態。此類衝突須仰賴專案經理主動申報，而在人力調度緊湊的期間，最容易被略過的正是這道程序。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>兩案內容分別套用不同分類等級後，跨案的匯出與對外分享即受政策約束。真正的關鍵在事後：客戶若提出質疑，使用者活動稽核記錄可具體回答該顧問在轉調之後是否再度開啟過前案內容。此一答案，與「我們的政策規定不得如此」在專業責任的認定上有本質差異。</p>
               </div>
             </div>
@@ -1247,14 +1247,14 @@
             <p>前面數十題以政策文件即可答覆，此題則要求提出實際的機制說明與樣本輸出。審查未通過者將自合格供應商名單中移除。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>Standard 能佐證的是存取控制層：單一登入、兩步驟驗證、外部使用者規範、帳號生命週期管理，這些項目通常可順利通過。但在資料外洩防護與使用者層稽核兩欄，僅能填列「以內部流程規範管理」，於審查中屬於明確的缺項。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>內容掃描與分類政策構成可展示的資料外洩防護機制，使用者活動稽核記錄則可直接輸出樣本作為佐證。對於以 SOC 2 或 ISO 27001 作為銷售前提的組織，此處的支出<b>實質上並非資安成本，而是取得投標資格的條件</b>。</p>
               </div>
             </div>
@@ -1268,14 +1268,14 @@
             <p>組織與雙方均簽有保密協議。此行為本身可能僅是一次文件整理，但若客戶 A 提出查詢，組織必須能明確說明何人於何時檢視過該文件。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>Space 權限設計再嚴謹，仍無法防範內容被主動移至權限範圍較寬的位置。事後追查時，Standard 的稽核記錄僅涵蓋管理員操作，無法回應「哪些人員檢視過該頁面」。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>分類標籤依附於內容本身而非所在的 Space，標示為 Restricted 的規格文件無論移至何處，均受同一套政策約束。若事件確實發生，使用者活動稽核記錄可列出完整檢視紀錄，此紀錄為對客戶說明時的佐證依據。</p>
               </div>
             </div>
@@ -1294,14 +1294,14 @@
             <p>其中部分為文字表格，部分為自院內系統擷取的畫面截圖。組織須確認影響範圍，並提出後續的處置與預防措施。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>不具備內容層的辨識能力。此類資料一旦寫入頁面即與一般內容無異，僅能以人工逐頁檢視，於數十個 Space、數年累積的內容規模下並不可行。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>文字形式的病歷號與檢驗數值可由自訂規則涵蓋，掃描後產出命中清單並套用遮蔽動作，新增內容則於寫入當下完成判定。<br><b>惟此處的邊界須於選型階段即予認知：</b>內容掃描不執行光學文字辨識、不涵蓋附件內容，亦不支援 Confluence Whiteboard。以截圖形式存在的檢驗報告，本輪掃描無法辨識，該部分仍須以流程管制與人工複查處理。</p>
               </div>
             </div>
@@ -1315,14 +1315,14 @@
             <p>依個資法規範，此類資料應於處理目的完成後停止利用。實務上工單永久留存，且查詢權限開放給整個承辦科室。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>可確保僅經身分驗證的人員得以進入系統，並限制外部存取，此為必要的基礎。惟「哪些工單含有個人資料」與「這些工單目前開放給何人」二者，Standard 均無法回答，年度個資盤點因而只能以抽樣方式進行。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>掃描可標定含個人資料的工單並依敏感度分類，據以套用禁止匯出與限制分享的政策。逾保存期限者可套用遮蔽動作，<b>在保留案件處理歷程的同時移除個資欄位</b>。盤點結果可直接作為個人資料檔案安全維護計畫的佐證文件。</p>
               </div>
             </div>
@@ -1341,14 +1341,14 @@
             <p>該議題共有 12 位關注者，其中兩位為外部協力廠商。問題排除後未有人回頭清除該則留言，內容持續留存於議題中。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>此情境不在 Standard 的能力範圍內。Standard 管理的是存取層，不檢視議題的內容本身。此類憑證通常須待實際遭到濫用，或於下一次資安健檢的人工抽查中才會被發現。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>內建偵測涵蓋憑證與金鑰類樣式，留言於<b>寫入當下</b>即會命中並觸發告警，可直接套用遮蔽的修復動作。<br><b>惟涵蓋範圍須予釐清：</b>內容掃描僅支援 Jira 與 Confluence，<b>不包含 Bitbucket</b>。程式碼中的硬編碼憑證仍須由專用的 secret scanning 機制處理。</p>
               </div>
             </div>
@@ -1362,14 +1362,14 @@
             <p>其存取範圍應僅限於該專案，但 Confluence 中同時存有其他客戶的規格文件、內部架構圖，以及一份載明各環境連線方式的維運手冊。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Standard</h4>
                 <p>此層級的需求 Standard 已可覆蓋：外部使用者政策允許對這 20 人套用獨立規則，包括強制兩步驟驗證、縮短工作階段逾時、禁止建立 API token，以及在行動裝置上限制下載與截圖。專案結束時可透過 SCIM 一次性完成權限回收。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>Premium 補強的是 Space 權限設定發生疏漏時的第二道防線。將維運手冊與其他客戶的內容標示為 Restricted 後，即<b>從組織層級禁止外部協作者存取</b>，不再仰賴每一個 Space 的權限設定皆正確無誤。搭配使用者活動稽核記錄，交付後若須證明外包團隊未接觸其他內容，亦具備可查證的依據。</p>
               </div>
             </div>
@@ -1383,14 +1383,14 @@
             <p>組織希望全面清查此類 token，但無法確認哪些 Jenkins 工作、GitHub Actions 流程或內部工具仍依賴其運作，因而遲遲未能執行停用。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Standard</h4>
                 <p>可從源頭進行治理：禁止使用者自行建立 API token、對既有 token 設定到期時間以強制輪替，並改以 OAuth 2.0 服務帳號（上限 250 個）承接自動化流程，使機器身分與個人帳號脫鉤。<br>惟此為<b>由上而下的關閉機制</b>，仍無法在停用前評估各組 token 的影響範圍。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>API token 使用行為追蹤可呈現每一組 token 的<b>最近使用時間、呼叫來源與操作內容</b>。有了這份清單，清查工作即可從無從評估的停用風險，轉為依相依性排序的分階段遷移。</p>
               </div>
             </div>
@@ -1404,14 +1404,14 @@
             <p>該站台已使用八個月，未納入單一登入、未納入備份機制，組織層級亦無人知悉其存在，而這些帳號實際上已計入每月的 Guard 帳單。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Standard</h4>
                 <p>產品探索（Product Discovery）即針對此情境設計：只要帳號使用已驗證網域，該站台便會被列出，後續可執行納管、合併或關閉。此外，這些帳號<b>本即已計入 Guard 帳單</b>，盤點未納管站台因而同時涉及資安與成本兩個面向。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>識別站台僅為第一步。完成納管後執行一次內容掃描，方能確認這八個月間累積了哪些內容。測試帳號密碼、客戶名單與尚未公開的產品規劃，常見於此類未納管的站台。</p>
               </div>
             </div>
@@ -1425,14 +1425,14 @@
             <p>該筆輸出包含四十餘位真實使用者的電子郵件與訂單內容。事故於九十分鐘後排除，事故單則保持開放，並依慣例同步至公司內的公開頻道。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop"></span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="stop"></span> Guard Standard</h4>
+                <h4><span class="stop" role="img" aria-label="未能完整覆蓋"></span> Guard Standard</h4>
                 <p>此情境不在覆蓋範圍內。高壓情境下的貼上行為，任何以人員自律為基礎的管制都難以生效；而 Standard 並不檢視內容，事後亦無從得知該筆資料曾經存在於工單之中。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>留言於送出當下即命中電子郵件與個人資料樣式，可自動遮蔽並通知事故指揮人員。事故檢討階段，則可自稽核記錄確認該筆內容在遮蔽前的實際曝光範圍——這正是通報義務判斷所需的資訊：<b>是否構成個資事故，取決於有多少人在何時看過</b>。</p>
               </div>
             </div>
@@ -1446,14 +1446,14 @@
             <p>該帳號的可見範圍實質等同於一位資深工程師，且其行為由提示詞驅動、呼叫次數頻繁。若某日出現大量而異常的讀取，組織需要能夠察覺。</p>
           </div>
           <details class="case-more">
-            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" aria-hidden="true">✓</span> Premium</span></span></summary>
+            <summary><span class="cm-label">兩方案的處理程度</span><span class="cm-marks"><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Standard</span><span class="cm-mark"><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Premium</span></span></summary>
             <div class="case-split">
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Standard</h4>
                 <p>治理的起點在此：禁止使用者自行建立 API token、對既有 token 設定到期輪替，並改以 OAuth 2.0 服務帳號（上限 250 個）承接自動化流程與 AI 代理的存取，使機器身分與個人帳號脫鉤，其權限範圍得以單獨界定、單獨回收。</p>
               </div>
               <div class="case-col">
-                <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
+                <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
                 <p>API token 使用行為追蹤可呈現該帳號的呼叫來源、頻率與操作內容，異常讀取因而具備可比較的基準線。若內容已完成分類，Restricted 等級的頁面亦可自政策層排除於代理的可見範圍之外——<b>AI 代理與人員適用同一套規則</b>，此為近期最常被詢問、實際上卻最少被設定的一環。</p>
               </div>
             </div>
