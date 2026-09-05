@@ -1,0 +1,6 @@
+# https://atlassianguard.com/
+# 單頁站台，全站開放索引；不封鎖任何資源，讓爬蟲能完整算繪頁面。
+User-agent: *
+Allow: /
+
+Sitemap: https://atlassianguard.com/sitemap.xml
