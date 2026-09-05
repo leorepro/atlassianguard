@@ -211,6 +211,9 @@
   --paper:#FFFFFF; --surface:#FFFFFF; --surface-2:#F5F7FA;
   --line:#E4E8EE; --line-2:#C6CDD7;
   --accent:#1769DC; --accent-soft:#E3EDFC; --on-accent:#FFFFFF;
+  /* 新增 token：琥珀（--c-respond #FFA902）的極淡底色，供 IdP 示意節點使用，
+     標示其位於 Atlassian 組織之外；深淺與 --accent-soft 對齊，僅色相不同。 */
+  --amber-soft:#FFF4DC;
   --yes:#1769DC; --yes-ring:#D5E4FB; --no:#C6CDD7;
   /* 分類階梯保留暖色對比；Public 去飽和為中性灰，避免與 Internal 的藍相混。
      四級的相對亮度單調遞減（.176 / .124 / .086 / .055），使機密程度直接讀作
@@ -522,6 +525,59 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 .layer p{font-size:var(--fs-sm); margin:0; color:var(--ink-2); line-height:1.7}
 
 /* ---------- integrations ---------- */
+/* IdP 協作示意圖：文字一律由 HTML 盒子承載，inline SVG 只畫圖示與箭頭，
+   如此文字不隨 viewBox 縮放，行動裝置仍可讀，讀屏軟體亦可取得節點文字。 */
+.idp-flow{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:30px}
+.idp-flow-title{grid-column:1/-1; font-size:var(--fs-md); margin:0 0 -8px}
+.idp-fig{
+  display:flex; flex-direction:column; background:var(--surface-2);
+  border:1px solid var(--line); border-radius:var(--r-card); padding:22px 22px 20px;
+}
+.idp-fig h4{margin:0 0 8px; font-size:var(--fs-base); font-weight:700; letter-spacing:-.01em}
+.dg-desc{font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7; margin:0 0 18px; max-width:none}
+.dg-desc a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
+/* 圖說沿用表格內說明的 --fs-xs／--ink-3 */
+.dg-cap{font-size:var(--fs-xs); color:var(--ink-3); line-height:1.6; margin:14px 0 0; max-width:none}
+
+/* 流程圖本體：桌面橫排。說明段長短不一，以 margin-top:auto 讓兩張圖沉底對齊。 */
+.dg{display:flex; align-items:center; gap:8px; margin-top:auto}
+.dg-node{
+  flex:1 1 0; min-width:0; display:flex; flex-direction:column; align-items:center; gap:3px;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card);
+  padding:10px 8px 11px; text-align:center;
+}
+.dg-node b{display:block; font-size:var(--fs-sm); font-weight:700; color:var(--ink); line-height:1.4; letter-spacing:-.01em}
+/* 站台網域等長字串在窄節點內可於任意處斷行，避免撐破盒子 */
+.dg-node small{display:block; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.5; overflow-wrap:anywhere}
+.dg-ico{display:block; width:24px; height:24px; margin-bottom:3px}
+/* IdP 位於 Atlassian 之外：以琥珀淡底與組織內的白底節點區隔 */
+.dg-node.dg-ext{background:var(--amber-soft)}
+/* 箭頭：單色 --ink-3，不參與伸縮；.dg-down 為群組內的向下連接 */
+.dg-arrow{flex:none; width:20px; height:20px; color:var(--ink-3)}
+.dg-arrow.dg-down{transform:rotate(90deg); align-self:center}
+/* 群組：淡藍底、虛線框與等寬角標，框住屬於同一組織的節點；寬度約為單一節點的 2.3 倍 */
+.dg-group{
+  flex:2.3 1 0; min-width:0; position:relative; display:flex; flex-direction:column; gap:8px;
+  background:color-mix(in srgb, var(--accent-soft) 55%, var(--surface));
+  border:1px dashed var(--line-2); border-radius:var(--r-card); padding:24px 10px 10px;
+}
+.dg-group > i{
+  position:absolute; top:7px; left:12px; font-style:normal; font-family:var(--mono);
+  font-size:var(--fs-tag); letter-spacing:.1em; text-transform:uppercase; color:var(--accent);
+}
+.dg-row{display:flex; align-items:center; gap:8px}
+.dg-col{flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:8px}
+/* 三個節點加一個群組橫排至少需要約 440px；兩欄並排在 960px 以下即不足，故較 .integ 早一步改為上下 */
+@media (max-width:960px){ .idp-flow{grid-template-columns:1fr} }
+/* 窄螢幕：流程改為垂直堆疊，箭頭旋轉 90°；Jira／Confluence 這類成對節點仍並排以節省高度 */
+@media (max-width:700px){
+  .dg,.dg-row{flex-direction:column; align-items:stretch}
+  .dg-row.dg-pair{flex-direction:row}
+  .dg-node,.dg-group{flex:none}
+  .dg-arrow{transform:rotate(90deg); align-self:center}
+  .idp-fig{padding:18px 16px}
+}
+
 .integ{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin-top:28px}
 .integ-col{background:var(--surface); padding:26px 26px 28px}
 .integ-col h3{font-size:var(--fs-base); font-weight:700; margin-bottom:6px}
@@ -1170,6 +1226,25 @@ img{max-width:100%}
     <p class="eyebrow">生態系整合</p>
     <h2>將 Guard 整合至既有的資安架構</h2>
     <p>告警與稽核記錄可送往組織既有的資安工具，無須為 Guard 另建一套作業流程。整合分為三類：</p>
+    <div class="idp-flow">
+      <h3 class="idp-flow-title">Guard 與身分識別提供者如何協作</h3>
+      <div class="idp-fig">
+        <h4>登入時：以公司 IdP 進行 SSO</h4>
+        <p class="dg-desc">使用者以公司的 Identity provider（Okta、Microsoft Entra ID、Google Workspace）登入，密碼原則與多因素驗證要求由 IdP 統一控管，Atlassian 端不另存密碼。首次登入時自動建立 Atlassian 帳戶，之後每次登入皆套用 IdP 當下的驗證設定。</p>
+        <div class="dg" role="img" aria-label="示意圖：使用者經公司 Identity provider 登入後進入 Atlassian 組織；Guard 位於組織層級提供 SSO、帳號佈建與全組織洞察，涵蓋 Jira 與 Confluence 站台。">
+          <div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="15" r="9" fill="#1769DC"/><path d="M7 42a17 17 0 0 1 34 0Z" fill="#123B5E"/></svg><b>使用者</b><small>以公司帳號登入</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-node dg-ext"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M22 5 7 11v13c0 10 6.5 18 15 21 8.5-3 15-11 15-21V11Z" fill="#1769DC"/><path d="M15 24l5 5 10-11" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="39" cy="10" r="6.5" fill="#FFA902"/></svg><b>Identity provider</b><small>Okta · Entra ID · Google Workspace</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-group"><i>Atlassian 組織</i><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M16 22v-7a8 8 0 0 1 16 0v7" fill="none" stroke="#1769DC" stroke-width="4"/><rect x="9" y="21" width="30" height="22" rx="4" fill="#123B5E"/><circle cx="24" cy="32" r="3.5" fill="#FFA902"/></svg><b>Atlassian Guard</b><small>SSO · 帳號佈建 · 全組織洞察</small></div><svg class="dg-arrow dg-down" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-row dg-pair"><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v5H4Z" fill="#123B5E"/><rect x="10" y="23" width="20" height="4" rx="2" fill="#FFFFFF"/><rect x="10" y="31" width="13" height="4" rx="2" fill="#FFFFFF"/></svg><b>Jira</b><small>acme.atlassian.net</small></div><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v5H4Z" fill="#123B5E"/><rect x="10" y="23" width="20" height="4" rx="2" fill="#FFFFFF"/><rect x="10" y="31" width="13" height="4" rx="2" fill="#FFFFFF"/></svg><b>Confluence</b><small>acme.atlassian.net</small></div></div></div>
+        </div>
+        <p class="dg-cap">圖一：SSO 登入流程。Guard 作用於組織層級，Jira 與 Confluence 等所有站台一併納入，不需逐站台設定。</p>
+      </div>
+      <div class="idp-fig">
+        <h4>帳號生命週期：以 SCIM 同步群組</h4>
+        <p class="dg-desc">IdP 群組的成員異動會自動同步至 Atlassian 組織的 Directory，再套用至各 Cloud site，與站台既有群組並存。於 IdP 停用的使用者會同時在所有站台失去存取權，不需逐站台處理，帳單人數也隨之下降。<a href="https://medium.com/p/e2288a0abec6" target="_blank" rel="noopener">延伸閱讀：用 Atlassian Guard（Standard）管好帳號：從 IdP 串接到 JSM Customer 授權問題</a></p>
+        <div class="dg" role="img" aria-label="示意圖：Identity provider 的群組經 SCIM 同步至 Atlassian 組織的 Directory，成為 Synced groups，再套用至每個 Cloud site，與站台既有群組並存。">
+          <div class="dg-node dg-ext"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="16" cy="15" r="7" fill="#1769DC"/><circle cx="33" cy="15" r="7" fill="#50B0E8"/><path d="M3 40a13 13 0 0 1 26 0Z" fill="#123B5E"/><path d="M23 40a12 12 0 0 1 22 0Z" fill="#50B0E8"/></svg><b>Identity provider</b><small>Groups：以群組指派存取權</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-group"><i>Your organization</i><div class="dg-row"><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 21a15 15 0 0 1 27-7" fill="none" stroke="#1769DC" stroke-width="4" stroke-linecap="round"/><path d="M38 6v9h-9" fill="none" stroke="#1769DC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 27a15 15 0 0 1-27 7" fill="none" stroke="#123B5E" stroke-width="4" stroke-linecap="round"/><path d="M10 42v-9h9" fill="none" stroke="#123B5E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="3.5" fill="#FFA902"/></svg><b>Directory</b><small>Synced groups</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-col"><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 40h23a8.5 8.5 0 0 0 1.4-16.9A11.5 11.5 0 0 0 15.3 20.6 9.8 9.8 0 0 0 13 40Z" fill="#1769DC"/><rect x="17" y="29" width="16" height="4" rx="2" fill="#FFFFFF"/></svg><b>Cloud site 1</b><small>既有站台群組 ＋ Synced groups</small></div><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 40h23a8.5 8.5 0 0 0 1.4-16.9A11.5 11.5 0 0 0 15.3 20.6 9.8 9.8 0 0 0 13 40Z" fill="#1769DC"/><rect x="17" y="29" width="16" height="4" rx="2" fill="#FFFFFF"/></svg><b>Cloud site 2</b><small>既有站台群組 ＋ Synced groups</small></div></div></div></div>
+        </div>
+        <p class="dg-cap">圖二：SCIM 佈建流程。Synced groups 的成員僅能於 IdP 端修改，Atlassian 端為唯讀，確保單一事實來源。</p>
+      </div>
+    </div>
     <div class="integ">
       <div class="integ-col">
         <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
