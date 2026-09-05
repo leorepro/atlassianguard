@@ -320,7 +320,7 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 
 /* ---------- hero ---------- */
 .hero{padding:64px 0 72px}
-.hero-grid{display:grid; grid-template-columns:1.25fr .75fr; gap:56px; align-items:start}
+.hero-grid{display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center}
 .hero h1 em{font-style:normal; color:var(--accent); box-shadow:inset 0 -.38em 0 var(--accent-soft)}
 .hero .lede{margin-top:22px}
 .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px}
@@ -341,21 +341,53 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 .fact b{display:block; font-family:var(--sans); font-size:var(--fs-num); font-weight:800; letter-spacing:-.02em; line-height:1.2; font-variant-numeric:tabular-nums}
 .fact span{display:block; font-size:var(--fs-xs); color:var(--ink-3); margin-top:4px; line-height:1.6}
 
-/* classification ladder */
-.ladder{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card); box-shadow:var(--shadow); overflow:hidden}
-.ladder-head{
-  padding:14px 18px; border-bottom:1px solid var(--line);
-  font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
-  display:flex; justify-content:space-between; align-items:center;
+/* 首屏影片：色塊向右下偏移、播放器浮於其上，與 .pdr-media 使用同一套處理 */
+.hero-video{margin:0}
+.hv-media{position:relative}
+.hv-media::before{content:""; position:absolute; inset:18px -18px -18px 18px; background:var(--accent)}
+.hv-btn{
+  position:relative; display:block; aspect-ratio:16/9; overflow:hidden;
+  background:var(--surface-2); box-shadow:0 1px 3px rgba(17,21,25,.12);
 }
-.ladder-head span:last-child{color:var(--accent)}
-.rung{display:grid; grid-template-columns:5px 1fr; border-bottom:1px solid var(--line)}
-.rung:last-child{border-bottom:0}
-.rung i{display:block}
-.rung-body{padding:13px 18px}
-.rung-body strong{font-size:var(--fs-base); font-weight:500; display:flex; justify-content:space-between; gap:12px; align-items:baseline}
-.rung-body strong code{font-family:var(--mono); font-size:var(--fs-tag); color:var(--ink-3); font-weight:400}
-.rung-body small{display:block; color:var(--ink-3); font-size:var(--fs-xs); line-height:1.65; margin-top:3px}
+.hv-btn img{display:block; width:100%; height:100%; object-fit:cover}
+.hv-play{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:62px; height:62px; border-radius:50%;
+  background:rgba(17,21,25,.60); display:grid; place-items:center;
+  transition:background .18s ease, transform .18s ease;
+}
+.hv-play svg{width:22px; height:22px; fill:#FFFFFF; margin-left:3px; display:block}
+.hv-btn:hover .hv-play{background:var(--accent); transform:translate(-50%,-50%) scale(1.07)}
+.hv-btn:active .hv-play{transform:translate(-50%,-50%) scale(1)}
+/* 點擊後由指令碼替換為 iframe，尺寸與縮圖一致，避免版面位移 */
+.hv-frame{position:relative; display:block; width:100%; aspect-ratio:16/9; border:0; background:#000}
+.hero-video figcaption{margin-top:30px; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.7}
+
+/* ---------- 資料分類四級 ---------- */
+.cls{
+  display:grid; gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin-top:28px;
+}
+.cls-row{display:grid; grid-template-columns:5px .78fr 1.22fr; background:var(--surface)}
+.cls-row i{display:block; background:var(--k)}
+.cls-head{padding:26px 28px 28px; border-right:1px solid var(--line)}
+.cls-lv{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3)}
+.cls-head h3{margin:8px 0 9px; font-size:var(--fs-md); color:var(--k)}
+.cls-head p{margin:0; font-size:var(--fs-base); line-height:1.75}
+.cls-detail{margin:0; padding:26px 28px 28px; display:grid; gap:14px}
+.cls-detail dt{
+  font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); margin-bottom:4px;
+}
+.cls-detail dd{margin:0; font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7}
+.cls-detail b{font-weight:600; color:var(--ink)}
+.cls-note{
+  max-width:none; margin-top:24px; padding:20px 24px; background:var(--surface-2);
+  border-left:3px solid var(--line-2); border-radius:0 var(--r-card) var(--r-card) 0;
+  font-size:var(--fs-sm); color:var(--ink-2); line-height:1.75;
+}
+.cls-note b{font-weight:600; color:var(--ink)}
+.cls-note a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
 
 /* ---------- protect / detect / respond ---------- */
 .pdr-in{position:absolute; width:1px; height:1px; opacity:0; pointer-events:none}
@@ -707,7 +739,14 @@ footer a:hover{color:var(--accent)}
   .layers{grid-template-columns:1fr}
   .layers-wrap{padding:26px 22px 30px}
   .tl{grid-template-columns:repeat(2,1fr); gap:22px 0}
-  .pdr-media::before{inset:12px -12px -12px 12px}
+  .pdr-media::before,.hv-media::before{inset:12px -12px -12px 12px}
+  .hero-video figcaption{margin-top:24px}
+  /* 分類四級改為上下堆疊：等級說明在上，細項在下，色條維持於左緣 */
+  .cls-row{grid-template-columns:5px 1fr}
+  .cls-row i{grid-row:1 / span 2}
+  .cls-head,.cls-detail{grid-column:2}
+  .cls-head{border-right:0; padding-bottom:0}
+  .cls-detail{padding-top:20px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
 
@@ -758,6 +797,7 @@ img{max-width:100%}
       <a href="#vs">為何需要 Guard</a>
       <a href="#layers">防護層次</a>
       <a href="#compare">功能對照</a>
+      <a href="#classification">資料分級</a>
       <a href="#cases">場景對照</a>
       <a href="#pricing">定價</a>
       <a href="#faq">常見問題</a>
@@ -781,25 +821,19 @@ img{max-width:100%}
         </div>
       </div>
 
-      <div class="ladder" aria-label="資料分類階梯示意">
-        <div class="ladder-head"><span>Data Classification</span><span>Guard Premium</span></div>
-        <div class="rung"><i style="background:var(--c-public)"></i><div class="rung-body">
-          <strong>Public<code>LEVEL 1</code></strong>
-          <small>可對外公開，允許匿名檢視與公開分享連結。</small>
-        </div></div>
-        <div class="rung"><i style="background:var(--c-internal)"></i><div class="rung-body">
-          <strong>Internal<code>LEVEL 2</code></strong>
-          <small>限組織內部檢視，封鎖對外分享連結。</small>
-        </div></div>
-        <div class="rung"><i style="background:var(--c-conf)"></i><div class="rung-body">
-          <strong>Confidential<code>LEVEL 3</code></strong>
-          <small>偵測到信用卡號等敏感樣式時自動升級標籤，並禁止匯出。</small>
-        </div></div>
-        <div class="rung"><i style="background:var(--c-restricted)"></i><div class="rung-body">
-          <strong>Restricted<code>LEVEL 4</code></strong>
-          <small>禁止外部協作者存取，命中時觸發告警與建議修復動作。</small>
-        </div></div>
-      </div>
+      <figure class="hero-video">
+        <div class="hv-media">
+          <a class="hv-btn" href="https://www.youtube.com/watch?v=4NUYNM5H4RI" target="_blank" rel="noopener"
+             aria-label="播放 Atlassian 官方影片：Safeguard mission-critical work with Atlassian Guard，片長 1 分 19 秒">
+            <picture>
+              <source srcset="assets/video/guard-overview-poster.webp" type="image/webp">
+              <img src="assets/video/guard-overview-poster.jpg" width="1280" height="720" alt="" fetchpriority="high">
+            </picture>
+            <span class="hv-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5 20.5 12 6 20.5Z"/></svg></span>
+          </a>
+        </div>
+        <figcaption>Atlassian 官方影片《Safeguard mission-critical work with Atlassian Guard》，片長 1:19，英文發音、附英文字幕。</figcaption>
+      </figure>
     </div>
 
     <div class="facts">
@@ -1177,6 +1211,73 @@ img{max-width:100%}
       </div>
 
     </div>
+  </section>
+
+  <!-- CLASSIFICATION -->
+  <section id="classification">
+    <p class="eyebrow">資料分類四級</p>
+    <h2>四個等級分別對應什麼內容，又實際限制了什麼</h2>
+    <p>資料分類是 Guard Premium 與 Standard 之間最具體的分野，但四個等級的名稱本身並未說明其效力。以下逐級列出建議的適用內容、搭配政策後的實際限制，以及設定時容易被忽略的一點。等級數量與名稱由組織自行定義，此處採 Atlassian 預設的四級架構。</p>
+    <div class="cls">
+
+      <article class="cls-row" style="--k:var(--c-public)">
+        <i aria-hidden="true"></i>
+        <div class="cls-head">
+          <span class="cls-lv">Level 1</span>
+          <h3>Public</h3>
+          <p>已確認可對外揭露的內容，不含任何未公開資訊。</p>
+        </div>
+        <dl class="cls-detail">
+          <div><dt>典型內容</dt><dd>對外發布的產品說明、公開技術文件、行銷素材、徵才資訊、已發布的新聞稿。</dd></div>
+          <div><dt>套用政策後</dt><dd>允許匿名檢視與公開分享連結，匯出與第三方應用程式存取均不受限。此為唯一預期會以公開連結流通的等級。</dd></div>
+          <div><dt>容易忽略的一點</dt><dd><b>未分類的內容不等於 Public。</b>未帶標籤的頁面不會被視為公開，但同樣不受任何分級政策約束——這是導入初期覆蓋率必須先行盤點的原因。</dd></div>
+        </dl>
+      </article>
+
+      <article class="cls-row" style="--k:var(--c-internal)">
+        <i aria-hidden="true"></i>
+        <div class="cls-head">
+          <span class="cls-lv">Level 2</span>
+          <h3>Internal</h3>
+          <p>限組織成員檢視的日常工作內容，多數頁面與議題屬此級。</p>
+        </div>
+        <dl class="cls-detail">
+          <div><dt>典型內容</dt><dd>專案規劃、會議記錄、內部流程與教育訓練文件、一般開發議題與技術討論。</dd></div>
+          <div><dt>套用政策後</dt><dd>封鎖對外公開分享連結與匿名存取；組織內部成員的檢視、編輯與匯出行為不受限制。</dd></div>
+          <div><dt>容易忽略的一點</dt><dd>此級適合作為導入初期的基準等級：<b>先以 Internal 涵蓋大多數內容，再往上分出少量高敏感內容</b>，比一開始就建立細緻的分級規則更容易維持。</dd></div>
+        </dl>
+      </article>
+
+      <article class="cls-row" style="--k:var(--c-conf)">
+        <i aria-hidden="true"></i>
+        <div class="cls-head">
+          <span class="cls-lv">Level 3</span>
+          <h3>Confidential</h3>
+          <p>外流將造成商業或法遵損害，僅限特定團隊或角色接觸。</p>
+        </div>
+        <dl class="cls-detail">
+          <div><dt>典型內容</dt><dd>報價與定價策略、合約條款、客戶名單、財務數據、尚未公布的產品規劃、個人資料檔案。</dd></div>
+          <div><dt>套用政策後</dt><dd>於 Internal 的限制之外，另禁止匯出（PDF、Word、CSV 等格式）與第三方應用程式讀取內容。</dd></div>
+          <div><dt>容易忽略的一點</dt><dd>此級是自動分類的主要落點：內容掃描命中信用卡號、雲端服務金鑰等樣式時會自動升級至此。<b>台灣的身分證字號、健保卡號與統一編號不在內建的 60 餘項偵測清單內</b>，須自行建立自訂偵測規則，此工作量應納入導入時程。</dd></div>
+        </dl>
+      </article>
+
+      <article class="cls-row" style="--k:var(--c-restricted)">
+        <i aria-hidden="true"></i>
+        <div class="cls-head">
+          <span class="cls-lv">Level 4</span>
+          <h3>Restricted</h3>
+          <p>僅限最小必要範圍存取，任何一次未授權檢視都須留下記錄。</p>
+        </div>
+        <dl class="cls-detail">
+          <div><dt>典型內容</dt><dd>系統憑證與 API 金鑰、法務與併購文件、人事調查資料、資安事件記錄、受監理規範約束的客戶資料。</dd></div>
+          <div><dt>套用政策後</dt><dd>於 Confidential 的限制之外，另禁止外部協作者存取，並可將內容排除於 Rovo 等 AI 助理的檢索範圍。命中偵測規則時觸發告警，並於調查儀表板提供建議修復動作：停用帳號、遮蔽敏感內容、重新分類。</dd></div>
+          <div><dt>容易忽略的一點</dt><dd><b>分類標籤依附於內容本身，而非其所在的 Space 或專案。</b>標為 Restricted 的文件無論被移至何處，均受同一套政策約束——這正是分級相對於空間權限設定的主要價值。</dd></div>
+        </dl>
+      </article>
+
+    </div>
+    <p class="cls-note"><b>三點務必留意：</b>其一，標籤本身不具強制力，上述限制須另行建立「以分類等級為條件的組織級資料安全政策」方會生效；其二，此處列出的限制為常見的政策設定範例，並非產品預設值，實際行為完全由組織所建立的政策決定；其三，分級式資料政策為 Premium 專屬，Standard 的資料安全政策以空間或專案為套用範圍，屬一體適用。詳見<a href="#compare">功能對照表</a>與上方的「資料安全政策」說明。</p>
   </section>
 
   <!-- CASES -->
@@ -1827,5 +1928,24 @@ img{max-width:100%}
     功能與定價資訊整理自 Atlassian 官方網站與支援文件，最後更新於 <time datetime="2026-09-05">2026 年 9 月 5 日</time>。Atlassian、Jira、Confluence、Atlassian Guard 為 Atlassian Pty Ltd 之商標。定價與功能可能異動，實際條件以
     <a href="https://www.atlassian.com/software/guard/pricing" target="_blank" rel="noopener">Atlassian 官方頁面</a>及正式報價為準。
   </footer>
+
+<script>
+/* 首屏影片採點擊後載入：初次進站只下載本地縮圖，按下播放才向 YouTube 發出請求。
+   未啟用指令碼時，連結維持原本行為，於新分頁開啟 YouTube。 */
+(function(){
+  var btn = document.querySelector('.hv-btn');
+  if(!btn) return;
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    var f = document.createElement('iframe');
+    f.className = 'hv-frame';
+    f.src = 'https://www.youtube-nocookie.com/embed/4NUYNM5H4RI?autoplay=1&rel=0&cc_load_policy=1';
+    f.title = 'Safeguard mission-critical work with Atlassian Guard';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+    f.allowFullscreen = true;
+    btn.replaceWith(f);
+  });
+})();
+</script>
 </body>
 </html>
