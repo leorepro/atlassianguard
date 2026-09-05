@@ -15,3 +15,6 @@ node_modules/
 
 # 影片原始檔（高位元率母帶）留在本機；網站使用 assets/video/ 的壓縮版
 /assets/blog-guard-*.mp4
+
+# Claude Code 子任務的 git worktree 與本機設定
+.claude/
