@@ -955,7 +955,12 @@ td.feat details.more[open] > p{animation:reveal .18s ease-out}
 .card-contact dl{margin:0; display:grid; grid-template-columns:auto 1fr; gap:6px 16px; font-size:var(--fs-sm)}
 .card-contact dt{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); padding-top:3px}
 .card-contact dd{margin:0; color:var(--ink-2)}
-footer{padding-top:44px; padding-bottom:40px; font-size:var(--fs-xs); color:var(--ink-3); border-top:1px solid var(--line)}
+/* footer 同時掛著 .wrap，而 .wrap 的 padding:0 28px 是簡寫、特異性也較高，
+   會把這裡的上下留白歸零——頂線因而幾乎貼著頁尾內容，底部同樣沒有留白。
+   選擇器提高到 footer.wrap 才蓋得過去。全頁只有 <main> 與 <footer> 用 .wrap，
+   而 main 未宣告上下 padding，不受影響。 */
+footer.wrap{padding-top:44px; padding-bottom:40px}
+footer{font-size:var(--fs-xs); color:var(--ink-3); border-top:1px solid var(--line)}
 footer a{color:var(--ink-3); text-decoration:none; transition:color .15s ease}
 footer a:hover{color:var(--accent)}
 .ft-grid{display:grid; grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr)); gap:32px 40px}
