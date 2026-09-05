@@ -270,8 +270,29 @@ a{color:inherit}
 section{padding:76px 0; border-top:1px solid var(--line)}
 section:first-of-type{border-top:0}
 
+/* ---------- 區塊節奏：交替底色的滿版色帶 ---------- */
+/* 區塊位於置中欄 .wrap 之內，要讓底色鋪滿視窗寬度而內容仍對齊欄位：
+   負的 margin 把盒子外推到視窗左右緣（50% 為欄寬的一半、50vw 為視窗的一半，
+   兩者相減即欄緣到視窗緣的距離），再以等量的 padding 把內容推回原位。
+   此法不依賴 .wrap 的實際內距值，窄螢幕 .wrap 改為 18px 時仍自動成立。 */
+.band{
+  background:var(--surface-2);
+  margin-inline:calc(50% - 50vw);
+  padding-inline:calc(50vw - 50%);
+  border-top:0;
+}
+/* 色帶的色差本身已是分隔線，緊接其後的白底區塊不再疊一條邊線 */
+.band + section{border-top:0}
+/* 內文型區塊（僅一段導言加時間軸）不需要與主要區塊相同的呼吸空間 */
+section.compact{padding:56px 0}
+@media (max-width:900px){section.compact{padding:44px 0}}
+
 /* ---------- sticky 導航列 ---------- */
 html{scroll-behavior:smooth}
+/* 色帶以 50vw 計寬，而 vw 含捲軸寬度：在顯示傳統捲軸的系統上會比可視區寬出
+   半個捲軸並產生橫向捲動。以 clip 裁掉溢出而不把根元素變成捲動容器，
+   sticky 導航列與錨點捲動皆不受影響；不支援 clip 的舊瀏覽器回落至 hidden。 */
+html{overflow-x:hidden; overflow-x:clip}
 .nav{
   position:sticky; top:0; z-index:20; background:rgba(255,255,255,.92);
   backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid var(--line);
@@ -399,7 +420,8 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 .cls-detail dd{margin:0; font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7}
 .cls-detail b{font-weight:600; color:var(--ink)}
 .cls-note{
-  max-width:none; margin-top:24px; padding:20px 24px; background:var(--surface-2);
+  /* 所在區塊為 --surface-2 色帶，註記改用白底才能自灰底浮出 */
+  max-width:none; margin-top:24px; padding:20px 24px; background:var(--surface);
   border-left:3px solid var(--line-2); border-radius:0 var(--r-card) var(--r-card) 0;
   font-size:var(--fs-sm); color:var(--ink-2); line-height:1.75;
 }
@@ -498,8 +520,8 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 #pdr-3:focus-visible ~ .pdr-nav label[for="pdr-3"]{outline:2px solid var(--ink); outline-offset:3px}
 
 /* ---------- 產品沿革時間軸 ---------- */
-.tl{list-style:none; margin:32px 0 0; padding:0; display:grid; grid-template-columns:repeat(4,1fr)}
-.tl li{position:relative; padding:24px 22px 0 0; border-top:1px solid var(--line-2)}
+.tl{list-style:none; margin:26px 0 0; padding:0; display:grid; grid-template-columns:repeat(4,1fr)}
+.tl li{position:relative; padding:20px 22px 0 0; border-top:1px solid var(--line-2)}
 .tl li::before{
   content:""; position:absolute; top:-5px; left:0; width:9px; height:9px;
   border-radius:50%; background:var(--paper); border:2px solid var(--line-2);
@@ -945,7 +967,7 @@ img{max-width:100%}
   </section>
 
   <!-- WHY -->
-  <section id="why">
+  <section id="why" class="band">
     <p class="eyebrow">導入背景</p>
     <h2>雲端協作平台，往往是資料治理最容易被略過的一段</h2>
     <p>多數組織已在端點防護、雲端存取安全代理與資安事件管理平台上投入相當資源，但 Jira 議題附件與 Confluence 頁面中的合約條款、客戶名單與系統憑證，通常未被納入同一套治理框架。常見的風險缺口集中於三類日常性疏漏，而非外部入侵：離職人員的存取權未即時解除、內部頁面被設定為公開連結、以及 AI 助理檢索到原本不應納入索引的內容。</p>
@@ -953,11 +975,10 @@ img{max-width:100%}
   </section>
 
   <!-- HISTORY -->
-  <section id="history">
+  <section id="history" class="compact">
     <p class="eyebrow">產品沿革</p>
     <h2>從 Atlassian Access 到 Atlassian Guard</h2>
-    <p>評估過程中常見的疑問是 Atlassian Access 與 Guard 的關係。Access 為 Atlassian 於 2018 年推出的身分與存取管理訂閱；2023 年另以 Beacon 進入 Beta，提供威脅偵測與回應能力。2024 年，Atlassian 將 Access 與 Beacon 的能力合併，並加入全新的資料外洩防護功能，整合為單一產品 Atlassian Guard，分為 Standard 與 Premium 兩個方案。</p>
-    <p><b>原 Atlassian Access 的訂閱者即為現行的 Guard Standard</b>，能力延續且持續擴充，僅產品名稱變更；Beacon 的偵測與調查能力則併入 Guard Premium。文件與社群中若仍見 Atlassian Access 一詞，所指即為 Guard Standard。</p>
+    <p>Atlassian 於 2024 年將 Access（2018 年推出的身分與存取管理）與 Beacon（2023 年進入 Beta 的威脅偵測）合併，並新增資料外洩防護，整合為 Guard。<b>原 Atlassian Access 的訂閱者即為現行的 Guard Standard</b>；Beacon 的能力則併入 Guard Premium。</p>
     <ol class="tl">
       <li><span class="tl-y">2011</span><b>Jira 與 Confluence Cloud</b><small>Atlassian 雲端產品線的起點</small></li>
       <li><span class="tl-y">2018</span><b>Atlassian Access 推出</b><small>首個專為 Atlassian Cloud 設計的身分與存取管理工具</small></li>
@@ -1166,7 +1187,7 @@ img{max-width:100%}
   </section>
 
   <!-- INTEGRATIONS -->
-  <section id="integrations">
+  <section id="integrations" class="band">
     <p class="eyebrow">生態系整合</p>
     <h2>將 Guard 整合至既有的資安架構</h2>
     <p>告警與稽核記錄可送往組織既有的資安工具，無須為 Guard 另建一套作業流程。整合分為三類：</p>
@@ -1322,7 +1343,7 @@ img{max-width:100%}
   </section>
 
   <!-- COMPARE -->
-  <section id="compare">
+  <section id="compare" class="band">
     <p class="eyebrow">完整功能對照</p>
     <h2>Guard Standard 與 Guard Premium 的差異</h2>
     <p style="margin-bottom:26px">Premium 為疊加於 Standard 之上的方案，並非替代選項。Guard Standard 已內含於 Cloud Enterprise，以及 Teamwork Collection 的 Premium 與 Enterprise 方案；上述訂閱的持有者在升級 Premium 時，僅需補足每位使用者的價差。</p>
@@ -1443,7 +1464,7 @@ img{max-width:100%}
   </section>
 
   <!-- CLASSIFICATION -->
-  <section id="classification">
+  <section id="classification" class="band">
     <p class="eyebrow">資料分類四級</p>
     <h2>四個等級分別對應什麼內容，又實際限制了什麼</h2>
     <p>資料分類是 Premium 與 Standard 之間最具體的分野，但四個等級的名稱本身並未說明其效力。等級數量與名稱由組織自行定義，此處採 Atlassian 預設的四級架構。</p>
@@ -2001,7 +2022,7 @@ img{max-width:100%}
   </section>
 
   <!-- PATHS -->
-  <section id="paths">
+  <section id="paths" class="band">
     <p class="eyebrow">典型採用路徑</p>
     <h2>三種起點，同一項基礎</h2>
     <p style="margin-bottom:30px">組織的資安成熟度不同，導入 Guard 的時機亦有差異。Guard Standard 為各條路徑共同的起點，差異在於後續的發展方向。</p>
@@ -2090,7 +2111,7 @@ img{max-width:100%}
   </section>
 
   <!-- FAQ -->
-  <section id="faq">
+  <section id="faq" class="band">
     <p class="eyebrow">常見問題</p>
     <h2>導入前最常被提出的問題</h2>
     <div class="faq" style="margin-top:24px">
