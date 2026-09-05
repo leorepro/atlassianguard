@@ -212,9 +212,11 @@
   --line:#E4E8EE; --line-2:#C6CDD7;
   --accent:#1769DC; --accent-soft:#E3EDFC; --on-accent:#FFFFFF;
   --yes:#1769DC; --yes-ring:#D5E4FB; --no:#C6CDD7;
-  /* 分類階梯保留暖色對比；Public 去飽和為中性灰，避免與 Internal 的藍相混 */
+  /* 分類階梯保留暖色對比；Public 去飽和為中性灰，避免與 Internal 的藍相混。
+     四級的相對亮度單調遞減（.176 / .124 / .086 / .055），使機密程度直接讀作
+     顏色的深淺；四色於白底皆達 4.5:1 以上，可安全用作 h3 的文字色。 */
   --c-protect:#1769DC; --c-detect:#BF63F4; --c-respond:#FFA902;
-  --c-public:#71808F; --c-internal:#2E6FA8; --c-conf:#A85C22; --c-restricted:#8E2B2B;
+  --c-public:#687684; --c-internal:#2A669B; --c-conf:#7D4419; --c-restricted:#792525;
   /* 場景六組各一色，以及配對的極淡底色。色相分散但飽和度一致，
      使六組在導覽列上可一眼區分，底色則淡到不與卡片白底相爭。 */
   --g-common:#5E6B7A;   --g-common-s:#F3F5F7;
@@ -1396,7 +1398,7 @@ img{max-width:100%}
     <div class="caps">
 
       <div class="cap">
-        <div class="cap-top"><span class="tag">Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#71808F"/><rect x="17" y="6.4" width="25" height="5.2" rx="2.6" fill="#71808F" opacity=".3"/><circle cx="9" cy="20" r="3.4" fill="#2E6FA8"/><rect x="17" y="17.4" width="25" height="5.2" rx="2.6" fill="#2E6FA8" opacity=".3"/><circle cx="9" cy="31" r="3.4" fill="#A85C22"/><rect x="17" y="28.4" width="19" height="5.2" rx="2.6" fill="#A85C22" opacity=".3"/><circle cx="9" cy="42" r="3.4" fill="#8E2B2B"/><rect x="17" y="39.4" width="13" height="5.2" rx="2.6" fill="#8E2B2B" opacity=".3"/></svg></div>
+        <div class="cap-top"><span class="tag">Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="var(--c-public)"/><rect x="17" y="6.4" width="25" height="5.2" rx="2.6" fill="var(--c-public)" opacity=".3"/><circle cx="9" cy="20" r="3.4" fill="var(--c-internal)"/><rect x="17" y="17.4" width="25" height="5.2" rx="2.6" fill="var(--c-internal)" opacity=".3"/><circle cx="9" cy="31" r="3.4" fill="var(--c-conf)"/><rect x="17" y="28.4" width="19" height="5.2" rx="2.6" fill="var(--c-conf)" opacity=".3"/><circle cx="9" cy="42" r="3.4" fill="var(--c-restricted)"/><rect x="17" y="39.4" width="13" height="5.2" rx="2.6" fill="var(--c-restricted)" opacity=".3"/></svg></div>
           <h3>資料分級與自動分類</h3>
         <p>Guard Premium 於組織層級提供 Public、Internal、Confidential、Restricted 四級標籤，套用對象為 Confluence 頁面與 Jira 議題。<b>標籤本身不具強制力</b>：將頁面標為 Restricted 不會自動封鎖任何操作，必須另行建立「以分類等級為條件的組織級政策」，該等級才會實際限制分享與匯出行為。</p>
         <p>自動分類則於內容寫入時比對敏感樣式，命中信用卡號等格式即自動套用對應等級，用以降低仰賴人工標記所產生的落差。導入順序通常為先以手動分級建立少量高價值內容的基準，再逐步開啟自動分類。初期誤判比例過高時，標籤的可信度會連帶受影響。</p>
@@ -2193,7 +2195,6 @@ img{max-width:100%}
         <li><a href="https://www.atlassian.com/software/guard" target="_blank" rel="noopener">Guard 產品頁</a></li>
         <li><a href="https://www.atlassian.com/software/guard/capabilities" target="_blank" rel="noopener">功能說明</a></li>
         <li><a href="https://www.atlassian.com/software/guard/pricing" target="_blank" rel="noopener">官方定價</a></li>
-        <li><a href="https://support.atlassian.com/security-and-access-policies/" target="_blank" rel="noopener">支援文件</a></li>
       </ul>
     </nav>
   </div>
