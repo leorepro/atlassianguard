@@ -426,13 +426,15 @@ p{margin:0 0 16px; max-width:60ch; color:var(--ink-2)}
   display:grid; gap:1px; background:var(--line);
   border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin-top:28px;
 }
+/* 每列以該級色票（--k，由行內 style 指定）調出淡底：左欄 7%、右欄 4%，
+   讓四級的深淺在整列上就讀得出來，而非只靠左緣 5px 色條。手法沿用 .dg-group 的 color-mix。 */
 .cls-row{display:grid; grid-template-columns:5px .78fr 1.22fr; background:var(--surface)}
 .cls-row i{display:block; background:var(--k)}
-.cls-head{padding:26px 28px 28px; border-right:1px solid var(--line)}
+.cls-head{padding:26px 28px 28px; border-right:1px solid var(--line); background:color-mix(in srgb, var(--k) 7%, var(--surface))}
 .cls-lv{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
 .cls-head h3{margin:8px 0 9px; font-size:var(--fs-md); color:var(--k)}
 .cls-head p{margin:0; font-size:var(--fs-base); line-height:1.75}
-.cls-detail{margin:0; padding:26px 28px 28px; display:grid; gap:14px}
+.cls-detail{margin:0; padding:26px 28px 28px; display:grid; gap:14px; background:color-mix(in srgb, var(--k) 4%, var(--surface))}
 .cls-detail dt{
   font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; text-transform:uppercase;
   color:var(--ink-3); margin-bottom:4px;
@@ -655,6 +657,15 @@ p{margin:0 0 16px; max-width:60ch; color:var(--ink-2)}
 .dg-ico{display:block; width:24px; height:24px; margin-bottom:3px}
 /* IdP 位於 Atlassian 之外：以琥珀淡底與組織內的白底節點區隔 */
 .dg-node.dg-ext{background:var(--amber-soft)}
+/* 兩張圖並排時，同一個實體（Identity provider）必須同寬同高才對得起來。
+   .dg 的直接子節點——圖一的「使用者／Identity provider」與圖二的「Identity provider」——
+   一律取容器寬的 19%，標題與副標各自撐滿兩行，三個外框因而完全一致；
+   群組框吃剩餘寬度。最小高度的手法沿用 .integ-col p。 */
+@media (min-width:701px){
+  .dg > .dg-node{flex:0 0 19%}
+  .dg > .dg-node b{min-height:calc(2 * 1.4em); display:flex; align-items:center; justify-content:center}
+  .dg > .dg-node small{min-height:calc(2 * 1.5em)}
+}
 /* 箭頭：單色 --ink-3，不參與伸縮；.dg-down 為群組內的向下連接 */
 .dg-arrow{flex:none; width:20px; height:20px; color:var(--ink-3)}
 .dg-arrow.dg-down{transform:rotate(90deg); align-self:center}
@@ -1554,14 +1565,14 @@ img{max-width:100%}
   <section id="identity">
     <p class="eyebrow">身分與存取</p>
     <h2>Guard 與身分識別提供者如何協作</h2>
-    <p>Guard 不自行保存密碼，也不另建帳號目錄：登入交給公司的 Identity provider 驗證，帳號與群組則由 IdP 單向同步進 Atlassian 組織。下方兩張圖分別說明「登入的那一刻」與「帳號從到職到離職的生命週期」。</p>
+    <p>Guard 不自行保存密碼，也不另建帳號目錄：登入交給公司的 Identity provider 驗證，帳號與群組則由 IdP 單向同步進 Atlassian 組織。圖一與圖二分別說明「登入的那一刻」與「帳號從到職到離職的生命週期」。</p>
 
   <div class="idp-flow">
     <div class="idp-fig">
       <h4>登入時：以公司 IdP 進行 SSO</h4>
       <p class="dg-desc">使用者以公司的 Identity provider（Okta、Microsoft Entra ID、Google Workspace）登入，密碼原則與多因素驗證要求由 IdP 統一控管，Atlassian 端不另存密碼。首次登入時自動建立 Atlassian 帳戶，之後每次登入皆套用 IdP 當下的驗證設定。</p>
       <div class="dg" role="img" aria-label="示意圖：使用者經公司 Identity provider 登入後進入 Atlassian 組織；Guard 位於組織層級提供 SSO、帳號佈建與全組織洞察，涵蓋 Jira 與 Confluence 站台。">
-        <div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="15" r="9" fill="#1769DC"/><path d="M7 42a17 17 0 0 1 34 0Z" fill="#123B5E"/></svg><b>使用者</b><small>以公司帳號登入</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-node dg-ext"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M22 5 7 11v13c0 10 6.5 18 15 21 8.5-3 15-11 15-21V11Z" fill="#1769DC"/><path d="M15 24l5 5 10-11" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="39" cy="10" r="6.5" fill="#FFA902"/></svg><b>Identity provider</b><small>Okta · Entra ID · Google Workspace</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-group"><i>Atlassian 組織</i><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M16 22v-7a8 8 0 0 1 16 0v7" fill="none" stroke="#1769DC" stroke-width="4"/><rect x="9" y="21" width="30" height="22" rx="4" fill="#123B5E"/><circle cx="24" cy="32" r="3.5" fill="#FFA902"/></svg><b>Atlassian Guard</b><small>SSO · 帳號佈建 · 全組織洞察</small></div><svg class="dg-arrow dg-down" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-row dg-pair"><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v5H4Z" fill="#123B5E"/><rect x="10" y="23" width="20" height="4" rx="2" fill="#FFFFFF"/><rect x="10" y="31" width="13" height="4" rx="2" fill="#FFFFFF"/></svg><b>Jira</b></div><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v5H4Z" fill="#123B5E"/><rect x="10" y="23" width="20" height="4" rx="2" fill="#FFFFFF"/><rect x="10" y="31" width="13" height="4" rx="2" fill="#FFFFFF"/></svg><b>Confluence</b></div></div></div>
+        <div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="15" r="9" fill="#1769DC"/><path d="M7 42a17 17 0 0 1 34 0Z" fill="#123B5E"/></svg><b>使用者</b><small>以公司帳號登入</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-node dg-ext"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M22 5 7 11v13c0 10 6.5 18 15 21 8.5-3 15-11 15-21V11Z" fill="#1769DC"/><path d="M15 24l5 5 10-11" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="39" cy="10" r="6.5" fill="#FFA902"/></svg><b>Identity provider</b><small>統一控管密碼與驗證</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-group"><i>Atlassian 組織</i><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M16 22v-7a8 8 0 0 1 16 0v7" fill="none" stroke="#1769DC" stroke-width="4"/><rect x="9" y="21" width="30" height="22" rx="4" fill="#123B5E"/><circle cx="24" cy="32" r="3.5" fill="#FFA902"/></svg><b>Atlassian Guard</b><small>SSO · 帳號佈建 · 全組織洞察</small></div><svg class="dg-arrow dg-down" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-row dg-pair"><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v5H4Z" fill="#123B5E"/><rect x="10" y="23" width="20" height="4" rx="2" fill="#FFFFFF"/><rect x="10" y="31" width="13" height="4" rx="2" fill="#FFFFFF"/></svg><b>Jira</b></div><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v5H4Z" fill="#123B5E"/><rect x="10" y="23" width="20" height="4" rx="2" fill="#FFFFFF"/><rect x="10" y="31" width="13" height="4" rx="2" fill="#FFFFFF"/></svg><b>Confluence</b></div></div></div>
       </div>
       <p class="dg-cap">圖一：SSO 登入流程。Guard 作用於組織層級，Jira 與 Confluence 等所有站台一併納入，不需逐站台設定。</p>
     </div>
@@ -1569,7 +1580,7 @@ img{max-width:100%}
       <h4>帳號生命週期：以 SCIM 同步群組</h4>
       <p class="dg-desc">IdP 群組的成員異動會自動同步至 Atlassian 組織的 Directory，再套用至各 Cloud site，與站台既有群組並存。於 IdP 停用的使用者會同時在所有站台失去存取權，不需逐站台處理，帳單人數也隨之下降。<a href="https://medium.com/p/e2288a0abec6" target="_blank" rel="noopener">延伸閱讀：用 Atlassian Guard（Standard）管好帳號：從 IdP 串接到 JSM Customer 授權問題</a></p>
       <div class="dg" role="img" aria-label="示意圖：Identity provider 的群組經 SCIM 同步至 Atlassian 組織的 Directory，成為 Synced groups，再套用至每個 Cloud site，與站台既有群組並存。">
-        <div class="dg-node dg-ext"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="16" cy="15" r="7" fill="#1769DC"/><circle cx="33" cy="15" r="7" fill="#50B0E8"/><path d="M3 40a13 13 0 0 1 26 0Z" fill="#123B5E"/><path d="M23 40a12 12 0 0 1 22 0Z" fill="#50B0E8"/></svg><b>Identity provider</b><small>Groups：以群組指派存取權</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-group"><i>Your organization</i><div class="dg-row"><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 21a15 15 0 0 1 27-7" fill="none" stroke="#1769DC" stroke-width="4" stroke-linecap="round"/><path d="M38 6v9h-9" fill="none" stroke="#1769DC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 27a15 15 0 0 1-27 7" fill="none" stroke="#123B5E" stroke-width="4" stroke-linecap="round"/><path d="M10 42v-9h9" fill="none" stroke="#123B5E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="3.5" fill="#FFA902"/></svg><b>Directory</b><small>Synced groups</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-col"><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 40h23a8.5 8.5 0 0 0 1.4-16.9A11.5 11.5 0 0 0 15.3 20.6 9.8 9.8 0 0 0 13 40Z" fill="#1769DC"/><rect x="17" y="29" width="16" height="4" rx="2" fill="#FFFFFF"/></svg><b>Cloud site 1</b><small>既有站台群組 ＋ Synced groups</small></div><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 40h23a8.5 8.5 0 0 0 1.4-16.9A11.5 11.5 0 0 0 15.3 20.6 9.8 9.8 0 0 0 13 40Z" fill="#1769DC"/><rect x="17" y="29" width="16" height="4" rx="2" fill="#FFFFFF"/></svg><b>Cloud site 2</b><small>既有站台群組 ＋ Synced groups</small></div></div></div></div>
+        <div class="dg-node dg-ext"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M22 5 7 11v13c0 10 6.5 18 15 21 8.5-3 15-11 15-21V11Z" fill="#1769DC"/><path d="M15 24l5 5 10-11" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="39" cy="10" r="6.5" fill="#FFA902"/></svg><b>Identity provider</b><small>以群組指派存取權</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-group"><i>Atlassian 組織</i><div class="dg-row"><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M10 21a15 15 0 0 1 27-7" fill="none" stroke="#1769DC" stroke-width="4" stroke-linecap="round"/><path d="M38 6v9h-9" fill="none" stroke="#1769DC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 27a15 15 0 0 1-27 7" fill="none" stroke="#123B5E" stroke-width="4" stroke-linecap="round"/><path d="M10 42v-9h9" fill="none" stroke="#123B5E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="3.5" fill="#FFA902"/></svg><b>Directory</b><small>Synced groups</small></div><svg class="dg-arrow" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10h14M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="dg-col"><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 40h23a8.5 8.5 0 0 0 1.4-16.9A11.5 11.5 0 0 0 15.3 20.6 9.8 9.8 0 0 0 13 40Z" fill="#1769DC"/><rect x="17" y="29" width="16" height="4" rx="2" fill="#FFFFFF"/></svg><b>Cloud site 1</b><small>既有站台群組 ＋ Synced groups</small></div><div class="dg-node"><svg class="dg-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 40h23a8.5 8.5 0 0 0 1.4-16.9A11.5 11.5 0 0 0 15.3 20.6 9.8 9.8 0 0 0 13 40Z" fill="#1769DC"/><rect x="17" y="29" width="16" height="4" rx="2" fill="#FFFFFF"/></svg><b>Cloud site 2</b><small>既有站台群組 ＋ Synced groups</small></div></div></div></div>
       </div>
       <p class="dg-cap">圖二：SCIM 佈建流程。Synced groups 的成員僅能於 IdP 端修改，Atlassian 端為唯讀，確保單一事實來源。</p>
     </div>
@@ -1580,7 +1591,7 @@ img{max-width:100%}
   <section id="managed" class="band">
     <p class="eyebrow">受管帳號</p>
     <h2>Guard 如何把帳號收進組織的控制範圍</h2>
-    <p>Atlassian 帳號隸屬於人，而非任何單一產品。Guard 先由組織驗證其擁有的電子郵件網域（Claimed domain），再把使用該網域的帳號納為受管帳號（Managed accounts）；驗證政策、密碼原則與 API token 管控隨之套用在帳號本身，而非逐站台設定。下圖以 Acme Global 為例：兩個已驗證網域的帳號進入納管，供應商網域的帳號留在範圍之外。</p>
+    <p>Atlassian 帳號隸屬於人，而非任何單一產品。Guard 先由組織驗證其擁有的電子郵件網域（Claimed domain），再把使用該網域的帳號納為受管帳號（Managed accounts）；驗證政策、密碼原則與 API token 管控隨之套用在帳號本身，而非逐站台設定。圖三以 Acme Global 為例：兩個已驗證網域的帳號進入納管，供應商網域的帳號留在範圍之外。</p>
     <figure class="ma-flow">
       <div class="ma-canvas" role="img" aria-label="受管帳號示意圖：Acme Global 組織內，@acme.com 與 @acme.co.uk 兩個 Claimed domain 下的帳號為 Managed accounts，分別連至 Cloud site acme.atlassian.net（Jira、Jira Service Management、Confluence）與 acme-eu.atlassian.net（Jira、Confluence）；組織框外另有 @vendor.com 網域的帳號，標示為未納管。">
         <div class="ma-org">
@@ -1603,7 +1614,7 @@ img{max-width:100%}
         <li><b>登入方式受控：</b>可阻止受管帳號改用第三方帳號登入，一律由公司 IdP 驗證。</li>
         <li><b>外部協作者另行處理：</b>其他網域（如 @vendor.com）的帳號不在納管範圍，須以外部使用者政策施加控制。</li>
       </ul>
-      <figcaption>圖：Guard 以 Claimed domain 為界，將 @acme.com 與 @acme.co.uk 的帳號收入 Acme Global 的 Managed accounts；帳號屬於人而非產品，因此控制施加於帳號，即涵蓋其可存取的所有 Cloud site。</figcaption>
+      <figcaption>圖三：Guard 以 Claimed domain 為界，將 @acme.com 與 @acme.co.uk 的帳號收入 Acme Global 的 Managed accounts；帳號屬於人而非產品，因此控制施加於帳號，即涵蓋其可存取的所有 Cloud site。</figcaption>
     </figure>
   </section>
 
@@ -1880,7 +1891,7 @@ img{max-width:100%}
     <h2>讓標籤產生實際限制：一組政策 ＝ 範圍 × 規則</h2>
     <p>分類標籤只是內容上的註記，實際限制由組織層級的資料安全政策執行。一組政策只有兩個要件：<b class="nb">管到哪些資料</b>（覆蓋範圍）與<b class="nb">不允許做什麼</b>（規則）；名稱、描述、建立者與啟用狀態則是一般的管理欄位。政策建立於組織層級，同一組規則可跨 Jira 與 Confluence 一致執行，單一組織最多可建立 50 組。</p>
 
-    <p>以下以一組名為 <b>Finance data</b> 的政策為例。財務團隊的預算表與稽核底稿分散在 Jira 議題與 Confluence 頁面，管理者不想逐一空間設定，於是把範圍定為<b>兩個產品的全部內容</b>，規則只挑兩項：禁止匯出、禁止建立公開連結。</p>
+    <p>以下以一組名為 <b>Finance data</b> 的政策為例。財務團隊的預算表與稽核底稿分散在 Jira 議題與 Confluence 頁面，管理者不想逐一空間設定，於是把範圍定為<b>兩個產品的全部內容</b>，規則只挑兩項：禁止匯出、禁止建立公開連結（圖四）。</p>
     <figure class="pol-card" role="img" aria-label="一組資料安全政策的示意：名稱 Finance data、狀態 Active；覆蓋範圍為 Jira 與 Confluence 整個產品；規則為禁止匯出資料，以及禁止建立公開連結（僅 Confluence）。">
       <div class="pol-card-hd">
         <div class="pol-card-name">Finance data<small>財務與稽核內容的保護政策 · 建立者 IT Security</small></div>
@@ -1905,7 +1916,7 @@ img{max-width:100%}
         </div>
       </div>
     </figure>
-    <p class="pol-cap">圖：Finance data 生效後，Jira 與 Confluence 內的任何頁面或議題都無法匯出為 PDF、Word 或 CSV，也無法產生公開分享連結；未勾選的「匿名存取」與「應用程式存取」則不受此政策影響。範圍決定「管到哪些資料」，規則決定「不允許做什麼」——下方分別說明範圍的三種選法，以及多組政策同時涵蓋同一內容時的效果。</p>
+    <p class="pol-cap">圖四：Finance data 生效後，Jira 與 Confluence 內的任何頁面或議題都無法匯出為 PDF、Word 或 CSV，也無法產生公開分享連結；未勾選的「匿名存取」與「應用程式存取」則不受此政策影響。範圍決定「管到哪些資料」，規則決定「不允許做什麼」——下方分別說明範圍的三種選法，以及多組政策同時涵蓋同一內容時的效果。</p>
 
     <h3 class="pol-h3">覆蓋範圍怎麼選：三種方式</h3>
     <p>三種方式的差別在於<b>用什麼當邊界</b>：整個產品、特定的空間與專案，或內容本身的分類標籤。前兩種 Standard 即可使用；依分類等級劃定範圍是 Premium 專屬，也是「資料分級」一節之所以重要的原因。</p>
