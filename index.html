@@ -296,7 +296,7 @@ img{max-width:100%}
     <div class="hero-grid">
       <div>
         <h1>讓「誰能存取什麼」<br>成為<em>可稽核、可執行</em>的規則</h1>
-        <p class="lede">Atlassian Guard 是套用於整個 Atlassian Cloud 組織的資安附加訂閱，將身分驗證、資料分級、敏感內容偵測與事件回應整合於單一管理平面。其目的並非新增一套獨立的資安工具，而是讓 Jira 與 Confluence 中實際流動的資料，具備可被治理與稽核的基礎。</p>
+        <p class="lede">Atlassian Guard 是套用於整個 Atlassian Cloud 組織的資安附加訂閱，將身分驗證、資料分級、敏感內容偵測與事件回應整合於單一管理平面。其作用對象為既有的 Jira 與 Confluence 環境，使其中流動的資料具備可治理與可稽核的基礎，而非另行建置獨立的資安系統。</p>
         <div class="cta-row">
           <a class="btn" href="#compare">查看功能對照表</a>
           <a class="btn ghost" href="https://www.atlassian.com/software/guard/pricing" target="_blank" rel="noopener">查看官方定價</a>
@@ -336,7 +336,7 @@ img{max-width:100%}
   <section>
     <p class="eyebrow">導入背景</p>
     <h2>雲端協作平台，往往是資料治理最容易被略過的一段</h2>
-    <p>多數組織已在端點防護、雲端存取安全代理與資安事件管理平台上投入相當資源，但 Jira 議題附件與 Confluence 頁面中的合約條款、客戶名單與系統憑證，通常未被納入同一套治理框架。實務上的風險缺口多半並非外部入侵，而是三類日常性疏漏：離職人員的存取權未即時解除、內部頁面被設定為公開連結、以及 AI 助理檢索到原本不應納入索引的內容。</p>
+    <p>多數組織已在端點防護、雲端存取安全代理與資安事件管理平台上投入相當資源，但 Jira 議題附件與 Confluence 頁面中的合約條款、客戶名單與系統憑證，通常未被納入同一套治理框架。常見的風險缺口集中於三類日常性疏漏，而非外部入侵：離職人員的存取權未即時解除、內部頁面被設定為公開連結、以及 AI 助理檢索到原本不應納入索引的內容。</p>
     <p>Atlassian Guard 針對的正是這一段落差。Standard 建立身分與存取的邊界，Premium 則延伸至資料本身：內容於寫入當下即完成掃描與分級，異常行為在數分鐘內轉為告警，並提供可直接執行的修復建議。</p>
   </section>
 
@@ -344,7 +344,7 @@ img{max-width:100%}
   <section>
     <p class="eyebrow">三大價值支柱</p>
     <h2>Protect · Detect · Respond</h2>
-    <p style="margin-bottom:30px">Guard 依循「保護、偵測、回應」的完整循環設計。Standard 涵蓋前段的存取控制與可視性，Premium 補齊資料層的偵測能力與事件回應機制。</p>
+    <p style="margin-bottom:30px">Guard 依「保護、偵測、回應」三個階段設計。Standard 涵蓋前段的存取控制與可視性，Premium 補齊資料層的偵測能力與事件回應機制。</p>
     <div class="pillars">
       <div class="pillar">
         <span class="tag">Protect</span>
@@ -386,7 +386,7 @@ img{max-width:100%}
   <section>
     <p class="eyebrow">產品方案與 Guard 的分工</p>
     <h2>已經有 Jira，為什麼還需要 Guard？</h2>
-    <p>這是評估階段最常出現的疑問，其根源在於兩者的<b>邊界不同</b>。Jira 與 Confluence 方案中的安全控制，作用範圍是單一站台與單一產品，保護的是<b>應用程式本身</b>；Atlassian Guard 的作用範圍是整個組織的所有帳號與所有 Atlassian 產品，管理的是<b>身分與資料</b>。兩者並非替代關係，而是分工——升級 Jira Premium 不會取得 Guard 的任何能力，反之亦然。</p>
+    <p>兩者的<b>作用範圍不同</b>。Jira 與 Confluence 方案中的安全控制，範圍為單一站台與單一產品，處理的是<b>應用程式的存取條件</b>；Atlassian Guard 的範圍為整個組織的所有帳號與所有 Atlassian 產品，處理的是<b>身分與資料本身</b>。兩者為並行的訂閱，升級 Jira Premium 不會取得 Guard 的任何能力，反之亦然。</p>
 
     <div class="tbl-scroll" style="margin-top:26px">
       <table>
@@ -421,9 +421,9 @@ img{max-width:100%}
       </table>
     </div>
 
-    <p class="note"><b>為何產品方案無法取代 Guard：</b>Jira Premium 的 IP 許可清單於<b>站台層級</b>生效，依 Atlassian 官方文件，其範圍明確不涵蓋 admin.atlassian.com、使用者管理與帳號佈建的 REST API——亦即帳號與存取權的管理面，完全不在其保護範圍內。更根本的原因在於，Atlassian 帳號並不隸屬於任何單一產品：即使於 Jira 中移除某位離職人員的產品存取權，該帳號依然存在、依然可以登入，並可能仍持有其他站台的存取權。未經 Guard 完成網域驗證與帳號納管，組織既無法強制其改用公司的身分識別提供者登入，也無法在 HR 系統或 IdP 停用該人員時連動解除全部存取權。</p>
+    <p class="note"><b>為何產品方案無法取代 Guard：</b>Jira Premium 的 IP 許可清單於<b>站台層級</b>生效，依 Atlassian 官方文件，其範圍明確不涵蓋 admin.atlassian.com、使用者管理與帳號佈建的 REST API。帳號與存取權的管理面不在其涵蓋範圍內。更根本的原因在於，Atlassian 帳號並不隸屬於任何單一產品：即使於 Jira 中移除某位離職人員的產品存取權，該帳號依然存在、依然可以登入，並可能仍持有其他站台的存取權。未經 Guard 完成網域驗證與帳號納管，組織既無法強制其改用公司的身分識別提供者登入，也無法在 HR 系統或 IdP 停用該人員時連動解除全部存取權。</p>
 
-    <p class="note" style="margin-top:14px"><b>一句話說明：</b>產品方案保護的是 <b>Jira 這個應用程式</b>，Guard 保護的是<b>使用 Jira 的人，以及其中的資料</b>。</p>
+    <p class="note" style="margin-top:14px"><b>判斷功能歸屬的依據：</b>於站台管理區進行設定的項目，屬於 Jira 或 Confluence 方案的範圍；須於 admin.atlassian.com 進行設定的項目，則屬於 Guard 的範圍。組織層級的管理面不在單一站台的權責範圍內，升級產品方案不會涵蓋此部分。</p>
   </section>
 
   <!-- COMPARE -->
@@ -499,34 +499,34 @@ img{max-width:100%}
   <section>
     <p class="eyebrow">重點能力說明</p>
     <h2>對照表中幾項需要進一步理解的機制</h2>
-    <p>功能對照表以單行呈現各項能力，但其中數項的實際運作方式會直接影響導入工作量與選版判斷。以下就最容易被低估的六項補充說明。</p>
+    <p>功能對照表以單行呈現各項能力，但其中數項的實際運作方式會直接影響導入工作量與選版判斷。以下就其中六項補充說明。</p>
     <div class="caps">
 
       <div class="cap">
         <span class="tag">Premium</span>
         <h3>資料分級與自動分類</h3>
-        <p>Guard Premium 於組織層級提供 Public、Internal、Confidential、Restricted 四級標籤，套用對象為 Confluence 頁面與 Jira 議題。<b>須留意標籤本身不具強制力</b>：將頁面標為 Restricted 不會自動封鎖任何操作，必須另行建立「以分類等級為條件的組織級政策」，該等級才會實際限制分享與匯出行為。</p>
-        <p>自動分類則於內容寫入時比對敏感樣式，命中信用卡號等格式即自動套用對應等級，用以降低仰賴人工標記所產生的落差。實務上建議先以手動分級為少量高價值內容建立基準，再逐步開啟自動分類；初期若出現大量誤判，使用者會很快對標籤失去信任。</p>
+        <p>Guard Premium 於組織層級提供 Public、Internal、Confidential、Restricted 四級標籤，套用對象為 Confluence 頁面與 Jira 議題。<b>標籤本身不具強制力</b>：將頁面標為 Restricted 不會自動封鎖任何操作，必須另行建立「以分類等級為條件的組織級政策」，該等級才會實際限制分享與匯出行為。</p>
+        <p>自動分類則於內容寫入時比對敏感樣式，命中信用卡號等格式即自動套用對應等級，用以降低仰賴人工標記所產生的落差。導入順序通常為先以手動分級建立少量高價值內容的基準，再逐步開啟自動分類。初期誤判比例過高時，標籤的可信度會連帶受影響。</p>
       </div>
 
       <div class="cap">
         <span class="tag std">Standard · Premium</span>
         <h3>資料安全政策</h3>
         <p>可限制匯出、公開分享連結、匿名存取與第三方應用程式的資料存取，兩種方案均具備。<b>差別在於套用條件</b>：Standard 以空間或專案為範圍，屬一體適用；Premium 則可將分類等級作為條件，例如「Confidential 以上一律封鎖對外分享連結，Internal 以下不受限」。</p>
-        <p>這往往是評估是否升級的關鍵分野。若安全要求可以用「整個空間全開或全關」表達，Standard 已足夠；若必須依內容本身的敏感程度採取不同管制，才需要 Premium 的分級能力。</p>
+        <p>此項為兩方案的主要分野。若安全要求可以「整個空間全開或全關」表達，Standard 即可滿足；若必須依內容本身的敏感程度採取不同管制，才需要 Premium 的分級能力。</p>
       </div>
 
       <div class="cap">
         <span class="tag">Premium</span>
         <h3>內容掃描與自訂偵測規則</h3>
         <p>內容掃描提供 60 項以上內建偵測，涵蓋個人資料、金融資訊、憑證與健康資料，並以兩種模式運作：全站掃描對既有內容執行一次性盤點，即時掃描則於內容寫入當下判定。</p>
-        <p><b>內建偵測以國際通用格式為主</b>（信用卡號、雲端服務金鑰、美國社會安全號碼等）。台灣的身分證字號、健保卡號與統一編號不在預設清單內，須以自訂偵測規則建立。評估階段應將此工作量納入導入時程，並以組織既有內容實測命中率——掃描目前不執行光學文字辨識、亦不涵蓋附件內容，對以掃描檔流通文件的組織影響甚大。</p>
+        <p><b>內建偵測以國際通用格式為主</b>（信用卡號、雲端服務金鑰、美國社會安全號碼等）。台灣的身分證字號、健保卡號與統一編號不在預設清單內，須以自訂偵測規則建立。此項工作量需納入導入時程評估。另有兩項涵蓋限制：掃描不執行光學文字辨識，亦不涵蓋附件內容；以掃描檔形式流通文件的組織，實際覆蓋率會低於偵測項目數所呈現的水準。</p>
       </div>
 
       <div class="cap">
         <span class="tag std">Standard · Premium</span>
         <h3>稽核記錄的兩個層次</h3>
-        <p>兩者的差別可以一句話概括：<b>Standard 能回答「管理員做了什麼」，Premium 才能回答「使用者對資料做了什麼」。</b></p>
+        <p>兩者的記錄對象不同：<b>Standard 記錄管理員的操作行為，Premium 另涵蓋使用者對內容的檢視與匯出行為。</b></p>
         <p>Standard 提供管理員活動稽核記錄、組織洞察（活躍使用者統計與驗證方式分布），以及產品探索（識別組織內未納管的 Atlassian 站台）。Premium 另加使用者活動稽核（延伸稽核）與 API token 使用行為追蹤。離職人員的存取歷程盤查，或稽核單位要求說明「何人於何時檢視過哪份文件」這類需求，僅憑 Standard 的管理員記錄無法完成。</p>
       </div>
 
@@ -534,14 +534,14 @@ img{max-width:100%}
         <span class="tag">Premium</span>
         <h3>告警、調查與修復動作</h3>
         <p>可疑活動偵測涵蓋異常登入、大量匯出與資料外洩徵兆，命中後於統一的調查儀表板呈現，包含行為者脈絡與事件時間軸，免去跨多個管理介面拼湊事件經過。告警可送達 Slack 或 Microsoft Teams，稽核記錄亦可經 Webhook 與 API 串流至 Splunk 等資安事件管理平台。儀表板並提供可直接執行的修復動作：停用帳號、遮蔽敏感內容、重新分類。</p>
-        <p><b>導入時的關鍵不在偵測規則的數量，而在於告警的收斂。</b>應於上線前即設定告警等級與接收對象，並確認高風險項目具備明確的處理時限，否則未處理告警會快速累積至無法判讀的程度。</p>
+        <p><b>告警機制的效果取決於收斂程度，而非偵測規則的數量。</b>上線前需設定告警等級與接收對象，並訂定高風險項目的處理時限。未經分級的情況下，未處理告警的累積會使儀表板失去判讀價值。</p>
       </div>
 
       <div class="cap">
         <span class="tag">Premium · Early Access</span>
         <h3>AI 治理</h3>
         <p>兩項能力目前均屬 Early Access：Rovo Chat 的提示與回應內容掃描，可阻擋或遮蔽出現於 AI 對話中的敏感資料；連接器資料安全則避免第三方來源的敏感資料被納入 Teamwork Graph 的索引範圍。</p>
-        <p><b>Early Access 表示功能尚未正式發布</b>，可用性、涵蓋範圍與服務水準均可能調整。若組織尚未導入 Rovo，這兩項不宜構成升級 Premium 的決定性理由；若已導入或即將導入，則建議於試用期間實際驗證，並將其視為後續強化項目，而非既有保障。</p>
+        <p><b>Early Access 表示功能尚未正式發布</b>，可用性、涵蓋範圍與服務水準均可能調整。尚未導入 Rovo 的組織，此兩項與其升級評估無直接關聯；已導入或即將導入者，可於試用期間驗證實際行為。Early Access 階段的功能不宜列為既有保障。</p>
       </div>
 
     </div>
@@ -551,7 +551,7 @@ img{max-width:100%}
   <section>
     <p class="eyebrow">場景對照</p>
     <h2>同一事件發生時，兩種方案分別能處理到什麼程度</h2>
-    <p style="margin-bottom:30px">功能清單難以呈現的差異，往往在事件發生的當下才會顯現。以下十個場景均為實務上反覆出現的類型，前五個為跨產業通用情境，後五個聚焦於軟體開發與產品公司。差異的關鍵不在於「是否防範得住」，而在於事後能否完整說明事件經過，以及從發現到處置所需的時間。</p>
+    <p style="margin-bottom:30px">部分差異在功能清單上不易呈現，須於事件發生時方會顯現。以下十個場景為實際運作中反覆出現的類型，前五個為跨產業通用情境，後五個聚焦於軟體開發與產品公司。兩方案的差異不在於能否防範，而在於事後能否完整說明事件經過，以及從發現到處置所需的時間。</p>
 
     <div class="cases">
 
@@ -584,7 +584,7 @@ img{max-width:100%}
         <div class="case-split">
           <div class="case-col">
             <h4><span class="stop"></span> Guard Standard</h4>
-            <p>資料安全政策可<b>於站台層級全面禁止公開連結</b>，但此設定為全有全無：一旦啟用，行銷本應對外公開的活動說明與產品文件亦同時受限。實務上多半會因業務單位反映而重新開放，導致政策難以長期維持。</p>
+            <p>資料安全政策可<b>於站台層級全面禁止公開連結</b>，但此設定為全有全無：一旦啟用，行銷本應對外公開的活動說明與產品文件亦同時受限。此類設定多因業務單位反映而重新開放，難以長期維持。</p>
           </div>
           <div class="case-col">
             <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
@@ -620,7 +620,7 @@ img{max-width:100%}
         <div class="case-split">
           <div class="case-col">
             <h4><span class="stop"></span> Guard Standard</h4>
-            <p>強制單一登入（Single Sign-On）與兩步驟驗證（Two-Step Verification）可大幅降低此類攻擊的成功率，為最具效益的第一道防線。惟若攻擊者已突破兩步驟驗證，Standard <b>不會產生任何告警</b>，事件通常需數日後才會被察覺。</p>
+            <p>強制單一登入（Single Sign-On）與兩步驟驗證（Two-Step Verification）可大幅降低此類攻擊的成功率，構成第一道防線。惟若攻擊者已突破兩步驟驗證，Standard <b>不會產生任何告警</b>，事件通常需數日後才會被察覺。</p>
           </div>
           <div class="case-col">
             <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
@@ -676,7 +676,7 @@ img{max-width:100%}
         <div class="case-split">
           <div class="case-col">
             <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
-            <p>此層級的需求 Standard 已可有效覆蓋：外部使用者政策允許對這 20 人套用獨立規則，包括強制兩步驟驗證、縮短工作階段逾時、禁止建立 API token，以及在行動裝置上限制下載與截圖。專案結束時可透過 SCIM 一次性完成權限回收。</p>
+            <p>此層級的需求 Standard 已可覆蓋：外部使用者政策允許對這 20 人套用獨立規則，包括強制兩步驟驗證、縮短工作階段逾時、禁止建立 API token，以及在行動裝置上限制下載與截圖。專案結束時可透過 SCIM 一次性完成權限回收。</p>
           </div>
           <div class="case-col">
             <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
@@ -716,7 +716,7 @@ img{max-width:100%}
           </div>
           <div class="case-col">
             <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
-            <p>分類標籤依附於內容本身而非所在的 Space，標示為 Restricted 的規格文件無論移至何處，均受同一套政策約束。若事件確實發生，使用者活動稽核記錄可列出完整檢視紀錄，此為對客戶說明時能否完成結案的關鍵差異。</p>
+            <p>分類標籤依附於內容本身而非所在的 Space，標示為 Restricted 的規格文件無論移至何處，均受同一套政策約束。若事件確實發生，使用者活動稽核記錄可列出完整檢視紀錄，此紀錄為對客戶說明時的佐證依據。</p>
           </div>
         </div>
       </article>
@@ -730,25 +730,25 @@ img{max-width:100%}
         <div class="case-split">
           <div class="case-col">
             <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Standard</h4>
-            <p>產品探索（Product Discovery）即針對此情境設計：只要帳號使用已驗證網域，該站台便會被列出，後續可執行納管、合併或關閉。此外，這些帳號<b>本即已計入 Guard 帳單</b>，因此盤點影子 IT 通常同時具備資安與成本管控的效益。</p>
+            <p>產品探索（Product Discovery）即針對此情境設計：只要帳號使用已驗證網域，該站台便會被列出，後續可執行納管、合併或關閉。此外，這些帳號<b>本即已計入 Guard 帳單</b>，盤點未納管站台因而同時涉及資安與成本兩個面向。</p>
           </div>
           <div class="case-col">
             <h4><span class="tick sm" aria-hidden="true">✓</span> Guard Premium</h4>
-            <p>識別站台僅為第一步。完成納管後執行一次內容掃描，方能確認這八個月間累積了哪些內容。測試帳號密碼、客戶名單與尚未公開的產品規劃，多半出現在此類未納管的站台之中。</p>
+            <p>識別站台僅為第一步。完成納管後執行一次內容掃描，方能確認這八個月間累積了哪些內容。測試帳號密碼、客戶名單與尚未公開的產品規劃，常見於此類未納管的站台。</p>
           </div>
         </div>
       </article>
 
     </div>
 
-    <p class="note"><b>上述場景的共同結構：</b>Standard 界定「何人可取得存取權」，此層若未落實，後續機制均無從發揮作用；Premium 則回應「取得存取權之後發生了什麼、組織多久後得知、以及能否完成處置」。若組織現階段的課題仍集中於第一層，優先將 Standard 落實至完整狀態較具效益；若已面臨第二層的問責要求，Premium 便不屬於加值選項，而是唯一可行的方案。</p>
+    <p class="note"><b>上述場景的共同結構：</b>Standard 界定「何人可取得存取權」，此層若未落實，後續機制均無從發揮作用；Premium 則回應「取得存取權之後發生了什麼、組織多久後得知、以及能否完成處置」。若組織現階段的課題仍集中於第一層，優先將 Standard 落實至完整狀態；若已面臨第二層的問責要求，則須由 Premium 提供對應能力。</p>
   </section>
 
   <!-- PATHS -->
   <section>
     <p class="eyebrow">典型採用路徑</p>
     <h2>三種起點，同一項基礎</h2>
-    <p style="margin-bottom:30px">組織的資安成熟度不同，導入 Guard 的時機亦有差異。但無論由何種需求切入，Guard Standard 均為維持安全協作的共同基準，差異在於後續的發展方向。</p>
+    <p style="margin-bottom:30px">組織的資安成熟度不同，導入 Guard 的時機亦有差異。Guard Standard 為各條路徑共同的起點，差異在於後續的發展方向。</p>
 
     <div class="paths">
       <div class="path-start">
@@ -760,7 +760,7 @@ img{max-width:100%}
       <div>
         <div class="stage">
           <div class="stage-hd"><em>基礎</em><h3>Atlassian Guard Standard</h3></div>
-          <p>所有企業級組織均應將 Standard 視為在 Atlassian Cloud 維持安全協作的必要條件，涵蓋強制單一登入、集中稽核與自動化佈建。此層若未完備，後續的分級與偵測機制皆缺乏可靠的基礎。</p>
+          <p>Standard 為在 Atlassian Cloud 維持安全協作的基準層，涵蓋強制單一登入、集中稽核與自動化佈建。此層未完備時，後續的分級與偵測機制缺乏可靠的基礎。</p>
         </div>
 
         <div class="branches">
@@ -841,7 +841,7 @@ img{max-width:100%}
       <div class="faq-grp">導入與功能範圍</div>
       <details open>
         <summary>導入 Guard 之前需要完成哪些前置作業？</summary>
-        <p>Guard Standard 有兩項前置作業：網域驗證（domain verification）與使用者認領（user claim）。組織須先證明擁有該電子郵件網域，方能將使用該網域的 Atlassian 帳號納為受管帳號，後續的單一登入、驗證政策與稽核機制才會生效。此步驟通常需與 IT 或 DNS 管理者協調，建議預留充分時程。</p>
+        <p>Guard Standard 有兩項前置作業：網域驗證（domain verification）與使用者認領（user claim）。組織須先證明擁有該電子郵件網域，方能將使用該網域的 Atlassian 帳號納為受管帳號，後續的單一登入、驗證政策與稽核機制才會生效。此步驟需與 IT 或 DNS 管理者協調，其所需時間會影響整體導入時程。</p>
       </details>
       <details>
         <summary>哪些訂閱已內含 Guard Standard？</summary>
@@ -857,7 +857,7 @@ img{max-width:100%}
       </details>
       <details>
         <summary>資料外洩防護的偵測範圍有哪些已知限制？</summary>
-        <p>內容掃描目前針對頁面與議題的文字內容。實務評估時應特別確認幾項常見盲點：不執行光學文字辨識、不涵蓋附件檔案內容，且尚未支援 Confluence Whiteboard。若組織的敏感資料多以掃描檔或附件形式流通，將直接影響覆蓋率評估，建議於概念驗證階段即進行實測。</p>
+        <p>內容掃描目前針對頁面與議題的文字內容，有三項已知的涵蓋限制：不執行光學文字辨識、不涵蓋附件檔案內容，且尚未支援 Confluence Whiteboard。以掃描檔或附件形式流通敏感資料的組織，實際覆蓋率會低於偵測項目數所呈現的水準，此差距須於概念驗證階段實測確認。</p>
       </details>
       <details>
         <summary>取消訂閱後會產生哪些影響？</summary>
@@ -865,25 +865,25 @@ img{max-width:100%}
       </details>
       <details>
         <summary>是否可以先行試用？</summary>
-        <p>可以。兩種方案均提供 30 天免費試用，由組織管理員於 admin.atlassian.com 啟用。建議於試用期間即選定兩至三個最具代表性的 Space 或專案執行全站掃描，以實際命中結果驗證偵測規則是否符合組織的資料型態，而非僅就功能清單進行評估。</p>
+        <p>可以。兩種方案均提供 30 天免費試用，由組織管理員於 admin.atlassian.com 啟用。試用期間可選定兩至三個代表性的 Space 或專案執行全站掃描，以實際命中結果驗證偵測規則與組織資料型態的符合程度。</p>
       </details>
 
       <div class="faq-grp">使用者與計費</div>
       <details>
         <summary>受管使用者、計費使用者與外部使用者如何區分？</summary>
-        <p>受管使用者（managed users）指帳號位於已驗證網域、因而受組織控管的帳號；計費使用者（billable users）則是實際計入帳單的人數。兩者不必然相等：受管帳號若未持有任何受支援產品的存取權，就不會計費；反之，非受管網域的外部協作者只要具備受支援產品的存取權，仍會計入 Standard 帳單。實際人數可於 admin.atlassian.com 的帳單預估頁面查看，建議報價前以該數字為準，而非以組織通訊錄的人數推估。</p>
+        <p>受管使用者（managed users）指帳號位於已驗證網域、因而受組織控管的帳號；計費使用者（billable users）則是實際計入帳單的人數。兩者不必然相等：受管帳號若未持有任何受支援產品的存取權，就不會計費；反之，非受管網域的外部協作者只要具備受支援產品的存取權，仍會計入 Standard 帳單。實際人數可於 admin.atlassian.com 的帳單預估頁面查看。報價應以該數字為準；以組織通訊錄人數推估通常與實際計費人數有落差。</p>
       </details>
       <details>
         <summary>Premium 的計費人數如何認定？與 Standard 有何不同？</summary>
-        <p>兩者的計費基礎並不相同。Standard 計入具備 Jira、JSM（Agent）、Confluence、Bitbucket、Trello 或 Statuspage 存取權的使用者；Premium 則僅計入具備 Jira 或 Confluence 存取權者，且不分方案版本。已停用的帳號、未持有任何產品存取權者，以及僅使用 JSM 或 Jira Product Discovery 的使用者，不計入 Premium。因此在同一組織中，Premium 的計費人數通常低於 Standard，估算升級成本時不應直接以 Standard 的人數乘以價差。</p>
+        <p>兩者的計費基礎並不相同。Standard 計入具備 Jira、JSM（Agent）、Confluence、Bitbucket、Trello 或 Statuspage 存取權的使用者；Premium 則僅計入具備 Jira 或 Confluence 存取權者，且不分方案版本。已停用的帳號、未持有任何產品存取權者，以及僅使用 JSM 或 Jira Product Discovery 的使用者，不計入 Premium。因此在同一組織中，Premium 的計費人數通常低於 Standard，估算升級成本時，直接以 Standard 的人數乘以價差會高估實際金額。</p>
       </details>
       <details>
         <summary>JSM 的報修者會計入費用嗎？</summary>
-        <p>不會。僅透過客戶入口網站（portal-only）提交或追蹤案件的帳號，不計入 Guard Standard 帳單；實際處理案件的 JSM Agent 才會計費，且該 Agent 須使用受管帳號。對於以 JSM 作為全公司 IT 服務台、報修者動輒數百至數千人的組織，此項差異對總成本的影響甚大，評估時應明確區分 Agent 與報修者的人數。</p>
+        <p>不會。僅透過客戶入口網站（portal-only）提交或追蹤案件的帳號，不計入 Guard Standard 帳單；實際處理案件的 JSM Agent 才會計費，且該 Agent 須使用受管帳號。對於以 JSM 作為全公司 IT 服務台、報修者動輒數百至數千人的組織，此項差異對總成本的影響幅度大，估算時須區分 Agent 與報修者的人數。</p>
       </details>
       <details>
         <summary>人數成長時帳單會如何變動？會事先通知嗎？</summary>
-        <p>Guard 依當期實際計費人數計算，人數增加時帳單隨之提高。若當期金額高於前一期，帳務與技術聯絡人會在扣款前三日收到通知信；但這是扣款前的告知，而非事前核准機制。對人數波動較大的組織，建議定期於 admin.atlassian.com 的訂閱管理頁面檢視使用量，並將「新進人員取得產品存取權」納入既有的帳號開通流程，避免帳單在無人察覺的情況下逐月墊高。</p>
+        <p>Guard 依當期實際計費人數計算，人數增加時帳單隨之提高。若當期金額高於前一期，帳務與技術聯絡人會在扣款前三日收到通知信；但這是扣款前的告知，而非事前核准機制。人數波動較大的組織可於 admin.atlassian.com 的訂閱管理頁面定期檢視使用量。將「新進人員取得產品存取權」納入既有的帳號開通流程，可避免帳單在未經察覺的情況下逐月增加。</p>
       </details>
     </div>
   </section>
