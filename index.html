@@ -185,6 +185,29 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 #pdr-2:focus-visible ~ .pdr-nav label[for="pdr-2"],
 #pdr-3:focus-visible ~ .pdr-nav label[for="pdr-3"]{outline:2px solid var(--ink); outline-offset:3px}
 
+/* ---------- 產品沿革時間軸 ---------- */
+.tl{list-style:none; margin:32px 0 0; padding:0; display:grid; grid-template-columns:repeat(4,1fr)}
+.tl li{position:relative; padding:24px 22px 0 0; border-top:1px solid var(--line-2)}
+.tl li::before{
+  content:""; position:absolute; top:-5px; left:0; width:9px; height:9px;
+  border-radius:50%; background:var(--paper); border:2px solid var(--line-2);
+}
+.tl li:last-child::before{background:var(--accent); border-color:var(--accent)}
+.tl-y{display:block; font-family:var(--mono); font-size:12px; letter-spacing:.1em; color:var(--ink-3); margin-bottom:8px}
+.tl b{display:block; font-size:15px; font-weight:700; letter-spacing:-.01em; margin-bottom:5px}
+.tl small{display:block; font-size:12.5px; color:var(--ink-3); line-height:1.6}
+.tl li:last-child b{color:var(--accent)}
+
+/* ---------- 三個防護層次 ---------- */
+.layers-wrap{background:var(--accent-soft); border-radius:3px; padding:40px 40px 44px; margin-top:30px}
+.layers-wrap > p{max-width:none; color:var(--ink-2)}
+.layers{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden; margin-top:26px}
+.layer{background:var(--surface); padding:26px 26px 28px}
+.layer .lv{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3)}
+.layer h3{font-size:17px; margin:10px 0 3px}
+.layer .sub{font-size:13px; font-weight:700; color:var(--accent); margin:0 0 9px}
+.layer p{font-size:13.5px; margin:0; color:var(--ink-2); line-height:1.7}
+
 /* ---------- integrations ---------- */
 .integ{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:3px; overflow:hidden; margin-top:28px}
 .integ-col{background:var(--surface); padding:26px 26px 28px}
@@ -357,6 +380,9 @@ footer a{color:var(--ink-3)}
   .caps{grid-template-columns:1fr}
   .pdr-panel{grid-template-columns:1fr; gap:34px}
   .integ{grid-template-columns:1fr}
+  .layers{grid-template-columns:1fr}
+  .layers-wrap{padding:26px 22px 30px}
+  .tl{grid-template-columns:repeat(2,1fr); gap:22px 0}
   .pdr-media::before{inset:12px -12px -12px 12px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
@@ -373,11 +399,11 @@ img{max-width:100%}
   <div class="nav-in">
     <a class="nav-brand" href="#top"><img src="assets/favicon-32.png" alt="">Atlassian Guard</a>
     <div class="nav-links">
+      <a href="#history">產品沿革</a>
       <a href="#pdr">三大支柱</a>
-      <a href="#integrations">生態系整合</a>
       <a href="#vs">為何需要 Guard</a>
+      <a href="#layers">三個層次</a>
       <a href="#compare">功能對照</a>
-      <a href="#capabilities">能力說明</a>
       <a href="#cases">場景對照</a>
       <a href="#pricing">定價</a>
       <a href="#faq">常見問題</a>
@@ -436,6 +462,20 @@ img{max-width:100%}
     <h2>雲端協作平台，往往是資料治理最容易被略過的一段</h2>
     <p>多數組織已在端點防護、雲端存取安全代理與資安事件管理平台上投入相當資源，但 Jira 議題附件與 Confluence 頁面中的合約條款、客戶名單與系統憑證，通常未被納入同一套治理框架。常見的風險缺口集中於三類日常性疏漏，而非外部入侵：離職人員的存取權未即時解除、內部頁面被設定為公開連結、以及 AI 助理檢索到原本不應納入索引的內容。</p>
     <p>Atlassian Guard 針對的正是這一段落差。Standard 建立身分與存取的邊界，Premium 則延伸至資料本身：內容於寫入當下即完成掃描與分級，異常行為在數分鐘內轉為告警，並提供可直接執行的修復建議。</p>
+  </section>
+
+  <!-- HISTORY -->
+  <section id="history">
+    <p class="eyebrow">產品沿革</p>
+    <h2>從 Atlassian Access 到 Atlassian Guard</h2>
+    <p>評估過程中常見的疑問是 Atlassian Access 與 Guard 的關係。Access 為 Atlassian 於 2018 年推出的身分與存取管理訂閱；2023 年另以 Beacon 進入 Beta，提供威脅偵測與回應能力。2024 年，Atlassian 將 Access 與 Beacon 的能力合併，並加入全新的資料外洩防護功能，整合為單一產品 Atlassian Guard，分為 Standard 與 Premium 兩個方案。</p>
+    <p><b>原 Atlassian Access 的訂閱者即為現行的 Guard Standard</b>，能力延續且持續擴充，僅產品名稱變更；Beacon 的偵測與調查能力則併入 Guard Premium。文件與社群中若仍見 Atlassian Access 一詞，所指即為 Guard Standard。</p>
+    <ol class="tl">
+      <li><span class="tl-y">2011</span><b>Jira 與 Confluence Cloud</b><small>Atlassian 雲端產品線的起點</small></li>
+      <li><span class="tl-y">2018</span><b>Atlassian Access 推出</b><small>首個專為 Atlassian Cloud 設計的身分與存取管理工具</small></li>
+      <li><span class="tl-y">2023</span><b>Beacon 進入 Beta</b><small>威脅偵測與回應能力</small></li>
+      <li><span class="tl-y">2024</span><b>Atlassian Guard 發表</b><small>整合 Access 與 Beacon，並新增資料外洩防護</small></li>
+    </ol>
   </section>
 
   <!-- PROTECT / DETECT / RESPOND -->
@@ -574,6 +614,35 @@ img{max-width:100%}
     <p class="note"><b>為何產品方案無法取代 Guard：</b>Jira Premium 的 IP 許可清單於<b>站台層級</b>生效，依 Atlassian 官方文件，其範圍明確不涵蓋 admin.atlassian.com、使用者管理與帳號佈建的 REST API。帳號與存取權的管理面不在其涵蓋範圍內。更根本的原因在於，Atlassian 帳號並不隸屬於任何單一產品：即使於 Jira 中移除某位離職人員的產品存取權，該帳號依然存在、依然可以登入，並可能仍持有其他站台的存取權。未經 Guard 完成網域驗證與帳號納管，組織既無法強制其改用公司的身分識別提供者登入，也無法在 HR 系統或 IdP 停用該人員時連動解除全部存取權。</p>
 
     <p class="note" style="margin-top:14px"><b>判斷功能歸屬的依據：</b>於站台管理區進行設定的項目，屬於 Jira 或 Confluence 方案的範圍；須於 admin.atlassian.com 進行設定的項目，則屬於 Guard 的範圍。組織層級的管理面不在單一站台的權責範圍內，升級產品方案不會涵蓋此部分。</p>
+  </section>
+
+  <!-- LAYERS -->
+  <section id="layers">
+    <p class="eyebrow">三個防護層次</p>
+    <h2>隨組織規模擴充的防護能力</h2>
+    <div class="layers-wrap">
+      <p>Atlassian Cloud 的資安能力分為三層，後者疊加於前者之上。釐清目前所處的層次，是選版判斷的起點。</p>
+      <div class="layers">
+        <div class="layer">
+          <span class="lv">Layer 1</span>
+          <h3>Atlassian 平台</h3>
+          <p class="sub">預設即具備</p>
+          <p>每個 Atlassian Cloud 方案均內含的基本身分與資料控制，包含站台層級的權限管理與產品自身的安全設定。無須額外訂閱。</p>
+        </div>
+        <div class="layer">
+          <span class="lv">Layer 2</span>
+          <h3>Guard Standard</h3>
+          <p class="sub">組織層級的可視性與控制</p>
+          <p>將控制範圍由單一站台提升至整個組織的所有帳號：強制單一登入與兩步驟驗證、SCIM 自動佈建、API token 管控，以及跨產品的稽核記錄。</p>
+        </div>
+        <div class="layer">
+          <span class="lv">Layer 3</span>
+          <h3>Guard Premium</h3>
+          <p class="sub">進階防護與威脅偵測</p>
+          <p>由存取層延伸至資料本身：資料分級與自動分類、內容掃描、異常行為偵測，以及告警調查與修復動作。適用於持有高價值資料的組織。</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- COMPARE -->
