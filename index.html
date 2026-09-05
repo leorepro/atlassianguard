@@ -940,6 +940,40 @@ details p{font-size:var(--fs-base); padding-bottom:6px}
 .faq details[open] > p,
 td.feat details.more[open] > p{animation:reveal .18s ease-out}
 
+/* ---------- reading（延伸閱讀） ---------- */
+/* 文章卡屬列表卡：1px 邊框、--r-card、無陰影；hover 才加深邊框並給陰影，語彙與 .case:hover 一致。
+   整張卡是一個 <a>，故重設連結的顏色與底線，讓標題、副標各自沿用文字色階。 */
+.rd-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px}
+.rd-card{
+  display:flex; flex-direction:column; gap:10px;
+  border:1px solid var(--line); border-radius:var(--r-card); background:var(--surface);
+  padding:24px 26px 22px; color:inherit; text-decoration:none;
+  transition:border-color .18s ease, box-shadow .18s ease;
+}
+.rd-card:hover{border-color:var(--line-2); box-shadow:var(--shadow)}
+/* 全域 :where(a):focus-visible 會把焦點框圓角設為 999px，套在矩形卡上會與卡角脫開，改回卡片圓角 */
+.rd-card:focus-visible{border-radius:var(--r-card)}
+.rd-meta{
+  display:block; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+.rd-card h3{font-size:var(--fs-md); line-height:1.5; margin:0; letter-spacing:-.01em}
+.rd-card p{font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7; margin:0; max-width:none}
+/* 「閱讀全文」以 margin-top:auto 推至卡底，三張卡的副標長短不一時仍能對齊 */
+.rd-more{
+  margin-top:auto; padding-top:6px; display:inline-flex; align-items:center; gap:6px;
+  font-size:var(--fs-sm); font-weight:600; color:var(--accent);
+}
+/* 箭頭右移 2px 作為整卡可點的提示；prefers-reduced-motion 由全域 transition:none!important 關閉 */
+.rd-more i{font-style:normal; display:inline-block; transition:transform .15s ease}
+.rd-card:hover .rd-more i{transform:translateX(2px)}
+@media (max-width:900px){.rd-grid{grid-template-columns:1fr}}
+
+/* 段落末的延伸閱讀連結：沿用 .note a 的行內連結語彙；「延伸閱讀：」由 ::before 產生，
+   設為 inline-block 以阻斷底線向偽元素延伸，只有篇名部分帶底線 */
+.more-link{font-size:var(--fs-sm); color:var(--accent); text-decoration:underline; text-underline-offset:2px; margin-left:.25em}
+.more-link::before{content:"延伸閱讀："; display:inline-block; color:var(--ink-3)}
+
 /* ---------- cta ---------- */
 .final{background:var(--surface); border-radius:var(--r-card-lg); padding:44px 44px 40px; box-shadow:var(--shadow)}
 .final-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center}
@@ -1057,6 +1091,7 @@ img{max-width:100%}
       <a href="#cases">場景對照</a>
       <a href="#pricing">定價</a>
       <a href="#faq">常見問題</a>
+      <a href="#reading">延伸閱讀</a>
       <a href="#contact">預約諮詢</a>
     </div>
     <a class="nav-cta" href="https://tsgojira.atlassian.net/servicedesk/customer/portal/4/group/8/create/43" target="_blank" rel="noopener">預約 Demo</a>
@@ -1125,7 +1160,7 @@ img{max-width:100%}
   <section id="pdr">
     <p class="eyebrow">三大價值支柱</p>
     <h2>Protect · Detect · Respond</h2>
-    <p>Guard 依「保護、偵測、回應」三個階段設計。Standard 涵蓋前段的存取控制與可視性，Premium 補齊資料層的偵測能力與事件回應機制。每個階段之下另有三項具體能力，並各附一段 Atlassian 原廠錄製的管理主控台操作畫面，共九項；影片點擊後才載入，不影響頁面初始載入速度。</p>
+    <p>Guard 依「保護、偵測、回應」三個階段設計。Standard 涵蓋前段的存取控制與可視性，Premium 補齊資料層的偵測能力與事件回應機制。每個階段之下另有三項具體能力，並各附一段 Atlassian 原廠錄製的管理主控台操作畫面，共九項；影片點擊後才載入，不影響頁面初始載入速度。<a class="more-link" href="https://medium.com/p/c2aaee16e798" target="_blank" rel="noopener">〈Atlassian Guard 是什麼？用 Protect / Detect / Respond 一次看懂企業級資安策略〉</a></p>
     <div class="pdr">
       <input class="pdr-in" type="radio" name="pdr" id="pdr-1" checked>
       <input class="pdr-in" type="radio" name="pdr" id="pdr-2">
@@ -1259,7 +1294,7 @@ img{max-width:100%}
       <article class="pdr-panel" id="pdr-p3" style="--k:var(--c-respond)">
         <div class="pdr-txt">
           <h3>在威脅升級為事件之前處置</h3>
-          <p>告警必須能銜接既有的資安作業流程，而非形成另一個無人處理的通知管道。</p>
+          <p>告警必須能銜接既有的資安作業流程，而非形成另一個無人處理的通知管道。<a class="more-link" href="https://medium.com/p/017a02ac37ac" target="_blank" rel="noopener">〈從異常登入到停權處理：Atlassian Guard (Premium) 的 Detect &amp; Respond 實戰示範〉</a></p>
           <ul>
             <li><b>統一告警檢視與調查儀表板</b>，含行為者脈絡與事件時間軸（Premium）</li>
             <li><b>資安事件管理平台整合</b>，透過 Webhook 與 API 串流至 Splunk 等平台（Premium）</li>
@@ -2330,6 +2365,33 @@ img{max-width:100%}
     </div>
   </section>
 
+  <!-- READING -->
+  <section id="reading" class="band">
+    <p class="eyebrow">延伸閱讀</p>
+    <h2>三篇文章，補足本頁未展開的實作細節</h2>
+    <p>由 Titansoft 顧問團隊撰寫、發表於 Medium，依「是什麼、帳號怎麼管、事件怎麼處理」的順序由淺入深。</p>
+    <div class="rd-grid">
+      <a class="rd-card" href="https://medium.com/p/c2aaee16e798" target="_blank" rel="noopener">
+        <span class="rd-meta">Medium · 6 分鐘閱讀 · <time datetime="2026-05-06">2026 年 5 月</time></span>
+        <h3>Atlassian Guard 是什麼？用 Protect / Detect / Respond 一次看懂企業級資安策略</h3>
+        <p>從帳號控管到資安事件回應，Atlassian Guard 如何成為 Cloud 組織的安全中樞</p>
+        <span class="rd-more">閱讀全文 <i aria-hidden="true">→</i></span>
+      </a>
+      <a class="rd-card" href="https://medium.com/p/e2288a0abec6" target="_blank" rel="noopener">
+        <span class="rd-meta">Medium · 6 分鐘閱讀 · <time datetime="2026-05-20">2026 年 5 月</time></span>
+        <h3>用 Atlassian Guard（Standard）管好帳號：從 IdP 串接到 JSM Customer 授權問題</h3>
+        <p>搞懂 SSO、AD 整合與帳號計費，避免資安漏洞與授權失控</p>
+        <span class="rd-more">閱讀全文 <i aria-hidden="true">→</i></span>
+      </a>
+      <a class="rd-card" href="https://medium.com/p/017a02ac37ac" target="_blank" rel="noopener">
+        <span class="rd-meta">Medium · 6 分鐘閱讀 · <time datetime="2026-05-28">2026 年 5 月</time></span>
+        <h3>從異常登入到停權處理：Atlassian Guard (Premium) 的 Detect &amp; Respond 實戰示範</h3>
+        <p>把資安事件從「幾天調查」縮短到「幾分鐘處理」的實務流程</p>
+        <span class="rd-more">閱讀全文 <i aria-hidden="true">→</i></span>
+      </a>
+    </div>
+  </section>
+
   <!-- FINAL CTA -->
   <section id="contact">
     <div class="final">
@@ -2372,6 +2434,7 @@ img{max-width:100%}
         <li><a href="#cases">場景對照</a></li>
         <li><a href="#pricing">定價與計費</a></li>
         <li><a href="#faq">常見問題</a></li>
+        <li><a href="#reading">延伸閱讀</a></li>
       </ul>
     </nav>
 
