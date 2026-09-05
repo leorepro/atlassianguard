@@ -738,6 +738,25 @@ td.v.yes{color:var(--yes)}
 .cap p{font-size:var(--fs-base); line-height:1.75; margin:0 0 11px}
 .cap p:last-child{margin-bottom:0}
 .cap b{font-weight:500; color:var(--ink)}
+/* 稽核卡的 Standard／Premium 對照：兩欄以 1px 直線分隔，延續 .caps 用細線切格的語彙；
+   卡片因此變高、右鄰卡片留白屬預期，不另調 .caps */
+.al-grid{display:grid; grid-template-columns:1fr 1fr; gap:0 28px; margin:14px 0; padding-top:14px; border-top:1px solid var(--line)}
+.al-col + .al-col{border-left:1px solid var(--line); padding-left:28px}
+.al-hd{display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 10px; margin:0 0 6px}
+.al-hd b{font-size:var(--fs-sm); font-weight:600; color:var(--ink)}
+.al-col > p{font-size:var(--fs-sm); color:var(--ink-2); line-height:1.65; margin:0 0 10px}
+.al-col ul{margin:0; padding:0; list-style:none}
+/* 條列沿用 .pdr-txt li 的短橫線 bullet（而非 .price 的圓點）：卡片內文屬說明性質，短橫線較圓點安靜 */
+.al-col li{font-size:var(--fs-sm); color:var(--ink-2); padding:4px 0 4px 16px; position:relative; line-height:1.65}
+.al-col li::before{content:""; position:absolute; left:0; top:13px; width:6px; height:1px; background:var(--line-2)}
+.al-col .al-meta{margin:10px 0 0}
+.al-col .al-meta b{font-weight:600}
+/* 保留期限屬註記層級，字級與墨色再降一階 */
+.al-col .al-keep{font-size:var(--fs-xs); color:var(--ink-3); margin:8px 0 0; line-height:1.6}
+@media (max-width:600px){
+  .al-grid{grid-template-columns:1fr; gap:18px}
+  .al-col + .al-col{border-left:0; border-top:1px solid var(--line); padding-left:0; padding-top:18px}
+}
 
 /* ---------- cases ---------- */
 .cases{display:grid; gap:18px}
@@ -1560,7 +1579,36 @@ img{max-width:100%}
         <div class="cap-top"><span class="tag std">Standard · Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="7" width="38" height="15" rx="3" fill="#50B0E8"/><rect x="5" y="26" width="38" height="15" rx="3" fill="#123B5E"/><circle cx="13" cy="14.5" r="2.8" fill="#FFFFFF"/><rect x="20" y="13" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/><circle cx="13" cy="33.5" r="2.8" fill="#FFA902"/><rect x="20" y="32" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/></svg></div>
           <h3>稽核記錄的兩個層次</h3>
         <p>兩者的記錄對象不同：<b>Standard 記錄管理員的操作行為，Premium 另涵蓋使用者對內容的檢視與匯出行為。</b></p>
-        <p>Standard 提供管理員活動稽核記錄、組織洞察（活躍使用者統計與驗證方式分布），以及產品探索（識別組織內未納管的 Atlassian 站台）。Premium 另加使用者活動稽核（延伸稽核）與 API token 使用行為追蹤。離職人員的存取歷程盤查，或稽核單位要求說明「何人於何時檢視過哪份文件」這類需求，僅憑 Standard 的管理員記錄無法完成。</p>
+        <div class="al-grid">
+          <div class="al-col">
+            <div class="al-hd"><span class="tag std">Standard</span><b>管理員活動日誌</b></div>
+            <p>記錄管理員層級的操作，回答「誰動了組織設定」。</p>
+            <ul>
+              <li>Authentication policy 的建立、修改、刪除</li>
+              <li>使用者帳號的新增、停用、移除</li>
+              <li>產品存取權限與群組成員變更</li>
+              <li>Marketplace App 的安裝與移除</li>
+              <li>資料安全政策的調整</li>
+              <li>API token 的撤銷</li>
+            </ul>
+            <p class="al-meta"><b>組織洞察（Insights）</b>：每日／每月活躍使用者、授權使用狀況、已啟用兩步驗證或 SSO 的受管帳號比例。</p>
+            <p class="al-keep">保留期限：最多 180 天。</p>
+          </div>
+          <div class="al-col">
+            <div class="al-hd"><span class="tag">Premium</span><b>使用者活動日誌 + 進階整合</b></div>
+            <p>在 Standard 之上額外記錄一般使用者的操作，並可即時串流至 SIEM。額外記錄範圍：</p>
+            <ul>
+              <li>使用者建立、編輯、刪除頁面／Issue</li>
+              <li>使用者匯出資料（PDF、CSV）</li>
+              <li>使用者存取特定空間／專案的紀錄</li>
+              <li>使用者的登入／登出事件與 IP 位址</li>
+              <li>異常行為事件（大量下載、非正常時段存取等）</li>
+            </ul>
+            <p class="al-meta"><b>更細緻的篩選</b>：可依使用者、產品、操作類型、時間區間交叉查詢。</p>
+            <p class="al-keep">保留期限：官方文件載明最多 180 天，未區分方案；更長期的留存需定期匯出或串流至 SIEM。</p>
+          </div>
+        </div>
+        <p>離職人員的存取歷程盤查，或稽核單位要求說明「何人於何時檢視過哪份文件」這類需求，僅憑 Standard 的管理員記錄無法完成。</p>
       </div>
 
       <div class="cap">
