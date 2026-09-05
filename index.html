@@ -424,6 +424,49 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
   box-shadow:0 1px 3px rgba(17,21,25,.12);
 }
 
+/* 各階段下方的三項具體能力：每張卡片一段原廠操作錄影 */
+.pdr-caps{grid-column:1/-1; margin-top:52px; padding-top:30px; border-top:1px solid var(--line)}
+.pdr-caps-h{
+  font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-3); margin:0 0 6px;
+}
+.pdr-caps-note{font-size:var(--fs-sm); color:var(--ink-2); margin:0 0 22px; max-width:none}
+.pdr-caps-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+.pdr-caps-grid > .capcard.is-playing{grid-column:1/-1}
+.capcard{
+  margin:0; display:flex; flex-direction:column; overflow:hidden;
+  background:var(--surface-2); border:1px solid var(--line); border-radius:var(--r-card);
+}
+.capcard video{
+  display:block; width:100%; aspect-ratio:1100/618;
+  background:var(--surface); border-bottom:1px solid var(--line);
+}
+/* 三欄縮圖中的主控台介面過小而不可辨讀，因此播放時展開至整列寬度；
+   未啟用指令碼時維持原尺寸的內嵌播放，功能不受影響。 */
+.capcard{transition:border-color .18s ease, box-shadow .18s ease}
+.capcard.is-playing{border-color:var(--line-2); box-shadow:0 4px 16px rgba(17,21,25,.12)}
+.capcard.is-playing figcaption{max-width:760px}
+.capcard figcaption{padding:15px 17px 17px}
+.capcard figcaption .tag{
+  display:block; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.13em;
+  text-transform:uppercase; color:var(--accent); margin-bottom:7px;
+}
+.capcard figcaption .tag.std{color:var(--ink-3)}
+.capcard figcaption > b{
+  display:block; font-size:var(--fs-md); font-weight:600;
+  letter-spacing:-.01em; line-height:1.4; margin-bottom:7px;
+}
+.capcard figcaption p{font-size:var(--fs-sm); color:var(--ink-2); line-height:1.65; margin:0}
+.capcard .scr{
+  margin-top:10px; padding-top:10px; border-top:1px solid var(--line);
+  font-size:var(--fs-xs); color:var(--ink-3);
+}
+.capcard .scr b{font-weight:600; color:var(--ink-2)}
+.pdr-src{
+  grid-column:1/-1; margin-top:20px; font-size:var(--fs-xs); color:var(--ink-3);
+}
+.pdr-src a{color:inherit; text-decoration:underline; text-underline-offset:2px}
+
 /* 選中的分頁：底色改為該階段代表色 */
 #pdr-1:checked ~ .pdr-nav label[for="pdr-1"]{background:var(--c-protect); border-color:var(--c-protect); color:#FFFFFF; box-shadow:0 3px 12px rgba(17,21,25,.20)}
 #pdr-2:checked ~ .pdr-nav label[for="pdr-2"]{background:var(--c-detect); border-color:var(--c-detect); color:#FFFFFF; box-shadow:0 3px 12px rgba(17,21,25,.20)}
@@ -735,6 +778,9 @@ footer a:hover{color:var(--accent)}
   section{padding:56px 0}
   .caps{grid-template-columns:1fr}
   .pdr-panel{grid-template-columns:1fr; gap:34px}
+  /* 能力卡改為兩欄，第三張跨滿整列 */
+  .pdr-caps-grid{grid-template-columns:1fr 1fr}
+  .pdr-caps-grid .capcard:last-child{grid-column:1/-1}
   .integ{grid-template-columns:1fr}
   .layers{grid-template-columns:1fr}
   .layers-wrap{padding:26px 22px 30px}
@@ -766,6 +812,8 @@ img{max-width:100%}
 }
 
 @media (max-width:600px){
+  .pdr-caps-grid{grid-template-columns:1fr; gap:18px}
+  .pdr-caps{margin-top:36px}
   /* 表格於窄螢幕必然需要橫向捲動，縮小最小寬度與欄寬以減少捲動距離 */
   table{min-width:540px; font-size:var(--fs-xs)}
   thead th.plan, td.v{width:112px}
@@ -870,7 +918,7 @@ img{max-width:100%}
   <section id="pdr">
     <p class="eyebrow">三大價值支柱</p>
     <h2>Protect · Detect · Respond</h2>
-    <p>Guard 依「保護、偵測、回應」三個階段設計。Standard 涵蓋前段的存取控制與可視性，Premium 補齊資料層的偵測能力與事件回應機制。以下操作畫面取自 Atlassian 原廠展示。</p>
+    <p>Guard 依「保護、偵測、回應」三個階段設計。Standard 涵蓋前段的存取控制與可視性，Premium 補齊資料層的偵測能力與事件回應機制。每個階段之下另有三項具體能力，並各附一段 Atlassian 原廠錄製的管理主控台操作畫面，共九項；影片點擊後才載入，不影響頁面初始載入速度。</p>
     <div class="pdr">
       <input class="pdr-in" type="radio" name="pdr" id="pdr-1" checked>
       <input class="pdr-in" type="radio" name="pdr" id="pdr-2">
@@ -897,6 +945,50 @@ img{max-width:100%}
                  controls muted loop playsinline preload="none"
                  aria-label="Atlassian 管理主控台的資料分類設定畫面"></video>
         </div>
+
+        <div class="pdr-caps">
+          <p class="pdr-caps-h">此階段的三項能力</p>
+          <p class="pdr-caps-note">以下三段錄影取自 Atlassian 原廠的功能說明頁，呈現各項能力在管理主控台中的實際設定介面。</p>
+          <div class="pdr-caps-grid">
+
+            <figure class="capcard">
+              <video src="assets/video/guard-cap-auth-policy.mp4" poster="assets/video/guard-cap-auth-policy.webp"
+                     controls muted loop playsinline preload="none"
+                     aria-label="Atlassian 管理主控台的驗證政策設定畫面"></video>
+              <figcaption>
+                <span class="tag std">Standard · Premium</span>
+                <b>要求進階驗證</b>
+                <p>建立多組驗證政策，對受管帳號與外部協作者分別施加不同強度的控制。</p>
+                <p class="scr"><b>畫面：</b>Authentication policies 的政策設定頁，涵蓋單一登入、兩步驟驗證、第三方帳號登入、密碼強度、閒置逾時與 API token 管控。</p>
+              </figcaption>
+            </figure>
+
+            <figure class="capcard">
+              <video src="assets/video/guard-cap-mobile-policy.mp4" poster="assets/video/guard-cap-mobile-policy.webp"
+                     controls muted loop playsinline preload="none"
+                     aria-label="Atlassian 管理主控台的行動應用程式政策建立畫面"></video>
+              <figcaption>
+                <span class="tag std">Standard · Premium</span>
+                <b>保護團隊的工作內容</b>
+                <p>對分散各地的團隊強制單一登入，並套用行動應用程式管理。</p>
+                <p class="scr"><b>畫面：</b>Mobile app policy 的建立流程，可禁止分享、截圖與螢幕錄影，限制複製與下載，並要求生物辨識或裝置密碼與最低作業系統版本。</p>
+              </figcaption>
+            </figure>
+
+            <figure class="capcard">
+              <video src="assets/video/guard-cap-classification.mp4" poster="assets/video/guard-cap-classification.webp"
+                     controls muted loop playsinline preload="none"
+                     aria-label="Atlassian 管理主控台的分類等級建立畫面"></video>
+              <figcaption>
+                <span class="tag">Premium</span>
+                <b>辨識關鍵資料</b>
+                <p>以資料分級降低資料外洩風險。</p>
+                <p class="scr"><b>畫面：</b>Create classification level 精靈，逐步設定等級名稱、代表色、定義，以及提供給使用者判讀的使用指引。</p>
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
       </article>
       <article class="pdr-panel" id="pdr-p2" style="--k:var(--c-detect)">
         <div class="pdr-txt">
@@ -913,6 +1005,50 @@ img{max-width:100%}
           <video src="assets/video/blog-guard-2-1.mp4" poster="assets/video/blog-guard-2-1.jpg"
                  controls muted loop playsinline preload="none"
                  aria-label="Guard 的使用者活動偵測規則清單畫面"></video>
+        </div>
+
+        <div class="pdr-caps">
+          <p class="pdr-caps-h">此階段的三項能力</p>
+          <p class="pdr-caps-note">以下三段錄影取自 Atlassian 原廠的功能說明頁，呈現各項能力在管理主控台中的實際檢視介面。</p>
+          <div class="pdr-caps-grid">
+
+            <figure class="capcard">
+              <video src="assets/video/guard-cap-audit-log.mp4" poster="assets/video/guard-cap-audit-log.webp"
+                     controls muted loop playsinline preload="none"
+                     aria-label="Atlassian 管理主控台的組織稽核記錄篩選畫面"></video>
+              <figcaption>
+                <span class="tag std">Standard · Premium</span>
+                <b>揭露異常行為</b>
+                <p>以稽核記錄檢視 Atlassian Cloud 上跨產品的活動歷程。</p>
+                <p class="scr"><b>畫面：</b>組織層級的 Audit log，可依日期、活動類型、行為者與來源 IP 位址交叉篩選，記錄範圍涵蓋過去 180 天，並可整批匯出。</p>
+              </figcaption>
+            </figure>
+
+            <figure class="capcard">
+              <video src="assets/video/guard-cap-discovered.mp4" poster="assets/video/guard-cap-discovered.webp"
+                     controls muted loop playsinline preload="none"
+                     aria-label="Atlassian 管理主控台的未納管產品清單畫面"></video>
+              <figcaption>
+                <span class="tag std">Standard · Premium</span>
+                <b>降低 Shadow IT 風險</b>
+                <p>透過自動化的產品探索，識別組織內未經核准的 Atlassian 產品。</p>
+                <p class="scr"><b>畫面：</b>Discovered products 清單（示範環境中列出 137 個站台），逐項顯示使用者人數、建立日期、最後活動時間與現任管理員，可匯出 CSV，並於成員自行建立新產品時發出通知。</p>
+              </figcaption>
+            </figure>
+
+            <figure class="capcard">
+              <video src="assets/video/guard-cap-detections.mp4" poster="assets/video/guard-cap-detections.webp"
+                     controls muted loop playsinline preload="none"
+                     aria-label="Guard 主控台的使用者活動偵測規則清單畫面"></video>
+              <figcaption>
+                <span class="tag">Premium</span>
+                <b>排序高風險威脅</b>
+                <p>以可自訂的偵測規則與告警，快速判讀組織當前的暴險範圍。</p>
+                <p class="scr"><b>畫面：</b>User activity detections 清單，逐項列出偵測規則、所屬產品與偵測間隔——匿名存取 Confluence、Confluence 頁面匯出、分類等級變更、資料安全政策變更等多數項目均為即時（Real Time）判定。</p>
+              </figcaption>
+            </figure>
+
+          </div>
         </div>
       </article>
       <article class="pdr-panel" id="pdr-p3" style="--k:var(--c-respond)">
@@ -931,9 +1067,54 @@ img{max-width:100%}
                  controls muted loop playsinline preload="none"
                  aria-label="Guard 的告警儀表板畫面，含告警狀態分布與行為者統計"></video>
         </div>
+
+        <div class="pdr-caps">
+          <p class="pdr-caps-h">此階段的三項能力</p>
+          <p class="pdr-caps-note">以下三段錄影取自 Atlassian 原廠的功能說明頁，呈現告警自產生、調查到處置的完整流程。</p>
+          <div class="pdr-caps-grid">
+
+            <figure class="capcard">
+              <video src="assets/video/guard-cap-alert-dashboard.mp4" poster="assets/video/guard-cap-alert-dashboard.webp"
+                     controls muted loop playsinline preload="none"
+                     aria-label="Guard 主控台的告警儀表板畫面，含地理位置地圖與活動趨勢圖"></video>
+              <figcaption>
+                <span class="tag">Premium</span>
+                <b>集中檢視告警</b>
+                <p>以單一檢視掌握頁面匯出、可疑登入等使用者行為。</p>
+                <p class="scr"><b>畫面：</b>告警儀表板，含登入來源的地理位置地圖、告警與活動的每日趨勢圖，以及可依告警類型、活動、產品與狀態篩選的活動明細表。</p>
+              </figcaption>
+            </figure>
+
+            <figure class="capcard">
+              <video src="assets/video/guard-cap-alert-investigate.mp4" poster="assets/video/guard-cap-alert-investigate.webp"
+                     controls muted loop playsinline preload="none"
+                     aria-label="Guard 的告警詳情畫面，並示範直接開立 Jira 議題"></video>
+              <figcaption>
+                <span class="tag">Premium</span>
+                <b>加速事件回應</b>
+                <p>透過 SIEM 整合，於數分鐘內將潛在威脅通知資安團隊。</p>
+                <p class="scr"><b>畫面：</b>「Confluence page crawling」告警詳情，列出遭檢視的頁面及其分類等級、行為者脈絡（IP 位址、地點、帳號建立時間）、事件時間軸與建議調查步驟，並可就地開立 Jira 議題轉入既有的事件處理流程。</p>
+              </figcaption>
+            </figure>
+
+            <figure class="capcard">
+              <video src="assets/video/guard-cap-remediation.mp4" poster="assets/video/guard-cap-remediation.webp"
+                     controls muted loop playsinline preload="none"
+                     aria-label="Guard 的可疑搜尋行為告警畫面，含建議修復動作清單"></video>
+              <figcaption>
+                <span class="tag">Premium</span>
+                <b>有效解除威脅</b>
+                <p>偵測到威脅時，直接執行系統建議的修復動作，例如停用帳號。</p>
+                <p class="scr"><b>畫面：</b>「Confluence 可疑搜尋行為」告警，以圓環圖呈現同一使用者於 30 分鐘內搜尋的敏感關鍵字分類（存取權杖、憑證、RSA 金鑰），並於下方直接提供停用帳號、調整空間權限與撤銷 API token 三項修復選項。</p>
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
       </article>
       </div>
     </div>
+    <p class="note" style="margin-top:26px"><b>畫面出處：</b>九段能力錄影取自 Atlassian 官方網站的 <a href="https://www.atlassian.com/software/guard/capabilities" target="_blank" rel="noopener">Guard 功能頁</a>，內容為原廠示範環境，其中的組織名稱、使用者與統計數字均為示範資料。說明文字為中文翻譯並補述畫面中實際可見的設定項目；介面文字維持產品原本的英文，以便與實際操作時所見一致。</p>
   </section>
 
   <!-- INTEGRATIONS -->
@@ -1944,6 +2125,26 @@ img{max-width:100%}
     f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
     f.allowFullscreen = true;
     btn.replaceWith(f);
+  });
+})();
+
+/* 能力卡的操作錄影：三欄縮圖中的主控台介面過小而不可辨讀，
+   因此播放時將該卡展開至整列寬度，暫停後復原，同一時間僅一段播放。 */
+(function(){
+  var cards = document.querySelectorAll('.pdr-caps-grid .capcard video');
+  if(!cards.length) return;
+  Array.prototype.forEach.call(cards, function(v){
+    var card = v.closest('.capcard');
+    v.addEventListener('play', function(){
+      Array.prototype.forEach.call(cards, function(o){
+        if(o !== v && !o.paused) o.pause();
+      });
+      card.classList.add('is-playing');
+      /* 展開後若卡片頂緣被導覽列遮住，捲回可見範圍 */
+      var top = card.getBoundingClientRect().top;
+      if(top < 76) window.scrollBy({top: top - 88, behavior: 'smooth'});
+    });
+    v.addEventListener('pause', function(){ card.classList.remove('is-playing'); });
   });
 })();
 </script>
