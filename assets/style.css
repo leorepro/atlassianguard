@@ -221,9 +221,12 @@ p{margin:0 0 16px; max-width:60ch; color:var(--ink-2)}
 /* 首屏影片：色塊向右下偏移、播放器浮於其上，與 .pdr-media 使用同一套處理 */
 .hero-video{margin:0}
 .hv-media{position:relative}
-.hv-media::before{content:""; position:absolute; inset:18px -18px -18px 18px; background:var(--accent)}
+/* 色塊與其上的媒體若都是 z-index:auto，先後只由 DOM 順序決定；一旦媒體那側
+   少了 position（如 .hv-frame 的情形）就會被色塊蓋住。兩邊各給明確的 z-index，
+   先後不再取決於其他屬性是否到位。 */
+.hv-media::before{content:""; position:absolute; inset:18px -18px -18px 18px; background:var(--accent); z-index:0}
 .hv-btn{
-  position:relative; display:block; aspect-ratio:16/9; overflow:hidden;
+  position:relative; z-index:1; display:block; aspect-ratio:16/9; overflow:hidden;
   background:var(--surface-2); box-shadow:0 1px 3px rgba(17,21,25,.12);
 }
 .hv-btn img{display:block; width:100%; height:100%; object-fit:cover}
@@ -236,6 +239,10 @@ p{margin:0 0 16px; max-width:60ch; color:var(--ink-2)}
 .hv-play svg{width:22px; height:22px; fill:#FFFFFF; margin-left:3px; display:block}
 .hv-btn:hover .hv-play{background:var(--accent); transform:translate(-50%,-50%) scale(1.07)}
 .hv-btn:active .hv-play{transform:translate(-50%,-50%) scale(1)}
+/* 點下播放後由指令碼把 .hv-btn 換成這個 iframe。尺寸與縮圖一致，避免版面位移；
+   z-index 與 position 不可省——少了它 iframe 會落在色塊的 ::before 之下，
+   畫面上就是一塊藍色蓋住影片（此規則曾在首屏改版時遺漏，導致該狀況）。 */
+.hv-frame{position:relative; z-index:1; display:block; width:100%; aspect-ratio:16/9; border:0; background:#000}
 
 /* ---------- 資料分類四級 ---------- */
 .cls{
@@ -353,9 +360,10 @@ p{margin:0 0 16px; max-width:60ch; color:var(--ink-2)}
 
 /* 色塊向右下偏移，操作畫面浮於其上（比照官方版面） */
 .pdr-media{position:relative}
-.pdr-media::before{content:""; position:absolute; inset:18px -18px -18px 18px; background:var(--k)}
+/* 同上：先後不交給 DOM 順序決定 */
+.pdr-media::before{content:""; position:absolute; inset:18px -18px -18px 18px; background:var(--k); z-index:0}
 .pdr-media video{
-  position:relative; display:block; width:100%; background:var(--surface);
+  position:relative; z-index:1; display:block; width:100%; background:var(--surface);
   box-shadow:0 1px 3px rgba(17,21,25,.12);
 }
 
