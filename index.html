@@ -221,9 +221,8 @@
   /* detect 原為 #BF63F4，是全頁最鮮的一色。降飽和至相對亮度 .156，與 protect（.155）
      幾乎等重；作為 .pdr-nav 選中底色時，白字對比 5.10:1（原 3.33:1 不及 AA）。 */
   --c-public:#687684; --c-internal:#2A669B; --c-conf:#7D4419; --c-restricted:#792525;
-  /* 資料政策疊加示意的第二組色：Policy 1 沿用 --accent-soft，Policy 2 需要一組與藍色相區隔、
-     且不與分類四級暖色相混的淡琥珀；--amber-ink 為其標籤文字色，於 --amber-soft 底達 5.5:1 以上 */
-  --amber-soft:#FFF6E0; --amber-ink:#8A5300;
+  /* IdP 節點的淡琥珀底色，深淺對齊 --accent-soft */
+  --amber-soft:#FFF6E0;
   /* 場景六組各一色，以及配對的極淡底色。色相分散但飽和度一致，
      使六組在導覽列上可一眼區分，底色則淡到不與卡片白底相爭。 */
   --g-common:#5E6B7A;   --g-common-s:#F3F5F7;
@@ -367,8 +366,6 @@ section[id]{scroll-margin-top:72px}
 .nb{white-space:nowrap}
 
 h1,h2,h3{font-family:var(--sans); font-weight:800; text-wrap:balance; margin:0}
-/* 區塊內的次級標題：在同一節中另起子題（如 #vs 的受管帳號說明） */
-.sub-h{font-size:var(--fs-lg); font-weight:700; letter-spacing:-.015em; margin:40px 0 10px}
 h1{font-size:var(--fs-h1); line-height:1.24; letter-spacing:-.028em}
 .h1-brand{display:flex; align-items:center; gap:10px; font-size:var(--fs-xs); font-weight:500;
   letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3);
@@ -452,133 +449,45 @@ p{margin:0 0 16px; max-width:60ch; color:var(--ink-2)}
 .cls-note a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
 
 /* ---------- 資料安全政策（#policy）----------
-   接在分類四級之後，把「標籤須另建政策方能生效」展開：組成 → 覆蓋範圍 → 多組疊加。
-   類別一律以 dsp- 前綴，避免與其他示意圖的類別相撞。 */
-/* 四個組成：橫排編號步驟，上緣一條細線把四步串成一個流程 */
-.dsp-steps{list-style:none; margin:32px 0 0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:28px}
-.dsp-steps li{position:relative; padding-top:22px; border-top:1px solid var(--line-2)}
-.dsp-n{
-  position:absolute; top:-15px; left:0; width:30px; height:30px; border-radius:50%;
-  background:var(--accent); color:var(--on-accent); font-family:var(--mono); font-size:var(--fs-sm); font-weight:600;
-  display:grid; place-items:center; outline:4px solid var(--paper);
-}
-.dsp-steps h3{font-size:var(--fs-base); margin:0 0 6px}
-.dsp-steps h3 small{display:block; font-family:var(--mono); font-size:var(--fs-tag); font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin-top:2px}
-.dsp-steps p{margin:0; font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7}
-
-/* 政策卡：模擬管理主控台的一張政策，用 HTML 盒子畫，不放截圖；卡內小編號對應上方四步 */
-.dsp-polwrap{margin:34px 0 0; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:32px; align-items:center}
-.dsp-pol{margin:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card); box-shadow:var(--shadow); overflow:hidden}
-.dsp-pol-head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:20px 22px 16px; border-bottom:1px solid var(--line)}
-.dsp-pol-title{font-weight:700; font-size:var(--fs-md); color:var(--ink); line-height:1.4}
-.dsp-pol-desc{margin:2px 0 0; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.6}
-.dsp-pol-meta{margin:10px 0 0; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.6}
-.dsp-status{
-  flex:none; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase;
-  color:var(--accent); background:var(--accent-soft); border-radius:var(--r-chip); padding:3px 10px; line-height:1.6;
-}
-.dsp-pol-body{display:grid; grid-template-columns:96px 1fr; gap:12px 18px; margin:0; padding:18px 22px 20px; font-size:var(--fs-sm)}
-.dsp-pol-body dt{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); padding-top:2px}
-.dsp-pol-body dd{margin:0; color:var(--ink-2)}
-.dsp-pol-body dd b{font-weight:600; color:var(--ink)}
-.dsp-chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px}
-.dsp-chip,.dsp-badge{
-  display:inline-block; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.06em; line-height:1.6;
-  background:var(--surface-2); border-radius:var(--r-chip); padding:2px 9px; color:var(--ink-2); white-space:nowrap;
-}
-/* 徽章為純拉丁字，字距放寬 */
-.dsp-badge{letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
-.dsp-rulelist{list-style:none; margin:0; padding:0; display:grid; gap:6px}
-.dsp-rulelist li{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
-.dsp-ok{display:inline-grid; place-items:center; width:16px; height:16px; border-radius:50%; background:var(--accent); flex:none}
-.dsp-ok svg{width:9px; height:9px; display:block}
-/* 卡內對應步驟的小編號：邊框式而非實心，與步驟圓點區分主從 */
-.dsp-ref{
-  display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; flex:none; vertical-align:middle; margin-right:6px;
-  border:1.5px solid var(--accent); color:var(--accent); font-family:var(--mono); font-size:var(--fs-tag); font-weight:600; line-height:1;
-}
-.dsp-polnote{font-size:var(--fs-sm); color:var(--ink-2); line-height:1.75; margin:0; max-width:none}
-.dsp-polnote b{font-weight:600; color:var(--ink)}
-/* 節內小節標題：三塊內容各自成段，以較大的上距分隔 */
-.dsp-sub{margin-top:44px; font-size:var(--fs-md)}
-
-/* 三種覆蓋範圍：沿用 .integ 的 1px 線格語彙 */
-.dsp-cov{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin-top:30px}
-.dsp-cov-col{background:var(--surface); padding:24px 26px 26px; display:flex; flex-direction:column}
-.dsp-cov-top{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px}
-.dsp-cov-top svg{display:block; width:32px; height:32px}
-.dsp-tag{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.13em; text-transform:uppercase; color:var(--accent); white-space:nowrap}
-.dsp-tag.std{color:var(--ink-3)}
-.dsp-cov-col h3{font-size:var(--fs-base); font-weight:700; margin:0 0 6px}
-.dsp-cov-col > p{font-size:var(--fs-sm); margin:0 0 16px; color:var(--ink-3); line-height:1.65}
-.dsp-cov-col .dsp-rh{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin:auto 0 8px; padding-top:14px; border-top:1px solid var(--line)}
-.dsp-cov-col ul{list-style:none; margin:0; padding:0; display:grid; gap:7px}
-.dsp-cov-col li{display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:var(--fs-sm); color:var(--ink-2)}
-.dsp-cov-col li b{font-weight:600; color:var(--ink)}
-/* 規則釋義：四則共用一份，避免三張卡各自重複同一句話 */
-.dsp-defs{margin:18px 0 0; display:grid; grid-template-columns:repeat(4,1fr); gap:14px 22px; padding:18px 22px; background:var(--surface-2); border-radius:var(--r-card)}
-.dsp-defs div{min-width:0}
-.dsp-defs dt{font-size:var(--fs-sm); font-weight:600; color:var(--ink); margin-bottom:3px}
-.dsp-defs dd{margin:0; font-size:var(--fs-xs); color:var(--ink-2); line-height:1.65}
-
-/* 多組政策疊加：左為組織框內五個站台，兩塊半透明色塊以 grid 疊層表示各政策的涵蓋範圍；右為兩組政策的規則 */
-.dsp-multi{margin-top:30px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.9fr); gap:28px; align-items:start}
-.dsp-org{position:relative; border:1px dashed var(--line-2); border-radius:var(--r-card); padding:44px 26px 26px}
-.dsp-org-lb{
-  position:absolute; top:14px; left:26px; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3);
-}
-.dsp-sites{display:grid; grid-template-columns:1fr; grid-auto-rows:auto; row-gap:12px; position:relative}
-.dsp-site{
-  grid-column:1; position:relative; z-index:2; display:flex; align-items:center; gap:10px;
-  background:var(--surface); border:1px solid var(--line-2); border-radius:var(--r-card); padding:9px 14px;
-  font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
-.dsp-site svg{display:block; width:16px; height:16px; flex:none}
-.dsp-site:nth-child(1){grid-row:1} .dsp-site:nth-child(2){grid-row:2} .dsp-site:nth-child(3){grid-row:3}
-.dsp-site:nth-child(4){grid-row:4} .dsp-site:nth-child(5){grid-row:5}
-/* 色塊佈於同一欄、跨越所指定的列；負邊距讓色塊包住節點外緣。Policy 2 向右伸、Policy 1 向左伸，
-   使兩者於 hr、legal 兩列交疊時仍各露出一側，可辨認為兩個獨立範圍 */
-.dsp-ov{grid-column:1; position:relative; z-index:1; border-radius:var(--r-card); border:1px solid var(--pc)}
-.dsp-ov span{
-  position:absolute; top:-1px; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase;
-  color:var(--pc); background:var(--ps); padding:3px 8px; line-height:1.5;
-}
-.dsp-ov-2{grid-row:2/6; --pc:var(--amber-ink); --ps:var(--amber-soft); background:var(--amber-soft); margin:-10px -14px -10px -8px}
-.dsp-ov-2 span{right:-1px; border-radius:0 var(--r-card) 0 var(--r-card)}
-.dsp-ov-1{grid-row:3/5; --pc:var(--accent); --ps:var(--accent-soft); background:var(--accent-soft); margin:-10px 40px -10px -14px; opacity:.92}
-.dsp-ov-1 span{left:-1px; border-radius:var(--r-card) 0 var(--r-card) 0}
-.dsp-pols{display:grid; gap:14px}
-.dsp-polcard{border:1px solid var(--line); border-left:4px solid var(--pc); border-radius:var(--r-card); padding:16px 20px 18px; background:var(--surface)}
-.dsp-polcard-1{--pc:var(--accent); --ps:var(--accent-soft)}
-.dsp-polcard-2{--pc:var(--amber-ink); --ps:var(--amber-soft)}
-.dsp-polcard h3{font-size:var(--fs-base); margin:0 0 4px; display:flex; align-items:center; gap:10px}
-.dsp-polcard h3 i{display:inline-block; width:14px; height:14px; border-radius:3px; background:var(--ps); border:1px solid var(--pc); flex:none}
-.dsp-polcard h3 span{font-family:var(--mono); font-size:var(--fs-tag); font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--pc)}
-.dsp-polcard p{margin:0 0 10px; font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7}
-.dsp-polcard ul{margin:0; padding:0; list-style:none; display:grid; gap:5px}
-.dsp-polcard li{font-size:var(--fs-sm); color:var(--ink-2); display:flex; align-items:center; gap:8px}
-.dsp-polcard li::before{content:""; width:12px; height:2px; background:var(--pc); border-radius:1px; flex:none}
-.dsp-concl{
-  margin-top:24px; padding:18px 24px; background:var(--surface-2); border-left:3px solid var(--line-2);
-  border-radius:0 var(--r-card) var(--r-card) 0; font-size:var(--fs-sm); color:var(--ink-2); line-height:1.75; max-width:none;
-}
-.dsp-concl b{font-weight:600; color:var(--ink)}
-@media (max-width:900px){
-  .dsp-steps{grid-template-columns:1fr 1fr; gap:34px 24px}
-  .dsp-polwrap{grid-template-columns:1fr; gap:18px}
-  .dsp-cov{grid-template-columns:1fr}
-  .dsp-defs{grid-template-columns:1fr 1fr}
-  .dsp-multi{grid-template-columns:1fr}
-}
-@media (max-width:700px){
-  .dsp-steps{grid-template-columns:1fr; gap:34px}
-  .dsp-defs{grid-template-columns:1fr}
-  .dsp-pol-body{grid-template-columns:1fr; gap:4px 0}
-  .dsp-pol-body dd{margin-bottom:10px}
-  .dsp-org{padding:44px 18px 22px}
-  .dsp-ov-2{margin:-8px -8px -8px -4px}
-  .dsp-ov-1{margin:-8px 28px -8px -8px}
-}
+   資訊框架只有一句：一組政策＝範圍×規則。開頭以一張只標兩個部位的政策示意建立心智模型，
+   其後兩段都用讀者已熟悉的表格：三種範圍的對照表、站台×政策的疊加矩陣。 */
+.pol-h3{font-size:var(--fs-lg); font-weight:700; letter-spacing:-.015em; margin:46px 0 8px}
+.pol-h3 + p{margin-bottom:18px}
+.pol-card{margin:26px 0 0; max-width:660px; border:1px solid var(--line); border-radius:var(--r-card-lg); background:var(--surface); box-shadow:var(--shadow); overflow:hidden}
+.pol-card-hd{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 20px; background:var(--surface-2)}
+.pol-card-name{font-weight:700; font-size:var(--fs-base)}
+.pol-card-name small{display:block; font-weight:400; font-size:var(--fs-xs); color:var(--ink-3); margin-top:2px}
+.pol-status{flex:none; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase; color:var(--accent); background:var(--accent-soft); padding:4px 10px; border-radius:var(--r-chip)}
+.pol-part{display:grid; grid-template-columns:150px 1fr; gap:16px; padding:18px 20px; border-top:1px solid var(--line)}
+.pol-part-lb b{display:block; font-size:var(--fs-base)}
+.pol-part-lb small{display:block; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin-top:3px}
+.pol-q{display:block; font-size:var(--fs-sm); color:var(--ink-3); margin-bottom:8px}
+.pol-chips{display:flex; flex-wrap:wrap; gap:6px}
+.pol-chips span{font-family:var(--mono); font-size:var(--fs-xs); padding:3px 10px; border-radius:var(--r-chip); background:var(--surface-2); border:1px solid var(--line)}
+.pol-part-body > small{display:block; font-size:var(--fs-xs); color:var(--ink-3); margin-top:8px}
+.pol-part-body ul{margin:0; padding:0; list-style:none; display:grid; gap:7px}
+.pol-part-body li{font-size:var(--fs-sm); display:flex; align-items:center; gap:9px; flex-wrap:wrap}
+.pol-part-body li em{font-style:normal; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3)}
+.pol-x{width:16px; height:16px; border-radius:50%; background:var(--c-restricted); color:#FFFFFF; font-size:10px; line-height:1; display:inline-grid; place-items:center; flex:none}
+.pol-cap{font-size:var(--fs-xs); color:var(--ink-3); margin:12px 0 0; max-width:660px; line-height:1.7}
+/* 兩張表沿用全站表格樣式；欄寬改為等分，不用對照表的 168px 值欄 */
+.pol-tbl{min-width:640px}
+.pol-tbl thead th{vertical-align:top; text-align:left}
+.pol-tbl thead th small{display:block; font-weight:400; color:var(--ink-3); font-size:var(--fs-xs); margin-top:3px; letter-spacing:0; text-transform:none; font-family:var(--sans); line-height:1.5}
+.pol-tbl th + th, .pol-tbl td + td{border-left:1px solid var(--line)}
+.pol-tbl td.feat{width:124px; font-weight:600; color:var(--ink)}
+.pol-tbl td.v{width:150px}
+.pol-tbl td b{font-weight:600; color:var(--ink)}
+.pol-matrix td.feat{font-family:var(--mono); font-weight:400; font-size:var(--fs-xs); color:var(--ink-2); width:220px}
+.pol-matrix td.v{width:150px}
+.pol-matrix tr.hi td{background:color-mix(in srgb, var(--accent-soft) 45%, transparent)}
+.pol-rules{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin:16px 0 0}
+.pol-rules > div{background:var(--surface); padding:14px 16px}
+.pol-rules dt{font-weight:600; font-size:var(--fs-sm); margin-bottom:5px}
+.pol-rules dt small{display:block; font-weight:400; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); margin-top:3px}
+.pol-rules dd{margin:0; font-size:var(--fs-xs); color:var(--ink-2); line-height:1.65}
+@media (max-width:900px){ .pol-rules{grid-template-columns:1fr 1fr} .pol-part{grid-template-columns:1fr; gap:8px} }
+@media (max-width:600px){ .pol-rules{grid-template-columns:1fr} }
 
 /* ---------- protect / detect / respond ---------- */
 .pdr-in{position:absolute; width:1px; height:1px; opacity:0; pointer-events:none}
@@ -928,6 +837,11 @@ td.v.yes{color:var(--yes)}
 .cap b{font-weight:500; color:var(--ink)}
 /* 稽核卡的 Standard／Premium 對照：兩欄以 1px 直線分隔，延續 .caps 用細線切格的語彙；
    卡片因此變高、右鄰卡片留白屬預期，不另調 .caps */
+/* 稽核對照原放在半寬卡片內，兩欄各僅約 200px、逐行折行而顯得雜亂；
+   改為六張卡下方的全寬區塊，卡片只留結論句。 */
+.al-wide{margin-top:28px; padding:26px 28px 26px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card)}
+.al-wide > h3{font-size:var(--fs-md); margin:0 0 8px}
+.al-wide > p{font-size:var(--fs-base); margin:0 0 6px; max-width:none}
 .al-grid{display:grid; grid-template-columns:1fr 1fr; gap:0 28px; margin:14px 0; padding-top:14px; border-top:1px solid var(--line)}
 .al-col + .al-col{border-left:1px solid var(--line); padding-left:28px}
 .al-hd{display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 10px; margin:0 0 6px}
@@ -1185,16 +1099,12 @@ footer a:hover{color:var(--accent)}
   font-weight:800; font-size:var(--fs-base); letter-spacing:-.02em; color:var(--ink)}
 .ft-logo:hover{color:var(--accent)}
 .ft-brand p{font-size:var(--fs-xs); line-height:1.8; margin:12px 0 0; max-width:none}
-.ft-cta{
-  display:inline-block; margin-top:16px; padding:8px 18px; border-radius:var(--r-chip);
-  border:1px solid var(--line-2); font-size:var(--fs-sm); font-weight:600; color:var(--ink-2);
-  transition:border-color .15s ease, color .15s ease, background .15s ease;
-}
-.ft-cta:hover{background:var(--accent); border-color:var(--accent); color:var(--on-accent)}
 .ft-h{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em;
   text-transform:uppercase; color:var(--ink-2); margin:0 0 12px}
 .ft-col ul{list-style:none; margin:0; padding:0; display:grid; gap:8px}
 .ft-col li{font-size:var(--fs-sm); line-height:1.5}
+/* 本頁章節已達十項，單欄過長；改兩欄與右側「官方資源」高度相近 */
+.ft-col-2 ul{grid-template-columns:1fr 1fr; column-gap:20px}
 .ft-base{
   display:flex; flex-wrap:wrap; gap:8px 28px; align-items:baseline;
   margin-top:36px; padding-top:20px; border-top:1px solid var(--line);
@@ -1617,6 +1527,37 @@ img{max-width:100%}
   </div>
   </section>
 
+  <!-- MANAGED ACCOUNTS -->
+  <section id="managed" class="band">
+    <p class="eyebrow">受管帳號</p>
+    <h2>Guard 如何把帳號收進組織的控制範圍</h2>
+    <p>Atlassian 帳號隸屬於人，而非任何單一產品。Guard 先由組織驗證其擁有的電子郵件網域（Claimed domain），再把使用該網域的帳號納為受管帳號（Managed accounts）；驗證政策、密碼原則與 API token 管控隨之套用在帳號本身，而非逐站台設定。下圖以 Acme Global 為例：兩個已驗證網域的帳號進入納管，供應商網域的帳號留在範圍之外。</p>
+    <figure class="ma-flow">
+      <div class="ma-canvas" role="img" aria-label="受管帳號示意圖：Acme Global 組織內，@acme.com 與 @acme.co.uk 兩個 Claimed domain 下的帳號為 Managed accounts，分別連至 Cloud site acme.atlassian.net（Jira、Jira Service Management、Confluence）與 acme-eu.atlassian.net（Jira、Confluence）；組織框外另有 @vendor.com 網域的帳號，標示為未納管。">
+        <div class="ma-org">
+          <span class="ma-cap">Your organization · Acme Global</span><span class="ma-cap ma-cap-r">Managed accounts</span>
+        <div class="ma-row">
+          <div class="ma-node"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 8 11v13c0 10 7 17 16 20 9-3 16-10 16-20V11Z" fill="#1769DC"/><path d="M16 24.5 22 30.5 33 18.5" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38" cy="10" r="6" fill="#FFA902"/></svg><span class="ma-txt"><span class="ma-t">@acme.com</span><span class="ma-d">Claimed accounts</span></span><svg class="ma-avatars" viewBox="0 0 44 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#50B0E8"/><circle cx="22" cy="10" r="8" fill="#1769DC" stroke="#FFFFFF" stroke-width="2"/><circle cx="34" cy="10" r="8" fill="#FFA902" stroke="#FFFFFF" stroke-width="2"/></svg></div>
+          <svg class="ma-arrow" viewBox="0 0 44 16" aria-hidden="true"><path d="M2 8h34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M31 2.5 37.5 8 31 13.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="ma-node"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v6H4Z" fill="#123B5E"/><rect x="10" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/><rect x="20" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/><rect x="30" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/></svg><span class="ma-txt"><span class="ma-t">acme.atlassian.net</span><span class="ma-d">Cloud site · Jira · Jira Service Management · Confluence</span></span></div>
+        </div>
+        <div class="ma-row">
+          <div class="ma-node"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 8 11v13c0 10 7 17 16 20 9-3 16-10 16-20V11Z" fill="#1769DC"/><path d="M16 24.5 22 30.5 33 18.5" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38" cy="10" r="6" fill="#FFA902"/></svg><span class="ma-txt"><span class="ma-t">@acme.co.uk</span><span class="ma-d">Claimed accounts</span></span><svg class="ma-avatars" viewBox="0 0 44 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#50B0E8"/><circle cx="22" cy="10" r="8" fill="#1769DC" stroke="#FFFFFF" stroke-width="2"/><circle cx="34" cy="10" r="8" fill="#FFA902" stroke="#FFFFFF" stroke-width="2"/></svg></div>
+          <svg class="ma-arrow" viewBox="0 0 44 16" aria-hidden="true"><path d="M2 8h34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M31 2.5 37.5 8 31 13.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="ma-node"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v6H4Z" fill="#123B5E"/><rect x="10" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/><rect x="20" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/><rect x="30" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/></svg><span class="ma-txt"><span class="ma-t">acme-eu.atlassian.net</span><span class="ma-d">Cloud site · Jira · Confluence</span></span></div>
+        </div>
+        </div>
+        <div class="ma-ext"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="16" r="9" fill="#50B0E8"/><path d="M4 42a16 16 0 0 1 32 0Z" fill="#50B0E8"/><path d="M31 12h12m0 0-5-5m5 5-5 5" fill="none" stroke="#FFA902" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ma-txt"><span class="ma-t">@vendor.com</span><span class="ma-d">Accounts with another domain</span></span><svg class="ma-avatars" viewBox="0 0 44 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#50B0E8"/><circle cx="22" cy="10" r="8" fill="#1769DC" stroke="#FFFFFF" stroke-width="2"/><circle cx="34" cy="10" r="8" fill="#FFA902" stroke="#FFFFFF" stroke-width="2"/></svg><span class="ma-tag">未納管</span></div>
+      </div>
+      <ul class="ma-points">
+        <li><b>安全設定自動套用：</b>驗證政策、密碼原則、閒置逾時與 API token 管控，對所有 Managed accounts 一體生效，不需逐站台設定。</li>
+        <li><b>登入方式受控：</b>可阻止受管帳號改用第三方帳號登入，一律由公司 IdP 驗證。</li>
+        <li><b>外部協作者另行處理：</b>其他網域（如 @vendor.com）的帳號不在納管範圍，須以外部使用者政策施加控制。</li>
+      </ul>
+      <figcaption>圖：Guard 以 Claimed domain 為界，將 @acme.com 與 @acme.co.uk 的帳號收入 Acme Global 的 Managed accounts；帳號屬於人而非產品，因此控制施加於帳號，即涵蓋其可存取的所有 Cloud site。</figcaption>
+    </figure>
+  </section>
+
   <!-- 產品方案 vs GUARD -->
   <section id="vs">
     <p class="eyebrow">產品方案與 Guard 的分工</p>
@@ -1656,32 +1597,6 @@ img{max-width:100%}
       </table>
     </div>
 
-    <h3 class="sub-h">Guard 如何把帳號收進組織的控制範圍</h3>
-    <p>Atlassian 帳號隸屬於人，而非任何單一產品。Guard 先由組織驗證其擁有的電子郵件網域（Claimed domain），再把使用該網域的帳號納為受管帳號（Managed accounts）；驗證政策、密碼原則與 API token 管控隨之套用在帳號本身，而非逐站台設定。下圖以 Acme Global 為例。</p>
-    <figure class="ma-flow">
-      <div class="ma-canvas" role="img" aria-label="受管帳號示意圖：Acme Global 組織內，@acme.com 與 @acme.co.uk 兩個 Claimed domain 下的帳號為 Managed accounts，分別連至 Cloud site acme.atlassian.net（Jira、Jira Service Management、Confluence）與 acme-eu.atlassian.net（Jira、Confluence）；組織框外另有 @vendor.com 網域的帳號，標示為未納管。">
-        <div class="ma-org">
-          <span class="ma-cap">Your organization · Acme Global</span><span class="ma-cap ma-cap-r">Managed accounts</span>
-        <div class="ma-row">
-          <div class="ma-node"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 8 11v13c0 10 7 17 16 20 9-3 16-10 16-20V11Z" fill="#1769DC"/><path d="M16 24.5 22 30.5 33 18.5" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38" cy="10" r="6" fill="#FFA902"/></svg><span class="ma-txt"><span class="ma-t">@acme.com</span><span class="ma-d">Claimed accounts</span></span><svg class="ma-avatars" viewBox="0 0 44 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#50B0E8"/><circle cx="22" cy="10" r="8" fill="#1769DC" stroke="#FFFFFF" stroke-width="2"/><circle cx="34" cy="10" r="8" fill="#FFA902" stroke="#FFFFFF" stroke-width="2"/></svg></div>
-          <svg class="ma-arrow" viewBox="0 0 44 16" aria-hidden="true"><path d="M2 8h34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M31 2.5 37.5 8 31 13.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div class="ma-node"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v6H4Z" fill="#123B5E"/><rect x="10" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/><rect x="20" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/><rect x="30" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/></svg><span class="ma-txt"><span class="ma-t">acme.atlassian.net</span><span class="ma-d">Cloud site · Jira · Jira Service Management · Confluence</span></span></div>
-        </div>
-        <div class="ma-row">
-          <div class="ma-node"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 8 11v13c0 10 7 17 16 20 9-3 16-10 16-20V11Z" fill="#1769DC"/><path d="M16 24.5 22 30.5 33 18.5" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38" cy="10" r="6" fill="#FFA902"/></svg><span class="ma-txt"><span class="ma-t">@acme.co.uk</span><span class="ma-d">Claimed accounts</span></span><svg class="ma-avatars" viewBox="0 0 44 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#50B0E8"/><circle cx="22" cy="10" r="8" fill="#1769DC" stroke="#FFFFFF" stroke-width="2"/><circle cx="34" cy="10" r="8" fill="#FFA902" stroke="#FFFFFF" stroke-width="2"/></svg></div>
-          <svg class="ma-arrow" viewBox="0 0 44 16" aria-hidden="true"><path d="M2 8h34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M31 2.5 37.5 8 31 13.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div class="ma-node"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="4" fill="#1769DC"/><path d="M4 12a4 4 0 0 1 4-4h32a4 4 0 0 1 4 4v6H4Z" fill="#123B5E"/><rect x="10" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/><rect x="20" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/><rect x="30" y="23" width="8" height="11" rx="1.5" fill="#FFFFFF"/></svg><span class="ma-txt"><span class="ma-t">acme-eu.atlassian.net</span><span class="ma-d">Cloud site · Jira · Confluence</span></span></div>
-        </div>
-        </div>
-        <div class="ma-ext"><svg class="ma-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="20" cy="16" r="9" fill="#50B0E8"/><path d="M4 42a16 16 0 0 1 32 0Z" fill="#50B0E8"/><path d="M31 12h12m0 0-5-5m5 5-5 5" fill="none" stroke="#FFA902" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="ma-txt"><span class="ma-t">@vendor.com</span><span class="ma-d">Accounts with another domain</span></span><svg class="ma-avatars" viewBox="0 0 44 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="#50B0E8"/><circle cx="22" cy="10" r="8" fill="#1769DC" stroke="#FFFFFF" stroke-width="2"/><circle cx="34" cy="10" r="8" fill="#FFA902" stroke="#FFFFFF" stroke-width="2"/></svg><span class="ma-tag">未納管</span></div>
-      </div>
-      <ul class="ma-points">
-        <li><b>安全設定自動套用：</b>驗證政策、密碼原則、閒置逾時與 API token 管控，對所有 Managed accounts 一體生效，不需逐站台設定。</li>
-        <li><b>登入方式受控：</b>可阻止受管帳號改用第三方帳號登入，一律由公司 IdP 驗證。</li>
-        <li><b>外部協作者另行處理：</b>其他網域（如 @vendor.com）的帳號不在納管範圍，須以外部使用者政策施加控制。</li>
-      </ul>
-      <figcaption>圖：Guard 以 Claimed domain 為界，將 @acme.com 與 @acme.co.uk 的帳號收入 Acme Global 的 Managed accounts；帳號屬於人而非產品，因此控制施加於帳號，即涵蓋其可存取的所有 Cloud site。</figcaption>
-    </figure>
 
     <p class="note"><b>為何產品方案無法取代 Guard：</b>Jira Premium 的 IP 許可清單僅於<b>站台層級</b>生效，依官方文件不涵蓋 admin.atlassian.com 與帳號管理的 REST API。更根本的是，<b>Atlassian 帳號不隸屬於任何單一產品</b>——在 Jira 移除離職人員的存取權後，帳號依然存在、依然可登入，且可能仍持有其他站台的權限。未經 Guard 納管，就無法強制其改用公司 IdP 登入，也無法在 IdP 停用時連動解除全部存取權。</p>
 
@@ -1839,36 +1754,7 @@ img{max-width:100%}
         <div class="cap-top"><span class="tag std">Standard · Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="7" width="38" height="15" rx="3" fill="#50B0E8"/><rect x="5" y="26" width="38" height="15" rx="3" fill="#123B5E"/><circle cx="13" cy="14.5" r="2.8" fill="#FFFFFF"/><rect x="20" y="13" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/><circle cx="13" cy="33.5" r="2.8" fill="#FFA902"/><rect x="20" y="32" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/></svg></div>
           <h3>稽核記錄的兩個層次</h3>
         <p>兩者的記錄對象不同：<b>Standard 記錄管理員的操作行為，Premium 另涵蓋使用者對內容的檢視與匯出行為。</b></p>
-        <div class="al-grid">
-          <div class="al-col">
-            <div class="al-hd"><span class="tag std">Standard</span><b>管理員活動日誌</b></div>
-            <p>記錄管理員層級的操作，回答「誰動了組織設定」。</p>
-            <ul>
-              <li>Authentication policy 的建立、修改、刪除</li>
-              <li>使用者帳號的新增、停用、移除</li>
-              <li>產品存取權限與群組成員變更</li>
-              <li>Marketplace App 的安裝與移除</li>
-              <li>資料安全政策的調整</li>
-              <li>API token 的撤銷</li>
-            </ul>
-            <p class="al-meta"><b>組織洞察（Insights）</b>：每日／每月活躍使用者、授權使用狀況、已啟用兩步驗證或 SSO 的受管帳號比例。</p>
-            <p class="al-keep">保留期限：最多 180 天。</p>
-          </div>
-          <div class="al-col">
-            <div class="al-hd"><span class="tag">Premium</span><b>使用者活動日誌 + 進階整合</b></div>
-            <p>在 Standard 之上額外記錄一般使用者的操作，並可即時串流至 SIEM。額外記錄範圍：</p>
-            <ul>
-              <li>使用者建立、編輯、刪除頁面／Issue</li>
-              <li>使用者匯出資料（PDF、CSV）</li>
-              <li>使用者存取特定空間／專案的紀錄</li>
-              <li>使用者的登入／登出事件與 IP 位址</li>
-              <li>異常行為事件（大量下載、非正常時段存取等）</li>
-            </ul>
-            <p class="al-meta"><b>更細緻的篩選</b>：可依使用者、產品、操作類型、時間區間交叉查詢。</p>
-            <p class="al-keep">保留期限：官方文件載明最多 180 天，未區分方案；更長期的留存需定期匯出或串流至 SIEM。</p>
-          </div>
-        </div>
-        <p>離職人員的存取歷程盤查，或稽核單位要求說明「何人於何時檢視過哪份文件」這類需求，僅憑 Standard 的管理員記錄無法完成。</p>
+        <p>兩者各自涵蓋哪些操作、保留多久，逐項對照見本節下方。</p>
       </div>
 
       <div class="cap">
@@ -1886,13 +1772,47 @@ img{max-width:100%}
       </div>
 
     </div>
+
+    <div class="al-wide">
+      <h3>稽核記錄：兩種方案分別記錄什麼</h3>
+      <p>離職人員的存取歷程盤查，或稽核單位要求說明「何人於何時檢視過哪份文件」這類需求，僅憑 Standard 的管理員記錄無法完成。</p>
+      <div class="al-grid">
+        <div class="al-col">
+          <div class="al-hd"><span class="tag std">Standard</span><b>管理員活動日誌</b></div>
+          <p>記錄管理員層級的操作，回答「誰動了組織設定」。</p>
+          <ul>
+            <li>Authentication policy 的建立、修改、刪除</li>
+            <li>使用者帳號的新增、停用、移除</li>
+            <li>產品存取權限與群組成員變更</li>
+            <li>Marketplace App 的安裝與移除</li>
+            <li>資料安全政策的調整</li>
+            <li>API token 的撤銷</li>
+          </ul>
+          <p class="al-meta"><b>組織洞察（Insights）</b>：每日／每月活躍使用者、授權使用狀況、已啟用兩步驗證或 SSO 的受管帳號比例。</p>
+          <p class="al-keep">保留期限：最多 180 天。</p>
+        </div>
+        <div class="al-col">
+          <div class="al-hd"><span class="tag">Premium</span><b>使用者活動日誌 + 進階整合</b></div>
+          <p>在 Standard 之上額外記錄一般使用者的操作，並可即時串流至 SIEM。額外記錄範圍：</p>
+          <ul>
+            <li>使用者建立、編輯、刪除頁面／Issue</li>
+            <li>使用者匯出資料（PDF、CSV）</li>
+            <li>使用者存取特定空間／專案的紀錄</li>
+            <li>使用者的登入／登出事件與 IP 位址</li>
+            <li>異常行為事件（大量下載、非正常時段存取等）</li>
+          </ul>
+          <p class="al-meta"><b>更細緻的篩選</b>：可依使用者、產品、操作類型、時間區間交叉查詢。</p>
+          <p class="al-keep">保留期限：官方文件載明最多 180 天，未區分方案；更長期的留存需定期匯出或串流至 SIEM。</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- CLASSIFICATION -->
   <section id="classification" class="band">
     <p class="eyebrow">資料分類四級</p>
     <h2>四個等級分別對應什麼內容，又實際限制了什麼</h2>
-    <p>資料分類是 Premium 與 Standard 之間最具體的分野，但四個等級的名稱本身並未說明其效力。等級數量與名稱由組織自行定義，此處採 Atlassian 預設的四級架構。</p>
+    <p>資料分類為 Guard Premium 與 Standard 之間最明確的差異所在；惟等級名稱本身不具效力，實際限制須由資料安全政策賦予。等級的數量與名稱可由組織自行定義，本節以 Atlassian 預設的四級架構說明。</p>
     <div class="cls">
 
       <article class="cls-row" style="--k:var(--c-public)">
@@ -1958,143 +1878,85 @@ img{max-width:100%}
   <!-- POLICY -->
   <section id="policy">
     <p class="eyebrow">資料安全政策</p>
-    <h2>標籤如何轉為實際限制：政策的組成、範圍與疊加</h2>
-    <p>分類標籤只是內容上的註記，真正執行限制的是組織層級的資料安全政策。本節說明一組政策由哪些部分構成、可選擇的三種覆蓋範圍，以及多組政策同時涵蓋同一內容時應如何理解。</p>
+    <h2>讓標籤產生實際限制：一組政策 ＝ 範圍 × 規則</h2>
+    <p>分類標籤只是內容上的註記，實際限制由組織層級的資料安全政策執行。一組政策只有兩個要件：<b class="nb">管到哪些資料</b>（覆蓋範圍）與<b class="nb">不允許做什麼</b>（規則）；名稱、描述、建立者與啟用狀態則是一般的管理欄位。政策建立於組織層級，同一組規則可跨 Jira 與 Confluence 一致執行，單一組織最多可建立 50 組。</p>
 
-    <ol class="dsp-steps">
-      <li><span class="dsp-n" aria-hidden="true">1</span><h3>名稱與描述</h3><p>政策的名稱與選填描述，說明其目的與背景，方便日後其他管理者理解設定緣由。</p></li>
-      <li><span class="dsp-n" aria-hidden="true">2</span><h3>建立者與狀態</h3><p>記錄建立者、最後更新者與更新時間；政策須處於啟用（Active）狀態，規則才會實際生效。</p></li>
-      <li><span class="dsp-n" aria-hidden="true">3</span><h3>覆蓋範圍<small>Coverage</small></h3><p>政策適用的資料。可依分類等級、指定空間與專案，或整個產品三種方式選擇，詳見下方。</p></li>
-      <li><span class="dsp-n" aria-hidden="true">4</span><h3>規則<small>Rules</small></h3><p>對覆蓋範圍內的資料執行的安全控制，例如阻擋匯出、禁止公開連結、阻擋匿名或應用程式存取。</p></li>
-    </ol>
-
-    <div class="dsp-polwrap">
-      <figure class="dsp-pol" role="img" aria-label="管理主控台中一組資料安全政策的示意：名稱 Finance data，狀態 Active，覆蓋範圍為兩個產品，規則為阻擋 Data export 與僅限 Confluence 的 Public links。">
-        <div class="dsp-pol-head">
-          <div>
-            <div class="dsp-pol-title"><span class="dsp-ref">1</span>Finance data</div>
-            <p class="dsp-pol-desc">Controls for finance and audit content shared across Jira and Confluence.</p>
-            <p class="dsp-pol-meta"><span class="dsp-ref">2</span>Created by J. Lin · Last updated 2026-08-21 by IT Security</p>
-          </div>
-          <span class="dsp-status">Active</span>
+    <figure class="pol-card" role="img" aria-label="一組資料安全政策的示意：名稱 Finance data、狀態 Active；覆蓋範圍為 Jira 與 Confluence 整個產品；規則為禁止匯出資料，以及禁止建立公開連結（僅 Confluence）。">
+      <div class="pol-card-hd">
+        <div class="pol-card-name">Finance data<small>財務與稽核內容的保護政策 · 建立者 IT Security</small></div>
+        <span class="pol-status">Active</span>
+      </div>
+      <div class="pol-part">
+        <div class="pol-part-lb"><b>覆蓋範圍</b><small>Coverage</small></div>
+        <div class="pol-part-body">
+          <span class="pol-q">管到哪些資料？</span>
+          <div class="pol-chips"><span>Jira</span><span>Confluence</span></div>
+          <small>以「整個產品」為範圍——兩個產品內的所有頁面與議題都受此政策約束。</small>
         </div>
-        <dl class="dsp-pol-body">
-          <dt><span class="dsp-ref">3</span>Coverage</dt>
-          <dd><b>2 products</b><div class="dsp-chips"><span class="dsp-chip">Jira</span><span class="dsp-chip">Confluence</span></div></dd>
-          <dt><span class="dsp-ref">4</span>Rules</dt>
-          <dd><ul class="dsp-rulelist">
-            <li><span class="dsp-ok" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 5.2 4 7.6 8.6 2.4" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Data export</b> blocked</li>
-            <li><span class="dsp-ok" aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M1.5 5.2 4 7.6 8.6 2.4" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><b>Public links</b> blocked <span class="dsp-badge">Confluence only</span></li>
-          </ul></dd>
-        </dl>
-      </figure>
-      <p class="dsp-polnote"><b>一組政策在主控台中的樣貌。</b>四個組成一一對應：名稱與描述說明用途，狀態決定是否生效，覆蓋範圍決定「管到哪些資料」，規則決定「不允許什麼」。政策建立於組織層級，因此同一組規則可跨 Jira 與 Confluence 一致執行，不必於各站台分別設定。單一組織最多可建立 50 組政策。</p>
+      </div>
+      <div class="pol-part">
+        <div class="pol-part-lb"><b>規則</b><small>Rules</small></div>
+        <div class="pol-part-body">
+          <span class="pol-q">不允許做什麼？</span>
+          <ul>
+            <li><span class="pol-x" aria-hidden="true">✕</span>匯出資料 <em>Data export</em></li>
+            <li><span class="pol-x" aria-hidden="true">✕</span>建立公開連結 <em>Public links · Confluence</em></li>
+          </ul>
+        </div>
+      </div>
+    </figure>
+    <p class="pol-cap">圖：一組政策在管理主控台中的兩個要件。範圍決定「管到哪些資料」，規則決定「不允許做什麼」；下方分別說明範圍的三種選法，以及多組政策同時涵蓋同一內容時的效果。</p>
+
+    <h3 class="pol-h3">覆蓋範圍怎麼選：三種方式</h3>
+    <p>三種方式的差別在於<b>用什麼當邊界</b>：整個產品、特定的空間與專案，或內容本身的分類標籤。前兩種 Standard 即可使用；依分類等級劃定範圍是 Premium 專屬，也是「資料分級」一節之所以重要的原因。</p>
+    <div class="tbl-scroll">
+      <table class="tiers pol-tbl">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">整個產品<small>Products</small></th>
+            <th scope="col">指定空間／專案<small>Spaces and projects</small></th>
+            <th scope="col" class="prem">依分類等級<small>Classification level</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="feat">邊界</td><td>產品本身：Jira 或 Confluence 內的全部內容</td><td>容器：選定的 Confluence 空間與 Jira 專案</td><td>內容本身的標籤：Public、Internal、Confidential、Restricted</td></tr>
+          <tr><td class="feat">適合</td><td>全組織一體適用的底線，例如「任何人都不得建立公開連結」</td><td>特定部門或專案，例如「財務空間禁止匯出」</td><td>依敏感程度分級管制，例如「Confidential 以上禁止匯出、禁止應用程式讀取」</td></tr>
+          <tr><td class="feat">內容移動後</td><td>仍在產品內即持續受約束</td><td>移出該空間或專案即不再受約束</td><td>標籤跟著內容走，移到任何位置仍受約束</td></tr>
+          <tr><td class="feat">可用規則</td><td>匿名存取（僅 Jira）、匯出資料、公開連結（僅 Confluence）</td><td>同左，另可加<b>應用程式存取</b></td><td>匿名存取（僅 Jira）、匯出資料、公開連結（僅 Confluence）</td></tr>
+          <tr><td class="feat">方案</td><td>Standard · Premium</td><td>Standard · Premium</td><td><b>Premium</b></td></tr>
+        </tbody>
+      </table>
     </div>
-
-    <h3 class="dsp-sub">三種覆蓋範圍：政策可以「管到」哪些資料</h3>
-    <div class="dsp-cov">
-
-      <div class="dsp-cov-col">
-        <div class="dsp-cov-top">
-          <svg viewBox="0 0 48 48" aria-hidden="true">
-            <rect x="4" y="7" width="40" height="8" rx="4" fill="#123B5E"/>
-            <rect x="4" y="20" width="30" height="8" rx="4" fill="#1769DC"/>
-            <rect x="4" y="33" width="20" height="8" rx="4" fill="#50B0E8"/>
-          </svg>
-          <span class="dsp-tag">Premium</span>
-        </div>
-        <h3>Classification level</h3>
-        <p>依分類等級涵蓋頁面與議題。標籤依附於內容本身，內容移動至任何空間或專案，均仍受同一組政策約束。</p>
-        <p class="dsp-rh">支援的規則</p>
-        <ul>
-          <li><b>Anonymous access</b><span class="dsp-badge">Jira only</span></li>
-          <li><b>Data export</b></li>
-          <li><b>Public links</b><span class="dsp-badge">Confluence only</span></li>
-        </ul>
-      </div>
-
-      <div class="dsp-cov-col">
-        <div class="dsp-cov-top">
-          <svg viewBox="0 0 48 48" aria-hidden="true">
-            <rect x="4" y="4" width="18" height="18" rx="4" fill="#1769DC"/>
-            <rect x="26" y="4" width="18" height="18" rx="4" fill="#123B5E"/>
-            <rect x="4" y="26" width="40" height="18" rx="4" fill="#FFA902"/>
-          </svg>
-          <span class="dsp-tag std">Standard · Premium</span>
-        </div>
-        <h3>Spaces and projects</h3>
-        <p>涵蓋指定 Confluence 空間與 Jira 專案中的頁面與議題。以容器為單位套用，是 Guard Standard 可用的最細粒度。</p>
-        <p class="dsp-rh">支援的規則</p>
-        <ul>
-          <li><b>App access</b></li>
-          <li><b>Anonymous access</b><span class="dsp-badge">Jira only</span></li>
-          <li><b>Data export</b></li>
-          <li><b>Public links</b><span class="dsp-badge">Confluence only</span></li>
-        </ul>
-      </div>
-
-      <div class="dsp-cov-col">
-        <div class="dsp-cov-top">
-          <svg viewBox="0 0 48 48" aria-hidden="true">
-            <rect x="12" y="4" width="32" height="26" rx="4" fill="#123B5E"/>
-            <rect x="4" y="14" width="32" height="30" rx="4" fill="#1769DC"/>
-            <rect x="4" y="14" width="32" height="7" rx="3" fill="#FFA902"/>
-          </svg>
-          <span class="dsp-tag std">Standard · Premium</span>
-        </div>
-        <h3>Products</h3>
-        <p>涵蓋整個產品中的所有頁面與議題。範圍最廣、設定最少，適合作為全組織一體適用的底線規則。</p>
-        <p class="dsp-rh">支援的規則</p>
-        <ul>
-          <li><b>Anonymous access</b><span class="dsp-badge">Jira only</span></li>
-          <li><b>Data export</b></li>
-          <li><b>Public links</b><span class="dsp-badge">Confluence only</span></li>
-        </ul>
-      </div>
-
-    </div>
-    <dl class="dsp-defs">
-      <div><dt>Anonymous access</dt><dd>阻擋未登入者存取覆蓋範圍內的內容。</dd></div>
-      <div><dt>Data export</dt><dd>阻擋匯出 Confluence 頁面／部落格與 Jira 議題。</dd></div>
-      <div><dt>Public links</dt><dd>禁止為覆蓋範圍內的頁面建立公開連結。</dd></div>
-      <div><dt>App access</dt><dd>阻擋 Marketplace 與自訂應用程式存取特定資料。</dd></div>
+    <dl class="pol-rules">
+      <div><dt>匿名存取<small>Anonymous access · 僅 Jira</small></dt><dd>阻擋未登入者檢視覆蓋範圍內的內容。</dd></div>
+      <div><dt>匯出資料<small>Data export</small></dt><dd>阻擋匯出 Confluence 頁面、部落格與 Jira 議題。</dd></div>
+      <div><dt>公開連結<small>Public links · 僅 Confluence</small></dt><dd>禁止為覆蓋範圍內的頁面建立公開分享連結。</dd></div>
+      <div><dt>應用程式存取<small>App access · 僅空間／專案範圍</small></dt><dd>阻擋 Marketplace 與自訂應用程式讀取特定資料。</dd></div>
     </dl>
 
-    <h3 class="dsp-sub">多組政策疊加：同一內容可同時落在多組政策的範圍內</h3>
-    <div class="dsp-multi">
-      <div class="dsp-org" role="img" aria-label="示意圖：Acme organization 內有五個 Confluence 站台。Policy 1 涵蓋 acme-hr 與 acme-legal；Policy 2 涵蓋 acme-finance、acme-hr、acme-legal 與 acme-marketing。hr 與 legal 兩個站台同時落在兩組政策內。">
-        <span class="dsp-org-lb">Acme organization</span>
-        <div class="dsp-sites">
-          <div class="dsp-site"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="1.5" width="12" height="13" rx="2" fill="#1769DC"/><rect x="5" y="5" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="8.2" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="11.4" width="3.5" height="1.6" rx=".8" fill="#FFFFFF"/></svg>acme.atlassian.net/wiki</div>
-          <div class="dsp-site"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="1.5" width="12" height="13" rx="2" fill="#1769DC"/><rect x="5" y="5" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="8.2" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="11.4" width="3.5" height="1.6" rx=".8" fill="#FFFFFF"/></svg>acme-finance.atlassian.net/wiki</div>
-          <div class="dsp-site"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="1.5" width="12" height="13" rx="2" fill="#1769DC"/><rect x="5" y="5" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="8.2" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="11.4" width="3.5" height="1.6" rx=".8" fill="#FFFFFF"/></svg>acme-hr.atlassian.net/wiki</div>
-          <div class="dsp-site"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="1.5" width="12" height="13" rx="2" fill="#1769DC"/><rect x="5" y="5" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="8.2" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="11.4" width="3.5" height="1.6" rx=".8" fill="#FFFFFF"/></svg>acme-legal.atlassian.net/wiki</div>
-          <div class="dsp-site"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="1.5" width="12" height="13" rx="2" fill="#1769DC"/><rect x="5" y="5" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="8.2" width="6" height="1.6" rx=".8" fill="#FFFFFF"/><rect x="5" y="11.4" width="3.5" height="1.6" rx=".8" fill="#FFFFFF"/></svg>acme-marketing.atlassian.net/wiki</div>
-          <div class="dsp-ov dsp-ov-2"><span>Policy 2</span></div>
-          <div class="dsp-ov dsp-ov-1"><span>Policy 1</span></div>
-        </div>
-      </div>
-      <div class="dsp-pols">
-        <article class="dsp-polcard dsp-polcard-1">
-          <h3><i aria-hidden="true"></i>Policy 1 <span>hr · legal</span></h3>
-          <p>適用於含個人識別資訊（PII，Personally Identifiable Information）的產品。</p>
-          <ul>
-            <li>不允許下載</li>
-            <li>不允許應用程式存取</li>
-            <li>不允許匿名存取</li>
-          </ul>
-        </article>
-        <article class="dsp-polcard dsp-polcard-2">
-          <h3><i aria-hidden="true"></i>Policy 2 <span>finance · hr · legal · marketing</span></h3>
-          <p>適用於含未經核准對外揭露資訊的產品。</p>
-          <ul>
-            <li>不允許下載</li>
-            <li>不允許匿名存取</li>
-          </ul>
-        </article>
-      </div>
+    <h3 class="pol-h3">多組政策疊加：同一站台落在兩組政策內時</h3>
+    <p>Acme 組織有五個 Confluence 站台，建立了兩組政策。下表逐站台列出各政策是否涵蓋，以及最後一欄<b>實際生效的限制</b>——即所有涵蓋它的政策規則加總。</p>
+    <div class="tbl-scroll">
+      <table class="tiers pol-tbl pol-matrix">
+        <thead>
+          <tr>
+            <th scope="col">站台</th>
+            <th scope="col">Policy 1<small>含個人識別資訊（PII）的產品</small><small>不允許：下載、應用程式存取、匿名存取</small></th>
+            <th scope="col">Policy 2<small>含未經核准對外揭露資訊的產品</small><small>不允許：下載、匿名存取</small></th>
+            <th scope="col">實際生效的限制</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="feat">acme.atlassian.net/wiki</td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td>無</td></tr>
+          <tr><td class="feat">acme-finance.atlassian.net/wiki</td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td>下載、匿名存取</td></tr>
+          <tr class="hi"><td class="feat">acme-hr.atlassian.net/wiki</td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td><b>下載、應用程式存取、匿名存取</b></td></tr>
+          <tr class="hi"><td class="feat">acme-legal.atlassian.net/wiki</td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td><b>下載、應用程式存取、匿名存取</b></td></tr>
+          <tr><td class="feat">acme-marketing.atlassian.net/wiki</td><td class="v"><span class="dash" role="img" aria-label="未涵蓋"></span></td><td class="v yes"><span class="tick sm" aria-hidden="true">✓</span></td><td>下載、匿名存取</td></tr>
+        </tbody>
+      </table>
     </div>
-    <p class="dsp-concl"><b>多組政策可同時涵蓋同一內容。</b>如圖中的 hr 與 legal 站台同時受 Policy 1 與 Policy 2 約束，設計時應以最嚴格的規則組合檢視其實際效果：Policy 2 未限制的應用程式存取，在 hr 與 legal 仍會被 Policy 1 阻擋。建議先以 Products 或 Spaces and projects 建立全組織的底線政策，再以 Classification level 政策針對高敏感內容加嚴。</p>
+    <p class="note" style="margin-top:20px"><b>疊加的效果：</b>hr 與 legal 同時受兩組政策約束，實際限制是兩組規則的加總——Policy 2 未限制的應用程式存取，在這兩個站台仍被 Policy 1 阻擋。實務上建議先以「整個產品」或「指定空間／專案」建立全組織的底線政策，再以「依分類等級」的政策針對高敏感內容加嚴。</p>
   </section>
 
   <!-- CASES -->
@@ -2735,7 +2597,7 @@ img{max-width:100%}
   <!-- READING -->
   <section id="reading" class="band">
     <p class="eyebrow">延伸閱讀</p>
-    <h2>三篇文章，補足本頁未展開的實作細節</h2>
+    <h2>從概念到導入現場：三篇可延伸閱讀的實作文章</h2>
     <p>由 Titansoft 顧問團隊撰寫、發表於 Medium，依「是什麼、帳號怎麼管、事件怎麼處理」的順序由淺入深。</p>
     <div class="rd-grid">
       <a class="rd-card" href="https://medium.com/p/c2aaee16e798" target="_blank" rel="noopener">
@@ -2807,14 +2669,14 @@ img{max-width:100%}
     <div class="ft-brand">
       <a class="ft-logo" href="#top"><img src="assets/favicon-32.png" alt="" width="24" height="24"><span>Atlassian Guard</span></a>
       <p>Atlassian Guard Standard 與 Premium 的選版指南，由 Atlassian 合作夥伴新加坡商鈦坦科技（Titansoft）整理與維護。</p>
-      <a class="ft-cta" href="https://tsgojira.atlassian.net/servicedesk/customer/portal/4/group/8/create/43" target="_blank" rel="noopener">預約 Demo</a>
     </div>
 
-    <nav class="ft-col" aria-labelledby="ft-nav-page">
+    <nav class="ft-col ft-col-2" aria-labelledby="ft-nav-page">
       <p class="ft-h" id="ft-nav-page">本頁章節</p>
       <ul>
         <li><a href="#pdr">防護支柱</a></li>
         <li><a href="#identity">身分與存取</a></li>
+        <li><a href="#managed">受管帳號</a></li>
         <li><a href="#compare">功能對照</a></li>
         <li><a href="#classification">資料分級</a></li>
         <li><a href="#policy">資料政策</a></li>
