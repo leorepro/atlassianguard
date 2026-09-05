@@ -6,7 +6,7 @@
 <meta name="description" content="Atlassian Guard Standard 與 Premium 的完整功能對照、場景對照、定價級距與導入 FAQ。">
 <title>Atlassian Guard 選版指南</title>
 <link rel="canonical" href="https://atlassianguard.com/">
-<meta name="theme-color" content="#12463C">
+<meta name="theme-color" content="#0F3D6B">
 
 <!-- Open Graph / 社群分享 -->
 <meta property="og:type" content="article">
@@ -32,13 +32,14 @@
 /* 單一淺色主題：白底，所有顏色明確指定，不隨檢視者主題反轉 */
 :root{
   color-scheme:light;
-  --ink:#111716; --ink-2:#404E51; --ink-3:#78878B;
-  --paper:#FFFFFF; --surface:#FFFFFF; --surface-2:#F5F7F6;
-  --line:#E3E7E5; --line-2:#C6CDC9;
-  --accent:#12463C; --accent-soft:#E9F1ED; --on-accent:#FFFFFF;
-  --yes:#0E8F5E; --yes-ring:#CFEBDF; --no:#C6CDC9;
-  --c-public:#5E7A73; --c-internal:#2C6288; --c-conf:#A85C22; --c-restricted:#8E2B2B;
-  --shadow:0 1px 2px rgba(17,23,22,.04), 0 14px 34px -24px rgba(17,23,22,.30);
+  --ink:#111519; --ink-2:#404B58; --ink-3:#798695;
+  --paper:#FFFFFF; --surface:#FFFFFF; --surface-2:#F5F7FA;
+  --line:#E4E8EE; --line-2:#C6CDD7;
+  --accent:#0F3D6B; --accent-soft:#E8F0F9; --on-accent:#FFFFFF;
+  --yes:#1263CE; --yes-ring:#D2E3FA; --no:#C6CDD7;
+  /* 分類階梯保留暖色對比；Public 去飽和為中性灰，避免與 Internal 的藍相混 */
+  --c-public:#71808F; --c-internal:#2E6FA8; --c-conf:#A85C22; --c-restricted:#8E2B2B;
+  --shadow:0 1px 2px rgba(17,21,25,.04), 0 14px 34px -24px rgba(17,21,25,.30);
 
   --serif:"Noto Serif TC", Georgia, "Songti TC", serif;
   --sans:"Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", sans-serif;
@@ -406,16 +407,16 @@ img{max-width:100%}
           <tr><td class="feat">資料落腳地<small>指定資料存放區域</small></td><td class="v v-list">Standard 以上</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
 
           <tr class="grp"><th colspan="3" scope="colgroup">僅 Guard 提供，產品方案再高階亦不含</th></tr>
-          <tr><td class="feat">強制單一登入<small>強制全組織帳號改由公司身分識別提供者驗證</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
-          <tr><td class="feat">強制兩步驟驗證</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
-          <tr><td class="feat">SCIM 自動佈建與解除佈建<small>於 IdP 停用帳號的同時解除所有存取權</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
-          <tr><td class="feat">API token 管控與到期設定</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
-          <tr><td class="feat">跨產品的組織層級稽核記錄<small>涵蓋所有站台，而非單一產品的操作記錄</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
-          <tr><td class="feat">行動應用程式管理<small>限制截圖、螢幕錄影與檔案下載</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard</td></tr>
-          <tr><td class="feat">資料分類與自動分級</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
-          <tr><td class="feat">內容掃描與自訂偵測規則</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
-          <tr><td class="feat">異常行為偵測與告警</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
-          <tr><td class="feat">SIEM 整合與建議修復動作</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
+          <tr><td class="feat">強制單一登入<small>強制全組織帳號改由公司身分識別提供者驗證</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard 以上</td></tr>
+          <tr><td class="feat">強制兩步驟驗證</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard 以上</td></tr>
+          <tr><td class="feat">SCIM 自動佈建與解除佈建<small>於 IdP 停用帳號的同時解除所有存取權</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard 以上</td></tr>
+          <tr><td class="feat">API token 管控與到期設定</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard 以上</td></tr>
+          <tr><td class="feat">跨產品的組織層級稽核記錄<small>涵蓋所有站台，而非單一產品的操作記錄</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard 以上</td></tr>
+          <tr><td class="feat">行動應用程式管理<small>限制截圖、螢幕錄影與檔案下載</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard 以上</td></tr>
+          <tr><td class="feat">資料分類與自動分級</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">僅 Premium</td></tr>
+          <tr><td class="feat">內容掃描與自訂偵測規則</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">僅 Premium</td></tr>
+          <tr><td class="feat">異常行為偵測與告警</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">僅 Premium</td></tr>
+          <tr><td class="feat">SIEM 整合與建議修復動作</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">僅 Premium</td></tr>
         </tbody>
       </table>
     </div>
@@ -440,8 +441,8 @@ img{max-width:100%}
         <thead>
           <tr>
             <th scope="col">功能</th>
-            <th scope="col" class="plan"><span class="pn">Standard</span><span class="pp">US$4.20 / 人 / 月起</span></th>
-            <th scope="col" class="plan prem"><span class="pn">Premium</span><span class="pp">US$8.18 / 人 / 月起</span></th>
+            <th scope="col" class="plan"><span class="pn">Standard</span></th>
+            <th scope="col" class="plan prem"><span class="pn">Premium</span></th>
           </tr>
         </thead>
         <tbody>
