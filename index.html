@@ -198,7 +198,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<!-- 拉丁字型：檔案小，各裝置皆載入 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<!-- 中文字型：CJK 分片約 1.2MB，僅於桌面尺寸載入；行動裝置改用系統內建中文字型 -->
+<link rel="stylesheet" media="(min-width:820px)" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap">
 
 <style>
 /* 單一淺色主題：白底，所有顏色明確指定，不隨檢視者主題反轉 */
@@ -230,7 +233,10 @@
   --fs-amt:40px;                          /* 價格數字 */
   --shadow:0 1px 2px rgba(17,21,25,.04), 0 14px 34px -24px rgba(17,21,25,.30);
 
-  --sans:"Plus Jakarta Sans", "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", sans-serif;
+  /* 拉丁字用 Plus Jakarta Sans；中文於桌面用 Noto Sans TC，
+     行動裝置則依序回落至系統內建字型（iOS 蘋方、Android 思源、Windows 微軟正黑） */
+  --sans:"Plus Jakarta Sans", "Noto Sans TC", -apple-system, BlinkMacSystemFont,
+         "PingFang TC", "Noto Sans CJK TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
   --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
