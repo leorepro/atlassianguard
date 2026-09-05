@@ -1881,6 +1881,7 @@ img{max-width:100%}
     <h2>讓標籤產生實際限制：一組政策 ＝ 範圍 × 規則</h2>
     <p>分類標籤只是內容上的註記，實際限制由組織層級的資料安全政策執行。一組政策只有兩個要件：<b class="nb">管到哪些資料</b>（覆蓋範圍）與<b class="nb">不允許做什麼</b>（規則）；名稱、描述、建立者與啟用狀態則是一般的管理欄位。政策建立於組織層級，同一組規則可跨 Jira 與 Confluence 一致執行，單一組織最多可建立 50 組。</p>
 
+    <p>以下以一組名為 <b>Finance data</b> 的政策為例。財務團隊的預算表與稽核底稿分散在 Jira 議題與 Confluence 頁面，管理者不想逐一空間設定，於是把範圍定為<b>兩個產品的全部內容</b>，規則只挑兩項：禁止匯出、禁止建立公開連結。</p>
     <figure class="pol-card" role="img" aria-label="一組資料安全政策的示意：名稱 Finance data、狀態 Active；覆蓋範圍為 Jira 與 Confluence 整個產品；規則為禁止匯出資料，以及禁止建立公開連結（僅 Confluence）。">
       <div class="pol-card-hd">
         <div class="pol-card-name">Finance data<small>財務與稽核內容的保護政策 · 建立者 IT Security</small></div>
@@ -1905,7 +1906,7 @@ img{max-width:100%}
         </div>
       </div>
     </figure>
-    <p class="pol-cap">圖：一組政策在管理主控台中的兩個要件。範圍決定「管到哪些資料」，規則決定「不允許做什麼」；下方分別說明範圍的三種選法，以及多組政策同時涵蓋同一內容時的效果。</p>
+    <p class="pol-cap">圖：Finance data 生效後，Jira 與 Confluence 內的任何頁面或議題都無法匯出為 PDF、Word 或 CSV，也無法產生公開分享連結；未勾選的「匿名存取」與「應用程式存取」則不受此政策影響。範圍決定「管到哪些資料」，規則決定「不允許做什麼」——下方分別說明範圍的三種選法，以及多組政策同時涵蓋同一內容時的效果。</p>
 
     <h3 class="pol-h3">覆蓋範圍怎麼選：三種方式</h3>
     <p>三種方式的差別在於<b>用什麼當邊界</b>：整個產品、特定的空間與專案，或內容本身的分類標籤。前兩種 Standard 即可使用；依分類等級劃定範圍是 Premium 專屬，也是「資料分級」一節之所以重要的原因。</p>
