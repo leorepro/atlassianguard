@@ -9,11 +9,13 @@ Atlassian Guard **Standard 與 Premium** 的功能對照、場景對照、定價
 
 ```
 .
-├── index.html                    # 網站本體（單一自含檔案：內嵌 CSS、無 JS）
+├── index.html                    # 網站本體：標記與文案
 ├── robots.txt                    # 全站開放索引，並指向 sitemap
 ├── sitemap.xml                   # 單一 URL，含 lastmod
 ├── favicon.ico                   # 多尺寸 16/32/48
 ├── assets/
+│   ├── style.css                 # 全站樣式：設計 token 與版面
+│   ├── app.js                    # 全站行為：影片延後載入、分組展開、導覽列區塊標示
 │   ├── og-cover.png              # 社群分享卡片 1200×630（由 tools/og.html 產生）
 │   ├── favicon-32.png
 │   ├── favicon-192.png           # Android
@@ -28,7 +30,8 @@ Atlassian Guard **Standard 與 Premium** 的功能對照、場景對照、定價
 ```
 
 外部相依只有 Google Fonts（Plus Jakarta Sans / Noto Sans TC / IBM Plex Mono），
-其餘樣式全部內嵌，無建置步驟、無 npm 相依。
+無建置步驟、無 npm 相依、無前端框架——`style.css` 與 `app.js` 均為原生撰寫，直接由
+`index.html` 以相對路徑引用。
 
 icon 的 `<link>` 一律用**相對路徑**，所以不論站台掛在自訂網域根目錄或
 `leorepro.github.io/atlassianguard/` 子路徑都能正確載入。
@@ -76,10 +79,13 @@ git push
 
 ## 更新內容
 
-所有文案、表格與樣式都在 `index.html` 內：
+- `index.html`：文案、表格與各 `<section>`（Hero、功能對照表、場景對照、定價、FAQ）
+- `assets/style.css`：設計 token（顏色、字級、圓角、陰影）與所有版面樣式
+- `assets/app.js`：四段互不相依的 IIFE——首屏影片延後載入、能力卡錄影展開、
+  場景分組展開、導覽列區塊標示。各自在目標元素不存在時直接跳出，因此未啟用
+  指令碼或元素被移除時，頁面功能均不受影響
 
-- `<style>` 區塊：設計 token（顏色、字體）與版面樣式
-- `<body>` 內各 `<section>`：Hero、功能對照表、場景對照、定價、FAQ
+樣式沿用既有的 token 與語彙，新增顏色或字級前請先確認 `:root` 內是否已有對應的變數。
 
 ## SEO
 
