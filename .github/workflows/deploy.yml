@@ -29,6 +29,13 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      # 把 index.html 內的 ?v= 改寫為 style.css／app.js 的內容雜湊，讓長效快取
+      # 隨檔案內容自動失效。只改工作目錄、不回寫倉庫；倉庫內維持日期版本，
+      # 因此本機直接開啟 index.html 仍可正常運作。
+      # 找不到對應的 ?v= 或資源檔時會讓部署失敗，避免無聲地失去快取失效機制。
+      - name: Stamp asset versions
+        run: python3 tools/stamp-assets.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

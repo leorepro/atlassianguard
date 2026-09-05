@@ -21,6 +21,9 @@ Atlassian Guard **Standard 與 Premium** 的功能對照、場景對照、定價
 │   ├── favicon-192.png           # Android
 │   ├── apple-touch-icon.png      # iOS 180×180
 │   └── video/                    # 壓縮後的示意影片與 poster 圖
+├── tools/
+│   ├── og.html                   # 產生 og-cover.png 的版型
+│   └── stamp-assets.py           # 部署前把 ?v= 改寫為資源內容雜湊
 ├── CNAME                         # 自訂網域 atlassianguard.com
 ├── .nojekyll                     # 告知 GitHub Pages 略過 Jekyll 處理
 ├── .gitignore
@@ -99,10 +102,17 @@ git push
 改內容後也請一併更新日期，四處值相同：`article:modified_time`、JSON-LD 的
 `dateModified`、`sitemap.xml` 的 `<lastmod>`，以及頁尾 `<time>` 標籤。
 
-**改動 `style.css` 或 `app.js` 時，還要更新 `index.html` 內兩個 `?v=` 版本參數**
-（`YYYYMMDD`，與上述日期同一天）。GitHub Pages 對靜態資源給的是長效快取，
-版本參數沒跟著換的話，回訪者會拿到舊的樣式或指令碼，但 HTML 是新的——
-畫面會壞得很難察覺。同日內反覆修改時，本機以強制重新整理即可。
+`index.html` 內兩個 `?v=` 版本參數**不需要手動維護**：部署流程會在上傳前執行
+`tools/stamp-assets.py`，把它們改寫為 `style.css` 與 `app.js` 的內容雜湊，
+長效快取因而隨檔案內容自動失效。倉庫內保留的是日期版本，所以本機直接開啟
+`index.html` 仍可正常運作；改寫只發生在 CI 的工作目錄，不會回寫進版本控制。
+
+若 `?v=` 被拿掉、或資源檔被搬移，該腳本會讓部署直接失敗，而不是無聲地失去
+快取失效機制。要在本機預覽改寫結果可執行（會就地改寫 `index.html`，看完記得還原）：
+
+```bash
+python3 tools/stamp-assets.py
+```
 
 ## 資料來源
 
