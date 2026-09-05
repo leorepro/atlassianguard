@@ -221,11 +221,14 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 .integ-col h3{font-size:15px; font-weight:700; margin-bottom:6px}
 .ico{display:block; width:40px; height:40px; margin-bottom:14px}
 .integ-col p{font-size:13.5px; margin:0 0 14px; color:var(--ink-3); line-height:1.65}
-.integ-col ul{margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:7px}
+.integ-col ul{margin:0; padding:14px 0 0; list-style:none; border-top:1px solid var(--line)}
 .integ-col li{
-  font-size:12.5px; font-weight:600; color:var(--ink-2); letter-spacing:-.01em;
-  border:1px solid var(--line-2); border-radius:var(--r-chip); padding:5px 13px;
+  display:flex; align-items:center; gap:11px;
+  font-size:13.5px; font-weight:600; color:var(--ink); letter-spacing:-.01em;
+  padding:8px 0;
 }
+.integ-col li + li{border-top:1px solid var(--line)}
+.brand-ico{width:22px; height:22px; flex:none; display:block}
 
 /* ---------- table ---------- */
 .tbl-note{display:flex; flex-wrap:wrap; gap:18px; align-items:center; margin-bottom:20px; font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; color:var(--ink-3)}
@@ -249,6 +252,21 @@ tbody tr.grp th{border-top:1px solid var(--line)}
 td{padding:11px 18px; border-top:1px solid var(--line); vertical-align:top; color:var(--ink-2)}
 td.feat{color:var(--ink); font-weight:400}
 td.feat small{display:block; color:var(--ink-3); font-size:12.5px; line-height:1.6; margin-top:2px}
+td.feat details.more{margin-top:8px}
+td.feat details.more summary{
+  cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:5px;
+  font-size:12px; font-weight:600; color:var(--accent); padding:0;
+}
+td.feat details.more summary::-webkit-details-marker{display:none}
+td.feat details.more summary::after{
+  content:"+"; font-family:var(--mono); font-size:13px; line-height:1;
+  transition:transform .2s ease;   /* 與 FAQ 的收合互動一致 */
+}
+td.feat details.more[open] summary::after{transform:rotate(45deg)}
+td.feat details.more p{
+  font-size:12.5px; line-height:1.75; color:var(--ink-2);
+  margin:9px 0 2px; max-width:64ch; padding-left:11px; border-left:2px solid var(--line);
+}
 td.v{text-align:center; width:168px; border-left:1px solid var(--line); font-family:var(--mono); font-size:13px; color:var(--ink-3); font-variant-numeric:tabular-nums; vertical-align:middle; padding-top:13px; padding-bottom:13px}
 td.v.prem{background:color-mix(in srgb, var(--accent-soft) 55%, transparent)}
 
@@ -574,7 +592,7 @@ img{max-width:100%}
           </svg>
           <h3>身分識別提供者</h3>
         <p>透過 SAML 或 OIDC 串接，並以 SCIM 同步帳號的建立與停用。</p>
-        <ul><li>Okta</li><li>Microsoft Entra ID</li><li>Google Workspace</li></ul>
+        <ul><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.6" fill="none" stroke="#00297A" stroke-width="4.8"/></svg>Okta</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6 21 19l-9 2.4Z" fill="#0F6CBD"/><path d="M12 2.6 3 19l9 2.4Z" fill="#50B0E8"/></svg>Microsoft Entra ID</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke-width="3.6"><path d="M12 4.4a7.6 7.6 0 0 0-6.58 3.8" stroke="#EA4335"/><path d="M5.42 8.2a7.6 7.6 0 0 0 0 7.6" stroke="#FBBC05"/><path d="M5.42 15.8A7.6 7.6 0 0 0 12 19.6" stroke="#34A853"/><path d="M12 19.6a7.6 7.6 0 0 0 7.6-7.6" stroke="#4285F4"/></g><rect x="11.6" y="10.2" width="8" height="3.6" fill="#4285F4"/></svg>Google Workspace</li></ul>
       </div>
       <div class="integ-col">
         <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
@@ -585,7 +603,7 @@ img{max-width:100%}
           </svg>
           <h3>告警通知</h3>
         <p>可疑活動命中偵測規則後，將告警送至團隊既有的通訊管道。</p>
-        <ul><li>Slack</li><li>Microsoft Teams</li></ul>
+        <ul><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="10" y="1.6" width="4" height="9" rx="2" fill="#36C5F0"/><rect x="13.4" y="10" width="9" height="4" rx="2" fill="#2EB67D"/><rect x="10" y="13.4" width="4" height="9" rx="2" fill="#ECB22E"/><rect x="1.6" y="10" width="9" height="4" rx="2" fill="#E01E5A"/></svg>Slack</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="13" height="14" rx="2.6" fill="#5059C9"/><rect x="5" y="8" width="8" height="2.3" fill="#FFFFFF"/><rect x="7.85" y="8" width="2.3" height="8.4" fill="#FFFFFF"/><circle cx="18.6" cy="8.4" r="3.4" fill="#7B83EB"/><path d="M15.5 12.4h6v4.2a3 3 0 0 1-3 3h-3Z" fill="#7B83EB"/></svg>Microsoft Teams</li></ul>
       </div>
       <div class="integ-col">
         <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
@@ -598,7 +616,7 @@ img{max-width:100%}
           </svg>
           <h3>資安事件管理平台</h3>
         <p>稽核記錄可經 Webhook 與 API 串流至 SIEM，納入既有的監控與留存機制。</p>
-        <ul><li>Splunk</li><li>Webhook</li><li>REST API</li></ul>
+        <ul><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5 17 12 6.5 19.5" fill="none" stroke="#F2951E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>Splunk</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="6.5" r="3.4" fill="#1769DC"/><circle cx="17.5" cy="12" r="3.4" fill="#123B5E"/><circle cx="7" cy="17.5" r="3.4" fill="#1769DC"/><path d="M9.6 8.2 15 10.8M15 13.2 9.6 15.8" stroke="#123B5E" stroke-width="2" stroke-linecap="round"/></svg>Webhook</li><li><svg class="brand-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.5 3.5 12l5 5.5M15.5 6.5 20.5 12l-5 5.5" fill="none" stroke="#1769DC" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.4 5.6 10.6 18.4" stroke="#123B5E" stroke-width="2.4" stroke-linecap="round"/></svg>REST API</li></ul>
       </div>
     </div>
   </section>
@@ -620,24 +638,24 @@ img{max-width:100%}
         </thead>
         <tbody>
           <tr class="grp"><th colspan="3" scope="colgroup">由產品方案提供，Guard 不重複涵蓋</th></tr>
-          <tr><td class="feat">IP 許可清單<small>限制僅特定 IP 範圍或公司 VPN 可存取</small></td><td class="v v-list">Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
-          <tr><td class="feat">沙箱測試環境<small>於隔離環境驗證權限設定與外掛變更</small></td><td class="v v-list">Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
-          <tr><td class="feat">版本發佈軌道<small>控制雲端功能更新的時間與方式</small></td><td class="v v-list">Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
-          <tr><td class="feat">專案封存<small>隱藏過期專案，降低權限管理的複雜度</small></td><td class="v v-list">Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
-          <tr><td class="feat">議題層級安全性<small>自訂單一議題的檢視權限</small></td><td class="v v-list">Standard／Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
-          <tr><td class="feat">資料落腳地<small>指定資料存放區域</small></td><td class="v v-list">Standard／Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">IP 許可清單<small>限制僅特定 IP 範圍或公司 VPN 可存取</small><details class="more"><summary>詳細說明</summary><p>於站台層級指定允許存取的 IP 範圍，來源不符者連同 REST API 呼叫一併阻擋，適用於要求必須經公司網路或 VPN 才能存取的組織。其範圍不涵蓋 admin.atlassian.com 與使用者管理 API，因此無法用於保護組織層級的管理操作。</p></details></td><td class="v v-list">Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">沙箱測試環境<small>於隔離環境驗證權限設定與外掛變更</small><details class="more"><summary>詳細說明</summary><p>提供與正式環境隔離的複本，可於其中驗證權限調整、工作流程變更與第三方外掛的相容性，確認無誤後再套用至正式環境。對權限結構複雜、或變更須通過內部審核程序的組織，可避免直接於正式環境試錯。</p></details></td><td class="v v-list">Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">版本發佈軌道<small>控制雲端功能更新的時間與方式</small><details class="more"><summary>詳細說明</summary><p>Atlassian Cloud 預設持續推送功能更新。發佈軌道可將更新延後至固定週期，使組織有時間先於沙箱驗證相容性，並完成內部公告與教育訓練，避免介面或行為在未預期的時點變動。</p></details></td><td class="v v-list">Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">專案封存<small>隱藏過期專案，降低權限管理的複雜度</small><details class="more"><summary>詳細說明</summary><p>將已結案的專案或空間封存後，內容自搜尋與導覽中隱藏，但資料本身保留且可還原。相較於直接刪除，封存可在降低權限管理複雜度的同時，維持稽核所需的可追溯性。</p></details></td><td class="v v-list">Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">議題層級安全性<small>自訂單一議題的檢視權限</small><details class="more"><summary>詳細說明</summary><p>在專案權限之外，可針對個別議題指定可檢視的對象，例如僅限回報者與特定群組。常用於人資、法務或資安事件等需要在共用專案中隔離特定案件的情境。</p></details></td><td class="v v-list">Standard／Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
+          <tr><td class="feat">資料落腳地<small>指定資料存放區域</small><details class="more"><summary>詳細說明</summary><p>指定產品資料存放的地理區域（例如歐盟、美國、澳洲），以符合資料主權或產業監管要求。設定以產品與站台為單位，搬遷由 Atlassian 排程執行。</p></details></td><td class="v v-list">Standard／Premium／Enterprise</td><td class="v prem v-list"><span class="dash" role="img" aria-label="未提供"></span></td></tr>
 
           <tr class="grp"><th colspan="3" scope="colgroup">僅 Guard 提供，產品方案再高階亦不含</th></tr>
-          <tr><td class="feat">強制單一登入<small>強制全組織帳號改由公司身分識別提供者驗證</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
-          <tr><td class="feat">強制兩步驟驗證</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
-          <tr><td class="feat">SCIM 自動佈建與解除佈建<small>於 IdP 停用帳號的同時解除所有存取權</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
-          <tr><td class="feat">API token 管控與到期設定</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
-          <tr><td class="feat">跨產品的組織層級稽核記錄<small>涵蓋所有站台，而非單一產品的操作記錄</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
-          <tr><td class="feat">行動應用程式管理<small>限制截圖、螢幕錄影與檔案下載</small></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
-          <tr><td class="feat">資料分類與自動分級</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
-          <tr><td class="feat">內容掃描與自訂偵測規則</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
-          <tr><td class="feat">異常行為偵測與告警</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
-          <tr><td class="feat">SIEM 整合與建議修復動作</td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
+          <tr><td class="feat">強制單一登入<small>強制全組織帳號改由公司身分識別提供者驗證</small><details class="more"><summary>詳細說明</summary><p>未啟用時，使用者仍可使用 Atlassian 帳號密碼或社交帳號登入，組織無從得知，也無法施加密碼原則。啟用後，受管網域下的帳號一律改由公司身分識別提供者（Okta、Microsoft Entra ID、Google Workspace 等）驗證，密碼原則、多因素要求與條件式存取皆由 IdP 統一控管。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
+          <tr><td class="feat">強制兩步驟驗證<details class="more"><summary>詳細說明</summary><p>對未使用單一登入的帳號強制要求第二因素驗證。可搭配多組驗證政策，對正職員工、約聘人員與外部協作者套用不同強度的要求，而非全組織一體適用。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
+          <tr><td class="feat">SCIM 自動佈建與解除佈建<small>於 IdP 停用帳號的同時解除所有存取權</small><details class="more"><summary>詳細說明</summary><p>將帳號生命週期與身分識別提供者同步。人員到職時依 IdP 群組自動取得對應產品的存取權；離職或轉調時，於 IdP 停用的同時解除所有 Atlassian 站台的存取權，不需逐站台手動處理，也避免遺漏。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
+          <tr><td class="feat">API token 管控與到期設定<details class="more"><summary>詳細說明</summary><p>可禁止使用者自行建立 API token，或為既有 token 設定到期時間以強制輪替。未納管時，個人建立的 token 會在該人員離職後持續有效，且組織無從得知有哪些自動化流程正在使用它。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
+          <tr><td class="feat">跨產品的組織層級稽核記錄<small>涵蓋所有站台，而非單一產品的操作記錄</small><details class="more"><summary>詳細說明</summary><p>單一產品的稽核記錄僅涵蓋該站台內的操作。組織層級稽核記錄集中保留跨所有站台與產品的管理事件，包括權限變更、政策調整與帳號異動，可作為稽核程序中的統一舉證來源。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
+          <tr><td class="feat">行動應用程式管理<small>限制截圖、螢幕錄影與檔案下載</small><details class="more"><summary>詳細說明</summary><p>在不導入完整 MDM 的前提下，對 Jira 與 Confluence 行動應用套用資料保護規則，包括禁止截圖與螢幕錄影、限制檔案下載至裝置，以及要求應用層的 PIN 或生物辨識。適用於允許自帶裝置的組織。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Standard／Premium</td></tr>
+          <tr><td class="feat">資料分類與自動分級<details class="more"><summary>詳細說明</summary><p>於組織層級建立 Public、Internal、Confidential、Restricted 四級標籤，套用於 Confluence 頁面與 Jira 議題；自動分級會在內容寫入時比對敏感樣式並套用對應等級。標籤本身不具強制力，須另行建立以分類等級為條件的資料安全政策方能生效。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
+          <tr><td class="feat">內容掃描與自訂偵測規則<details class="more"><summary>詳細說明</summary><p>提供 60 項以上內建偵測，涵蓋個人資料、金融資訊、憑證與健康資料，並可自訂規則以涵蓋本地格式（例如台灣的身分證字號與統一編號）。支援對既有內容的全站掃描與寫入當下的即時判定。目前不執行光學文字辨識，亦不涵蓋附件內容。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
+          <tr><td class="feat">異常行為偵測與告警<details class="more"><summary>詳細說明</summary><p>以規則比對使用者活動，辨識異常登入地點、短時間內的大量頁面匯出、權限異常提升等徵兆，並於數分鐘內產生告警。相較於事後的人工抽查，可在資料實際外流前介入。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
+          <tr><td class="feat">SIEM 整合與建議修復動作<details class="more"><summary>詳細說明</summary><p>稽核記錄與告警可經 Webhook 與 REST API 串流至 Splunk 等資安事件管理平台，納入既有的監控與留存機制。告警本身附帶行為者脈絡與事件時間軸，並提供可直接執行的處置選項：停用帳號、撤銷 API token、遮蔽敏感內容或重新分類。</p></details></td><td class="v v-list"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem v-list">Premium</td></tr>
         </tbody>
       </table>
     </div>
