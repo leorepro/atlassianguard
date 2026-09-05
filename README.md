@@ -96,8 +96,13 @@ git push
 否則屬於 Google 定義的 spammy structured markup。FAQ 區塊改動後，重新產生 JSON-LD 的
 `FAQPage` 節點（從 `<details>` 的 `<summary>` 與 `<p>` 抽取純文字即可）。
 
-改內容後也請一併更新三處日期：`article:modified_time`、JSON-LD 的 `dateModified`、
-`sitemap.xml` 的 `<lastmod>`，以及頁尾 `<time>` 標籤。
+改內容後也請一併更新日期，四處值相同：`article:modified_time`、JSON-LD 的
+`dateModified`、`sitemap.xml` 的 `<lastmod>`，以及頁尾 `<time>` 標籤。
+
+**改動 `style.css` 或 `app.js` 時，還要更新 `index.html` 內兩個 `?v=` 版本參數**
+（`YYYYMMDD`，與上述日期同一天）。GitHub Pages 對靜態資源給的是長效快取，
+版本參數沒跟著換的話，回訪者會拿到舊的樣式或指令碼，但 HTML 是新的——
+畫面會壞得很難察覺。同日內反覆修改時，本機以強制重新整理即可。
 
 ## 資料來源
 
