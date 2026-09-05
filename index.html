@@ -509,8 +509,11 @@ td.v.yes{color:var(--yes)}
 .group-label::after{content:""; flex:1; height:1px; background:var(--line)}
 .case{border:1px solid var(--line); border-radius:var(--r-card); background:var(--surface); box-shadow:var(--shadow); overflow:hidden}
 .case-hd{padding:24px 28px 20px}
+.case-top{display:flex; align-items:center; gap:9px; margin-bottom:10px}
+.case-ico{width:28px; height:28px; flex:none; display:block}
+.chip-ico{width:21px; height:21px; display:inline-block; vertical-align:-5px; margin-right:8px}
 .case-hd .tag{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.14em; text-transform:uppercase; color:var(--accent)}
-.case-hd h3{margin:9px 0 10px; font-size:var(--fs-lg)}
+.case-hd h3{margin:0 0 10px; font-size:var(--fs-lg)}
 .case-hd p{font-size:var(--fs-base); margin:0; max-width:74ch}
 .case-split{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line)}
 .case-col{padding:20px 28px 22px}
@@ -1065,7 +1068,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">離職交接</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="12" cy="10" r="5.4" fill="#123B5E"/><path d="M3 27a9 9 0 0 1 18 0Z" fill="#123B5E"/><path d="M22 16h7m0 0-3-3m3 3-3 3" stroke="#FFA902" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tag">離職交接</span></div>
           <h3>資深工程師於週五提出離職，主管在下週一才開始盤查其存取歷程</h3>
           <p>該員於最後兩週仍持有 Confluence 技術規格庫的完整存取權。人資已於身分識別提供者停用帳號，但主管需要釐清的是：離職前該段期間內，其實際匯出與下載了哪些內容。</p>
         </div>
@@ -1083,7 +1086,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">公開連結</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="none" stroke="#1769DC" stroke-width="2.6"/><path d="M4 16h24M16 4c3.5 4 3.5 20 0 24-3.5-4-3.5-20 0-24" fill="none" stroke="#1769DC" stroke-width="2.2"/><circle cx="25" cy="25" r="6.5" fill="#FFA902"/><path d="M22.4 25h5.2" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/></svg><span class="tag">公開連結</span></div>
           <h3>行銷同仁將一頁 Confluence 設定為公開連結，該頁包含尚未對外的定價資訊</h3>
           <p>其原意是分享給外部設計協力廠商，因而選擇了「知道連結的人皆可檢視」。三週後，業務單位在客戶端看到了這份定價資料。</p>
         </div>
@@ -1101,7 +1104,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">稽核盤點</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="3" width="17" height="23" rx="2.4" fill="#123B5E"/><rect x="8" y="9" width="9" height="2" rx="1" fill="#FFFFFF" opacity=".8"/><rect x="8" y="14" width="9" height="2" rx="1" fill="#FFFFFF" opacity=".8"/><circle cx="21" cy="21" r="7" fill="none" stroke="#FFA902" stroke-width="3"/><path d="M26 26l4 4" stroke="#FFA902" stroke-width="3" stroke-linecap="round"/></svg><span class="tag">稽核盤點</span></div>
           <h3>稽核單位要求說明：Confluence 中是否存有客戶的身分證字號</h3>
           <p>依內部規範不應存在，但組織共有 40 個 Space、累積六年的內容，且客服團隊過去確有將個案截圖與資料貼入頁面的作業習慣。此項目須於兩週內提出書面答覆。</p>
         </div>
@@ -1119,7 +1122,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">帳號異常</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="14" r="10" fill="none" stroke="#1769DC" stroke-width="2.4"/><circle cx="13" cy="14" r="3.4" fill="#1769DC"/><path d="M23 6 31 22H15Z" fill="#FFA902"/><rect x="22" y="12" width="2.2" height="5" rx="1.1" fill="#123B5E"/><circle cx="23.1" cy="19.4" r="1.4" fill="#123B5E"/></svg><span class="tag">帳號異常</span></div>
           <h3>凌晨時段，某帳號自非慣用地點登入，隨後開始大量下載附件</h3>
           <p>該員工的密碼曾於其他網站的外洩名單中出現，且在多處重複使用。攻擊者取得的是一組合法憑證，其行為在驗證層面完全合規。</p>
         </div>
@@ -1137,7 +1140,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">AI 導入</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 5h18a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H11l-7 6v-6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z" fill="#1769DC"/><path d="M25 2.5 26.9 7.1 31.5 9 26.9 10.9 25 15.5 23.1 10.9 18.5 9 23.1 7.1Z" fill="#FFA902"/></svg><span class="tag">AI 導入</span></div>
           <h3>Rovo 上線第二週，有同仁詢問本年度調薪級距，系統提供了完整答覆</h3>
           <p>資料來源為人資兩年前建立的一頁 Confluence，當初的權限設定開放給全公司，後續無人重新檢視。AI 並未執行任何違規操作，僅是呈現了原本即處於開放狀態的內容。</p>
         </div>
@@ -1157,7 +1160,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">憑證外洩</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="9" cy="12" r="6" fill="none" stroke="#FFA902" stroke-width="4"/><rect x="13" y="10" width="15" height="4" rx="1" fill="#FFA902"/><rect x="24" y="13" width="4" height="5" rx="1" fill="#FFA902"/><path d="M6 22l-3 3 3 3M14 22l3 3-3 3" fill="none" stroke="#123B5E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="tag">憑證外洩</span></div>
           <h3>工程師為協助同事重現問題，將一組 AWS access key 貼入 Jira 留言</h3>
           <p>該議題共有 12 位關注者，其中兩位為外部協力廠商。問題排除後未有人回頭清除該則留言，內容持續留存於議題中。</p>
         </div>
@@ -1175,7 +1178,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">委外開發</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="10" cy="10" r="5" fill="#123B5E"/><path d="M2 24a8 8 0 0 1 16 0Z" fill="#123B5E"/><circle cx="23" cy="11" r="4.6" fill="none" stroke="#FFA902" stroke-width="2.4" stroke-dasharray="3.2 2.4"/><path d="M16 25a7 7 0 0 1 14 0Z" fill="none" stroke="#FFA902" stroke-width="2.4" stroke-dasharray="3.2 2.4"/></svg><span class="tag">委外開發</span></div>
           <h3>承接大型專案，外包團隊 20 人將於下週進入組織的 Jira 與 Confluence</h3>
           <p>其存取範圍應僅限於該專案，但 Confluence 中同時存有其他客戶的規格文件、內部架構圖，以及一份載明各環境連線方式的維運手冊。</p>
         </div>
@@ -1193,7 +1196,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">自動化治理</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6" fill="none" stroke="#123B5E" stroke-width="2.6"/><rect x="15" y="1.5" width="2" height="5" rx="1" fill="#123B5E" transform="rotate(0 16 16)"/><rect x="15" y="1.5" width="2" height="5" rx="1" fill="#123B5E" transform="rotate(60 16 16)"/><rect x="15" y="1.5" width="2" height="5" rx="1" fill="#123B5E" transform="rotate(120 16 16)"/><rect x="15" y="1.5" width="2" height="5" rx="1" fill="#123B5E" transform="rotate(180 16 16)"/><rect x="15" y="1.5" width="2" height="5" rx="1" fill="#123B5E" transform="rotate(240 16 16)"/><rect x="15" y="1.5" width="2" height="5" rx="1" fill="#123B5E" transform="rotate(300 16 16)"/><circle cx="16" cy="16" r="2.4" fill="#FFA902"/></svg><span class="tag">自動化治理</span></div>
           <h3>CI 流程中斷後追查發現，該組 API token 由三年前離職的同事以個人帳號建立</h3>
           <p>組織希望全面清查此類 token，但無法確認哪些 Jenkins 工作、GitHub Actions 流程或內部工具仍依賴其運作，因而遲遲未能執行停用。</p>
         </div>
@@ -1211,7 +1214,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">跨客戶隔離</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="8" width="11" height="16" rx="2" fill="#1769DC"/><rect x="19" y="8" width="11" height="16" rx="2" fill="#50B0E8"/><rect x="15" y="3" width="2.4" height="26" rx="1.2" fill="#FFA902"/></svg><span class="tag">跨客戶隔離</span></div>
           <h3>專案經理將客戶 A 的系統規格文件移入共用 Space 作為範本，客戶 B 的窗口亦具該 Space 存取權</h3>
           <p>組織與雙方均簽有保密協議。此行為本身可能僅是一次文件整理，但若客戶 A 提出查詢，組織必須能明確說明何人於何時檢視過該文件。</p>
         </div>
@@ -1229,7 +1232,7 @@ img{max-width:100%}
 
       <article class="case">
         <div class="case-hd">
-          <span class="tag">影子 IT</span>
+          <div class="case-top"><svg class="case-ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 22a6 6 0 0 1 1-11.9 8 8 0 0 1 15.2 2.2A5.5 5.5 0 0 1 24 22Z" fill="#50B0E8"/><circle cx="23" cy="23" r="7.5" fill="#123B5E"/><path d="M21 20.6a2.2 2.2 0 0 1 4.2.9c0 1.5-2.1 1.7-2.1 3" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linecap="round"/><circle cx="23.1" cy="27" r="1.2" fill="#FFFFFF"/></svg><span class="tag">影子 IT</span></div>
           <h3>某開發小組為簡化流程，自行以公司信箱申請了一個免費 Confluence 站台存放設計文件</h3>
           <p>該站台已使用八個月，未納入單一登入、未納入備份機制，組織層級亦無人知悉其存在，而這些帳號實際上已計入每月的 Guard 帳單。</p>
         </div>
@@ -1258,9 +1261,9 @@ img{max-width:100%}
 
     <div class="paths">
       <div class="path-start">
-        <div class="chip"><b>Path 1</b>高度複雜的大型企業</div>
-        <div class="chip"><b>Path 2</b>高度受監管產業</div>
-        <div class="chip"><b>Path 3</b>資安意識驅動的組織</div>
+        <div class="chip"><b>Path 1</b><svg class="chip-ico" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="9" width="9" height="13" rx="1.4" fill="#50B0E8"/><rect x="12" y="4" width="9" height="18" rx="1.4" fill="#1769DC"/><rect x="22" y="11" width="8" height="11" rx="1.4" fill="#123B5E"/></svg>高度複雜的大型企業</div>
+        <div class="chip"><b>Path 2</b><svg class="chip-ico" viewBox="0 0 32 32" aria-hidden="true"><rect x="15" y="3" width="2.4" height="19" rx="1.2" fill="#123B5E"/><rect x="6" y="7" width="20" height="2.4" rx="1.2" fill="#123B5E"/><path d="M6 8.2 2 17h8ZM26 8.2 22 17h8Z" fill="#FFA902"/><rect x="9" y="21" width="14" height="2.6" rx="1.3" fill="#123B5E"/></svg>高度受監管產業</div>
+        <div class="chip"><b>Path 3</b><svg class="chip-ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2.5 27 6.6v8c0 6.9-4.6 11.7-11 13.9-6.4-2.2-11-7-11-13.9v-8Z" fill="#1769DC"/><path d="M11.4 15.6 14.6 18.8 21 12.4" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>資安意識驅動的組織</div>
       </div>
 
       <div>
