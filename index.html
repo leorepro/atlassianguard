@@ -310,6 +310,16 @@ html{scroll-behavior:smooth}
 .nav-cta:active{transform:translateY(1px)}
 /* 錨點捲動時避開導航列 */
 section[id]{scroll-margin-top:72px}
+/* 九個連結加 CTA 在 1080px 版心內約需 990px；視窗窄於 1180px 起版心開始收縮，
+   連結列會被 overflow 悄悄裁掉末端而沒有任何提示。此級距縮字級與間距約 100px，
+   讓 1024px 仍能完整呈現所有連結；連結一律不隱藏。品牌副標比品牌名窄，
+   隱藏它省不到寬度，故保留。 */
+@media (max-width:1180px){
+  .nav-in{gap:20px}
+  .nav-links{gap:16px}
+  .nav-links a{font-size:var(--fs-xs)}
+  .nav-cta{font-size:var(--fs-xs); padding:7px 14px}
+}
 @media (max-width:820px){
   .nav-in{gap:16px; padding:0 18px}
   .nav-cta{display:none}
@@ -467,7 +477,17 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 /* 三欄縮圖中的主控台介面過小而不可辨讀，因此播放時展開至整列寬度；
    未啟用指令碼時維持原尺寸的內嵌播放，功能不受影響。 */
 .capcard{transition:border-color .18s ease, box-shadow .18s ease}
-.capcard.is-playing{border-color:var(--line-2); box-shadow:0 4px 16px rgba(17,21,25,.12)}
+.capcard.is-playing{
+  border-color:var(--line-2); box-shadow:0 4px 16px rgba(17,21,25,.12);
+  animation:capcard-in .18s ease-out;
+}
+/* grid-column 本身無法過場，展開時卡片會瞬間從三分之一寬跳到整列。
+   以短暫的浮現動畫掩飾重排：不動版面、只動 opacity 與 transform，
+   讓視線把「跳」讀成「浮出」。全域的 reduced-motion 規則會一併停用。 */
+@keyframes capcard-in{
+  from{opacity:.6; transform:translateY(4px)}
+  to{opacity:1; transform:none}
+}
 .capcard.is-playing figcaption{max-width:760px}
 .capcard figcaption{padding:15px 17px 17px}
 .capcard figcaption .tag{
@@ -542,11 +562,19 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 /* ---------- table ---------- */
 .tbl-note{display:flex; flex-wrap:wrap; gap:18px; align-items:center; margin-bottom:20px; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; color:var(--ink-3)}
 .tbl-scroll{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-card); background:var(--surface); box-shadow:var(--shadow)}
-@media (min-width:900px){ .tbl-scroll{overflow:visible} }
 table{border-collapse:collapse; width:100%; min-width:720px; font-size:var(--fs-sm)}
 thead th{
-  position:sticky; top:64px; background:var(--surface); z-index:2;
+  background:var(--surface);
   text-align:left; padding:16px 18px; border-bottom:1px solid var(--line-2); vertical-align:bottom;
+}
+/* 表頭跟隨捲動只在寬螢幕啟用。窄螢幕時 .tbl-scroll 為 overflow-x:auto，
+   依規範 overflow-y 會一併變成 auto，該容器就成了 sticky 的捲動參考框：
+   top:65px 不再是相對視窗，而是相對表格自身頂端，表頭一載入就被推下 65px、
+   原位留下一個空白框，且視窗捲動時也不會跟隨。改為與 overflow:visible 同一級距啟用。
+   top 值 = .nav-in 高度 64px + .nav 底框 1px。 */
+@media (min-width:900px){
+  .tbl-scroll{overflow:visible}
+  thead th{position:sticky; top:65px; z-index:2}
 }
 thead th.plan{text-align:center; width:168px; border-left:1px solid var(--line)}
 thead th .pn{display:block; font-family:var(--sans); font-size:var(--fs-md); font-weight:700; letter-spacing:-.01em; color:var(--ink)}
