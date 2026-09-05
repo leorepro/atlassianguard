@@ -346,12 +346,20 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 .pdr-in{position:absolute; width:1px; height:1px; opacity:0; pointer-events:none}
 .pdr-nav{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:34px 0 44px}
 .pdr-nav label{
-  cursor:pointer; padding:11px 32px; border-radius:var(--r-chip);
+  cursor:pointer; display:inline-flex; align-items:center; gap:9px;
+  padding:10px 26px; border-radius:var(--r-chip);
   font-size:var(--fs-base); font-weight:600; letter-spacing:-.01em;
   background:var(--surface-2); color:var(--ink-2);
-  transition:background .18s ease, color .18s ease;
+  border:1px solid var(--line-2);
+  transition:background .18s ease, color .18s ease, border-color .18s ease,
+             transform .18s ease, box-shadow .18s ease;
 }
-.pdr-nav label:hover{background:var(--line)}
+.pdr-nav label:hover{
+  background:var(--surface); border-color:var(--ink-3);
+  transform:translateY(-1px); box-shadow:0 3px 10px rgba(17,21,25,.11);
+}
+.pdr-nav label:active{transform:translateY(0); box-shadow:none}
+.pdr-ico{width:17px; height:17px; flex:none; display:block}
 
 .pdr-panel{display:none; grid-template-columns:.82fr 1.18fr; gap:54px; align-items:center}
 .pdr-txt h3{font-size:var(--fs-panel); letter-spacing:-.02em; margin-bottom:12px}
@@ -370,9 +378,9 @@ p{margin:0 0 16px; max-width:66ch; color:var(--ink-2)}
 }
 
 /* 選中的分頁：底色改為該階段代表色 */
-#pdr-1:checked ~ .pdr-nav label[for="pdr-1"]{background:var(--c-protect); color:#FFFFFF}
-#pdr-2:checked ~ .pdr-nav label[for="pdr-2"]{background:var(--c-detect); color:#FFFFFF}
-#pdr-3:checked ~ .pdr-nav label[for="pdr-3"]{background:var(--c-respond); color:var(--ink)}
+#pdr-1:checked ~ .pdr-nav label[for="pdr-1"]{background:var(--c-protect); border-color:var(--c-protect); color:#FFFFFF; box-shadow:0 3px 12px rgba(17,21,25,.20)}
+#pdr-2:checked ~ .pdr-nav label[for="pdr-2"]{background:var(--c-detect); border-color:var(--c-detect); color:#FFFFFF; box-shadow:0 3px 12px rgba(17,21,25,.20)}
+#pdr-3:checked ~ .pdr-nav label[for="pdr-3"]{background:var(--c-respond); border-color:var(--c-respond); color:var(--ink); box-shadow:0 3px 12px rgba(17,21,25,.20)}
 #pdr-1:checked ~ .pdr-body #pdr-p1,
 #pdr-2:checked ~ .pdr-body #pdr-p2,
 #pdr-3:checked ~ .pdr-body #pdr-p3{display:grid}
@@ -491,7 +499,8 @@ td.v.yes{color:var(--yes)}
 /* ---------- capabilities ---------- */
 .caps{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin-top:28px}
 .cap{background:var(--surface); padding:26px 28px 28px}
-.cap-ico{display:block; width:40px; height:40px; margin-bottom:15px}
+.cap-top{display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:11px}
+.cap-ico{display:block; width:36px; height:36px; flex:none}
 .cap .tag{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.13em; text-transform:uppercase; color:var(--accent)}
 .cap .tag.std{color:var(--ink-3)}
 .cap h3{margin:9px 0 11px; font-size:var(--fs-md)}
@@ -710,9 +719,9 @@ img{max-width:100%}
       <input class="pdr-in" type="radio" name="pdr" id="pdr-2">
       <input class="pdr-in" type="radio" name="pdr" id="pdr-3">
       <div class="pdr-nav">
-        <label for="pdr-1">Protect</label>
-        <label for="pdr-2">Detect</label>
-        <label for="pdr-3">Respond</label>
+        <label for="pdr-1"><svg class="pdr-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.4 20.6 5.6v6.5c0 5.4-3.7 9.2-8.6 10.7-4.9-1.5-8.6-5.3-8.6-10.7V5.6Z"/></svg>Protect</label>
+        <label for="pdr-2"><svg class="pdr-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12 4.8C5.8 4.8 1.6 12 1.6 12S5.8 19.2 12 19.2 22.4 12 22.4 12 18.2 4.8 12 4.8Zm0 11.3a4.1 4.1 0 1 1 0-8.2 4.1 4.1 0 0 1 0 8.2Z"/></svg>Detect</label>
+        <label for="pdr-3"><svg class="pdr-ico" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.6 1.8 4 13.7h6.3L9.4 22.2 19 10.3h-6.3Z"/></svg>Respond</label>
       </div>
       <div class="pdr-body">
       <article class="pdr-panel" id="pdr-p1" style="--k:var(--c-protect)">
@@ -1006,48 +1015,42 @@ img{max-width:100%}
     <div class="caps">
 
       <div class="cap">
-        <span class="tag">Premium</span>
-        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#71808F"/><rect x="17" y="6.4" width="25" height="5.2" rx="2.6" fill="#71808F" opacity=".3"/><circle cx="9" cy="20" r="3.4" fill="#2E6FA8"/><rect x="17" y="17.4" width="25" height="5.2" rx="2.6" fill="#2E6FA8" opacity=".3"/><circle cx="9" cy="31" r="3.4" fill="#A85C22"/><rect x="17" y="28.4" width="19" height="5.2" rx="2.6" fill="#A85C22" opacity=".3"/><circle cx="9" cy="42" r="3.4" fill="#8E2B2B"/><rect x="17" y="39.4" width="13" height="5.2" rx="2.6" fill="#8E2B2B" opacity=".3"/></svg>
+        <div class="cap-top"><span class="tag">Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="9" cy="9" r="3.4" fill="#71808F"/><rect x="17" y="6.4" width="25" height="5.2" rx="2.6" fill="#71808F" opacity=".3"/><circle cx="9" cy="20" r="3.4" fill="#2E6FA8"/><rect x="17" y="17.4" width="25" height="5.2" rx="2.6" fill="#2E6FA8" opacity=".3"/><circle cx="9" cy="31" r="3.4" fill="#A85C22"/><rect x="17" y="28.4" width="19" height="5.2" rx="2.6" fill="#A85C22" opacity=".3"/><circle cx="9" cy="42" r="3.4" fill="#8E2B2B"/><rect x="17" y="39.4" width="13" height="5.2" rx="2.6" fill="#8E2B2B" opacity=".3"/></svg></div>
           <h3>資料分級與自動分類</h3>
         <p>Guard Premium 於組織層級提供 Public、Internal、Confidential、Restricted 四級標籤，套用對象為 Confluence 頁面與 Jira 議題。<b>標籤本身不具強制力</b>：將頁面標為 Restricted 不會自動封鎖任何操作，必須另行建立「以分類等級為條件的組織級政策」，該等級才會實際限制分享與匯出行為。</p>
         <p>自動分類則於內容寫入時比對敏感樣式，命中信用卡號等格式即自動套用對應等級，用以降低仰賴人工標記所產生的落差。導入順序通常為先以手動分級建立少量高價值內容的基準，再逐步開啟自動分類。初期誤判比例過高時，標籤的可信度會連帶受影響。</p>
       </div>
 
       <div class="cap">
-        <span class="tag std">Standard · Premium</span>
-        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 10v12c0 10-7 17-16 20-9-3-16-10-16-20V10Z" fill="#1769DC"/><rect x="16" y="17" width="16" height="3.2" rx="1.6" fill="#FFFFFF"/><rect x="16" y="24" width="16" height="3.2" rx="1.6" fill="#FFFFFF"/><rect x="16" y="31" width="10" height="3.2" rx="1.6" fill="#FFFFFF"/></svg>
+        <div class="cap-top"><span class="tag std">Standard · Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 10v12c0 10-7 17-16 20-9-3-16-10-16-20V10Z" fill="#1769DC"/><rect x="16" y="17" width="16" height="3.2" rx="1.6" fill="#FFFFFF"/><rect x="16" y="24" width="16" height="3.2" rx="1.6" fill="#FFFFFF"/><rect x="16" y="31" width="10" height="3.2" rx="1.6" fill="#FFFFFF"/></svg></div>
           <h3>資料安全政策</h3>
         <p>可限制匯出、公開分享連結、匿名存取與第三方應用程式的資料存取，兩種方案均具備。<b>差別在於套用條件</b>：Standard 以空間或專案為範圍，屬一體適用；Premium 則可將分類等級作為條件，例如「Confidential 以上一律封鎖對外分享連結，Internal 以下不受限」。</p>
         <p>此項為兩方案的主要分野。若安全要求可以「整個空間全開或全關」表達，Standard 即可滿足；若必須依內容本身的敏感程度採取不同管制，才需要 Premium 的分級能力。</p>
       </div>
 
       <div class="cap">
-        <span class="tag">Premium</span>
-        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="5" width="25" height="33" rx="3" fill="#123B5E"/><rect x="10" y="12" width="15" height="2.6" rx="1.3" fill="#FFFFFF" opacity=".75"/><rect x="10" y="18" width="15" height="2.6" rx="1.3" fill="#FFFFFF" opacity=".75"/><rect x="10" y="24" width="9" height="2.6" rx="1.3" fill="#FFFFFF" opacity=".75"/><circle cx="30" cy="29" r="9" fill="none" stroke="#FFA902" stroke-width="4"/><path d="M36.4 35.4 43 42" stroke="#FFA902" stroke-width="4" stroke-linecap="round"/></svg>
+        <div class="cap-top"><span class="tag">Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="5" width="25" height="33" rx="3" fill="#123B5E"/><rect x="10" y="12" width="15" height="2.6" rx="1.3" fill="#FFFFFF" opacity=".75"/><rect x="10" y="18" width="15" height="2.6" rx="1.3" fill="#FFFFFF" opacity=".75"/><rect x="10" y="24" width="9" height="2.6" rx="1.3" fill="#FFFFFF" opacity=".75"/><circle cx="30" cy="29" r="9" fill="none" stroke="#FFA902" stroke-width="4"/><path d="M36.4 35.4 43 42" stroke="#FFA902" stroke-width="4" stroke-linecap="round"/></svg></div>
           <h3>內容掃描與自訂偵測規則</h3>
         <p>內容掃描提供 60 項以上內建偵測，涵蓋個人資料、金融資訊、憑證與健康資料，並以兩種模式運作：全站掃描對既有內容執行一次性盤點，即時掃描則於內容寫入當下判定。</p>
         <p><b>內建偵測以國際通用格式為主</b>（信用卡號、雲端服務金鑰、美國社會安全號碼等）。台灣的身分證字號、健保卡號與統一編號不在預設清單內，須以自訂偵測規則建立。此項工作量需納入導入時程評估。另有兩項涵蓋限制：掃描不執行光學文字辨識，亦不涵蓋附件內容；以掃描檔形式流通文件的組織，實際覆蓋率會低於偵測項目數所呈現的水準。</p>
       </div>
 
       <div class="cap">
-        <span class="tag std">Standard · Premium</span>
-        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="7" width="38" height="15" rx="3" fill="#50B0E8"/><rect x="5" y="26" width="38" height="15" rx="3" fill="#123B5E"/><circle cx="13" cy="14.5" r="2.8" fill="#FFFFFF"/><rect x="20" y="13" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/><circle cx="13" cy="33.5" r="2.8" fill="#FFA902"/><rect x="20" y="32" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/></svg>
+        <div class="cap-top"><span class="tag std">Standard · Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="7" width="38" height="15" rx="3" fill="#50B0E8"/><rect x="5" y="26" width="38" height="15" rx="3" fill="#123B5E"/><circle cx="13" cy="14.5" r="2.8" fill="#FFFFFF"/><rect x="20" y="13" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/><circle cx="13" cy="33.5" r="2.8" fill="#FFA902"/><rect x="20" y="32" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/></svg></div>
           <h3>稽核記錄的兩個層次</h3>
         <p>兩者的記錄對象不同：<b>Standard 記錄管理員的操作行為，Premium 另涵蓋使用者對內容的檢視與匯出行為。</b></p>
         <p>Standard 提供管理員活動稽核記錄、組織洞察（活躍使用者統計與驗證方式分布），以及產品探索（識別組織內未納管的 Atlassian 站台）。Premium 另加使用者活動稽核（延伸稽核）與 API token 使用行為追蹤。離職人員的存取歷程盤查，或稽核單位要求說明「何人於何時檢視過哪份文件」這類需求，僅憑 Standard 的管理員記錄無法完成。</p>
       </div>
 
       <div class="cap">
-        <span class="tag">Premium</span>
-        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M21 6 40 37H2Z" fill="#FFA902"/><rect x="18.6" y="17" width="4.8" height="10" rx="2.4" fill="#123B5E"/><circle cx="21" cy="31.4" r="2.8" fill="#123B5E"/><circle cx="37" cy="34" r="10" fill="#1769DC"/><path d="M32.6 34.2 35.8 37.4 41.4 31.4" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="cap-top"><span class="tag">Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M21 6 40 37H2Z" fill="#FFA902"/><rect x="18.6" y="17" width="4.8" height="10" rx="2.4" fill="#123B5E"/><circle cx="21" cy="31.4" r="2.8" fill="#123B5E"/><circle cx="37" cy="34" r="10" fill="#1769DC"/><path d="M32.6 34.2 35.8 37.4 41.4 31.4" fill="none" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <h3>告警、調查與修復動作</h3>
         <p>可疑活動偵測涵蓋異常登入、大量匯出與資料外洩徵兆，命中後於統一的調查儀表板呈現，包含行為者脈絡與事件時間軸，免去跨多個管理介面拼湊事件經過。告警可送達 Slack 或 Microsoft Teams，稽核記錄亦可經 Webhook 與 API 串流至 Splunk 等資安事件管理平台。儀表板並提供可直接執行的修復動作：停用帳號、遮蔽敏感內容、重新分類。</p>
         <p><b>告警機制的效果取決於收斂程度，而非偵測規則的數量。</b>上線前需設定告警等級與接收對象，並訂定高風險項目的處理時限。未經分級的情況下，未處理告警的累積會使儀表板失去判讀價值。</p>
       </div>
 
       <div class="cap">
-        <span class="tag">Premium · Early Access</span>
-        <svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 10v12c0 10-7 17-16 20-9-3-16-10-16-20V10Z" fill="#123B5E"/><path d="M24 13.5 26.9 20.6 34 23.5 26.9 26.4 24 33.5 21.1 26.4 14 23.5 21.1 20.6Z" fill="#FFA902"/></svg>
+        <div class="cap-top"><span class="tag">Premium · Early Access</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 10v12c0 10-7 17-16 20-9-3-16-10-16-20V10Z" fill="#123B5E"/><path d="M24 13.5 26.9 20.6 34 23.5 26.9 26.4 24 33.5 21.1 26.4 14 23.5 21.1 20.6Z" fill="#FFA902"/></svg></div>
           <h3>AI 治理</h3>
         <p>兩項能力目前均屬 Early Access：Rovo Chat 的提示與回應內容掃描，可阻擋或遮蔽出現於 AI 對話中的敏感資料；連接器資料安全則避免第三方來源的敏感資料被納入 Teamwork Graph 的索引範圍。</p>
         <p><b>Early Access 表示功能尚未正式發布</b>，可用性、涵蓋範圍與服務水準均可能調整。尚未導入 Rovo 的組織，此兩項與其升級評估無直接關聯；已導入或即將導入者，可於試用期間驗證實際行為。Early Access 階段的功能不宜列為既有保障。</p>
