@@ -1231,6 +1231,18 @@ img{max-width:100%}
   .ro-check-grid{grid-template-columns:1fr; gap:4px}
 }
 
+/* 同列三張卡的細線對齊：卡片以 subgrid 共用 .ro-steps 的列軌——標頭／標題／目標句／
+   前置條件的 dt、dd／風險的 dt、dd 共七列——同一段在三卡起始於同一條線。
+   dl 改 display:contents 後不再產生框，故把細線與其上距移到第一個 dt。
+   卡內列距歸零（subgrid 可覆寫繼承來的 gap），兩列卡片之間的 18px 不受影響。 */
+@supports (grid-template-rows:subgrid){
+  @media (min-width:901px){
+    .ro-step{display:grid; grid-template-rows:subgrid; grid-row:span 7; row-gap:0}
+    .ro-meta{display:contents}
+    .ro-meta > dt:first-of-type{padding-top:12px; border-top:1px solid var(--line)}
+  }
+}
+
 /* ===== AI 治理 #ai ===== */
 /* 三張卡屬主卡層級（白底、--r-card-lg、--shadow、無邊框）：本區位於灰底色帶上，
    白卡靠底色差與陰影浮出即可，再加邊框會與 .caps 的 1px 列表卡層級混淆。 */
