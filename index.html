@@ -780,8 +780,8 @@
       <div class="cap">
         <div class="cap-top"><span class="tag">Premium · Early Access</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 10v12c0 10-7 17-16 20-9-3-16-10-16-20V10Z" fill="#123B5E"/><path d="M24 13.5 26.9 20.6 34 23.5 26.9 26.4 24 33.5 21.1 26.4 14 23.5 21.1 20.6Z" fill="#FFA902"/></svg></div>
           <h3>AI 治理</h3>
-        <p>兩項能力目前均屬 Early Access：Rovo Chat 的提示與回應內容掃描，可阻擋或遮蔽出現於 AI 對話中的敏感資料；連接器資料安全則避免第三方來源的敏感資料被納入 Teamwork Graph 的索引範圍。</p>
-        <p><b>Early Access 表示功能尚未正式發布</b>，可用性、涵蓋範圍與服務水準均可能調整。尚未導入 Rovo 的組織，此兩項與其升級評估無直接關聯；已導入或即將導入者，可於試用期間驗證實際行為。Early Access 階段的功能不宜列為既有保障。</p>
+        <p>兩項能力目前均屬 Early Access，官方產品頁另標示為 coming soon：Rovo Chat 的提示與回應內容掃描，可阻擋或遮蔽出現於 AI 對話中的敏感資料；連接器資料安全則避免第三方來源的敏感資料被納入 Teamwork Graph 的索引範圍。</p>
+        <p><b>Early Access 階段的功能不宜列為既有保障</b>；三道邊界怎麼設、哪些已正式提供，見<a href="#ai">AI 治理</a>。</p>
       </div>
 
     </div>
@@ -973,6 +973,66 @@
       </table>
     </div>
     <p class="note" style="margin-top:20px"><b>怎麼讀這張表：</b>hr 與 legal 同受兩組約束，實際限制是兩組規則的加總——Policy 2 沒有限制應用程式存取，但這兩站仍被 Policy 1 阻擋；finance 與 marketing 只受 Policy 2 約束；主站 acme.atlassian.net/wiki 不在任何政策範圍內，完全不受限。實務上建議先以「整個產品」或「指定空間／專案」建立全組織的底線政策，再以「依分類等級」的政策針對高敏感內容加嚴。</p>
+  </section>
+
+  <!-- AI 治理 -->
+  <section id="ai" class="band">
+    <p class="eyebrow">AI 治理</p>
+    <h2>導入 Rovo 前，先讓 AI 只讀得到該讀的</h2>
+    <p>Rovo 依提問者既有的權限回答問題，這是設計上的保障。真正的落差在於多年累積、從未分級的頁面與工單：原本靠「沒人會去翻」維持的隱蔽性，在 AI 檢索面前不再成立。Guard 的分級、政策與帳號管控，正是讓 Rovo 可以放心全面開放的前提。</p>
+
+    <h3 class="ai-h3">三道要先設好的邊界</h3>
+    <div class="ai-grid">
+
+      <article class="ai-card">
+        <svg class="ai-ico" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 7h26a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H17l-9 7v-7H6a4 4 0 0 1-4-4V11a4 4 0 0 1 4-4Z" fill="#1769DC"/><rect x="9" y="14" width="18" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/><rect x="9" y="20" width="12" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/><path d="M37 22 46 25.4v6.6c0 5.6-3.9 9.6-9 11.4-5.1-1.8-9-5.8-9-11.4V25.4Z" fill="#FFA902"/><path d="M33.2 33.6 35.9 36.3 40.8 31.2" fill="none" stroke="#123B5E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h4>對話中的敏感內容</h4>
+        <dl class="ai-dl">
+          <div><dt>情境</dt><dd>同仁在 Rovo Chat 提問，回答可能引用含個資或機密的頁面；也可能把憑證或客戶資料直接貼進提示。</dd></div>
+          <div><dt>Guard 對應</dt><dd>Rovo Chat 提示與回應掃描：對話文字比對內容掃描的偵測規則，命中即阻擋或遮蔽，對話得以繼續。</dd></div>
+          <div><dt>狀態</dt><dd><div class="ai-status-row"><span class="ai-status ai-ea">Early Access</span><span class="pol-plan prem">Premium</span></div></dd></div>
+        </dl>
+      </article>
+
+      <article class="ai-card">
+        <svg class="ai-ico" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="5.5" fill="#123B5E"/><circle cx="9" cy="12" r="4" fill="#123B5E"/><circle cx="39" cy="12" r="4" fill="#123B5E"/><circle cx="9" cy="36" r="4" fill="#123B5E"/><path d="M12 14.5 20 20.5M36 14.5 28 20.5M12 33.5 20 27.5" stroke="#123B5E" stroke-width="2.4" stroke-linecap="round"/><path d="M28 27.5 36 33.5" stroke="#123B5E" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3 3"/><circle cx="39" cy="36" r="6.5" fill="#FFA902"/><path d="M36 33 42 39M42 33 36 39" stroke="#123B5E" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <h4>檢索範圍</h4>
+        <dl class="ai-dl">
+          <div><dt>情境</dt><dd>Rovo 與 connector 會把 Jira、Confluence 及 Google Drive、SharePoint 等外部來源納入 Teamwork Graph；權限過寬的頁面與外部文件都可能成為答案的來源。</dd></div>
+          <div><dt>Guard 對應</dt><dd>分類標籤標出 Restricted 內容，資料安全政策限制其匯出、公開連結與應用程式存取；Rovo 依權限回答，收斂 Restricted 的檢視權限即縮小檢索範圍。connector data security 則在外部文件進入索引前比對偵測規則並阻擋。</dd></div>
+          <div><dt>狀態</dt><dd>
+            <div class="ai-status-row"><span class="ai-status-lb">分級與政策</span><span class="ai-status">正式提供</span><span class="pol-plan prem">Premium</span></div>
+            <div class="ai-status-row"><span class="ai-status-lb">connector data security</span><span class="ai-status ai-ea">Early Access</span><span class="pol-plan prem">Premium</span></div>
+            <small class="ai-fn">以分類等級直接排除 AI 檢索的政策規則，Atlassian 列於 AI roadmap，目前尚未提供。</small>
+          </dd></div>
+        </dl>
+      </article>
+
+      <article class="ai-card">
+        <svg class="ai-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="30" height="24" rx="4" fill="#123B5E"/><path d="M10 16 15 20 10 24" fill="none" stroke="#50B0E8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="18" y="22.6" width="10" height="2.8" rx="1.4" fill="#50B0E8"/><circle cx="36" cy="35" r="7" fill="#FFA902"/><circle cx="36" cy="35" r="2.4" fill="#123B5E"/><path d="M41 38.6 46 43.6M44 41.6l2 2" stroke="#FFA902" stroke-width="3" stroke-linecap="round"/></svg>
+        <h4>非 Atlassian 的 AI 工具</h4>
+        <dl class="ai-dl">
+          <div><dt>情境</dt><dd>團隊以 AI 編碼助理等第三方工具，透過 REST API 或 Rovo MCP server 讀取 Jira 與 Confluence；若以個人帳號授權，工具的可見範圍等同該同仁，且離職後仍可能持續有效。</dd></div>
+          <div><dt>Guard 對應</dt><dd>以 service account 取代個人帳號授權；API token 到期與建立限制政策；資料安全政策的應用程式存取與 MCP server 存取規則、允許連線的 AI 工具網域；稽核記錄可見每次工具呼叫與讀取範圍。</dd></div>
+          <div><dt>狀態</dt><dd>
+            <div class="ai-status-row"><span class="ai-status">正式提供</span><span class="pol-plan">Standard</span></div>
+            <small class="ai-fn">API token 使用行為追蹤與建立／撤銷告警為 Premium。</small>
+          </dd></div>
+        </dl>
+      </article>
+
+    </div>
+
+    <div class="ai-steps">
+      <h3>導入 AI 前先做的三件事</h3>
+      <ol>
+        <li>先開內容掃描盤點既有敏感內容，並標示分類等級。</li>
+        <li>收斂 Restricted 的檢視權限縮小 AI 可見範圍，並禁止匯出與公開連結。</li>
+        <li>AI 工具一律以 service account 與有到期日的 API token 授權，納入稽核記錄。</li>
+      </ol>
+    </div>
+
+    <p class="note"><b>對應場景：</b>「Rovo 上線第二週，有同仁詢問本年度調薪級距」見<a href="#g-common">通用場景</a>；「開發團隊導入 AI 編碼助理」見<a href="#g-software">軟體開發場景</a>。Early Access 功能的可用性與範圍可能調整，正式導入前建議於試用期間驗證。</p>
   </section>
 
   <!-- CASES -->

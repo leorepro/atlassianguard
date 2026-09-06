@@ -1094,3 +1094,57 @@ img{max-width:100%}
   .pdr-nav{gap:8px; margin:26px 0 32px}
   .pdr-nav label{flex:1; justify-content:center; padding:11px 6px}
 }
+
+/* ===== AI 治理 #ai ===== */
+/* 三張卡屬主卡層級（白底、--r-card-lg、--shadow、無邊框）：本區位於灰底色帶上，
+   白卡靠底色差與陰影浮出即可，再加邊框會與 .caps 的 1px 列表卡層級混淆。 */
+.ai-h3{margin:40px 0 16px}
+.ai-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.ai-card{
+  background:var(--surface); border-radius:var(--r-card-lg); box-shadow:var(--shadow);
+  padding:24px 24px 26px; display:flex; flex-direction:column;
+  transition:box-shadow .18s ease;
+}
+/* hover 沿用 .layer／.price 的下一階陰影，不位移：卡內有多段文字，位移會讓閱讀中的行跳動 */
+.ai-card:hover{box-shadow:var(--shadow-hover)}
+.ai-ico{display:block; width:40px; height:40px; margin-bottom:14px}
+.ai-card h4{margin:0 0 6px; font-size:var(--fs-md); font-weight:700; line-height:1.45; letter-spacing:-.01em}
+/* 三卡的 dl 固定「情境 → Guard 對應 → 狀態」順序，每項以細線分隔，讀者可橫向比對三卡同一列 */
+.ai-dl{margin:0; display:grid; gap:0}
+.ai-dl > div{padding:12px 0 0; margin-top:12px; border-top:1px solid var(--line)}
+.ai-dl dt{
+  font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-3); margin-bottom:4px;
+}
+.ai-dl dd{margin:0; font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7}
+/* 狀態列：膠囊先答「正式提供／Early Access」，再以既有 .pol-plan 說方案。
+   正式提供用實心強調色，Early Access 用描邊，讓「哪些已可倚賴」一眼可辨。 */
+.ai-status-row{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+.ai-status-row + .ai-status-row{margin-top:8px}
+.ai-status-lb{flex-basis:100%; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.4}
+.ai-status{
+  display:inline-block; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; text-transform:uppercase;
+  padding:3px 10px; border-radius:var(--r-chip); color:var(--on-accent); background:var(--accent);
+}
+.ai-status.ai-ea{color:var(--ink-2); background:var(--surface); border:1px solid var(--line-2); padding:2px 9px}
+/* 狀態下的補充：說明尚未提供或屬 Premium 的細節，避免膠囊過度概括 */
+.ai-fn{display:block; margin-top:10px; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.6}
+/* 三件事屬次要層級：1px 邊框、--r-card，與上方三張主卡拉開層次 */
+.ai-steps{margin-top:26px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card); padding:22px 26px 24px}
+.ai-steps h3{font-size:var(--fs-md); margin-bottom:14px}
+.ai-steps ol{margin:0; padding:0; list-style:none; counter-reset:ai-step; display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+.ai-steps li{
+  counter-increment:ai-step; display:grid; grid-template-columns:28px 1fr; column-gap:12px; align-items:start;
+  font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7;
+}
+.ai-steps li::before{
+  content:counter(ai-step); width:28px; height:28px; border-radius:50%;
+  background:var(--accent-soft); color:var(--accent); font-family:var(--mono); font-size:var(--fs-xs); font-weight:600;
+  display:grid; place-items:center; margin-top:1px;
+}
+/* ≤900px 三卡與三件事都改單欄；卡內 dl 的細線分隔在單欄下仍成立 */
+@media (max-width:900px){
+  .ai-grid{grid-template-columns:1fr}
+  .ai-steps ol{grid-template-columns:1fr; gap:14px}
+  .ai-card{padding:22px 20px 24px}
+}
