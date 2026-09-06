@@ -757,7 +757,7 @@
           <tr><td class="feat">連接器資料安全<span class="feat-en">（Connector data security）</span><small>避免第三方來源的敏感資料被納入 Teamwork Graph</small></td><td class="v"><span class="dash" role="img" aria-label="未提供"></span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span><span class="ea">EA</span></td></tr>
 
           <tr class="grp"><th colspan="3" scope="colgroup">涵蓋範圍與計費</th></tr>
-          <tr><td class="feat">支援的雲端產品<span class="feat-en">（Supported cloud products）</span></td><td class="v v-list"><ul><li>Jira</li><li>JSM（Agent）</li><li>Confluence</li><li>Bitbucket</li><li>Trello</li><li>Statuspage</li></ul></td><td class="v v-list prem" style="color:var(--accent)"><ul><li>Jira</li><li>Confluence</li></ul></td></tr>
+          <tr><td class="feat">支援的雲端產品<span class="feat-en">（Supported cloud products）</span><small>Standard 的控制作用於 Atlassian 帳號層，凡以該帳號登入的產品皆適用；Premium 須讀取產品內的內容，掃描引擎目前僅涵蓋 Jira 與 Confluence。Premium 疊加於 Standard 之上，其餘產品仍在 Standard 的管控範圍內。</small></td><td class="v v-list"><ul><li>Jira</li><li>JSM（Agent）</li><li>Confluence</li><li>Bitbucket</li><li>Trello</li><li>Statuspage</li></ul></td><td class="v v-list prem" style="color:var(--accent)"><ul><li>Jira</li><li>Confluence</li></ul></td></tr>
           <tr><td class="feat">是否已內含於其他訂閱<span class="feat-en">（Included in other subscriptions）</span><small>已內含 Standard 者，升級 Premium 時僅需補足每位使用者的價差</small></td><td class="v yes v-list"><span class="tick" role="img" aria-label="支援">✓</span><ul><li>Cloud Enterprise</li><li>Teamwork Collection<span class="cont">Premium／Enterprise</span></li></ul></td><td class="v prem v-list">另行購買，補足價差</td></tr>
         </tbody>
       </table>
@@ -798,7 +798,7 @@
         <div class="cap-top"><span class="tag std">Standard · Premium</span><svg class="cap-ico" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="7" width="38" height="15" rx="3" fill="#50B0E8"/><rect x="5" y="26" width="38" height="15" rx="3" fill="#123B5E"/><circle cx="13" cy="14.5" r="2.8" fill="#FFFFFF"/><rect x="20" y="13" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/><circle cx="13" cy="33.5" r="2.8" fill="#FFA902"/><rect x="20" y="32" width="16" height="3" rx="1.5" fill="#FFFFFF" opacity=".85"/></svg></div>
           <h3>稽核記錄的兩個層次</h3>
         <p>兩者的記錄對象不同：<b>Standard 記錄管理員的操作行為，Premium 另涵蓋使用者對內容的檢視與匯出行為。</b></p>
-        <p>兩者各自涵蓋哪些操作、保留多久，逐項對照見本節下方。</p>
+        <p>兩者各自涵蓋哪些操作、保留多久，逐項對照見<a href="#audit-detail">本節下方的稽核記錄對照</a>。</p>
       </div>
 
       <div class="cap">
@@ -817,7 +817,7 @@
 
     </div>
 
-    <div class="al-wide">
+    <div class="al-wide" id="audit-detail">
       <h3>稽核記錄：兩種方案分別記錄什麼</h3>
       <p>離職人員的存取歷程盤查，或稽核單位要求說明「何人於何時檢視過哪份文件」這類需求，僅憑 Standard 的管理員記錄無法完成。</p>
       <div class="al-grid">
