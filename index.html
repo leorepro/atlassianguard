@@ -234,7 +234,7 @@
     <div class="hero-grid">
       <div>
         <h1><span class="h1-brand">Atlassian Guard · 組織層級資安附加訂閱</span><em>Standard</em> 建立存取的邊界，<br><em>Premium</em> 涵蓋邊界內的資料與行為</h1>
-        <p class="lede">Guard 將身分驗證、資料分級、內容偵測與事件回應整合於單一管理平面，套用對象為整個組織既有的 Jira 與 Confluence——不另建資安系統，而是讓既有環境中的資料變得可治理、可稽核。</p>
+        <p class="lede">Guard 將身分驗證、資料分級、內容偵測與事件回應整合於單一管理平面，<br class="br-lg">套用對象為整個組織既有的 Jira 與 Confluence——<br class="br-lg">不另建資安系統，而是讓既有環境中的資料變得可治理、可稽核。</p>
         <div class="cta-row">
           <a class="btn" href="https://tsgojira.atlassian.net/servicedesk/customer/portal/4/group/8/create/43" target="_blank" rel="noopener">預約 Demo</a>
           <a class="btn ghost" href="#compare">查看功能對照表</a>
@@ -727,7 +727,7 @@
           <tr><td class="feat">使用者 API token 管控與到期設定<span class="feat-en">（User API token controls）</span></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
           <tr><td class="feat">行動應用程式管理<span class="feat-en">（Mobile app management (MAM)）</span><small>限制截圖、螢幕錄影與檔案下載</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
           <tr><td class="feat">密碼原則、閒置逾時、工作階段與行動應用逾時<span class="feat-en">（Password policies and session timeouts）</span></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
-          <tr><td class="feat">OAuth 2.0 服務帳號上限<span class="feat-en">（Service accounts (OAuth 2.0)）</span><small>供自動化流程使用的機器身分，與個人帳號脫鉤</small><details class="more"><summary>什麼是服務帳號？</summary><p>服務帳號（service account）代表應用程式或自動化流程，而非真人使用者。與個人建立的 API token 不同，服務帳號不隸屬於任何員工，該人員離職時不會連帶失效；其權限範圍與使用情形亦可由管理員集中檢視與撤銷。常見用途為 CI/CD（Continuous Integration／Continuous Delivery）流程、系統整合與排程工作。詳見 <a href="https://support.atlassian.com/user-management/docs/understand-service-accounts/" target="_blank" rel="noopener">Atlassian 官方說明</a>。</p></details></td><td class="v">250</td><td class="v yes prem">1,000</td></tr>
+          <tr><td class="feat">服務帳號上限<span class="feat-en">（Service accounts）</span><small>供自動化流程使用的機器身分，與個人帳號脫鉤；可以 OAuth 2.0 或服務帳號專屬的 API token 驗證</small><details class="more"><summary>什麼是服務帳號？</summary><p>服務帳號（service account）代表應用程式或自動化流程，而非真人使用者。與個人建立的 API token 不同，服務帳號不隸屬於任何員工，該人員離職時不會連帶失效；其權限範圍與使用情形亦可由管理員集中檢視與撤銷。驗證方式有兩種：以 OAuth 2.0 應用程式授權，或由管理員為該服務帳號建立專屬的 API token，兩者都與個人 token 分開管理。常見用途為 CI/CD（Continuous Integration／Continuous Delivery）流程、系統整合與排程工作。詳見 <a href="https://support.atlassian.com/user-management/docs/understand-service-accounts/" target="_blank" rel="noopener">Atlassian 官方說明</a>。</p></details></td><td class="v">250</td><td class="v yes prem">1,000</td></tr>
 
           <tr class="grp"><th colspan="3" scope="colgroup">資料保護 Protect</th></tr>
           <tr><td class="feat">資料安全政策<span class="feat-en">（Data security policies）</span><small>限制匯出、公開連結、匿名存取與第三方應用程式存取</small></td><td class="v yes"><span class="tick" role="img" aria-label="支援">✓</span></td><td class="v yes prem"><span class="tick" role="img" aria-label="支援">✓</span></td></tr>
@@ -1478,7 +1478,7 @@
             <div class="case-split">
               <div class="case-col">
                 <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Standard</h4>
-                <p>可從源頭進行治理：禁止使用者自行建立 API token、對既有 token 設定到期時間以強制輪替，並改以 OAuth 2.0 服務帳號（上限 250 個）承接自動化流程，使機器身分與個人帳號脫鉤。<br>惟此為<b>由上而下的關閉機制</b>，仍無法在停用前評估各組 token 的影響範圍。</p>
+                <p>可從源頭進行治理：禁止使用者自行建立 API token、對既有 token 設定到期時間以強制輪替，並改以服務帳號（上限 250 個，可用 OAuth 2.0 或專屬 API token 驗證）承接自動化流程，使機器身分與個人帳號脫鉤。<br>惟此為<b>由上而下的關閉機制</b>，仍無法在停用前評估各組 token 的影響範圍。</p>
               </div>
               <div class="case-col">
                 <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>
@@ -1541,7 +1541,7 @@
             <div class="case-split">
               <div class="case-col">
                 <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Standard</h4>
-                <p>治理的起點在此：禁止使用者自行建立 API token、對既有 token 設定到期輪替，並改以 OAuth 2.0 服務帳號（上限 250 個）承接自動化流程與 AI 代理的存取，使機器身分與個人帳號脫鉤，其權限範圍得以單獨界定、單獨回收。</p>
+                <p>治理的起點在此：禁止使用者自行建立 API token、對既有 token 設定到期輪替，並改以服務帳號（上限 250 個，可用 OAuth 2.0 或專屬 API token 驗證）承接自動化流程與 AI 代理的存取，使機器身分與個人帳號脫鉤，其權限範圍得以單獨界定、單獨回收。</p>
               </div>
               <div class="case-col">
                 <h4><span class="tick sm" role="img" aria-label="已可覆蓋">✓</span> Guard Premium</h4>

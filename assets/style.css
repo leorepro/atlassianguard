@@ -190,6 +190,8 @@ h3{font-size:var(--fs-lg); line-height:1.5; font-weight:700; letter-spacing:-.01
 /* 66ch 在中文約 40 字／行，偏長；60ch 約 36 字，接近中文舒適行長（30–38 字）。 */
 p{margin:0 0 16px; max-width:var(--measure); color:var(--ink-2); text-wrap:pretty}
 .lede{font-size:var(--fs-lg); color:var(--ink-2)}
+/* 指定斷行只在寬螢幕生效：手機欄寬本來就窄，強制斷行會多出半行空白 */
+@media (max-width:820px){ .br-lg{display:none} }
 
 /* ---------- hero ---------- */
 .hero{padding:64px 0 72px}
