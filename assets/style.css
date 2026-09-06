@@ -601,6 +601,8 @@ td.feat details.more summary::after{
   transition:transform .2s ease;   /* 與 FAQ 的收合互動一致 */
 }
 td.feat details.more[open] summary::after{transform:rotate(45deg)}
+/* 功能名稱後的英文原名：中文譯名不一定直觀，附原文供對照官方文件；用一般字重與淡色，不與粗體中文爭主次 */
+td.feat .feat-en{font-weight:400; color:var(--ink-3); font-size:var(--fs-xs); margin-left:2px}
 td.feat details.more p a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
 td.feat details.more p{
   font-size:var(--fs-xs); line-height:1.75; color:var(--ink-2);
