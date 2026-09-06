@@ -39,21 +39,50 @@ NO_BREAK_BEFORE = set("，。、；：！？）」』》〉】〕』’”%")
 NO_BREAK_AFTER = set("（「『《〈【〔‘“")
 
 
+# 一段沒有換行點的文字最多容許幾個字：更長時改採 BudouX 的全部詞界（含單字片段），
+# 否則像「範圍由單一站台提升至整個組織的所有」整串被迫換到下一行，前一行只剩「將控制」
+MAX_RUN = 8
+
+
 def insert_wbr(text: str, parser) -> str:
     if not CJK.search(text):
         return text
     segs = [s for s in parser.parse(text) if s]
     out = segs[0]
+    run = len(segs[0].strip())
     for prev, seg in zip(segs, segs[1:]):
         a, b = prev[-1], seg[0]
-        ok = (
-            len(prev.strip()) >= 2 and len(seg.strip()) >= 2
-            and not a.isspace() and not b.isspace()           # 空白本身就是換行點
+        legal = (
+            not a.isspace() and not b.isspace()               # 空白本身就是換行點
             and not (WORDISH.match(a) and WORDISH.match(b))   # 不切開英數字串
             and b not in NO_BREAK_BEFORE and a not in NO_BREAK_AFTER
         )
+        strict = legal and len(prev.strip()) >= 2 and len(seg.strip()) >= 2
+        # 回退時仍不讓單一個字留在行尾（「另／一個」「不／影響」）；行首出現「的」「與」則可接受
+        ok = strict or (legal and len(prev.strip()) >= 2 and run + len(seg.strip()) > MAX_RUN)
+        if a.isspace() or b.isspace():
+            run = 0                                            # 空白處本來就會換行，重新起算
         out += ("<wbr>" if ok else "") + seg
+        run = len(seg.strip()) if ok else run + len(seg.strip())
     return out
+
+
+# 產品與專有名詞內的空格改為 &nbsp;，名稱不會被拆成兩行（如「Atlassian／Guard」）。
+# 先長後短，避免「Guard Premium」先吃掉「Atlassian Guard Premium」的一部分。
+PROPER_NOUNS = [
+    "Jira Service Management", "Jira Product Discovery", "Jira Work Management",
+    "Atlassian Guard Standard", "Atlassian Guard Premium", "Microsoft Entra ID",
+    "Atlassian Guard", "Atlassian Access", "Atlassian Cloud", "Atlassian Beacon",
+    "Guard Standard", "Guard Premium", "Cloud Enterprise", "Teamwork Collection", "Teamwork Graph",
+    "Rovo Chat", "Rovo MCP", "Entra ID", "Azure AD", "Google Workspace", "Google Drive",
+    "Data Center", "Early Access", "Admin Hub", "Trust Center", "Trust Portal",
+    "Forrester Consulting", "Total Economic Impact", "NIST CSF", "Cloud site",
+]
+NBSP_RE = re.compile("|".join(re.escape(n) for n in PROPER_NOUNS))
+
+
+def glue_names(text: str) -> str:
+    return NBSP_RE.sub(lambda m: m.group(0).replace(" ", "&nbsp;"), text)
 
 
 def process(html: str) -> str:
@@ -84,10 +113,12 @@ def process(html: str) -> str:
             elif tag in SKIP_TAGS or SKIP_CLASS.search(part):
                 skip_stack.append(tag)
             continue
-        if skip_stack or len(part.strip()) < MIN_LEN:
+        if skip_stack:
             out.append(part)
+        elif len(part.strip()) < MIN_LEN:
+            out.append(glue_names(part))
         else:
-            out.append(insert_wbr(part, parser))
+            out.append(glue_names(insert_wbr(part, parser)))
     return head + "".join(out)
 
 
