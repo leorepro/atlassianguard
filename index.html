@@ -1839,7 +1839,7 @@
         <div>
           <h4 class="ro-check-h">前置作業</h4>
           <ul>
-            <li>已列出所有 *.atlassian.net 站台與各站台的 Org admin</li>
+            <li>已列出所有 *.atlassian.net 站台，以及組織的 Org admin 與各站台的 site admin</li>
             <li>已列出公司持有的全部 email 網域，含子公司與舊品牌網域</li>
             <li>已確認 DNS 管理者與 IdP 管理者，並排定變更時窗</li>
             <li>已盤點所有使用個人 API token 的 CI／整合，並規劃改用 service account</li>
@@ -1851,7 +1851,7 @@
           <h4 class="ro-check-h">切換當週</h4>
           <ul>
             <li>已通知使用者切換日期與登入方式變化，並提供 FAQ 與支援窗口</li>
-            <li>已於測試政策完成 SSO 登入、登出與密碼重設流程驗證</li>
+            <li>已於測試政策完成 SSO 登入、登出與 session 逾時後重新登入的驗證</li>
             <li>已確認 IdP 群組與 Atlassian 既有群組沒有同名衝突</li>
             <li>已將預設 Authentication policy 切換為強制 SSO，並確認緊急管理帳號仍可登入</li>
             <li>已開啟 SCIM 同步，並核對首批佈建的使用者與群組數量</li>
@@ -1861,9 +1861,9 @@
         <div>
           <h4 class="ro-check-h">上線後</h4>
           <ul>
-            <li>已驗證離職流程：IdP 停用 → Atlassian 帳號於數分鐘內失去存取</li>
+            <li>已驗證離職流程：IdP 停用後依同步週期撤銷存取（Entra ID 預設約 40 分鐘），既有 session 依驗證政策的 session duration 失效</li>
             <li>已驗證到職流程：加入 IdP 群組後自動取得對應產品的存取權</li>
-            <li>已檢視組織稽核記錄，確認 SSO 登入與政策變更事件正常記錄</li>
+            <li>已檢視組織稽核記錄，確認驗證政策變更與使用者存取異動正常記錄（登入失敗需查 IdP 端記錄）</li>
             <li>已設定 API token 到期政策，並排定既有 token 的輪替時間</li>
             <li>已排定每季檢視：未受管帳號、外部使用者與閒置帳號</li>
             <li>（Premium）已確認告警送達 SIEM，並指定告警的處理負責人</li>
