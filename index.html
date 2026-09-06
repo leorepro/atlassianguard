@@ -1010,7 +1010,7 @@
   <section id="ai" class="band">
     <p class="eyebrow">AI 治理</p>
     <h2>導入 AI 前，先讓 AI 只讀得到該讀的</h2>
-    <p>Rovo 依提問者既有的權限回答問題，這是設計上的保障。<br class="br-lg">真正的落差在於多年累積、從未分級的頁面與工單：<br class="br-lg">原本靠「沒人會去翻」維持的隱蔽性，在 AI 檢索面前不再成立。<br class="br-lg">Guard 的分級、政策與帳號管控，正是讓 Rovo 可以放心全面開放的前提。</p>
+    <p>AI 依提問者既有的權限回答問題，這是設計上的保障。<br class="br-lg">真正的落差在於多年累積、從未分級的頁面與工單：<br class="br-lg">原本靠「沒人會去翻」維持的隱蔽性，在 AI 檢索面前不再成立。<br class="br-lg">Guard 的分級、政策與帳號管控，正是讓 AI 可以放心全面開放的前提。</p>
 
     <h3 class="ai-h3">三道要先設好的邊界</h3>
     <div class="ai-grid">
@@ -1034,7 +1034,7 @@
           <div><dt>狀態</dt><dd>
             <div class="ai-status-row"><span class="ai-status-lb">分級與政策</span><span class="ai-status">正式提供</span><span class="pol-plan prem">Premium</span></div>
             <div class="ai-status-row"><span class="ai-status-lb">connector data security</span><span class="ai-status ai-ea">Early Access</span><span class="pol-plan prem">Premium</span></div>
-            <small class="ai-fn">以分類等級直接排除 AI 檢索的政策規則，Atlassian 列於 AI roadmap，目前尚未提供。</small>
+            <div class="ai-status-row"><span class="ai-status-lb">以分類等級排除 AI 檢索</span><span class="ai-status ai-todo">尚未提供</span><span class="ai-status-note">列於 Atlassian AI roadmap</span></div>
           </dd></div>
         </dl>
       </article>
@@ -1046,8 +1046,8 @@
           <div><dt>情境</dt><dd>團隊以 AI 編碼助理等第三方工具，透過 REST API 或 Rovo MCP server 讀取 Jira 與 Confluence；若以個人帳號授權，工具的可見範圍等同該同仁，且離職後仍可能持續有效。</dd></div>
           <div><dt>Guard 對應</dt><dd>以 service account 取代個人帳號授權；API token 到期與建立限制政策；資料安全政策的應用程式存取與 MCP server 存取規則、允許連線的 AI 工具網域；稽核記錄可見每次工具呼叫與讀取範圍。</dd></div>
           <div><dt>狀態</dt><dd>
-            <div class="ai-status-row"><span class="ai-status">正式提供</span><span class="pol-plan">Standard</span></div>
-            <small class="ai-fn">API token 使用行為追蹤與建立／撤銷告警為 Premium。</small>
+            <div class="ai-status-row"><span class="ai-status-lb">帳號授權與存取控制</span><span class="ai-status">正式提供</span><span class="pol-plan">Standard</span></div>
+            <div class="ai-status-row"><span class="ai-status-lb">API token 使用追蹤與建立／撤銷告警</span><span class="ai-status">正式提供</span><span class="pol-plan prem">Premium</span></div>
           </dd></div>
         </dl>
       </article>

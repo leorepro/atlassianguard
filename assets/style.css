@@ -1239,15 +1239,21 @@ img{max-width:100%}
 /* 狀態列：膠囊先答「正式提供／Early Access」，再以既有 .pol-plan 說方案。
    正式提供用實心強調色，Early Access 用描邊，讓「哪些已可倚賴」一眼可辨。 */
 .ai-status-row{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
-.ai-status-row + .ai-status-row{margin-top:8px}
-.ai-status-lb{flex-basis:100%; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.4}
+/* 多組狀態時每組是「小標＋膠囊」的獨立單位，組距要明顯大於膠囊間距才不會糊成一片 */
+.ai-status-row + .ai-status-row{margin-top:14px}
+/* 組名用一般字體、深一階並加粗，與 dt「狀態」的 mono 灰小標拉開層級，不再是同一片灰字 */
+.ai-status-lb{
+  flex-basis:100%; font-size:var(--fs-xs); font-weight:600;
+  color:var(--ink-2); line-height:1.4; margin-bottom:4px;
+}
 .ai-status{
   display:inline-block; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; text-transform:uppercase;
   padding:3px 10px; border-radius:var(--r-chip); color:var(--on-accent); background:var(--accent);
 }
 .ai-status.ai-ea{color:var(--ink-2); background:var(--surface); border:1px solid var(--line-2); padding:2px 9px}
-/* 狀態下的補充：說明尚未提供或屬 Premium 的細節，避免膠囊過度概括 */
-.ai-fn{display:block; margin-top:10px; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.6}
+/* 尚未提供：虛線描邊、無強調色，與「正式提供」實心、「Early Access」實線描邊拉出三階 */
+.ai-status.ai-todo{color:var(--ink-3); background:transparent; border:1px dashed var(--line-2); padding:2px 9px}
+.ai-status-note{font-size:var(--fs-xs); color:var(--ink-3); line-height:1.4}
 /* 三件事屬次要層級：1px 邊框、--r-card，與上方三張主卡拉開層次 */
 .ai-steps{margin-top:26px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card); padding:22px 26px 24px}
 .ai-steps h3{font-size:var(--fs-md); margin-bottom:14px}
