@@ -831,12 +831,18 @@ td.v.yes{color:var(--yes)}
 .case-more > summary:hover{background:var(--accent-soft)}
 .case-more > summary:focus-visible{outline:2px solid var(--accent); outline-offset:-2px}
 .case-more > summary::-webkit-details-marker{display:none}
+/* 右側放一顆寫著「展開」的膠囊按鈕：只有加號時讀者看不出這列可以點，
+   膠囊的邊框與文字把它變成明確的操作元件；hover 時填色、開啟後改為「收合」 */
 .case-more > summary::after{
-  content:"+"; font-family:var(--mono); font-size:var(--fs-base); line-height:1;
-  color:var(--ink-3); flex:none; transition:transform .2s ease;
+  content:"展開 ＋"; margin-left:auto; flex:none;
+  font-size:var(--fs-xs); font-weight:500; letter-spacing:.02em; color:var(--accent);
+  padding:4px 12px; border:1px solid var(--accent); border-radius:var(--r-chip); background:var(--surface);
+  transition:background .15s ease, color .15s ease, transform .15s ease;
 }
+.case-more > summary:hover::after{background:var(--accent); color:var(--on-accent)}
 .case-more[open] > summary{color:var(--ink-3)}
-.case-more[open] > summary::after{transform:rotate(45deg)}
+.case-more[open] > summary::after{content:"收合 －"; color:var(--ink-3); border-color:var(--line-2)}
+.case-more[open] > summary:hover::after{background:var(--surface-2); color:var(--ink-2)}
 /* 收合狀態下仍讓讀者一眼看出這則場景 Standard 是否已能覆蓋 */
 .cm-marks{display:flex; align-items:center; gap:16px; margin-left:auto}
 .cm-mark{
@@ -1159,11 +1165,6 @@ img{max-width:100%}
 .ro-hd{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px}
 /* 步驟編號為純拉丁字，維持 .12em 的小型大寫字距（與 Path 1、Level 1 同一套） */
 .ro-num{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase; color:var(--accent); font-weight:500}
-/* 徽章含中文，字距降為 .08em；padding 與 .pol-plan 對齊 */
-.ro-help{
-  font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; color:var(--accent);
-  background:var(--accent-soft); border-radius:var(--r-chip); padding:3px 10px; white-space:nowrap; flex:none;
-}
 .ro-step h3{font-size:var(--fs-md); line-height:1.4; margin-bottom:8px}
 .ro-goal{font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7; margin:0 0 14px; max-width:none}
 /* 三組欄位以細線與目標句分隔；dt 為等寬微標籤，dd 緊接其下，組與組之間 10px */
@@ -1209,7 +1210,7 @@ img{max-width:100%}
   .ro-step.prem .ro-num{background:var(--accent); color:var(--on-accent)}
   .ro-num-l{display:none}
   /* 編號已移出，標頭只剩徽章，靠右即可 */
-  .ro-hd{justify-content:flex-end; margin-bottom:8px}
+  .ro-hd{display:none} /* 編號已移到左側節點，卡頭沒有其他內容 */
   .ro-check-grid{grid-template-columns:1fr; gap:4px}
 }
 
@@ -1280,33 +1281,64 @@ img{max-width:100%}
 .cp-col-p{width:116px}
 /* .tiers 取消了欄間分隔線；矩陣每格是獨立的一組標籤，沒有分隔線時會讀成一整排，補回來 */
 .cp-tbl th + th, .cp-tbl td + td{border-left:1px solid var(--line)}
-.cp-tbl td{padding:13px 14px 11px; vertical-align:top}
+.cp-tbl td{padding:12px 14px 10px; vertical-align:top}
 .cp-tbl td.feat{padding-left:18px; font-size:var(--fs-sm)}
 /* 表頭與 .pol-th 同一套語彙：圖示與文字並排、文字下方一行灰字來源。
    圖示改為 18px 線條風格，因為此處的表頭一列有五個，26px 的實心圖形會壓過文字。 */
 .cp-th{display:flex; align-items:flex-start; gap:8px; font-size:var(--fs-sm); font-weight:700; color:var(--ink); letter-spacing:-.01em; line-height:1.35}
 .cp-th-ico{width:18px; height:18px; flex:none; margin-top:1px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; color:var(--ink-2)}
 .cp-th small{display:block; font-weight:400; font-size:var(--fs-tag); color:var(--ink-3); margin-top:3px; line-height:1.5}
-/* 對照標籤：沿用 .pol-chips 的膠囊語彙，但編號改為等寬字，讓 5.15、§12-2-6、PR.AA-01
-   這類編號在一欄內對齊；正常文字色用 --ink-2，不淺於註記層級 */
-.cp-ref{display:inline-block; max-width:100%; margin:0 5px 5px 0; padding:2px 9px 2px 8px; border:1px solid var(--line); border-radius:var(--r-chip); background:var(--surface); font-size:var(--fs-xs); line-height:1.6; color:var(--ink-2); cursor:help}
-/* 標籤內文允許換行，否則較長的條文名稱會撐破 175px 的欄寬、疊到鄰欄之上；
-   唯編號本身不得折斷（PR.AA-05 拆成兩行就讀不出是編號），以 nowrap 鎖住 */
-.cp-ref b{font-family:var(--mono); font-weight:500; color:var(--ink); letter-spacing:.01em; font-variant-numeric:tabular-nums; white-space:nowrap}
-/* 多行膠囊的圓角在換行處會顯得過圓，改用 --r-card 的小圓角，單行時視覺差異極小 */
-.cp-ref{border-radius:var(--r-card)}
-/* 有 title 的標籤以底線點線提示可停留查看，與 abbr 的慣例一致 */
-.cp-ref[title]{text-decoration:underline dotted var(--line-2); text-decoration-thickness:1px; text-underline-offset:3px}
-.cp-ref:hover{border-color:var(--line-2); background:var(--surface-2)}
-/* 表列 hover 時全站規則會把 td 底色改為 --surface-2，標籤若同色就消失在底色裡，故維持白底 */
-.cp-tbl tbody tr:hover .cp-ref{background:var(--surface)}
-.cp-tbl tbody tr:hover .cp-ref:hover{background:var(--surface-2)}
+/* 對照標籤：不再用膠囊。編號一行（等寬字、框架色）、名稱一行（全寬，12 個中文字內不換行），
+   左側 2px 色條標示所屬框架；去掉邊框與內距後每格少掉約 20px 寬度的浪費，名稱較少被拆行。 */
+.cp-ref{display:block; position:relative; margin:0 0 8px; padding:1px 0 1px 9px; border-left:2px solid var(--k, var(--line-2)); line-height:1.5; color:var(--ink-2); cursor:help; transition:background .15s ease}
+.cp-ref:last-child{margin-bottom:0}
+.cp-ref b{display:block; font-family:var(--mono); font-weight:500; font-size:var(--fs-xs); color:var(--k, var(--ink)); letter-spacing:.01em; font-variant-numeric:tabular-nums; white-space:nowrap}
+.cp-ref > span{display:block; font-size:12px; color:var(--ink-2); /* 12px 讓 11 個字的條文名稱剛好放進 176px 欄寬，不拆行 */ text-decoration:underline dotted var(--line-2); text-decoration-thickness:1px; text-underline-offset:3px}
+.cp-ref:hover, .cp-ref:focus-visible{background:color-mix(in srgb, var(--k-s, var(--surface-2)) 80%, transparent)}
+.cp-ref:focus-visible{outline:2px solid var(--k, var(--accent)); outline-offset:1px}
+/* 四個框架各配一色，表頭圖示、標題與格內編號同色，讀者掃過一列時能靠顏色分辨欄位 */
+.cp-tbl th:nth-child(2), .cp-tbl td:nth-child(2){--k:var(--g-finance); --k-s:var(--g-finance-s)}
+.cp-tbl th:nth-child(3), .cp-tbl td:nth-child(3){--k:var(--g-public); --k-s:var(--g-public-s)}
+.cp-tbl th:nth-child(4), .cp-tbl td:nth-child(4){--k:var(--g-manu); --k-s:var(--g-manu-s)}
+.cp-tbl th:nth-child(5), .cp-tbl td:nth-child(5){--k:var(--g-services); --k-s:var(--g-services-s)}
+.cp-tbl thead th:nth-child(n+2):nth-child(-n+5){background:var(--k-s)}
+.cp-tbl thead th:nth-child(n+2):nth-child(-n+5) .cp-th, .cp-tbl thead th:nth-child(n+2):nth-child(-n+5) .cp-th-ico{color:var(--k)}
+/* 說明提示框：直接浮在標籤上方，寬螢幕的 .tbl-scroll 為 overflow:visible 不會被裁切；
+   內容取自 data-tip（由 JS 從 title 搬過來），無 JS 時退回瀏覽器原生 title */
+.cp-ref[data-tip]::after{
+  content:attr(data-tip); position:absolute; left:0; bottom:calc(100% + 8px); z-index:6;
+  width:max-content; max-width:280px; padding:8px 11px; border-radius:var(--r-card);
+  background:var(--ink); color:var(--paper); font-size:var(--fs-xs); font-weight:400; line-height:1.55;
+  white-space:normal; text-align:left; box-shadow:var(--shadow);
+  opacity:0; transform:translateY(4px); pointer-events:none; transition:opacity .15s ease, transform .15s ease;
+}
+.cp-ref[data-tip]::before{
+  content:""; position:absolute; left:10px; bottom:calc(100% + 3px); z-index:6;
+  border:5px solid transparent; border-top-color:var(--ink); border-bottom:0;
+  opacity:0; pointer-events:none; transition:opacity .15s ease;
+}
+.cp-ref[data-tip]:hover::after, .cp-ref[data-tip]:focus::after{opacity:1; transform:none}
+.cp-ref[data-tip]:hover::before, .cp-ref[data-tip]:focus::before{opacity:1}
+/* 窄螢幕的表格在捲動容器內會裁掉提示框，改用表格下方的提示列 */
+@media (max-width:899px){ .cp-ref[data-tip]::after, .cp-ref[data-tip]::before{display:none} }
+@media (min-width:900px){ .cp-tip{display:none} }
 /* 方案欄：膠囊下方一行說明 Standard 的哪個延伸需要 Premium */
 .cp-plan{text-align:left}
 .cp-plan small{display:block; font-size:var(--fs-tag); color:var(--ink-3); line-height:1.5; margin-top:6px}
 /* 免責與來源清單較長，放寬到 80ch 才不會拉成十幾行；連結沿用表格內連結語彙 */
 .cp-note{max-width:var(--measure)}
 .cp-note a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
+/* 法規版本與出處收進可展開區：多數讀者只需要知道「對應」的意義，要查證的人再點開 */
+.cp-src{max-width:var(--measure); margin-top:12px; border-bottom:0}
+.cp-src > summary{cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:8px; font-size:var(--fs-xs); color:var(--ink-3); padding:4px 0}
+.cp-src > summary::-webkit-details-marker{display:none}
+.cp-src > summary::after{content:"＋"; font-family:var(--mono); transition:transform .2s ease}
+.cp-src[open] > summary::after{transform:rotate(45deg)}
+.cp-src > summary:hover{color:var(--accent)}
+.cp-src ul{margin:8px 0 0; padding-left:18px; font-size:var(--fs-xs); color:var(--ink-3); line-height:1.75; animation:reveal .18s ease-out}
+.cp-src li + li{margin-top:4px}
+.cp-src li b{color:var(--ink-2); font-weight:500}
+.cp-src a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
 .cp-cta{margin:18px 0 0; font-size:var(--fs-sm); color:var(--ink-2)}
 .cp-cta a{color:var(--accent); font-weight:600; text-decoration:underline; text-underline-offset:2px}
 @media (max-width:600px){
@@ -1316,3 +1348,27 @@ img{max-width:100%}
   .cp-tbl td.feat{padding-left:14px}
   .cp-tbl thead th{padding:12px 12px}
 }
+
+/* ===== 微互動：今日新增區塊 ===== */
+/* 路線圖六步依序浮現：只在 JS 可用（html.has-js）且尚未進入視窗時隱藏，無 JS 直接顯示。
+   延遲只掛在 opacity／transform 上，hover 的陰影不受影響。 */
+.has-js .ro-steps:not(.is-in) .ro-step{opacity:0; transform:translateY(10px)}
+.ro-step{transition:box-shadow .18s ease, opacity .45s ease calc(var(--i,0) * 70ms), transform .45s ease calc(var(--i,0) * 70ms)}
+.ro-step:nth-child(1){--i:0} .ro-step:nth-child(2){--i:1} .ro-step:nth-child(3){--i:2}
+.ro-step:nth-child(4){--i:3} .ro-step:nth-child(5){--i:4} .ro-step:nth-child(6){--i:5}
+.ro-num{transition:color .18s ease}
+.ro-step:hover .ro-num{color:var(--ink)}
+/* KPI 數字由 0 數到目標值：等寬數字避免計數時寬度抖動 */
+.kpi-n{font-variant-numeric:tabular-nums}
+/* 合規對照：整列 hover 淡底、編號可聚焦，完整名稱顯示在表格下方的提示列（不在格內彈出，避免被捲動容器裁切） */
+.cp-tbl tbody tr:hover td{background:color-mix(in srgb, var(--accent-soft) 40%, transparent)}
+.cp-tip{font-size:var(--fs-xs); color:var(--ink-3); margin:10px 0 0; min-height:1.7em; line-height:1.7; padding-left:12px; border-left:2px solid var(--line); transition:color .15s ease, border-color .15s ease}
+.cp-tip.is-on{color:var(--ink); border-left-color:var(--accent)}
+/* AI 治理：卡片 hover 時圖示微微抬起；Early Access 膠囊前加一顆緩慢呼吸的琥珀點，表示「進行中」 */
+.ai-ico{transition:transform .2s ease}
+.ai-card:hover .ai-ico{transform:translateY(-2px) scale(1.05)}
+.ai-status.ai-ea::before{content:""; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--c-respond); margin-right:6px; vertical-align:1px; animation:ea-pulse 1.8s ease-in-out infinite}
+@keyframes ea-pulse{0%,100%{opacity:1} 50%{opacity:.35}}
+/* 三層卡片 hover 時圖示跟著抬 2px，與卡片本身的位移同步 */
+.layer-ico{transition:transform .18s ease}
+.layer:hover .layer-ico{transform:translateY(-2px)}

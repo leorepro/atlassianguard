@@ -167,3 +167,62 @@
     h2.appendChild(a);
   });
 })();
+
+// 標記 JS 可用：純 CSS 的進場隱藏只在此時啟用，無 JS 時內容直接顯示
+document.documentElement.classList.add('has-js');
+
+// 路線圖六步依序浮現；KPI 數字進入視窗時由 0 數到目標值（尊重 prefers-reduced-motion）
+(function(){
+  var steps = document.querySelector('.ro-steps');
+  // 沒有 IntersectionObserver 就直接顯示；另設 3 秒保險，分頁在背景被節流時觀察器不會回呼，回到前景也不該還是空白
+  if(!('IntersectionObserver' in window)){ if(steps) steps.classList.add('is-in'); return; }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(steps){
+    setTimeout(function(){ steps.classList.add('is-in'); }, 3000);
+    var so = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ steps.classList.add('is-in'); so.disconnect(); } });
+    }, {rootMargin:'0px 0px -10% 0px'});
+    so.observe(steps);
+  }
+  var nums = document.querySelectorAll('.kpi-n');
+  if(!nums.length || reduce) return;
+  function count(el){
+    var tn = null;
+    for(var i = 0; i < el.childNodes.length; i++){
+      var c = el.childNodes[i];
+      if(c.nodeType === 3 && /\d/.test(c.data)){ tn = c; break; }
+    }
+    if(!tn) return;
+    var target = parseInt(tn.data, 10), start = null, dur = 900;
+    function tick(t){
+      if(start === null) start = t;
+      var p = Math.min(1, (t - start) / dur), e = 1 - Math.pow(1 - p, 3);
+      tn.data = String(Math.round(target * e));
+      if(p < 1) requestAnimationFrame(tick); else tn.data = String(target);
+    }
+    tn.data = '0';
+    requestAnimationFrame(tick);
+  }
+  var ko = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ ko.unobserve(e.target); count(e.target); } });
+  }, {threshold:.6});
+  Array.prototype.forEach.call(nums, function(n){ ko.observe(n); });
+})();
+
+// 合規對照：游標移到或聚焦編號時，把完整名稱顯示在表格下方的提示列。
+// 原本的 title 轉成 data-tip，避免與瀏覽器原生提示重複；無 JS 時 title 仍在。
+(function(){
+  var tip = document.querySelector('.cp-tip');
+  if(!tip) return;
+  var def = tip.textContent;
+  Array.prototype.forEach.call(document.querySelectorAll('.cp-ref[title]'), function(r){
+    r.setAttribute('data-tip', r.getAttribute('title'));
+    r.removeAttribute('title');
+    function show(){ tip.textContent = r.getAttribute('data-tip'); tip.classList.add('is-on'); }
+    function hide(){ tip.textContent = def; tip.classList.remove('is-on'); }
+    r.addEventListener('mouseenter', show);
+    r.addEventListener('mouseleave', hide);
+    r.addEventListener('focus', show);
+    r.addEventListener('blur', hide);
+  });
+})();
