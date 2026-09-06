@@ -982,15 +982,15 @@
     </dl>
 
     <h3 class="pol-h3">多組政策疊加：同一站台落在兩組政策內時</h3>
-    <p>舉例：Acme 組織有五個 Confluence 站台，資安團隊基於兩種不同的顧慮各建一組政策。<br class="br-lg"><b>Policy 1</b> 針對含個人識別資訊（PII）的站台——hr 與 legal——規則最嚴：不允許下載、應用程式存取與匿名存取。<br class="br-lg"><b>Policy 2</b> 針對含未經核准對外揭露資訊的站台——finance、hr、legal 與 marketing——只禁止下載與匿名存取。<br class="br-lg">兩組政策各自獨立設定；hr 與 legal 因同時符合兩種顧慮而落在兩組範圍內。</p>
-    <p>下表逐站台列出涵蓋情形（<span class="tick sm" role="img" aria-label="打勾">✓</span> 表示受該政策約束），最後一欄是<b>實際生效的限制</b>：所有涵蓋該站台的政策，其規則加總。</p>
+    <p>舉例：Acme 組織有五個 Confluence 站台，資安團隊基於兩種不同的顧慮各建一組政策。<br class="br-lg"><span class="ptag ptag-1">Policy 1</span> 針對含個人識別資訊（PII）的站台——hr 與 legal——規則最嚴：不允許下載、應用程式存取與匿名存取。<br class="br-lg"><span class="ptag ptag-2">Policy 2</span> 針對含未經核准對外揭露資訊的站台——finance、hr、legal 與 marketing——只禁止下載與匿名存取。<br class="br-lg">兩組政策各自獨立設定；hr 與 legal 因同時符合兩種顧慮而落在兩組範圍內。</p>
+    <p class="pol-legend">下表逐站台列出涵蓋情形（<span class="tick sm" role="img" aria-label="打勾">✓</span> 表示受該政策約束），最後一欄是<b>實際生效的限制</b>：所有涵蓋該站台的政策，其規則加總。</p>
     <div class="tbl-scroll">
       <table class="tiers pol-tbl pol-matrix">
         <thead>
           <tr>
             <th scope="col">站台</th>
-            <th scope="col">Policy 1<small>含個人識別資訊（PII）的產品</small><small>不允許：下載、應用程式存取、匿名存取</small></th>
-            <th scope="col">Policy 2<small>含未經核准對外揭露資訊的產品</small><small>不允許：下載、匿名存取</small></th>
+            <th scope="col"><span class="ptag ptag-1">Policy 1</span><small>含個人識別資訊（PII）的產品</small><small>不允許：下載、應用程式存取、匿名存取</small></th>
+            <th scope="col"><span class="ptag ptag-2">Policy 2</span><small>含未經核准對外揭露資訊的產品</small><small>不允許：下載、匿名存取</small></th>
             <th scope="col">實際生效的限制</th>
           </tr>
         </thead>
@@ -1034,7 +1034,6 @@
           <div><dt>狀態</dt><dd>
             <div class="ai-status-row"><span class="ai-status-lb">分級與政策</span><span class="ai-status">正式提供</span><span class="pol-plan prem">Premium</span></div>
             <div class="ai-status-row"><span class="ai-status-lb">connector data security</span><span class="ai-status ai-ea">Early Access</span><span class="pol-plan prem">Premium</span></div>
-            <div class="ai-status-row"><span class="ai-status-lb">以分類等級排除 AI 檢索</span><span class="ai-status ai-todo">尚未提供</span><span class="ai-status-note">列於 Atlassian AI roadmap</span></div>
           </dd></div>
         </dl>
       </article>

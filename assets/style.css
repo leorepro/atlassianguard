@@ -322,6 +322,21 @@ p{margin:0 0 16px; max-width:var(--measure); color:var(--ink-2); text-wrap:prett
 .pol-matrix td.feat{font-family:var(--mono); font-weight:400; font-size:var(--fs-xs); color:var(--ink-2); width:256px; white-space:nowrap} /* 最長的站台網址 33 字元約 250px，寬度不足會在連字號處折行 */
 .pol-matrix td.v{width:150px}
 .pol-matrix tr.hi td{background:color-mix(in srgb, var(--accent-soft) 45%, transparent)}
+/* Policy 1／2 各給一枚定色標籤，段落敘述、表頭與該欄勾號同色，
+   讀者不必再逐字比對「哪一段講的是哪一欄」。兩色取自場景色票的紫與青綠，
+   與表格既有的藍（.hi 列底、tick）錯開，避免三者混為一談。 */
+.ptag{
+  display:inline-block; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em;
+  padding:2px 9px; border-radius:var(--r-chip); white-space:nowrap; vertical-align:1px;
+}
+.ptag-1{color:var(--g-services); background:var(--g-services-s); border:1px solid color-mix(in srgb, var(--g-services) 28%, transparent)}
+.ptag-2{color:var(--g-public); background:var(--g-public-s); border:1px solid color-mix(in srgb, var(--g-public) 28%, transparent)}
+.pol-matrix thead th .ptag{margin-bottom:5px}
+/* 勾號的顏色由 --yes／--yes-ring 決定，在欄上改寫這兩個變數即可讓整欄跟著標籤色 */
+.pol-matrix tbody td:nth-child(2){--yes:var(--g-services); --yes-ring:color-mix(in srgb, var(--g-services) 20%, transparent)}
+.pol-matrix tbody td:nth-child(3){--yes:var(--g-public); --yes-ring:color-mix(in srgb, var(--g-public) 20%, transparent)}
+/* 圖例的勾號泛指兩欄，故取中性灰；沿用欄位的藍會被誤讀成只講其中一欄 */
+.pol-legend .tick{--yes:var(--ink-3); --yes-ring:color-mix(in srgb, var(--ink-3) 18%, transparent)}
 .pol-rules{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r-card); overflow:hidden; margin:16px 0 0}
 .pol-rules > div{background:var(--surface); padding:16px 18px 18px}
 /* 表頭：圖示與文字並排，三個資料欄以 colgroup 等寬 */
@@ -1251,9 +1266,6 @@ img{max-width:100%}
   padding:3px 10px; border-radius:var(--r-chip); color:var(--on-accent); background:var(--accent);
 }
 .ai-status.ai-ea{color:var(--ink-2); background:var(--surface); border:1px solid var(--line-2); padding:2px 9px}
-/* 尚未提供：虛線描邊、無強調色，與「正式提供」實心、「Early Access」實線描邊拉出三階 */
-.ai-status.ai-todo{color:var(--ink-3); background:transparent; border:1px dashed var(--line-2); padding:2px 9px}
-.ai-status-note{font-size:var(--fs-xs); color:var(--ink-3); line-height:1.4}
 /* 三件事屬次要層級：1px 邊框、--r-card，與上方三張主卡拉開層次 */
 .ai-steps{margin-top:26px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-card); padding:22px 26px 24px}
 .ai-steps h3{font-size:var(--fs-md); margin-bottom:14px}
