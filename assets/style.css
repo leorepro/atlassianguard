@@ -1268,6 +1268,19 @@ img{max-width:100%}
   .ai-card{padding:22px 20px 24px}
 }
 
+/* 三卡的細線橫向對齊：桌面版讓卡片以 subgrid 共用 .ai-grid 的列軌
+   （圖示／標題／情境／Guard 對應／狀態共五列），同一段的起始線在三卡等高，
+   讀者才能真的橫向比對。不支援 subgrid 時退回原本的流排版，僅分隔線不齊。 */
+@supports (grid-template-rows:subgrid){
+  @media (min-width:901px){
+    .ai-grid{grid-template-rows:repeat(5,auto); row-gap:0}
+    .ai-card{display:grid; grid-template-rows:subgrid; grid-row:span 5; row-gap:0}
+    /* 流排版時 h4 的下邊距與 dl 首項的上邊距會折疊成 12px，grid 中不折疊，故歸零 */
+    .ai-card h4{margin-bottom:0}
+    .ai-dl{display:contents}
+  }
+}
+
 /* ===== 合規對照 #compliance ===== */
 /* 導言比一般段落寬：這段要在同一視線內講完「四件證據」與「不等於合規」的提醒，
    拆成兩段會削弱後者的警示力道；仍以 68ch 收住，避免整行橫跨 1080px 欄寬。 */
