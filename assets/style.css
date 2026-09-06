@@ -121,8 +121,9 @@ html{overflow-x:hidden; overflow-x:clip}
 }
 .nav-brand img{width:20px; height:20px; border-radius:6px}
 .nav-links{
-  display:flex; align-items:center; gap:22px; overflow-x:auto; flex:1;
+  display:flex; align-items:center; gap:18px; overflow-x:auto; flex:1;
   scrollbar-width:none; -ms-overflow-style:none;
+  /* 10 個連結在 1080px 的容器內：22px 間距會超出 40px、最後一項被切掉；18px 剛好放得下 */
 }
 .nav-links::-webkit-scrollbar{display:none}
 .nav-links a{
