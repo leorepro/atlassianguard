@@ -1094,3 +1094,31 @@ img{max-width:100%}
   .pdr-nav{gap:8px; margin:26px 0 32px}
   .pdr-nav label{flex:1; justify-content:center; padding:11px 6px}
 }
+
+/* ===== 量化效益 #why .kpi ===== */
+/* 三張數字卡與 .layer、.stage 同屬主卡層級：白底、大圓角、陰影、無邊框，浮在 .band 的
+   淡灰底上。數字用等寬字型並開啟 tabular-nums，是因為三個數字的位數與符號各異
+   （230%／−95%／+34%），等寬字才能讓三張卡的數字視覺重量一致。
+   不做進場動畫：首屏 .fact 的浮現是載入動畫，對這個位於折線下的區塊無效（讀者捲到時早已
+   播完），而捲動驅動需要 JS 先藏起內容，與 app.js 的 defer 載入順序相衝，故不套。 */
+.kpi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px}
+.kpi{background:var(--surface); border-radius:var(--r-card-lg); box-shadow:var(--shadow); padding:22px 24px 20px;
+  transition:transform .18s ease, box-shadow .18s ease}
+/* 與 .layer、.price 同一組 hover 語彙：位移 2px、陰影升一階 */
+.kpi:hover{transform:translateY(-2px); box-shadow:var(--shadow-hover)}
+.kpi-n{display:block; font-family:var(--mono); font-size:var(--fs-amt); font-weight:500; color:var(--accent);
+  letter-spacing:-.03em; line-height:1.1; font-variant-numeric:tabular-nums; white-space:nowrap}
+/* 正負號與百分號縮小，數字本體才是焦點；比例沿用 .price .amt sup 的做法 */
+.kpi-n span{font-size:var(--fs-lg); font-weight:500; letter-spacing:0}
+.kpi-t{display:block; font-size:var(--fs-base); font-weight:700; color:var(--ink); margin-top:8px}
+.kpi-d{display:block; font-size:var(--fs-xs); color:var(--ink-3); margin-top:4px; line-height:1.6}
+/* 出處說明：全頁最小的註記字級，顏色停在 --ink-3 以保住白底 4.5:1 的對比 */
+.kpi-src{font-size:var(--fs-xs); color:var(--ink-3); line-height:1.7; margin:18px 0 0}
+.kpi-src a{color:var(--ink-2); text-decoration-color:var(--line-2); text-underline-offset:2px}
+.kpi-src a:hover{color:var(--accent); text-decoration-color:currentColor}
+/* 窄螢幕改單欄：390px 寬時三欄每欄不到 110px，40px 的等寬「−95%」必然溢出，
+   單欄堆疊則數字與說明都能完整呈現 */
+@media (max-width:700px){
+  .kpi-grid{grid-template-columns:1fr; gap:12px}
+  .kpi{padding:18px 20px 16px}
+}
