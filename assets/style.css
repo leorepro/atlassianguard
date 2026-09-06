@@ -1121,6 +1121,8 @@ img{max-width:100%}
 @media (max-width:700px){
   .kpi-grid{grid-template-columns:1fr; gap:12px}
   .kpi{padding:18px 20px 16px}
+}
+
 /* ===== 導入路線圖 #rollout ===== */
 /* 導言與 h2 之間沿用區塊慣例的 16px 段距；與步驟卡之間拉開到 30px，
    讓六張卡讀作獨立的一組，而不是導言的延續。 */
