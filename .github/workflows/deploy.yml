@@ -36,6 +36,13 @@ jobs:
       - name: Stamp asset versions
         run: python3 tools/stamp-assets.py
 
+      # 依 BudouX 繁中詞界在內文插入 <wbr>，搭配樣式表的 word-break:keep-all，
+      # 中文只在詞的邊界換行。同樣只改工作目錄，倉庫內的 index.html 不含 <wbr>。
+      - name: Insert word-boundary hints
+        run: |
+          python3 -m pip install --quiet budoux==0.9.1
+          python3 tools/wbr.py
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
