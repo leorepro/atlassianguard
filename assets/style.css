@@ -1285,7 +1285,11 @@ img{max-width:100%}
 .cp-tbl td.feat{padding-left:18px; font-size:var(--fs-sm)}
 /* 表頭與 .pol-th 同一套語彙：圖示與文字並排、文字下方一行灰字來源。
    圖示改為 18px 線條風格，因為此處的表頭一列有五個，26px 的實心圖形會壓過文字。 */
+/* 表頭一律靠上對齊：預設的垂直置中會讓標題高度不同的欄位上下錯開；標題單行不折，副標可折 */
+.cp-tbl thead th{vertical-align:top; padding-top:14px; padding-bottom:14px}
 .cp-th{display:flex; align-items:flex-start; gap:8px; font-size:var(--fs-sm); font-weight:700; color:var(--ink); letter-spacing:-.01em; line-height:1.35}
+.cp-th > span{white-space:nowrap}
+.cp-th small{white-space:normal}
 .cp-th-ico{width:18px; height:18px; flex:none; margin-top:1px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; color:var(--ink-2)}
 .cp-th small{display:block; font-weight:400; font-size:var(--fs-tag); color:var(--ink-3); margin-top:3px; line-height:1.5}
 /* 對照標籤：不再用膠囊。編號一行（等寬字、框架色）、名稱一行（全寬，12 個中文字內不換行），
