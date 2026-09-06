@@ -1251,3 +1251,53 @@ img{max-width:100%}
   .ai-steps ol{grid-template-columns:1fr; gap:14px}
   .ai-card{padding:22px 20px 24px}
 }
+
+/* ===== 合規對照 #compliance ===== */
+/* 導言比一般段落寬：這段要在同一視線內講完「四件證據」與「不等於合規」的提醒，
+   拆成兩段會削弱後者的警示力道；仍以 68ch 收住，避免整行橫跨 1080px 欄寬。 */
+.cp-lede{max-width:68ch; margin-bottom:30px}
+/* 六欄矩陣在 720px 的全站表格最小寬度下，每格只剩約 100px，標籤會被折成單字一行；
+   提高到 860px 讓行動裝置改以橫向捲動呈現，桌面 1024px 欄寬則不受影響。 */
+.cp-tbl{table-layout:fixed; min-width:860px; font-size:var(--fs-xs)}
+/* 第一欄固定 200px 容納能力名稱與一行說明；方案欄 116px 只放膠囊與一行註記；
+   其餘四個框架欄等分剩餘寬度，避免某一框架因標籤較多而擠壓鄰欄。 */
+.cp-col-h{width:200px}
+.cp-col-p{width:116px}
+/* .tiers 取消了欄間分隔線；矩陣每格是獨立的一組標籤，沒有分隔線時會讀成一整排，補回來 */
+.cp-tbl th + th, .cp-tbl td + td{border-left:1px solid var(--line)}
+.cp-tbl td{padding:13px 14px 11px; vertical-align:top}
+.cp-tbl td.feat{padding-left:18px; font-size:var(--fs-sm)}
+/* 表頭與 .pol-th 同一套語彙：圖示與文字並排、文字下方一行灰字來源。
+   圖示改為 18px 線條風格，因為此處的表頭一列有五個，26px 的實心圖形會壓過文字。 */
+.cp-th{display:flex; align-items:flex-start; gap:8px; font-size:var(--fs-sm); font-weight:700; color:var(--ink); letter-spacing:-.01em; line-height:1.35}
+.cp-th-ico{width:18px; height:18px; flex:none; margin-top:1px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; color:var(--ink-2)}
+.cp-th small{display:block; font-weight:400; font-size:var(--fs-tag); color:var(--ink-3); margin-top:3px; line-height:1.5}
+/* 對照標籤：沿用 .pol-chips 的膠囊語彙，但編號改為等寬字，讓 5.15、§12-2-6、PR.AA-01
+   這類編號在一欄內對齊；正常文字色用 --ink-2，不淺於註記層級 */
+.cp-ref{display:inline-block; max-width:100%; margin:0 5px 5px 0; padding:2px 9px 2px 8px; border:1px solid var(--line); border-radius:var(--r-chip); background:var(--surface); font-size:var(--fs-xs); line-height:1.6; color:var(--ink-2); cursor:help}
+/* 標籤內文允許換行，否則較長的條文名稱會撐破 175px 的欄寬、疊到鄰欄之上；
+   唯編號本身不得折斷（PR.AA-05 拆成兩行就讀不出是編號），以 nowrap 鎖住 */
+.cp-ref b{font-family:var(--mono); font-weight:500; color:var(--ink); letter-spacing:.01em; font-variant-numeric:tabular-nums; white-space:nowrap}
+/* 多行膠囊的圓角在換行處會顯得過圓，改用 --r-card 的小圓角，單行時視覺差異極小 */
+.cp-ref{border-radius:var(--r-card)}
+/* 有 title 的標籤以底線點線提示可停留查看，與 abbr 的慣例一致 */
+.cp-ref[title]{text-decoration:underline dotted var(--line-2); text-decoration-thickness:1px; text-underline-offset:3px}
+.cp-ref:hover{border-color:var(--line-2); background:var(--surface-2)}
+/* 表列 hover 時全站規則會把 td 底色改為 --surface-2，標籤若同色就消失在底色裡，故維持白底 */
+.cp-tbl tbody tr:hover .cp-ref{background:var(--surface)}
+.cp-tbl tbody tr:hover .cp-ref:hover{background:var(--surface-2)}
+/* 方案欄：膠囊下方一行說明 Standard 的哪個延伸需要 Premium */
+.cp-plan{text-align:left}
+.cp-plan small{display:block; font-size:var(--fs-tag); color:var(--ink-3); line-height:1.5; margin-top:6px}
+/* 免責與來源清單較長，放寬到 80ch 才不會拉成十幾行；連結沿用表格內連結語彙 */
+.cp-note{max-width:80ch}
+.cp-note a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
+.cp-cta{margin:18px 0 0; font-size:var(--fs-sm); color:var(--ink-2)}
+.cp-cta a{color:var(--accent); font-weight:600; text-decoration:underline; text-underline-offset:2px}
+@media (max-width:600px){
+  /* 窄螢幕以橫向捲動呈現，縮小首欄與內距以減少捲動距離；標籤維持不換行以保住可讀性 */
+  .cp-col-h{width:160px}
+  .cp-tbl td{padding:11px 12px 9px}
+  .cp-tbl td.feat{padding-left:14px}
+  .cp-tbl thead th{padding:12px 12px}
+}

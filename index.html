@@ -1546,6 +1546,99 @@
     <p class="note"><b>上述場景的共同結構：</b>Standard 界定「何人可取得存取權」，此層若未落實，後續機制均無從發揮作用；Premium 則回應「取得存取權之後發生了什麼、組織多久後得知、以及能否完成處置」。若組織現階段的課題仍集中於第一層，優先將 Standard 落實至完整狀態；若已面臨第二層的問責要求，則須由 Premium 提供對應能力。</p>
   </section>
 
+  <!-- COMPLIANCE -->
+  <section id="compliance" class="band">
+    <p class="eyebrow">法規與合規</p>
+    <h2>Guard 的能力對應到哪些法規與控制項</h2>
+    <p class="cp-lede">資安稽核與供應商審查最常索取的證據，不外乎四件事：誰能登入、誰看過什麼、敏感資料在哪、外洩時如何處置。Guard 的身分管控、稽核記錄、資料分級與偵測回應，可作為下列控制項的技術措施之一。須注意：本表的用途是協助準備稽核，不等於導入即合規——控制項是否達成，仍須搭配組織的程序、權責分工與紀錄一併檢視。</p>
+
+    <div class="tbl-scroll cp-scroll">
+      <table class="tiers cp-tbl">
+        <colgroup><col class="cp-col-h"><col><col><col><col><col class="cp-col-p"></colgroup>
+        <thead>
+          <tr>
+            <th scope="col"><span class="cp-th"><span>Guard 能力</span></span></th>
+            <th scope="col"><span class="cp-th"><svg class="cp-th-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.6 7.5 9 4.3-1.4 7.5-4.5 7.5-9V6Z"/><path d="m9 12 2 2 4-4"/></svg><span>ISO/IEC 27001:2022<small>Annex A 控制項</small></span></span></th>
+            <th scope="col"><span class="cp-th"><svg class="cp-th-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6.5 16c.5-1.5 1.5-2.2 2.5-2.2s2 .7 2.5 2.2M14 10h4M14 13.5h4"/></svg><span>個資法施行細則<small>第 12 條第 2 項各款</small></span></span></th>
+            <th scope="col"><span class="cp-th"><svg class="cp-th-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10 12 5l9 5"/><path d="M5 10v7M9.5 10v7M14.5 10v7M19 10v7"/><path d="M3 19h18"/></svg><span>金管會<small>行動方案 2.0／防護基準／安維辦法</small></span></span></th>
+            <th scope="col"><span class="cp-th"><svg class="cp-th-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19.8 7.5v9L12 21l-7.8-4.5v-9Z"/><circle cx="12" cy="12" r="2"/><path d="M12 10V7.5M13.8 13l2.2 1.3M10.2 13 8 14.3"/></svg><span>NIST CSF 2.0<small>子類別</small></span></span></th>
+            <th scope="col"><span class="cp-th"><svg class="cp-th-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12Z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg><span>方案<small>最低方案</small></span></span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feat">SSO 與兩步驟驗證<small>以公司 IdP 統一登入，對全體受管帳號強制第二因子。</small></td>
+            <td><span class="cp-ref" title="A.5.15 Access control：依業務與資訊安全要求建立並實作存取控制規則"><b>5.15</b> 存取控制</span><span class="cp-ref" title="A.5.17 Authentication information：鑑別資訊的配置與管理"><b>5.17</b> 鑑別資訊</span><span class="cp-ref" title="A.8.5 Secure authentication：依存取控制限制實作安全鑑別技術與程序"><b>8.5</b> 安全鑑別</span></td>
+            <td><span class="cp-ref" title="施行細則第 12 條第 2 項第 6 款：資料安全管理及人員管理"><b>§12-2-6</b> 資料安全管理及人員管理</span></td>
+            <td><span class="cp-ref" title="金融資安行動方案 2.0：鼓勵金融機構採零信任網路部署，逐步導入身分鑑別、設備鑑別及信任推斷三大核心機制"><b>方案 2.0</b> 零信任：身分鑑別</span><span class="cp-ref" title="金融機構資通安全防護基準第 4 條第 3 款：應確認人員之身分及存取權限，必要時得限定其使用之機器或網路位置"><b>基準 §4-3</b> 身分與存取權限確認</span></td>
+            <td><span class="cp-ref" title="PR.AA-01：Identities and credentials for authorized users, services, and hardware are managed by the organization"><b>PR.AA-01</b> 身分與憑證管理</span><span class="cp-ref" title="PR.AA-03：Users, services, and hardware are authenticated"><b>PR.AA-03</b> 鑑別</span></td>
+            <td class="cp-plan"><span class="pol-plan">Standard</span></td>
+          </tr>
+          <tr>
+            <td class="feat">SCIM 帳號生命週期<small>由 IdP 自動建立、更新與停用帳號，離職當日撤銷存取。</small></td>
+            <td><span class="cp-ref" title="A.5.16 Identity management：管理身分的完整生命週期"><b>5.16</b> 身分管理</span><span class="cp-ref" title="A.5.18 Access rights：依存取控制政策配置、審查、修改與移除存取權限"><b>5.18</b> 存取權限</span></td>
+            <td><span class="cp-ref" title="施行細則第 12 條第 2 項第 6 款：資料安全管理及人員管理"><b>§12-2-6</b> 資料安全管理及人員管理</span></td>
+            <td><span class="cp-ref" title="金融機構資通安全防護基準第 4 條第 1 款：應建立人員之註冊、異動及撤銷註冊程序，用以配置適當之存取權限；人員離調職時應儘速移除權限"><b>基準 §4-1</b> 註冊、異動與撤銷程序</span><span class="cp-ref" title="金融監督管理委員會指定非公務機關個人資料檔案安全維護辦法第 12 條：設定相關人員接觸個人資料之權限及控管其接觸情形"><b>安維 §12</b> 接觸權限設定與控管</span></td>
+            <td><span class="cp-ref" title="PR.AA-01：Identities and credentials for authorized users, services, and hardware are managed by the organization"><b>PR.AA-01</b> 身分與憑證管理</span><span class="cp-ref" title="PR.AA-05：Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties"><b>PR.AA-05</b> 存取權限與最小權限</span></td>
+            <td class="cp-plan"><span class="pol-plan">Standard</span></td>
+          </tr>
+          <tr>
+            <td class="feat">API token 管控<small>檢視、設定到期與撤銷使用者 API token；Premium 另可追蹤使用行為。</small></td>
+            <td><span class="cp-ref" title="A.5.17 Authentication information：鑑別資訊的配置與管理"><b>5.17</b> 鑑別資訊</span><span class="cp-ref" title="A.5.18 Access rights：依存取控制政策配置、審查、修改與移除存取權限"><b>5.18</b> 存取權限</span></td>
+            <td><span class="cp-ref" title="施行細則第 12 條第 2 項第 6 款：資料安全管理及人員管理"><b>§12-2-6</b> 資料安全管理及人員管理</span></td>
+            <td><span class="cp-ref" title="金融資安行動方案 2.0：零信任網路部署搭配網路及資源的細化權限管控"><b>方案 2.0</b> 零信任：細化權限管控</span></td>
+            <td><span class="cp-ref" title="PR.AA-01：Identities and credentials for authorized users, services, and hardware are managed by the organization"><b>PR.AA-01</b> 身分與憑證管理</span><span class="cp-ref" title="PR.AA-05：Access permissions, entitlements, and authorizations are defined in a policy, managed, enforced, and reviewed, and incorporate the principles of least privilege and separation of duties"><b>PR.AA-05</b> 存取權限與最小權限</span></td>
+            <td class="cp-plan"><span class="pol-plan">Standard</span><small>使用行為追蹤為 Premium</small></td>
+          </tr>
+          <tr>
+            <td class="feat">組織稽核記錄<small>管理員活動記錄；Premium 延伸至使用者活動並可串流至 SIEM。</small></td>
+            <td><span class="cp-ref" title="A.8.15 Logging：產生、儲存、保護並分析記錄活動、例外、錯誤與其他相關事件的日誌"><b>8.15</b> 日誌記錄</span><span class="cp-ref" title="A.8.16 Monitoring activities：監控網路、系統與應用程式的異常行為"><b>8.16</b> 監控活動</span><span class="cp-ref" title="A.5.28 Collection of evidence：建立並實作證據識別、蒐集、取得與保存的程序"><b>5.28</b> 證據蒐集</span></td>
+            <td><span class="cp-ref" title="施行細則第 12 條第 2 項第 10 款：使用紀錄、軌跡資料及證據保存"><b>§12-2-10</b> 使用紀錄、軌跡資料及證據保存</span><span class="cp-ref" title="施行細則第 12 條第 2 項第 9 款：資料安全稽核機制"><b>§12-2-9</b> 資料安全稽核機制</span></td>
+            <td><span class="cp-ref" title="金融監督管理委員會指定非公務機關個人資料檔案安全維護辦法第 14 條：應記錄其個人資料使用情況，留存軌跡資料或相關證據，至少留存五年"><b>安維 §14</b> 使用紀錄留存五年</span><span class="cp-ref" title="金融機構資通安全防護基準第 5 條第 5 款：建置留存個人資料使用稽核軌跡（登入帳號、系統功能、時間、查詢指令或結果）"><b>基準 §5-5</b> 個資使用稽核軌跡</span></td>
+            <td><span class="cp-ref" title="PR.PS-04：Log records are generated and made available for continuous monitoring"><b>PR.PS-04</b> 日誌產生與供監控</span><span class="cp-ref" title="DE.CM-03：Personnel activity and technology usage are monitored to find potentially adverse events"><b>DE.CM-03</b> 人員活動監控</span></td>
+            <td class="cp-plan"><span class="pol-plan">Standard</span><small>使用者活動與 SIEM 串流為 Premium</small></td>
+          </tr>
+          <tr>
+            <td class="feat">資料分級與標示<small>組織層級的分類標籤與自動分類，標籤跟著內容走。</small></td>
+            <td><span class="cp-ref" title="A.5.12 Classification of information：依機密性、完整性、可用性與利害關係人要求分類資訊"><b>5.12</b> 資訊分類</span><span class="cp-ref" title="A.5.13 Labelling of information：依組織分類方案建立並實作資訊標示程序"><b>5.13</b> 資訊標示</span></td>
+            <td><span class="cp-ref" title="施行細則第 12 條第 2 項第 2 款：界定個人資料之範圍"><b>§12-2-2</b> 界定個人資料之範圍</span><span class="cp-ref" title="施行細則第 12 條第 2 項第 3 款：個人資料之風險評估及管理機制"><b>§12-2-3</b> 風險評估及管理機制</span></td>
+            <td><span class="cp-ref" title="金融機構資通安全防護基準第 5 條第 4 款：應針對核心資通系統及各類電腦系統確認所保有之個人資料進行風險評估及控管"><b>基準 §5-4</b> 個資風險評估及控管</span></td>
+            <td><span class="cp-ref" title="ID.AM-05：Assets are prioritized based on classification, criticality, resources, and impact on the mission"><b>ID.AM-05</b> 依分類排序資產</span><span class="cp-ref" title="ID.AM-07：Inventories of data and corresponding metadata for designated data types are maintained"><b>ID.AM-07</b> 資料清冊與中繼資料</span></td>
+            <td class="cp-plan"><span class="pol-plan prem">Premium</span></td>
+          </tr>
+          <tr>
+            <td class="feat">資料安全政策<small>依產品、空間／專案或分類等級限制匯出、公開連結、匿名存取與應用程式存取。</small></td>
+            <td><span class="cp-ref" title="A.8.12 Data leakage prevention：對處理、儲存或傳輸敏感資訊的系統、網路與裝置實施資料洩漏防範措施"><b>8.12</b> 資料洩漏防範</span><span class="cp-ref" title="A.8.3 Information access restriction：依存取控制政策限制對資訊與其他相關資產的存取"><b>8.3</b> 資訊存取限制</span></td>
+            <td><span class="cp-ref" title="施行細則第 12 條第 2 項第 5 款：個人資料蒐集、處理及利用之內部管理程序"><b>§12-2-5</b> 內部管理程序</span><span class="cp-ref" title="施行細則第 12 條第 2 項第 6 款：資料安全管理及人員管理"><b>§12-2-6</b> 資料安全管理及人員管理</span></td>
+            <td><span class="cp-ref" title="金融機構資通安全防護基準第 5 條第 6 款：應建立資料外洩防護機制，管制個人資料檔案透過輸出入裝置、通訊軟體、系統操作複製至網頁或網路檔案等方式傳輸，並應留存相關紀錄、軌跡及證據"><b>基準 §5-6</b> 資料外洩防護機制</span><span class="cp-ref" title="金融機構作業委託他人處理內部作業制度及程序辦法第 19 條：使用雲端服務應訂定政策及原則，對委託處理之資料保有完整所有權，並管控雲端服務業者對客戶資料之存取權限"><b>委外 §19</b> 雲端服務資料存取管控</span></td>
+            <td><span class="cp-ref" title="PR.DS-01：The confidentiality, integrity, and availability of data-at-rest are protected"><b>PR.DS-01</b> 靜態資料保護</span><span class="cp-ref" title="PR.DS-10：The confidentiality, integrity, and availability of data-in-use are protected"><b>PR.DS-10</b> 使用中資料保護</span></td>
+            <td class="cp-plan"><span class="pol-plan">Standard</span><small>以分類等級為條件為 Premium</small></td>
+          </tr>
+          <tr>
+            <td class="feat">內容掃描與偵測規則<small>以內建與自訂規則掃描頁面與議題中的敏感資料，如身分證字號、金鑰。</small></td>
+            <td><span class="cp-ref" title="A.8.12 Data leakage prevention：對處理、儲存或傳輸敏感資訊的系統、網路與裝置實施資料洩漏防範措施"><b>8.12</b> 資料洩漏防範</span><span class="cp-ref" title="A.8.16 Monitoring activities：監控網路、系統與應用程式的異常行為，並採取適當行動評估潛在資安事故"><b>8.16</b> 監控活動</span></td>
+            <td><span class="cp-ref" title="施行細則第 12 條第 2 項第 2 款：界定個人資料之範圍"><b>§12-2-2</b> 界定個人資料之範圍</span><span class="cp-ref" title="施行細則第 12 條第 2 項第 9 款：資料安全稽核機制"><b>§12-2-9</b> 資料安全稽核機制</span></td>
+            <td><span class="cp-ref" title="金融機構資通安全防護基準第 5 條第 6 款：應建立資料外洩防護機制，並留存相關紀錄、軌跡及證據"><b>基準 §5-6</b> 資料外洩防護機制</span><span class="cp-ref" title="金融資安行動方案 2.0：推動建置資安監控機制（SOC）及辦理有效性評估"><b>方案 2.0</b> 資安監控機制（SOC）</span></td>
+            <td><span class="cp-ref" title="DE.CM-09：Computing hardware and software, runtime environments, and their data are monitored to find potentially adverse events"><b>DE.CM-09</b> 運算環境與資料監控</span><span class="cp-ref" title="DE.AE-02：Potentially adverse events are analyzed to better understand associated activities"><b>DE.AE-02</b> 不利事件分析</span></td>
+            <td class="cp-plan"><span class="pol-plan prem">Premium</span></td>
+          </tr>
+          <tr>
+            <td class="feat">異常行為偵測與處置<small>可疑活動告警、調查儀表板、Slack／Teams 通知與 SIEM 串流。</small></td>
+            <td><span class="cp-ref" title="A.8.16 Monitoring activities：監控網路、系統與應用程式的異常行為，並採取適當行動評估潛在資安事故"><b>8.16</b> 監控活動</span><span class="cp-ref" title="A.5.26 Response to information security incidents：依文件化程序回應資訊安全事故"><b>5.26</b> 資安事故回應</span><span class="cp-ref" title="A.5.28 Collection of evidence：建立並實作證據識別、蒐集、取得與保存的程序"><b>5.28</b> 證據蒐集</span></td>
+            <td><span class="cp-ref" title="施行細則第 12 條第 2 項第 4 款：事故之預防、通報及應變機制"><b>§12-2-4</b> 事故之預防、通報及應變機制</span><span class="cp-ref" title="施行細則第 12 條第 2 項第 10 款：使用紀錄、軌跡資料及證據保存"><b>§12-2-10</b> 使用紀錄、軌跡資料及證據保存</span></td>
+            <td><span class="cp-ref" title="金融監督管理委員會指定非公務機關個人資料檔案安全維護辦法第 6 條：遇有重大個人資料事故者，應於七十二小時內通報本會"><b>安維 §6</b> 重大事故 72 小時通報</span><span class="cp-ref" title="金融機構資通安全防護基準第 16 條：資訊安全事故管理"><b>基準 §16</b> 資訊安全事故管理</span><span class="cp-ref" title="金融資安行動方案 2.0：推動建置資安監控機制（SOC），提升異常行為偵測告警之即時性及有效性"><b>方案 2.0</b> 資安監控機制（SOC）</span></td>
+            <td><span class="cp-ref" title="DE.CM-03：Personnel activity and technology usage are monitored to find potentially adverse events"><b>DE.CM-03</b> 人員活動監控</span><span class="cp-ref" title="RS.MA-01：The incident response plan is executed in coordination with relevant third parties once an incident is declared"><b>RS.MA-01</b> 事件回應計畫執行</span><span class="cp-ref" title="RS.AN-03：Analysis is performed to establish what has taken place during an incident and the root cause of the incident"><b>RS.AN-03</b> 事件經過與根因分析</span></td>
+            <td class="cp-plan"><span class="pol-plan prem">Premium</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note cp-note"><b>如何使用本表：</b>「對應」指 Guard 可作為該控制項的技術措施之一，非指單一功能即滿足該控制項；控制項是否達成，仍由稽核依組織整體制度判定。金管會欄的「方案 2.0」為《金融資安行動方案 2.0》（金管會，111 年 12 月）之推動措施名稱、「基準」為銀行公會《金融機構資通安全防護基準》（114 年 2 月金管會同意備查版）、「安維」為《金融監督管理委員會指定非公務機關個人資料檔案安全維護辦法》（110 年 12 月修正）、「委外」為《金融機構作業委託他人處理內部作業制度及程序辦法》（115 年 4 月修正）；非銀行業者請對照各業別公會之對應規範。個資法欄依《個人資料保護法施行細則》（105 年 3 月修正）第 12 條第 2 項；其母法依據原為個資法第 27 條第 1 項，114 年 11 月修正條文已將該義務移列第 20-1 條，施行日期由行政院另定。ISO 欄依 ISO/IEC 27001:2022 Annex A；NIST 欄依 NIST CSF 2.0（CSWP 29，2024 年 2 月）。Guard 本身的驗證報告（SOC 2、ISO 27001）與《Atlassian Guard: Trust FAQ》可於 <a href="https://www.atlassian.com/trust" target="_blank" rel="noopener">Atlassian Trust Center</a> 及其 <a href="https://customertrust.atlassian.com/" target="_blank" rel="noopener">Trust Portal</a> 取得。</p>
+
+    <p class="cp-cta">需要回覆供應商資安問卷的組織，Titansoft 可提供上表各項的對應說明與設定證據範本，<a href="https://tsgojira.atlassian.net/servicedesk/customer/portal/4/group/8/create/43" target="_blank" rel="noopener">預約 Demo 時一併索取</a>。</p>
+  </section>
+
   <!-- PATHS -->
   <section id="paths">
     <p class="eyebrow">典型採用路徑</p>
