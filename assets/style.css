@@ -1094,3 +1094,78 @@ img{max-width:100%}
   .pdr-nav{gap:8px; margin:26px 0 32px}
   .pdr-nav label{flex:1; justify-content:center; padding:11px 6px}
 }
+
+/* ===== 導入路線圖 #rollout ===== */
+/* 導言與 h2 之間沿用區塊慣例的 16px 段距；與步驟卡之間拉開到 30px，
+   讓六張卡讀作獨立的一組，而不是導言的延續。 */
+.ro-lede{margin-bottom:30px}
+/* 六步分兩列三欄：每步含三組欄位，卡寬低於 300px 時「風險與避免方式」會拆成四五行，
+   六欄一列反而難讀；三欄在 1080px 版心內每卡約 335px，恰好維持兩三行內收束。 */
+.ro-steps{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+/* 卡片頂部 2px 色條以 border-top 實作而非偽元素：border-box 下不改變卡片內部尺寸，
+   且圓角會自然裁切色條兩端，不需另外處理。預設為 --accent，Premium 一步改由 .prem 覆寫。 */
+.ro-step{
+  position:relative; background:var(--surface); border:1px solid var(--line); border-top:2px solid var(--accent);
+  border-radius:var(--r-card); padding:16px 18px 18px;
+  transition:box-shadow .18s ease, border-color .18s ease;
+}
+.ro-step:hover{box-shadow:var(--shadow)}
+/* Premium 一步沿用 .pol-plan.prem／td.v.prem 的語彙：accent 邊框加 --accent-soft 淡底，
+   讀者可一眼分出「前五步屬 Standard、末步屬 Premium」，而不必再讀標題。 */
+.ro-step.prem{border-color:var(--accent); background:color-mix(in srgb, var(--accent-soft) 55%, var(--surface))}
+.ro-hd{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px}
+/* 步驟編號為純拉丁字，維持 .12em 的小型大寫字距（與 Path 1、Level 1 同一套） */
+.ro-num{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.12em; text-transform:uppercase; color:var(--accent); font-weight:500}
+/* 徽章含中文，字距降為 .08em；padding 與 .pol-plan 對齊 */
+.ro-help{
+  font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; color:var(--accent);
+  background:var(--accent-soft); border-radius:var(--r-chip); padding:3px 10px; white-space:nowrap; flex:none;
+}
+.ro-step h3{font-size:var(--fs-md); line-height:1.4; margin-bottom:8px}
+.ro-goal{font-size:var(--fs-sm); color:var(--ink-2); line-height:1.7; margin:0 0 14px; max-width:none}
+/* 三組欄位以細線與目標句分隔；dt 為等寬微標籤，dd 緊接其下，組與組之間 10px */
+.ro-meta{margin:0; padding-top:12px; border-top:1px solid var(--line)}
+.ro-meta dt{font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; color:var(--ink-3); margin-bottom:2px}
+.ro-meta dd{margin:0 0 10px; font-size:var(--fs-sm); color:var(--ink-2); line-height:1.65}
+.ro-meta dd:last-child{margin-bottom:0}
+
+/* 檢查清單：整個 <details> 是一張 1px 邊框卡；summary 內距含左右 20px，整條橫條皆可點。
+   四邊邊框一起宣告，順帶蓋掉全站 details 只有底線的預設（與 .case-group 同理）。 */
+.ro-check{margin-top:26px; border:1px solid var(--line); border-radius:var(--r-card); background:var(--surface)}
+.ro-check > summary{padding:16px 20px; font-weight:600}
+.ro-check > summary:hover, .ro-check > summary:hover::after{color:var(--accent)}
+.ro-check > summary:focus-visible{outline-offset:-2px}
+.ro-check-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding:4px 20px 22px; border-top:1px solid var(--line); animation:reveal .18s ease-out}
+.ro-check-h{margin:18px 0 8px; font-family:var(--mono); font-size:var(--fs-tag); letter-spacing:.08em; color:var(--ink-3); font-weight:500}
+.ro-check-grid ul{list-style:none; margin:0; padding:0}
+/* 方框以偽元素畫出、不用 input：清單供列印或對照，不記錄狀態；
+   13px 方框的 top 依 13.5px 字級、1.65 行高推算，使其對齊首行文字的中線。 */
+.ro-check-grid li{position:relative; padding:5px 0 5px 24px; font-size:var(--fs-sm); color:var(--ink-2); line-height:1.65}
+.ro-check-grid li::before{
+  content:""; position:absolute; left:1px; top:10px; width:13px; height:13px;
+  border:1.5px solid var(--line-2); border-radius:3px; background:var(--surface);
+}
+/* .note 內的連結沿用表格說明文字的連結樣式（accent 加底線） */
+#rollout .note a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
+
+/* 900px 以下改為直向時間軸：編號移到卡片左側成為節點，節點之間以 1px 直線相連。
+   直線畫在 li 上而非 ol 上，才能讓最後一步的線在節點處停止，不會多出一截。 */
+@media (max-width:900px){
+  .ro-steps{grid-template-columns:1fr; gap:0; padding-left:44px}
+  .ro-step{margin-bottom:18px}
+  .ro-step:last-child{margin-bottom:0}
+  /* 直線自節點底部起、延伸到下一張卡的頂端（bottom 為負值以跨過 18px 的卡距） */
+  .ro-step::before{content:""; position:absolute; left:-31px; top:28px; bottom:-20px; width:1px; background:var(--line-2)}
+  .ro-step:last-child::before{display:none}
+  /* 節點：28px 圓形，只顯示數字；「Step」字樣於此隱藏。top:-2px 抵銷 2px 色條，使節點頂緣與卡頂齊平。 */
+  .ro-num{
+    position:absolute; left:-45px; top:-2px; width:28px; height:28px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--surface); border:1px solid var(--accent); letter-spacing:0; font-size:var(--fs-xs);
+  }
+  .ro-step.prem .ro-num{background:var(--accent); color:var(--on-accent)}
+  .ro-num-l{display:none}
+  /* 編號已移出，標頭只剩徽章，靠右即可 */
+  .ro-hd{justify-content:flex-end; margin-bottom:8px}
+  .ro-check-grid{grid-template-columns:1fr; gap:4px}
+}

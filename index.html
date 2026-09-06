@@ -1555,6 +1555,140 @@
     <p class="note"><b>關於價格差異的說明：</b>Atlassian 產品頁目前標示 Standard 為每人每月 US$4.20 起、Premium 為 US$8.18 起，而授權常見問題的月繳級距表中，11 至 250 人區間為 US$4.00。兩處數據並不一致，實際金額請以官方定價計算工具與正式報價為準。年繳採級距總價制，須另行取得報價。</p>
   </section>
 
+  <!-- ROLLOUT -->
+  <section id="rollout">
+    <p class="eyebrow">導入路線圖</p>
+    <h2>從決定到上線：六個步驟與各自的風險點</h2>
+    <p class="ro-lede">Standard 的導入核心是兩件事：把散落的帳號收進組織成為 Managed accounts，再把登入交給公司的 IdP；Premium 的分級與政策皆建立在這個基礎上。步驟順序不宜對調，因為後一步依賴前一步產出的資料——SCIM 對應需要已認領的帳號，資料安全政策需要已分級的內容。</p>
+
+    <ol class="ro-steps">
+      <li class="ro-step">
+        <div class="ro-hd">
+          <span class="ro-num"><span class="ro-num-l">Step</span> 0</span>
+          <span class="ro-help">Titansoft 可協助</span>
+        </div>
+        <h3>前置盤點</h3>
+        <p class="ro-goal">列出組織內所有 Atlassian Cloud 站台（含同仁自行申請的免費站台）、公司持有的全部 email 網域、現行 IdP（Entra ID／Okta／Google Workspace），以及既有的 Marketplace 應用程式與 API 整合。</p>
+        <dl class="ro-meta">
+          <dt>前置條件</dt><dd>Org admin 權限。</dd>
+          <dt>預估時程</dt><dd>1–3 天。</dd>
+          <dt>風險與避免方式</dt><dd>漏列網域會造成部分帳號無法納管；子公司、舊品牌與併購而來的網域尤其容易遺漏，盤點時一併列入。</dd>
+        </dl>
+      </li>
+
+      <li class="ro-step">
+        <div class="ro-hd">
+          <span class="ro-num"><span class="ro-num-l">Step</span> 1</span>
+          <span class="ro-help">Titansoft 可協助</span>
+        </div>
+        <h3>網域驗證與帳號認領</h3>
+        <p class="ro-goal">以 DNS TXT 記錄或 HTTPS 檔案驗證網域所有權，再認領（claim）使用該網域的帳號，使其成為 Managed accounts。</p>
+        <dl class="ro-meta">
+          <dt>前置條件</dt><dd>可修改 DNS 記錄；步驟 0 的網域清單已確認。</dd>
+          <dt>預估時程</dt><dd>驗證數小時；認領前建議預告使用者 1 週。</dd>
+          <dt>風險與避免方式</dt><dd>認領後，帳號的顯示名稱與密碼原則改由組織管控，個人自行申請的帳號也會一併納入；務必事先溝通，並說明既有內容與權限不受影響。</dd>
+        </dl>
+      </li>
+
+      <li class="ro-step">
+        <div class="ro-hd">
+          <span class="ro-num"><span class="ro-num-l">Step</span> 2</span>
+          <span class="ro-help">Titansoft 可協助</span>
+        </div>
+        <h3>SSO 與驗證政策</h3>
+        <p class="ro-goal">在 Admin Hub 以 SAML 或 OIDC 串接 IdP；先建立一組僅含 IT 團隊帳號的測試用 Authentication policy，確認登入無誤後，再將設定套用到預設政策。</p>
+        <dl class="ro-meta">
+          <dt>前置條件</dt><dd>IdP 管理權限；步驟 1 已完成。</dd>
+          <dt>預估時程</dt><dd>1–2 週（含測試）。</dd>
+          <dt>風險與避免方式</dt><dd>直接對預設政策強制 SSO，IdP 設定一有錯誤即全員鎖帳。務必保留一個不走 SSO 的緊急管理帳號，放在獨立的 Authentication policy 中。</dd>
+        </dl>
+      </li>
+
+      <li class="ro-step">
+        <div class="ro-hd">
+          <span class="ro-num"><span class="ro-num-l">Step</span> 3</span>
+          <span class="ro-help">Titansoft 可協助</span>
+        </div>
+        <h3>SCIM 佈建與群組對應</h3>
+        <p class="ro-goal">由 IdP 推送使用者與群組至 Atlassian，將群組對應到各產品的存取權；人員於 IdP 停用後，Atlassian 的存取權隨即自動撤銷。</p>
+        <dl class="ro-meta">
+          <dt>前置條件</dt><dd>步驟 2 已完成；IdP 的群組結構已整理。</dd>
+          <dt>預估時程</dt><dd>1–2 週。</dd>
+          <dt>風險與避免方式</dt><dd>SCIM 推送的群組與既有手動建立的群組同名會發生衝突，導致佈建失敗或權限錯置；先清理或改名，再開啟同步。</dd>
+        </dl>
+      </li>
+
+      <li class="ro-step">
+        <div class="ro-hd">
+          <span class="ro-num"><span class="ro-num-l">Step</span> 4</span>
+          <span class="ro-help">Titansoft 可協助</span>
+        </div>
+        <h3>API token、<span class="nb">行動裝置</span>與外部使用者政策</h3>
+        <p class="ro-goal">限制使用者自建 API token 或設定到期時間、設定 Mobile app policy，並對非受管的外部協作者套用 External user security（例如強制兩步驟驗證）。</p>
+        <dl class="ro-meta">
+          <dt>前置條件</dt><dd>步驟 1 已完成（政策以受管帳號為對象）。</dd>
+          <dt>預估時程</dt><dd>數天。</dd>
+          <dt>風險與避免方式</dt><dd>既有 CI／整合若以個人 API token 運作，token 到期或被禁止後即告中斷；先盤點所有整合，改由 service account 持有 token。</dd>
+        </dl>
+      </li>
+
+      <li class="ro-step prem">
+        <div class="ro-hd">
+          <span class="ro-num"><span class="ro-num-l">Step</span> 5</span>
+          <span class="ro-help">Titansoft 可協助</span>
+        </div>
+        <h3>Premium：分級、政策、偵測、SIEM</h3>
+        <p class="ro-goal">先以內容掃描盤點既有的敏感內容，再設定分類等級與自動分類規則，接著建立資料安全政策，最後調整偵測規則並以 webhook 接入 SIEM。</p>
+        <dl class="ro-meta">
+          <dt>前置條件</dt><dd>Guard Premium 訂閱；步驟 1–3 已完成。</dd>
+          <dt>預估時程</dt><dd>2–4 週；建議先以 1–2 個 Confluence 空間或 Jira 專案試行。</dd>
+          <dt>風險與避免方式</dt><dd>政策一開就對整個產品套用「禁止匯出」會直接影響日常工作。先從 Restricted 等級與少數空間開始，確認無誤後再逐步擴大。</dd>
+        </dl>
+      </li>
+    </ol>
+
+    <details class="ro-check">
+      <summary>導入檢查清單（前置作業・切換當週・上線後）</summary>
+      <div class="ro-check-grid">
+        <div>
+          <h4 class="ro-check-h">前置作業</h4>
+          <ul>
+            <li>已列出所有 *.atlassian.net 站台與各站台的 Org admin</li>
+            <li>已列出公司持有的全部 email 網域，含子公司與舊品牌網域</li>
+            <li>已確認 DNS 管理者與 IdP 管理者，並排定變更時窗</li>
+            <li>已盤點所有使用個人 API token 的 CI／整合，並規劃改用 service account</li>
+            <li>已建立不走 SSO 的緊急管理帳號，並記錄於密碼保險箱</li>
+            <li>已在 IdP 建立僅含 IT 團隊的測試群組，供測試用 Authentication policy 使用</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="ro-check-h">切換當週</h4>
+          <ul>
+            <li>已通知使用者切換日期與登入方式變化，並提供 FAQ 與支援窗口</li>
+            <li>已於測試政策完成 SSO 登入、登出與密碼重設流程驗證</li>
+            <li>已確認 IdP 群組與 Atlassian 既有群組沒有同名衝突</li>
+            <li>已將預設 Authentication policy 切換為強制 SSO，並確認緊急管理帳號仍可登入</li>
+            <li>已開啟 SCIM 同步，並核對首批佈建的使用者與群組數量</li>
+            <li>已匯出切換前的使用者與群組清單，供回溯比對</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="ro-check-h">上線後</h4>
+          <ul>
+            <li>已驗證離職流程：IdP 停用 → Atlassian 帳號 15 分鐘內失去存取</li>
+            <li>已驗證到職流程：加入 IdP 群組後自動取得對應產品的存取權</li>
+            <li>已檢視組織稽核記錄，確認 SSO 登入與政策變更事件正常記錄</li>
+            <li>已設定 API token 到期政策，並排定既有 token 的輪替時間</li>
+            <li>已排定每季檢視：未受管帳號、外部使用者與閒置帳號</li>
+            <li>（Premium）已確認告警送達 SIEM，並指定告警的處理負責人</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <p class="note"><b>關於時程的說明：</b>本路線圖依 Atlassian 官方支援文件的設定順序整理，實際時程依組織規模、站台數量與 IdP 現況而異。上述任一步驟均可由 Titansoft 顧問協助規劃與執行，歡迎<a href="https://tsgojira.atlassian.net/servicedesk/customer/portal/4/group/8/create/43" target="_blank" rel="noopener">預約 Demo</a>。</p>
+  </section>
+
   <!-- HISTORY -->
   <section id="history" class="compact">
     <p class="eyebrow">產品沿革</p>
