@@ -818,7 +818,7 @@ td.v.yes{color:var(--yes)}
 .case-group[open] > summary::after{transform:rotate(45deg)}
 /* 全站的 details[open] summary::after 是後代選擇器：組展開時會連帶把組內
    尚未展開的 .case-more 指示也轉成 ×，此處拉高特異性把它壓回原位 */
-.case-group .case-more:not([open]) > summary::after{transform:none}
+.case-group .case-more > summary::after{transform:none} /* 展開／收合已改為文字膠囊，任何狀態都不旋轉 */
 
 /* 比較區收合：標題與情境常駐可見，兩方案的處理程度由讀者自行展開 */
 .case-more{border-bottom:0}
