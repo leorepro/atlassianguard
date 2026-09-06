@@ -43,6 +43,11 @@ jobs:
           python3 -m pip install --quiet budoux==0.9.1
           python3 tools/wbr.py
 
+      # sitemap 的 lastmod 改為部署當天：Search Console 已提交 sitemap，Google 依此判斷頁面是否更新。
+      # 同樣只改工作目錄，倉庫內維持原值。
+      - name: Stamp sitemap lastmod
+        run: sed -i "s#<lastmod>[0-9-]*</lastmod>#<lastmod>$(date -u +%F)</lastmod>#" sitemap.xml && grep lastmod sitemap.xml
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
