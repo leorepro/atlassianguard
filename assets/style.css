@@ -332,6 +332,8 @@ p{margin:0 0 16px; max-width:var(--measure); color:var(--ink-2); text-wrap:prett
 .ptag-1{color:var(--g-services); background:var(--g-services-s); border:1px solid color-mix(in srgb, var(--g-services) 28%, transparent)}
 .ptag-2{color:var(--g-public); background:var(--g-public-s); border:1px solid color-mix(in srgb, var(--g-public) 28%, transparent)}
 .pol-matrix thead th .ptag{margin-bottom:5px}
+/* 嵌在註記長句中的標籤縮一號：小字段落塞入原尺寸膠囊會撐開行距、打斷閱讀 */
+.note .ptag{padding:1px 7px; letter-spacing:.06em; vertical-align:0}
 /* 勾號的顏色由 --yes／--yes-ring 決定，在欄上改寫這兩個變數即可讓整欄跟著標籤色 */
 .pol-matrix tbody td:nth-child(2){--yes:var(--g-services); --yes-ring:color-mix(in srgb, var(--g-services) 20%, transparent)}
 .pol-matrix tbody td:nth-child(3){--yes:var(--g-public); --yes-ring:color-mix(in srgb, var(--g-public) 20%, transparent)}
